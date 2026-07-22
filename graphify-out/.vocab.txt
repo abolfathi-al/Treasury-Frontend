@@ -411,6 +411,7 @@ dropzonedirective
 due
 dummy
 duotone
+duplicate
 duration
 during
 dynamic
@@ -1053,6 +1054,7 @@ randomization
 rate
 rationale
 raw
+react
 reactive
 read
 ready
@@ -1223,6 +1225,7 @@ shutdown
 sibling
 siblings
 sidebar
+signal
 signals
 simulator
 single

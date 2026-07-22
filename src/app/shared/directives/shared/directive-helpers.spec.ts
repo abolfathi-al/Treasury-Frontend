@@ -18,6 +18,7 @@ import {
 
 interface HelperOptions {
   readonly label: string;
+  readonly disabled: boolean;
 }
 
 @Directive({
@@ -26,7 +27,11 @@ interface HelperOptions {
 })
 class DirectiveHelperSpecDirective {
   readonly label = input<string>('default');
-  readonly manager = createOptionsManager<HelperOptions>({ label: 'default' });
+  readonly disabled = input(false);
+  readonly manager = createOptionsManager<HelperOptions>({
+    label: 'default',
+    disabled: false,
+  });
   readonly reinitCount = signal(0);
 
   constructor() {
@@ -37,6 +42,7 @@ class DirectiveHelperSpecDirective {
           key: 'label',
           transform: (value: string) => value.trim(),
         },
+        { input: this.disabled, key: 'disabled' },
       ],
       (key, value) => this.manager.setOption(key, value),
       () => this.reinitCount.update((count) => count + 1)
@@ -47,10 +53,17 @@ class DirectiveHelperSpecDirective {
 @Component({
   imports: [DirectiveHelperSpecDirective],
   standalone: true,
-  template: '<div vlDirectiveHelperSpec [label]="label()"></div>',
+  template: `
+    <div
+      vlDirectiveHelperSpec
+      [label]="label()"
+      [disabled]="disabled()"
+    ></div>
+  `,
 })
 class DirectiveHelperSpecHostComponent {
   readonly label = signal('default');
+  readonly disabled = signal(false);
   readonly directive = viewChild.required(DirectiveHelperSpecDirective);
 }
 
@@ -79,6 +92,22 @@ describe('directive helpers', () => {
     fixture.detectChanges();
 
     expect(directive.manager.snapshot().label).toBe('next');
+    expect(directive.reinitCount()).toBe(1);
+  });
+
+  it('calls the reinitialize callback once for simultaneous input changes', () => {
+    const fixture = TestBed.createComponent(DirectiveHelperSpecHostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+
+    fixture.componentInstance.label.set('next');
+    fixture.componentInstance.disabled.set(true);
+    fixture.detectChanges();
+
+    expect(directive.manager.snapshot()).toEqual({
+      label: 'next',
+      disabled: true,
+    });
     expect(directive.reinitCount()).toBe(1);
   });
 

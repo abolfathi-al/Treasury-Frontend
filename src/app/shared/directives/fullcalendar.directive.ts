@@ -18,7 +18,7 @@ type BootstrapModule = typeof import('@fullcalendar/bootstrap5');
 import { LoggerService } from '@core/services/logger.service';
 import { BaseDirective } from './shared/base-directive';
 import { useDirectiveHost } from './shared/directive-host';
-import { runSafely, setOptionIfChanged } from './shared/directive-helpers';
+import { runSafely } from './shared/directive-helpers';
 
 export interface FullCalendarOptions {
   events?: EventInput[];
@@ -419,14 +419,6 @@ export class FullCalendarDirective extends BaseDirective<FullCalendarOptions, Fu
     sync(this.fullCalendarDefaultAllDay, 'defaultAllDay');
     sync(this.fullCalendarEventOrder, 'eventOrder');
     sync(this.fullCalendarEventOrderStrict, 'eventOrderStrict');
-  }
-
-  protected override updateOption<K extends keyof FullCalendarOptions>(key: K, value: FullCalendarOptions[K]): boolean {
-    const changed = setOptionIfChanged(this.optionsManager, key, value);
-    if (changed && this.isBaseInitialized() && !this.isBaseDestroyed()) {
-      this.reinitialize();
-    }
-    return changed;
   }
 
   private bootstrap(): void {

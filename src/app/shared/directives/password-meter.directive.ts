@@ -269,15 +269,6 @@ export class PasswordMeterDirective
     this.updateVisibilityIcons(false);
   }
 
-  protected override updateOption<K extends keyof PasswordMeterOptions>(
-    key: K,
-    value: PasswordMeterOptions[K]
-  ): boolean {
-    const changed = super.updateOption(key, value);
-    if (changed) this.handleOptsUpdated();
-    return changed;
-  }
-
   private handleOptsUpdated(): void {
     if (!this.isBaseInitialized()) return;
 

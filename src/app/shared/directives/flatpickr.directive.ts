@@ -18,7 +18,6 @@ import { useDirectiveHost } from './shared/directive-host';
 import {
   mergeOptionsIfChanged,
   runSafely,
-  setOptionIfChanged,
   setOptionsIfChanged,
 } from './shared/directive-helpers';
 
@@ -307,11 +306,6 @@ export class FlatpickrDirective extends BaseDirective<FlatpickrOptions, Flatpick
         }
       })
       .catch(() => this.bootstrap());
-  }
-
-  protected override updateOption<K extends keyof FlatpickrOptions>(key: K, value: FlatpickrOptions[K]): boolean {
-    if (value === undefined) return false;
-    return setOptionIfChanged(this.optionsManager, key, value, () => this.handleOptionsChanged());
   }
 
   private handleOptionsChanged(): void {

@@ -111,19 +111,21 @@ export function bindInputEffects<TOptions extends object>(
   ) => boolean,
   onReinit?: () => void
 ): void {
-  bindings.forEach(({ input, key, transform }) => {
-    effect(() => {
-      const value = input() as unknown;
-      untracked(() => {
-        if (value !== undefined) {
-          const typedValue = value as TOptions[typeof key];
-          const finalValue = transform ? transform(typedValue) : typedValue;
-          const changed = updateOption(key, finalValue);
-          if (changed) {
-            onReinit?.();
-          }
-        }
+  effect(() => {
+    const values = bindings.map(({ input }) => input());
+    untracked(() => {
+      let changed = false;
+
+      bindings.forEach(({ key, transform }, index) => {
+        const value = values[index];
+        if (value === undefined) return;
+
+        const typedValue = value as TOptions[typeof key];
+        const finalValue = transform ? transform(typedValue) : typedValue;
+        if (updateOption(key, finalValue)) changed = true;
       });
+
+      if (changed) onReinit?.();
     });
   });
 }
