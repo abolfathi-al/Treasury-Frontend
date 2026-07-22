@@ -77,7 +77,7 @@ const FILE_EXTENSIONS = {
 
 const CONFIG = {
   PORT: parseInt(process.env['PORT'] || SERVER_CONSTANTS.DEFAULT_PORT, 10),
-  DIST_FOLDER: join(process.cwd(), 'dist/velora/browser'),
+  DIST_FOLDER: join(process.cwd(), 'dist/web'),
   SSR_CACHE_TTL: 5 * SERVER_CONSTANTS.SECONDS_PER_MINUTE * SERVER_CONSTANTS.MILLISECONDS_PER_SECOND,
   SSR_CACHE_MAX_SIZE: 100,
   SSR_TIMEOUT: 10000,

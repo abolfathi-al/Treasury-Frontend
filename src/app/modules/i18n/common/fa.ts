@@ -22,7 +22,10 @@ export const commonFa = {
     delete: "حذف",
     edit: "ویرایش",
     view: "مشاهده",
-    close: "بستن"
+    close: "بستن",
+    decrease: "کاهش",
+    increase: "افزایش",
+    togglePasswordVisibility: "نمایش یا پنهان‌کردن گذرواژه"
   },
   filters: {
     all: "همه",

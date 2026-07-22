@@ -277,7 +277,9 @@ function extractComponentInfo(file) {
 }
 
 function discoverStaticTranslationKeys() {
-  const files = walk(srcApp, (file) => file.endsWith('.ts') || file.endsWith('.html'));
+  const files = walk(srcApp, (file) =>
+    (file.endsWith('.ts') && !file.endsWith('.spec.ts')) || file.endsWith('.html')
+  );
   const keys = new Map();
 
   for (const file of files) {
@@ -310,7 +312,9 @@ function discoverStaticTranslationKeys() {
 }
 
 function discoverDynamicKeyFamilies() {
-  const files = walk(srcApp, (file) => file.endsWith('.ts') || file.endsWith('.html'));
+  const files = walk(srcApp, (file) =>
+    (file.endsWith('.ts') && !file.endsWith('.spec.ts')) || file.endsWith('.html')
+  );
   const families = [];
 
   for (const file of files) {

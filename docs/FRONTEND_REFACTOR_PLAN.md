@@ -1,6 +1,6 @@
 # Reusable Dashboard Master Refactor Plan
 
-Status: `PROPOSED`
+Status: `IN_PROGRESS`
 
 ## Outcome
 
@@ -39,6 +39,19 @@ does not implement Treasury semantics. Treasury routes, workflows, policies, and
 contracts remain blocked until a governed Delivery decision authorizes them.
 Treasury decisions MUST NOT enter the Master.
 
+## Implementation progress
+
+As of 2026-07-22:
+
+- Commit `72be53e` established the initial reusable Master boundary, made Node
+  and pnpm explicit, and moved navigation composition into `project/`.
+- The next slice added the authoritative pnpm lockfile, aligned browser and SSR
+  output under `dist/web`, and restored the missing SSR runtime dependency.
+- Frozen install, typecheck, lint, all 215 tests, i18n validation, production and
+  SSR builds, and an HTTP 200 SSR smoke check pass.
+- Phase 2 remains in progress. Navigation composition is consumer-owned; brand,
+  route, locale, auth, and demo boundaries still require separate slices.
+
 ## Baseline
 
 | Area | Current evidence |
@@ -49,7 +62,7 @@ Treasury decisions MUST NOT enter the Master.
 | Reusable seams | `brand.config.ts`, shell navigation config, layout/theme services, `ShellFacade`, tokens, and adapters |
 | Cross-cutting hubs | `LoggerService` (132 edges), `BaseDirective` (89), `runSafely()` (135) |
 | Legacy surface | 243 files contain `Velora` references outside generated output |
-| Repository bootstrap | No dependency lockfile and no local `node_modules` |
+| Repository bootstrap | pnpm 10.33.0, Node 22, committed lockfile, frozen install verified |
 | Graph | No import cycles detected; Graphify edge diagnostics contain known dangling/collapsed edges |
 
 Graph degree identifies refactor risk, not a reason to introduce interfaces or

@@ -22,7 +22,10 @@ export const commonEn = {
     delete: "Delete",
     edit: "Edit",
     view: "View",
-    close: "Close"
+    close: "Close",
+    decrease: "Decrease",
+    increase: "Increase",
+    togglePasswordVisibility: "Toggle password visibility"
   },
   filters: {
     all: "All",

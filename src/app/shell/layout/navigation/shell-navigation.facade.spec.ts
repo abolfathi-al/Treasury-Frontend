@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,6 +28,7 @@ describe('ShellNavigationFacade project composition', () => {
 
     TestBed.configureTestingModule({
       providers: [
+        provideZonelessChangeDetection(),
         ShellNavigationFacade,
         { provide: PAGE_NAVIGATION_ITEMS, useValue: navigationItems },
         {
@@ -63,6 +65,7 @@ describe('ShellNavigationFacade project composition', () => {
   it('uses the navigation token default when a consumer provides no items', () => {
     TestBed.configureTestingModule({
       providers: [
+        provideZonelessChangeDetection(),
         ShellNavigationFacade,
         { provide: Router, useValue: { events: EMPTY, url: '/' } },
         {

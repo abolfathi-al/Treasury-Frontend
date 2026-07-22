@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'vl-footer',
@@ -17,7 +18,7 @@ import { RouterLink } from '@angular/router';
   host: {
     class: 'd-flex flex-column',
   },
-  imports: [NgTemplateOutlet, RouterLink],
+  imports: [NgTemplateOutlet, RouterLink, TranslatePipe],
 })
 export class FooterComponent {
   readonly appFooterContainerCSSClass = input<string>('');

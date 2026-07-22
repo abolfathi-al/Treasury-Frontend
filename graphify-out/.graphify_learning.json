@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T09:41:48.144584+00:00",
+  "generated_at": "2026-07-22T11:08:16.460891+00:00",
   "nodes": {
     "docs_frontend_refactor_plan_enterprise_dashboard_master": {
       "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
@@ -12,7 +12,7 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 0.999864751,
+      "score": 0.998478452,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
@@ -28,7 +28,7 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 0.999947462,
+      "score": 0.998561048,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
@@ -49,7 +49,7 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 1.999812213,
+      "score": 1.997039501,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -65,7 +65,7 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 0.999947462,
+      "score": 0.998561048,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
@@ -81,7 +81,7 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 0.999864751,
+      "score": 0.998478452,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
@@ -102,7 +102,7 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 1.999812213,
+      "score": 1.997039501,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -123,10 +123,26 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.999026957,
+      "score": 1.996255333,
       "source_file": "docs/ui/ui-architecture.md",
       "status": "preferred",
       "uses": 2
+    },
+    "src_app_app_config": {
+      "code_fingerprint": "2cec374bd5da515e69e211db832db964c04ee372aa67e261fa7ce2509ef2c85d",
+      "label": "app.config.ts",
+      "last": "2026-07-22T11:00:22.657277+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T11:00:22.657277+00:00",
+          "outcome": "useful",
+          "q": "Start the reusable frontend Master refactor and use subagents if needed"
+        }
+      ],
+      "score": 0.999873304,
+      "source_file": "src/app/app.config.ts",
+      "status": "tentative",
+      "uses": 1
     },
     "src_app_core_services_logger_service_loggerservice": {
       "code_fingerprint": "8905e0eaf428a77fd38ea5c26d7011afabec70adde2636e4e9b4444df47a1183",
@@ -144,7 +160,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.999026957,
+      "score": 1.996255333,
       "source_file": "src/app/core/services/logger.service.ts",
       "status": "preferred",
       "uses": 2
@@ -165,10 +181,26 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.999026957,
+      "score": 1.996255333,
       "source_file": "src/app/modules/auth/data-access/permission.service.ts",
       "status": "preferred",
       "uses": 2
+    },
+    "src_app_project_navigation_project_navigation_config": {
+      "code_fingerprint": "9c092d58deb9fe48fb25c85cca1c0e4842776fed2644bf41e6cf7e84b83bcea8",
+      "label": "project-navigation.config.ts",
+      "last": "2026-07-22T11:00:22.657277+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T11:00:22.657277+00:00",
+          "outcome": "useful",
+          "q": "Start the reusable frontend Master refactor and use subagents if needed"
+        }
+      ],
+      "score": 0.999873304,
+      "source_file": "src/app/project/navigation/project-navigation.config.ts",
+      "status": "tentative",
+      "uses": 1
     },
     "src_app_shared_directives_shared_base_directive_basedirective": {
       "code_fingerprint": "3335d64b4ca033e3a72922d5084d5cd686898a4c518097310ecc2e98ccb960fb",
@@ -186,10 +218,26 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.999026957,
+      "score": 1.996255333,
       "source_file": "src/app/shared/directives/shared/base-directive.ts",
       "status": "preferred",
       "uses": 2
+    },
+    "src_app_shell_layout_navigation_shell_navigation_facade_shellnavigationfacade": {
+      "code_fingerprint": "d0133ba162fe82369bf4bd5f758faf33ee42542eaee4273ef7d233e84b51f06a",
+      "label": "ShellNavigationFacade",
+      "last": "2026-07-22T11:00:22.657277+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T11:00:22.657277+00:00",
+          "outcome": "useful",
+          "q": "Start the reusable frontend Master refactor and use subagents if needed"
+        }
+      ],
+      "score": 0.999873304,
+      "source_file": "src/app/shell/layout/navigation/shell-navigation.facade.ts",
+      "status": "tentative",
+      "uses": 1
     }
   },
   "version": 1

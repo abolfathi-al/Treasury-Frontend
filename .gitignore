@@ -5,6 +5,7 @@
 
 # cache
 /.angular
+/graphify-out/cache/ast/
 
 # dependencies
 /node_modules
