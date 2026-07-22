@@ -954,42 +954,47 @@
     ],
     "18": [
       "src_app_shared_directives_menu_directive_menudirective",
+      "src_app_shared_directives_menu_directive_menudirective_binddelegatedhandlers",
+      "src_app_shared_directives_menu_directive_menudirective_bindescapekey",
+      "src_app_shared_directives_menu_directive_menudirective_bindoutsideclick",
+      "src_app_shared_directives_menu_directive_menudirective_cachetrigger",
       "src_app_shared_directives_menu_directive_menudirective_calczindex",
-      "src_app_shared_directives_menu_directive_menudirective_cleanup",
-      "src_app_shared_directives_menu_directive_menudirective_constructor",
       "src_app_shared_directives_menu_directive_menudirective_createinstances",
       "src_app_shared_directives_menu_directive_menudirective_destroydropdownpopper",
       "src_app_shared_directives_menu_directive_menudirective_destroypopper",
-      "src_app_shared_directives_menu_directive_menudirective_findbysel",
-      "src_app_shared_directives_menu_directive_menudirective_finditemlink",
-      "src_app_shared_directives_menu_directive_menudirective_finditemparents",
-      "src_app_shared_directives_menu_directive_menudirective_finditemtoggle",
-      "src_app_shared_directives_menu_directive_menudirective_findsubmenu",
-      "src_app_shared_directives_menu_directive_menudirective_findtrigger",
-      "src_app_shared_directives_menu_directive_menudirective_getitemlinkelement",
-      "src_app_shared_directives_menu_directive_menudirective_getitemparentelements",
-      "src_app_shared_directives_menu_directive_menudirective_getitemtoggleelement",
+      "src_app_shared_directives_menu_directive_menudirective_findstandalonemenutrigger",
+      "src_app_shared_directives_menu_directive_menudirective_getcss",
+      "src_app_shared_directives_menu_directive_menudirective_getinstance",
+      "src_app_shared_directives_menu_directive_menudirective_getitemelement",
+      "src_app_shared_directives_menu_directive_menudirective_getitemsubelement",
+      "src_app_shared_directives_menu_directive_menudirective_getitemsubtype",
+      "src_app_shared_directives_menu_directive_menudirective_getitemsubtypeinternal",
+      "src_app_shared_directives_menu_directive_menudirective_getitemtriggervalue",
       "src_app_shared_directives_menu_directive_menudirective_getlinkbyattribute",
       "src_app_shared_directives_menu_directive_menudirective_gettriggerelement",
-      "src_app_shared_directives_menu_directive_menudirective_hasitemsub",
-      "src_app_shared_directives_menu_directive_menudirective_hideaccordions",
+      "src_app_shared_directives_menu_directive_menudirective_handlemouseout",
+      "src_app_shared_directives_menu_directive_menudirective_handlemouseover",
+      "src_app_shared_directives_menu_directive_menudirective_handletriggerclick",
+      "src_app_shared_directives_menu_directive_menudirective_hide",
+      "src_app_shared_directives_menu_directive_menudirective_hidedropdowns",
+      "src_app_shared_directives_menu_directive_menudirective_hideinternal",
       "src_app_shared_directives_menu_directive_menudirective_initelements",
       "src_app_shared_directives_menu_directive_menudirective_initglobalhandlers",
-      "src_app_shared_directives_menu_directive_menudirective_initinputbindings",
+      "src_app_shared_directives_menu_directive_menudirective_initglobalhandlersinternal",
       "src_app_shared_directives_menu_directive_menudirective_initwithdelay",
-      "src_app_shared_directives_menu_directive_menudirective_isitemparentshown",
-      "src_app_shared_directives_menu_directive_menudirective_isitemsubelement",
+      "src_app_shared_directives_menu_directive_menudirective_isitemsubshown",
+      "src_app_shared_directives_menu_directive_menudirective_isopen",
+      "src_app_shared_directives_menu_directive_menudirective_isopeninternal",
+      "src_app_shared_directives_menu_directive_menudirective_istriggerelement",
       "src_app_shared_directives_menu_directive_menudirective_ngafterviewinit",
-      "src_app_shared_directives_menu_directive_menudirective_ngoninit",
-      "src_app_shared_directives_menu_directive_menudirective_normalizedim",
-      "src_app_shared_directives_menu_directive_menudirective_queryelements",
-      "src_app_shared_directives_menu_directive_menudirective_refresh",
-      "src_app_shared_directives_menu_directive_menudirective_setoption",
-      "src_app_shared_directives_menu_directive_menudirective_settriggerelement",
+      "src_app_shared_directives_menu_directive_menudirective_parsetriggervalue",
+      "src_app_shared_directives_menu_directive_menudirective_resolvetriggervalue",
+      "src_app_shared_directives_menu_directive_menudirective_setupeventlisteners",
       "src_app_shared_directives_menu_directive_menudirective_shouldinit",
-      "src_app_shared_directives_menu_directive_menudirective_syncmenuinputs",
-      "src_app_shared_directives_menu_directive_menudirective_updateoption",
-      "src_app_shared_directives_menu_directive_menudirective_validateinputs",
+      "src_app_shared_directives_menu_directive_menudirective_show",
+      "src_app_shared_directives_menu_directive_menudirective_showinternal",
+      "src_app_shared_directives_menu_directive_menudirective_toggle",
+      "src_app_shared_directives_menu_directive_menudirective_toggleinternal",
       "src_app_shared_directives_menu_directive_ts_directive"
     ],
     "19": [
@@ -1400,21 +1405,13 @@
       "src_app_core_services_theme_mode_service_thememodeservice_switchmode",
       "src_app_core_services_theme_mode_service_thememodeservice_updatemode",
       "src_app_core_services_theme_mode_service_ts_injectable",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_isthememenuplacement",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_menudirectivestub",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_thememodeservicestub",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_ts_component",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_ts_directive",
       "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_ts_input",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_veloraiconstubcomponent",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_constructor",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_ngoninit",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_switchmode",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_validateinputs",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_validatemode",
-      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_ts_component"
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_spec_veloraiconstubcomponent"
     ],
     "32": [
       "src_app_shared_directives_anti_autocomplete_directive",
@@ -2638,7 +2635,6 @@
       "src_app_core_state_context_context_models_uicapability",
       "src_app_core_state_context_ui_capability_facade",
       "src_app_core_state_context_ui_capability_facade_uicapabilityfacade",
-      "src_app_demo_context_demo_context_providers",
       "src_app_demo_context_demo_ui_capability_facade",
       "src_app_demo_context_demo_ui_capability_facade_demouicapabilityfacade",
       "src_app_demo_context_demo_ui_capability_facade_demouicapabilityfacade_canshow",
@@ -3192,29 +3188,28 @@
       "src_app_shared_forms_form_controls_textarea_control_textarea_control_component_ts_component"
     ],
     "97": [
-      "src_app_shared_directives_menu_directive_menudirective_addclass",
-      "src_app_shared_directives_menu_directive_menudirective_dispatch",
-      "src_app_shared_directives_menu_directive_menudirective_findallbysel",
-      "src_app_shared_directives_menu_directive_menudirective_finditemsub",
-      "src_app_shared_directives_menu_directive_menudirective_getitemopt",
-      "src_app_shared_directives_menu_directive_menudirective_handleitemclick",
-      "src_app_shared_directives_menu_directive_menudirective_hasclass",
-      "src_app_shared_directives_menu_directive_menudirective_hideaccordion",
-      "src_app_shared_directives_menu_directive_menudirective_hideallaccordions",
-      "src_app_shared_directives_menu_directive_menudirective_hidealldropdowns",
-      "src_app_shared_directives_menu_directive_menudirective_hidedropdown",
-      "src_app_shared_directives_menu_directive_menudirective_isitemdropdownpermanent",
-      "src_app_shared_directives_menu_directive_menudirective_isvalidel",
-      "src_app_shared_directives_menu_directive_menudirective_parsebool",
-      "src_app_shared_directives_menu_directive_menudirective_removeclass",
-      "src_app_shared_directives_menu_directive_menudirective_reset",
-      "src_app_shared_directives_menu_directive_menudirective_resetstates",
-      "src_app_shared_directives_menu_directive_menudirective_setactivelink",
-      "src_app_shared_directives_menu_directive_menudirective_showaccordion",
-      "src_app_shared_directives_menu_directive_menudirective_showdropdown",
-      "src_app_shared_directives_menu_directive_menudirective_toggleaccordion",
-      "src_app_shared_directives_menu_directive_menudirective_toggledropdown",
-      "src_app_utils_dom_util_domutil_parsenumber"
+      "src_app_core_initializers_legacy_storage_cleanup_initializer",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_cleanuplegacystorage",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacy_namespace_char_codes",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacy_storage_key_suffixes",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacynamespace",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragecleanupsetup",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragekeyprefixes",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragekeys",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_shouldremovelegacystoragekey",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacydashkey",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacydatakey",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacykey",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacynamespace",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_clear",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_getitem",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_key",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_length",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_removeitem",
+      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_setitem",
+      "src_app_core_tokens_session_storage_token_session_storage"
     ],
     "98": [
       "src_app_core_state_context_active_access_context_facade",
@@ -3274,6 +3269,7 @@
     "100": [
       "docs_ui_forms_and_controls_invalid_feedback",
       "docs_ui_i18n_and_formatting_typescript_locale_modules",
+      "docs_ui_shared_components_generic_ui_components",
       "docs_ui_states_loading_error_empty_empty_states",
       "docs_ui_states_loading_error_empty_error_states",
       "docs_ui_states_loading_error_empty_loading_states",
@@ -3308,32 +3304,29 @@
       "src_main_server_main"
     ],
     "102": [
-      "src_app_core_initializers_legacy_storage_cleanup_initializer",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_cleanuplegacystorage",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacy_namespace_char_codes",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacy_storage_key_suffixes",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacynamespace",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragecleanupsetup",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragekeyprefixes",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_legacystoragekeys",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_shouldremovelegacystoragekey",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacydashkey",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacydatakey",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacykey",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_legacynamespace",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_clear",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_getitem",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_key",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_length",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_removeitem",
-      "src_app_core_initializers_legacy_storage_cleanup_initializer_spec_memorystorage_setitem",
-      "src_app_core_tokens_session_storage_token_session_storage"
+      "src_app_app_config_spec",
+      "src_app_app_config_spec_classproviderrecord",
+      "src_app_app_config_spec_classproviderrecords",
+      "src_app_app_config_spec_layoutserviceprobe",
+      "src_app_app_config_spec_layoutserviceprobe_constructor",
+      "src_app_core_config_config_app_default_layout_type",
+      "src_app_core_config_runtime_config",
+      "src_app_core_config_runtime_config_app_runtime_config",
+      "src_app_core_config_runtime_config_appruntimeconfig",
+      "src_app_core_config_runtime_config_default_app_runtime_config",
+      "src_app_core_services_layout_service_spec",
+      "src_app_core_services_layout_service_spec_memorystorage",
+      "src_app_core_services_layout_service_spec_memorystorage_clear",
+      "src_app_core_services_layout_service_spec_memorystorage_getitem",
+      "src_app_core_services_layout_service_spec_memorystorage_key",
+      "src_app_core_services_layout_service_spec_memorystorage_length",
+      "src_app_core_services_layout_service_spec_memorystorage_removeitem",
+      "src_app_core_services_layout_service_spec_memorystorage_setitem",
+      "src_app_modules_auth_data_access_auth_service_spec",
+      "src_app_project_layout_project_layout_config",
+      "src_app_project_runtime_project_runtime_config"
     ],
     "103": [
-      "src_app_core_tokens_is_server_platform_token",
-      "src_app_core_tokens_is_server_platform_token_is_server_platform",
       "src_app_demo_api_in_memory_db_in_memory_db_service",
       "src_app_demo_api_in_memory_db_in_memory_db_service_inmemorydbservice",
       "src_app_demo_api_in_memory_db_in_memory_db_service_inmemorydbservice_clonearray",
@@ -3353,11 +3346,7 @@
       "src_app_demo_api_in_memory_db_in_memory_db_types_mockcollectionname",
       "src_app_demo_api_in_memory_db_in_memory_db_types_mockrecord",
       "src_app_demo_api_in_memory_db_in_memory_db_types_mockuser",
-      "src_app_demo_api_in_memory_db_in_memory_db_types_platformmetadata",
-      "src_app_demo_api_mock_api_interceptor",
-      "src_app_demo_api_mock_api_interceptor_mockapiinterceptor",
-      "src_app_demo_api_mock_api_interceptor_singleton_collections",
-      "src_app_demo_api_mock_api_interceptor_spec"
+      "src_app_demo_api_in_memory_db_in_memory_db_types_platformmetadata"
     ],
     "104": [
       "src_app_core_services_seo_service_seoservice",
@@ -3392,27 +3381,27 @@
       "src_app_core_services_title_service_ts_injectable"
     ],
     "106": [
-      "src_app_app_config_spec",
-      "src_app_app_config_spec_classproviderrecord",
-      "src_app_app_config_spec_classproviderrecords",
-      "src_app_app_config_spec_layoutserviceprobe",
-      "src_app_app_config_spec_layoutserviceprobe_constructor",
-      "src_app_core_config_config_app_default_layout_type",
-      "src_app_core_config_runtime_config",
-      "src_app_core_config_runtime_config_app_runtime_config",
-      "src_app_core_config_runtime_config_appruntimeconfig",
-      "src_app_core_config_runtime_config_default_app_runtime_config",
-      "src_app_core_services_layout_service_spec",
-      "src_app_core_services_layout_service_spec_memorystorage",
-      "src_app_core_services_layout_service_spec_memorystorage_clear",
-      "src_app_core_services_layout_service_spec_memorystorage_getitem",
-      "src_app_core_services_layout_service_spec_memorystorage_key",
-      "src_app_core_services_layout_service_spec_memorystorage_length",
-      "src_app_core_services_layout_service_spec_memorystorage_removeitem",
-      "src_app_core_services_layout_service_spec_memorystorage_setitem",
-      "src_app_modules_auth_data_access_auth_service_spec",
-      "src_app_project_layout_project_layout_config",
-      "src_app_project_runtime_project_runtime_config"
+      "src_app_core_tokens_browser_capability_tokens_spec",
+      "src_app_core_tokens_browser_capability_tokens_spec_standardspeechrecognition",
+      "src_app_core_tokens_browser_capability_tokens_spec_webkitspeechrecognition",
+      "src_app_core_tokens_css_token",
+      "src_app_core_tokens_css_token_css",
+      "src_app_core_tokens_css_token_cssapi",
+      "src_app_core_tokens_css_token_cssapi_escape",
+      "src_app_core_tokens_css_token_cssapi_supports",
+      "src_app_core_tokens_css_token_fallbackcssapi",
+      "src_app_core_tokens_css_token_resolvecssapi",
+      "src_app_core_tokens_css_token_windowwithcssapi",
+      "src_app_core_tokens_network_information_token",
+      "src_app_core_tokens_network_information_token_navigatorwithnetworkinformation",
+      "src_app_core_tokens_network_information_token_network_information",
+      "src_app_core_tokens_network_information_token_networkinformation",
+      "src_app_core_tokens_network_information_token_resolvenetworkinformation",
+      "src_app_core_tokens_speech_recognition_token",
+      "src_app_core_tokens_speech_recognition_token_resolvespeechrecognitionconstructor",
+      "src_app_core_tokens_speech_recognition_token_speech_recognition",
+      "src_app_core_tokens_speech_recognition_token_speechrecognitionconstructor",
+      "src_app_core_tokens_speech_recognition_token_windowwithspeechrecognition"
     ],
     "107": [
       "src_app_shared_directives_inputmask_directive_spec",
@@ -3441,8 +3430,8 @@
       "src_app_core_strategies_custom_title_strategy_ts_injectable"
     ],
     "109": [
-      "angular_animations",
       "angular_common",
+      "angular_compiler",
       "angular_core",
       "angular_localize",
       "angular_ssr",
@@ -3455,8 +3444,8 @@
       "ngx_toastr",
       "ngx_translate_core",
       "package_dependencies",
-      "package_dependencies_angular_animations",
       "package_dependencies_angular_common",
+      "package_dependencies_angular_compiler",
       "package_dependencies_angular_core",
       "package_dependencies_angular_localize",
       "package_dependencies_angular_ssr",
@@ -3541,27 +3530,27 @@
       "src_app_shell_layout_components_toolbar_toolbar_component_toolbar_constants"
     ],
     "114": [
-      "src_app_core_tokens_browser_capability_tokens_spec",
-      "src_app_core_tokens_browser_capability_tokens_spec_standardspeechrecognition",
-      "src_app_core_tokens_browser_capability_tokens_spec_webkitspeechrecognition",
-      "src_app_core_tokens_css_token",
-      "src_app_core_tokens_css_token_css",
-      "src_app_core_tokens_css_token_cssapi",
-      "src_app_core_tokens_css_token_cssapi_escape",
-      "src_app_core_tokens_css_token_cssapi_supports",
-      "src_app_core_tokens_css_token_fallbackcssapi",
-      "src_app_core_tokens_css_token_resolvecssapi",
-      "src_app_core_tokens_css_token_windowwithcssapi",
-      "src_app_core_tokens_network_information_token",
-      "src_app_core_tokens_network_information_token_navigatorwithnetworkinformation",
-      "src_app_core_tokens_network_information_token_network_information",
-      "src_app_core_tokens_network_information_token_networkinformation",
-      "src_app_core_tokens_network_information_token_resolvenetworkinformation",
-      "src_app_core_tokens_speech_recognition_token",
-      "src_app_core_tokens_speech_recognition_token_resolvespeechrecognitionconstructor",
-      "src_app_core_tokens_speech_recognition_token_speech_recognition",
-      "src_app_core_tokens_speech_recognition_token_speechrecognitionconstructor",
-      "src_app_core_tokens_speech_recognition_token_windowwithspeechrecognition"
+      "src_app_modules_i18n_common_en",
+      "src_app_modules_i18n_common_en_commonen",
+      "src_app_modules_i18n_common_fa",
+      "src_app_modules_i18n_common_fa_commonfa",
+      "src_app_modules_i18n_index",
+      "src_app_modules_i18n_layout_en",
+      "src_app_modules_i18n_layout_en_layouten",
+      "src_app_modules_i18n_layout_fa",
+      "src_app_modules_i18n_layout_fa_layoutfa",
+      "src_app_modules_i18n_navigation_en",
+      "src_app_modules_i18n_navigation_en_navigationen",
+      "src_app_modules_i18n_navigation_fa",
+      "src_app_modules_i18n_navigation_fa_navigationfa",
+      "src_app_modules_i18n_status_en",
+      "src_app_modules_i18n_status_en_statusen",
+      "src_app_modules_i18n_status_fa",
+      "src_app_modules_i18n_status_fa_statusfa",
+      "src_app_modules_i18n_validation_en",
+      "src_app_modules_i18n_validation_en_validationen",
+      "src_app_modules_i18n_validation_fa",
+      "src_app_modules_i18n_validation_fa_validationfa"
     ],
     "115": [
       "src_app_shared_forms_invalid_feedback_invalid_feedback_component",
@@ -3605,7 +3594,8 @@
       "src_app_demo_context_demo_auth_facade_demoauthfacade_getauthstate",
       "src_app_demo_context_demo_auth_facade_demoauthfacade_logout",
       "src_app_demo_context_demo_auth_facade_demoauthfacade_startssologin",
-      "src_app_demo_context_demo_auth_facade_ts_injectable"
+      "src_app_demo_context_demo_auth_facade_ts_injectable",
+      "src_app_demo_context_demo_context_providers"
     ],
     "118": [
       "src_app_modules_errors_components_base_error_component_baseerrorcomponent",
@@ -3630,40 +3620,6 @@
       "src_app_core_state_context_demo_auth_facade_ts_injectable"
     ],
     "120": [
-      "src_app_modules_i18n_common_en",
-      "src_app_modules_i18n_common_en_commonen",
-      "src_app_modules_i18n_common_fa",
-      "src_app_modules_i18n_common_fa_commonfa",
-      "src_app_modules_i18n_index",
-      "src_app_modules_i18n_layout_en",
-      "src_app_modules_i18n_layout_en_layouten",
-      "src_app_modules_i18n_layout_fa",
-      "src_app_modules_i18n_layout_fa_layoutfa",
-      "src_app_modules_i18n_navigation_en",
-      "src_app_modules_i18n_navigation_en_navigationen",
-      "src_app_modules_i18n_navigation_fa",
-      "src_app_modules_i18n_navigation_fa_navigationfa",
-      "src_app_modules_i18n_status_en",
-      "src_app_modules_i18n_status_en_statusen",
-      "src_app_modules_i18n_status_fa",
-      "src_app_modules_i18n_status_fa_statusfa",
-      "src_app_modules_i18n_validation_en",
-      "src_app_modules_i18n_validation_en_validationen",
-      "src_app_modules_i18n_validation_fa",
-      "src_app_modules_i18n_validation_fa_validationfa"
-    ],
-    "121": [
-      "src_app_core_services_events_service_globaleventsservice",
-      "src_app_core_services_events_service_globaleventsservice_closealloverlays",
-      "src_app_core_services_events_service_globaleventsservice_constructor",
-      "src_app_core_services_events_service_globaleventsservice_resetstate",
-      "src_app_core_services_events_service_globaleventsservice_sethasopendrawer",
-      "src_app_core_services_events_service_globaleventsservice_sethasopennotification",
-      "src_app_core_services_events_service_globaleventsservice_setkeydown",
-      "src_app_core_services_events_service_globaleventsservice_setuprouterevents",
-      "src_app_core_services_events_service_ts_injectable"
-    ],
-    "122": [
       "src_app_core_tokens_local_storage_polyfill_token_localstoragepolyfillimpl_key",
       "src_app_utils_form_util_formutil",
       "src_app_utils_form_util_formutil_distinctuntilchangedefficient",
@@ -3684,6 +3640,39 @@
       "src_app_utils_form_util_formutil_setformvalues",
       "src_app_utils_form_util_formutil_validatepasswordstrength",
       "src_app_utils_form_util_formvaluemap"
+    ],
+    "121": [
+      "src_app_core_services_events_service_globaleventsservice",
+      "src_app_core_services_events_service_globaleventsservice_closealloverlays",
+      "src_app_core_services_events_service_globaleventsservice_constructor",
+      "src_app_core_services_events_service_globaleventsservice_resetstate",
+      "src_app_core_services_events_service_globaleventsservice_sethasopendrawer",
+      "src_app_core_services_events_service_globaleventsservice_sethasopennotification",
+      "src_app_core_services_events_service_globaleventsservice_setkeydown",
+      "src_app_core_services_events_service_globaleventsservice_setuprouterevents",
+      "src_app_core_services_events_service_ts_injectable"
+    ],
+    "122": [
+      "src_app_shared_directives_menu_directive_menudirective_addclass",
+      "src_app_shared_directives_menu_directive_menudirective_dispatch",
+      "src_app_shared_directives_menu_directive_menudirective_finditemsub",
+      "src_app_shared_directives_menu_directive_menudirective_getdropdownpopperconfig",
+      "src_app_shared_directives_menu_directive_menudirective_getitemopt",
+      "src_app_shared_directives_menu_directive_menudirective_handleitemclick",
+      "src_app_shared_directives_menu_directive_menudirective_hideaccordion",
+      "src_app_shared_directives_menu_directive_menudirective_hidealldropdowns",
+      "src_app_shared_directives_menu_directive_menudirective_hidedropdown",
+      "src_app_shared_directives_menu_directive_menudirective_initdropdownpopper",
+      "src_app_shared_directives_menu_directive_menudirective_isitemdropdownpermanent",
+      "src_app_shared_directives_menu_directive_menudirective_isvalidel",
+      "src_app_shared_directives_menu_directive_menudirective_parsebool",
+      "src_app_shared_directives_menu_directive_menudirective_removeclass",
+      "src_app_shared_directives_menu_directive_menudirective_setactivelink",
+      "src_app_shared_directives_menu_directive_menudirective_showaccordion",
+      "src_app_shared_directives_menu_directive_menudirective_showdropdown",
+      "src_app_shared_directives_menu_directive_menudirective_toggleaccordion",
+      "src_app_shared_directives_menu_directive_menudirective_toggledropdown",
+      "src_app_utils_dom_util_domutil_parsenumber"
     ],
     "123": [
       "src_app_shared_charts_d3_d3_chart_directives_spec",
@@ -3892,26 +3881,6 @@
       "src_app_core_services_focus_management_service_ts_injectable"
     ],
     "134": [
-      "src_app_shared_directives_menu_directive_menudirective_bindescapekey",
-      "src_app_shared_directives_menu_directive_menudirective_bindoutsideclick",
-      "src_app_shared_directives_menu_directive_menudirective_getcss",
-      "src_app_shared_directives_menu_directive_menudirective_getinstance",
-      "src_app_shared_directives_menu_directive_menudirective_getitemsubelement",
-      "src_app_shared_directives_menu_directive_menudirective_getitemsubtype",
-      "src_app_shared_directives_menu_directive_menudirective_getitemsubtypeinternal",
-      "src_app_shared_directives_menu_directive_menudirective_hide",
-      "src_app_shared_directives_menu_directive_menudirective_hidedropdowns",
-      "src_app_shared_directives_menu_directive_menudirective_hideinternal",
-      "src_app_shared_directives_menu_directive_menudirective_isitemsubshown",
-      "src_app_shared_directives_menu_directive_menudirective_isopen",
-      "src_app_shared_directives_menu_directive_menudirective_isopeninternal",
-      "src_app_shared_directives_menu_directive_menudirective_setupeventlisteners",
-      "src_app_shared_directives_menu_directive_menudirective_show",
-      "src_app_shared_directives_menu_directive_menudirective_showinternal",
-      "src_app_shared_directives_menu_directive_menudirective_toggle",
-      "src_app_shared_directives_menu_directive_menudirective_toggleinternal"
-    ],
-    "135": [
       "src_app_app_config",
       "src_app_app_config_app_config_constants",
       "src_app_app_config_appprovidersconfig",
@@ -3929,6 +3898,24 @@
       "src_app_project_locale_project_locale_config_project_locale",
       "src_app_project_routing_project_routes",
       "src_app_project_routing_project_routes_project_routes"
+    ],
+    "135": [
+      "src_app_shared_directives_menu_directive_menudirective_findbysel",
+      "src_app_shared_directives_menu_directive_menudirective_finditemlink",
+      "src_app_shared_directives_menu_directive_menudirective_finditemtoggle",
+      "src_app_shared_directives_menu_directive_menudirective_findsubmenu",
+      "src_app_shared_directives_menu_directive_menudirective_findtrigger",
+      "src_app_shared_directives_menu_directive_menudirective_getitemlinkelement",
+      "src_app_shared_directives_menu_directive_menudirective_getitemtoggleelement",
+      "src_app_shared_directives_menu_directive_menudirective_ngoninit",
+      "src_app_shared_directives_menu_directive_menudirective_normalizedim",
+      "src_app_shared_directives_menu_directive_menudirective_queryelements",
+      "src_app_shared_directives_menu_directive_menudirective_refresh",
+      "src_app_shared_directives_menu_directive_menudirective_setoption",
+      "src_app_shared_directives_menu_directive_menudirective_settriggerelement",
+      "src_app_shared_directives_menu_directive_menudirective_syncmenuinputs",
+      "src_app_shared_directives_menu_directive_menudirective_updateoption",
+      "src_app_shared_directives_menu_directive_menudirective_validateinputs"
     ],
     "136": [
       "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_ts_component",
@@ -4127,10 +4114,14 @@
       "src_app_shared_directives_tree_directive_treedirective_resetdragstate"
     ],
     "150": [
-      "docs_ui_forms_and_controls_forms_and_controls",
+      "docs_ui_actions_permissions_navigation_permission_filtering",
       "docs_ui_forms_and_controls_missing_standard_controls",
-      "docs_ui_forms_and_controls_standard_form_control",
       "docs_ui_tables_and_grids_pagination_selection_gaps",
+      "docs_ui_ui_architecture_dependency_rules",
+      "docs_ui_ui_architecture_folder_boundaries",
+      "docs_ui_ui_architecture_navigation_pattern",
+      "docs_ui_ui_architecture_shell_facade_pattern",
+      "docs_ui_ui_architecture_ui_architecture",
       "docs_ui_ui_knowledge_generation_report_completion_rationale",
       "docs_ui_ui_knowledge_generation_report_implementation_gaps",
       "docs_ui_ui_knowledge_generation_report_scan_coverage",
@@ -4186,18 +4177,18 @@
       "src_app_shell_layout_components_header_header_menu_header_menu_component_ts_component"
     ],
     "155": [
-      "src_app_shared_directives_menu_directive_menudirective_binddelegatedhandlers",
-      "src_app_shared_directives_menu_directive_menudirective_cachetrigger",
-      "src_app_shared_directives_menu_directive_menudirective_findstandalonemenutrigger",
-      "src_app_shared_directives_menu_directive_menudirective_getitemelement",
-      "src_app_shared_directives_menu_directive_menudirective_getitemtriggervalue",
-      "src_app_shared_directives_menu_directive_menudirective_handlemouseout",
-      "src_app_shared_directives_menu_directive_menudirective_handlemouseover",
-      "src_app_shared_directives_menu_directive_menudirective_handletriggerclick",
-      "src_app_shared_directives_menu_directive_menudirective_initglobalhandlersinternal",
-      "src_app_shared_directives_menu_directive_menudirective_istriggerelement",
-      "src_app_shared_directives_menu_directive_menudirective_parsetriggervalue",
-      "src_app_shared_directives_menu_directive_menudirective_resolvetriggervalue"
+      "src_app_shared_directives_tree_directive_treedirective_addchildnode",
+      "src_app_shared_directives_tree_directive_treedirective_addcontextmenuitem",
+      "src_app_shared_directives_tree_directive_treedirective_addcontextmenuseparator",
+      "src_app_shared_directives_tree_directive_treedirective_cleanup",
+      "src_app_shared_directives_tree_directive_treedirective_constructor",
+      "src_app_shared_directives_tree_directive_treedirective_destroytree",
+      "src_app_shared_directives_tree_directive_treedirective_handlecontextmenu",
+      "src_app_shared_directives_tree_directive_treedirective_hidecontextmenu",
+      "src_app_shared_directives_tree_directive_treedirective_initinputeffects",
+      "src_app_shared_directives_tree_directive_treedirective_ngondestroy",
+      "src_app_shared_directives_tree_directive_treedirective_recreatetree",
+      "src_app_shared_directives_tree_directive_treedirective_showcontextmenu"
     ],
     "156": [
       "src_app_shared_charts_d3_d3_bar_chart_directive_d3barchartdirective",
@@ -4220,20 +4211,6 @@
       "src_app_shared_charts_d3_d3_score_chart_directive_ts_input"
     ],
     "158": [
-      "src_app_shared_directives_tree_directive_treedirective_addchildnode",
-      "src_app_shared_directives_tree_directive_treedirective_addcontextmenuitem",
-      "src_app_shared_directives_tree_directive_treedirective_addcontextmenuseparator",
-      "src_app_shared_directives_tree_directive_treedirective_cleanup",
-      "src_app_shared_directives_tree_directive_treedirective_constructor",
-      "src_app_shared_directives_tree_directive_treedirective_destroytree",
-      "src_app_shared_directives_tree_directive_treedirective_handlecontextmenu",
-      "src_app_shared_directives_tree_directive_treedirective_hidecontextmenu",
-      "src_app_shared_directives_tree_directive_treedirective_initinputeffects",
-      "src_app_shared_directives_tree_directive_treedirective_ngondestroy",
-      "src_app_shared_directives_tree_directive_treedirective_recreatetree",
-      "src_app_shared_directives_tree_directive_treedirective_showcontextmenu"
-    ],
-    "159": [
       "src_app_shared_directives_tree_directive_treedirective_focusnode",
       "src_app_shared_directives_tree_directive_treedirective_getnodeindex",
       "src_app_shared_directives_tree_directive_treedirective_handlekeyboardnavigation",
@@ -4247,6 +4224,19 @@
       "src_app_shared_directives_tree_directive_treedirective_setupeventlisteners",
       "src_app_shared_directives_tree_directive_treedirective_updatenodedisplay"
     ],
+    "159": [
+      "figma_config_figma_config",
+      "figma_config_js_figma_config",
+      "scripts_figma_mcp",
+      "scripts_figma_mcp_args",
+      "scripts_figma_mcp_figmaconfig",
+      "scripts_figma_mcp_fs",
+      "scripts_figma_mcp_getserverconfig",
+      "scripts_figma_mcp_path",
+      "scripts_figma_mcp_spawn",
+      "scripts_figma_mcp_startserver",
+      "scripts_figma_mcp_stopserver"
+    ],
     "160": [
       "docs_ui_directives_d3_chart_directives",
       "docs_ui_directives_directive_lifecycle_rules",
@@ -4255,7 +4245,6 @@
       "docs_ui_directives_inputmask_maxlength_rules",
       "docs_ui_directives_shared_behavior_directives",
       "docs_ui_forms_and_controls_standard_control_catalog",
-      "docs_ui_shared_components_generic_ui_components",
       "docs_ui_shared_components_shared_chart_components",
       "docs_ui_shared_components_shared_components",
       "docs_ui_shared_components_shell_chrome_components",
@@ -4360,28 +4349,6 @@
       "angular_web_sourceroot"
     ],
     "168": [
-      "figma_config_figma_config",
-      "figma_config_js_figma_config",
-      "scripts_figma_mcp",
-      "scripts_figma_mcp_args",
-      "scripts_figma_mcp_figmaconfig",
-      "scripts_figma_mcp_fs",
-      "scripts_figma_mcp_getserverconfig",
-      "scripts_figma_mcp_path",
-      "scripts_figma_mcp_spawn",
-      "scripts_figma_mcp_startserver",
-      "scripts_figma_mcp_stopserver"
-    ],
-    "169": [
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_account_settings",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_language_selector",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_logout",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_select_language",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_user_menu",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_user_profile",
-      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_users_settings"
-    ],
-    "170": [
       "src_app_app_component",
       "src_app_core_services_events_service",
       "src_app_core_services_events_service_key",
@@ -4393,6 +4360,28 @@
       "src_app_core_services_keyboard_event_service_spec",
       "src_main",
       "src_main_main_constants"
+    ],
+    "169": [
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_account_settings",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_language_selector",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_logout",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_select_language",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_user_menu",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_user_profile",
+      "src_app_shell_components_extras_dropdown_inner_user_inner_user_inner_component_users_settings"
+    ],
+    "170": [
+      "src_app_core_state_context_context_models_identitysummary",
+      "src_app_demo_context_demo_context_fixtures",
+      "src_app_demo_context_demo_context_fixtures_builddemopermissionhints",
+      "src_app_demo_context_demo_context_fixtures_builddemouicapabilities",
+      "src_app_demo_context_demo_context_fixtures_createdemoauthfacadestate",
+      "src_app_demo_context_demo_context_fixtures_createdisableddemoauthfacadestate",
+      "src_app_demo_context_demo_context_fixtures_demo_active_access_context",
+      "src_app_demo_context_demo_context_fixtures_demo_active_actor_context",
+      "src_app_demo_context_demo_context_fixtures_demo_identity",
+      "src_app_demo_context_demo_context_fixtures_demo_organization_contexts",
+      "src_app_demo_context_demo_context_store"
     ],
     "171": [
       "tsconfig_compileroptions",
@@ -4418,17 +4407,17 @@
       "tsconfig_compileroptions_usedefineforclassfields"
     ],
     "172": [
-      "src_app_core_state_context_context_models_identitysummary",
-      "src_app_demo_context_demo_context_fixtures",
-      "src_app_demo_context_demo_context_fixtures_builddemopermissionhints",
-      "src_app_demo_context_demo_context_fixtures_builddemouicapabilities",
-      "src_app_demo_context_demo_context_fixtures_createdemoauthfacadestate",
-      "src_app_demo_context_demo_context_fixtures_createdisableddemoauthfacadestate",
-      "src_app_demo_context_demo_context_fixtures_demo_active_access_context",
-      "src_app_demo_context_demo_context_fixtures_demo_active_actor_context",
-      "src_app_demo_context_demo_context_fixtures_demo_identity",
-      "src_app_demo_context_demo_context_fixtures_demo_organization_contexts",
-      "src_app_demo_context_demo_context_store"
+      "src_app_shared_directives_menu_directive_menudirective_clearpositioningstyles",
+      "src_app_shared_directives_menu_directive_menudirective_destroystandalonemenupopper",
+      "src_app_shared_directives_menu_directive_menudirective_hideallstandalonemenus",
+      "src_app_shared_directives_menu_directive_menudirective_hidestandalonemenu",
+      "src_app_shared_directives_menu_directive_menudirective_initstandalonemenupopper",
+      "src_app_shared_directives_menu_directive_menudirective_loadpopper",
+      "src_app_shared_directives_menu_directive_menudirective_setstyle",
+      "src_app_shared_directives_menu_directive_menudirective_showstandalonemenu",
+      "src_app_shared_directives_menu_directive_menudirective_togglestandalonemenu",
+      "src_app_shared_directives_menu_directive_menudirective_withpopper",
+      "src_app_utils_core_util_coreutil_parsenumber"
     ],
     "173": [
       "src_app_modules_auth_guards_auth_guard_authguard",
@@ -4458,6 +4447,9 @@
       "src_app_shared_forms_form_controls_standard_control_imports_date_input_imports"
     ],
     "175": [
+      "src_app_shared_directives_menu_directive_menudirective_cleanup",
+      "src_app_shared_directives_menu_directive_menudirective_constructor",
+      "src_app_shared_directives_menu_directive_menudirective_initinputbindings",
       "src_app_shared_pipes_due_in_pipe_dueinpipe",
       "src_app_shared_pipes_due_in_pipe_dueinpipe_cleartimer",
       "src_app_shared_pipes_due_in_pipe_dueinpipe_constructor",
@@ -4522,6 +4514,19 @@
       "angular_schematics_schematics_angular_service"
     ],
     "179": [
+      "src_app_shared_directives_menu_directive_menudirective_findallbysel",
+      "src_app_shared_directives_menu_directive_menudirective_finditemparents",
+      "src_app_shared_directives_menu_directive_menudirective_getitemparentelements",
+      "src_app_shared_directives_menu_directive_menudirective_hasclass",
+      "src_app_shared_directives_menu_directive_menudirective_hasitemsub",
+      "src_app_shared_directives_menu_directive_menudirective_hideaccordions",
+      "src_app_shared_directives_menu_directive_menudirective_hideallaccordions",
+      "src_app_shared_directives_menu_directive_menudirective_isitemparentshown",
+      "src_app_shared_directives_menu_directive_menudirective_isitemsubelement",
+      "src_app_shared_directives_menu_directive_menudirective_reset",
+      "src_app_shared_directives_menu_directive_menudirective_resetstates"
+    ],
+    "180": [
       "src_app_shared_ui_hierarchy_hierarchy_tree_hierarchy_tree_component",
       "src_app_shared_ui_hierarchy_hierarchy_tree_hierarchy_tree_component_hierarchytreecomponent_clonenode",
       "src_app_shared_ui_hierarchy_hierarchy_tree_hierarchy_tree_component_hierarchytreecomponent_findnodebyid",
@@ -4533,19 +4538,6 @@
       "src_app_shared_ui_hierarchy_hierarchy_tree_hierarchy_tree_component_spec_readtranslatex",
       "src_app_shared_ui_hierarchy_hierarchy_tree_hierarchy_tree_component_treerendernode",
       "src_app_shared_ui_hierarchy_hierarchy_types_hierarchynode"
-    ],
-    "180": [
-      "src_app_utils_responsive_util_responsiveutil",
-      "src_app_utils_responsive_util_responsiveutil_getattributevaluebybreakpoint",
-      "src_app_utils_responsive_util_responsiveutil_getbreakpoint",
-      "src_app_utils_responsive_util_responsiveutil_getcssvariablevalue",
-      "src_app_utils_responsive_util_responsiveutil_getcurrentbreakpoint",
-      "src_app_utils_responsive_util_responsiveutil_getresponsiveitemcount",
-      "src_app_utils_responsive_util_responsiveutil_getviewport",
-      "src_app_utils_responsive_util_responsiveutil_isdesktopviewport",
-      "src_app_utils_responsive_util_responsiveutil_ismobileviewport",
-      "src_app_utils_responsive_util_responsiveutil_istabletviewport",
-      "src_app_utils_responsive_util_responsiveutil_matchesbreakpoint"
     ],
     "181": [
       "src_app_demo_dashboard_dashboard_component_authentication_login",
@@ -4624,16 +4616,17 @@
       "src_app_demo_context_demo_context_store_democontextstore_finddefaultactormembership"
     ],
     "187": [
-      "src_app_shared_directives_fullcalendar_directive",
-      "src_app_shared_directives_fullcalendar_directive_bootstrapmodule",
-      "src_app_shared_directives_fullcalendar_directive_daygridmodule",
-      "src_app_shared_directives_fullcalendar_directive_fullcalendarerror",
-      "src_app_shared_directives_fullcalendar_directive_fullcalendarmodule",
-      "src_app_shared_directives_fullcalendar_directive_fullcalendaroptions",
-      "src_app_shared_directives_fullcalendar_directive_fullcalendarvalidationresult",
-      "src_app_shared_directives_fullcalendar_directive_interactionmodule",
-      "src_app_shared_directives_fullcalendar_directive_listmodule",
-      "src_app_shared_directives_fullcalendar_directive_timegridmodule"
+      "src_app_utils_responsive_util_responsiveutil",
+      "src_app_utils_responsive_util_responsiveutil_getattributevaluebybreakpoint",
+      "src_app_utils_responsive_util_responsiveutil_getbreakpoint",
+      "src_app_utils_responsive_util_responsiveutil_getcssvariablevalue",
+      "src_app_utils_responsive_util_responsiveutil_getcurrentbreakpoint",
+      "src_app_utils_responsive_util_responsiveutil_getresponsiveitemcount",
+      "src_app_utils_responsive_util_responsiveutil_getviewport",
+      "src_app_utils_responsive_util_responsiveutil_isdesktopviewport",
+      "src_app_utils_responsive_util_responsiveutil_ismobileviewport",
+      "src_app_utils_responsive_util_responsiveutil_istabletviewport",
+      "src_app_utils_responsive_util_responsiveutil_matchesbreakpoint"
     ],
     "188": [
       "src_app_shared_ui_demo_actions_demo_action_modal_component_closed_event",
@@ -4736,6 +4729,18 @@
       "src_app_shell_components_splash_screen_splash_screen_component_splash_screen"
     ],
     "206": [
+      "src_app_shared_directives_fullcalendar_directive",
+      "src_app_shared_directives_fullcalendar_directive_bootstrapmodule",
+      "src_app_shared_directives_fullcalendar_directive_daygridmodule",
+      "src_app_shared_directives_fullcalendar_directive_fullcalendarerror",
+      "src_app_shared_directives_fullcalendar_directive_fullcalendarmodule",
+      "src_app_shared_directives_fullcalendar_directive_fullcalendaroptions",
+      "src_app_shared_directives_fullcalendar_directive_fullcalendarvalidationresult",
+      "src_app_shared_directives_fullcalendar_directive_interactionmodule",
+      "src_app_shared_directives_fullcalendar_directive_listmodule",
+      "src_app_shared_directives_fullcalendar_directive_timegridmodule"
+    ],
+    "207": [
       "src_app_shared_directives_tree_directive_treedirective_addnode",
       "src_app_shared_directives_tree_directive_treedirective_collapseall",
       "src_app_shared_directives_tree_directive_treedirective_collapsenode",
@@ -4746,18 +4751,6 @@
       "src_app_shared_directives_tree_directive_treedirective_removenode",
       "src_app_shared_directives_tree_directive_treedirective_updateexpandednodes",
       "src_app_shared_directives_tree_directive_treedirective_updatenode"
-    ],
-    "207": [
-      "src_app_shell_layout_navigation_shell_navigation_utils",
-      "src_app_shell_layout_navigation_shell_navigation_utils_applyshellnavigationlabels",
-      "src_app_shell_layout_navigation_shell_navigation_utils_filtershellnavigationitems",
-      "src_app_shell_layout_navigation_shell_navigation_utils_hasrequiredpermissions",
-      "src_app_shell_layout_navigation_shell_navigation_utils_isshellnavigationitemactive",
-      "src_app_shell_layout_navigation_shell_navigation_utils_isshellnavigationitemcurrentpage",
-      "src_app_shell_layout_navigation_shell_navigation_utils_normalizeshellnavigationurl",
-      "src_app_shell_layout_navigation_shell_navigation_utils_resolveshellnavigationviewitems",
-      "src_app_shell_layout_navigation_shell_navigation_utils_spec",
-      "src_app_shell_layout_navigation_shell_navigation_utils_toshellnavigationviewitems"
     ],
     "208": [
       "angular",
@@ -4853,15 +4846,12 @@
       "tsconfig_eslint_json_ref_tsconfig_json"
     ],
     "215": [
-      "docs_ui_directives_stepper_directive",
       "docs_ui_domain_workspace_design_rules_semantic_compare_and_impact",
-      "docs_ui_forms_and_controls_validation_model",
       "docs_ui_modals_drawers_wizards_drawer_pattern",
       "docs_ui_utilities_deep_diff_mapper",
       "docs_ui_utilities_form_util",
       "docs_ui_utilities_ui_infrastructure_services",
-      "docs_ui_utilities_utilities",
-      "src_app_modules_auth_pages_login_login_component_two_step_login_flow"
+      "docs_ui_utilities_utilities"
     ],
     "216": [
       "src_app_shell_layout_components_sidebar_sidebar_component_sidebarcomponent",
@@ -4940,15 +4930,16 @@
       "types_object_path"
     ],
     "221": [
-      "src_app_core_initializers_service_worker_initializer",
-      "src_app_core_initializers_service_worker_initializer_setupunrecoverablehandling",
-      "src_app_core_initializers_service_worker_initializer_setupupdatechecking",
-      "src_app_core_initializers_service_worker_initializer_setupversionactivation",
-      "src_app_core_initializers_service_worker_initializer_spec",
-      "src_app_core_initializers_service_worker_initializer_spec_applicationrefstub",
-      "src_app_core_initializers_service_worker_initializer_spec_swupdatestub",
-      "src_app_core_initializers_service_worker_initializer_swcheckforupdate",
-      "src_app_core_services_logger_service_loggerservice_info"
+      "src_app_shell_layout_navigation_shell_navigation_utils",
+      "src_app_shell_layout_navigation_shell_navigation_utils_applyshellnavigationlabels",
+      "src_app_shell_layout_navigation_shell_navigation_utils_filtershellnavigationitems",
+      "src_app_shell_layout_navigation_shell_navigation_utils_hasrequiredpermissions",
+      "src_app_shell_layout_navigation_shell_navigation_utils_isshellnavigationitemactive",
+      "src_app_shell_layout_navigation_shell_navigation_utils_isshellnavigationitemcurrentpage",
+      "src_app_shell_layout_navigation_shell_navigation_utils_normalizeshellnavigationurl",
+      "src_app_shell_layout_navigation_shell_navigation_utils_resolveshellnavigationviewitems",
+      "src_app_shell_layout_navigation_shell_navigation_utils_spec",
+      "src_app_shell_layout_navigation_shell_navigation_utils_toshellnavigationviewitems"
     ],
     "222": [
       "tsconfig_server",
@@ -4966,15 +4957,15 @@
       "tsconfig_server_json_ref_tsconfig_json"
     ],
     "223": [
-      "src_app_shared_directives_shared_directive_helpers_directivestate",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_getactive",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_geterror",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_getloading",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_reset",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_setactive",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_seterror",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_setloading",
-      "src_app_shared_directives_shared_directive_helpers_directivestate_snapshot"
+      "src_app_core_initializers_service_worker_initializer",
+      "src_app_core_initializers_service_worker_initializer_setupunrecoverablehandling",
+      "src_app_core_initializers_service_worker_initializer_setupupdatechecking",
+      "src_app_core_initializers_service_worker_initializer_setupversionactivation",
+      "src_app_core_initializers_service_worker_initializer_spec",
+      "src_app_core_initializers_service_worker_initializer_spec_applicationrefstub",
+      "src_app_core_initializers_service_worker_initializer_spec_swupdatestub",
+      "src_app_core_initializers_service_worker_initializer_swcheckforupdate",
+      "src_app_core_services_logger_service_loggerservice_info"
     ],
     "224": [
       "angular_architect_extract_i18n",
@@ -4990,6 +4981,17 @@
       "angular_web_architect"
     ],
     "225": [
+      "src_app_shared_directives_shared_directive_helpers_directivestate",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_getactive",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_geterror",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_getloading",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_reset",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_setactive",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_seterror",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_setloading",
+      "src_app_shared_directives_shared_directive_helpers_directivestate_snapshot"
+    ],
+    "226": [
       "src_app_utils_deep_diff_mapper",
       "src_app_utils_deep_diff_mapper_deepdiffmapper",
       "src_app_utils_deep_diff_mapper_deepdiffmapper_comparevalues",
@@ -5000,7 +5002,7 @@
       "src_app_utils_deep_diff_mapper_diffresultmap",
       "src_app_utils_deep_diff_mapper_difftype"
     ],
-    "226": [
+    "227": [
       "src_app_core_tokens_local_storage_polyfill_token",
       "src_app_core_tokens_local_storage_polyfill_token_localstoragepolyfill",
       "src_app_core_tokens_local_storage_polyfill_token_localstoragepolyfillimpl",
@@ -5010,7 +5012,7 @@
       "src_app_core_tokens_local_storage_polyfill_token_localstoragepolyfillimpl_removeitem",
       "src_app_core_tokens_local_storage_polyfill_token_localstoragepolyfillimpl_setitem"
     ],
-    "227": [
+    "228": [
       "src_app_models_common_app_type",
       "src_app_models_common_app_type_appcomponentconfig",
       "src_app_models_common_app_type_focustarget",
@@ -5019,16 +5021,6 @@
       "src_app_models_common_base_model",
       "src_app_models_common_base_model_basemodel",
       "src_app_models_common_index"
-    ],
-    "228": [
-      "src_app_shared_directives_tree_directive_treedirective_checkall",
-      "src_app_shared_directives_tree_directive_treedirective_checknode",
-      "src_app_shared_directives_tree_directive_treedirective_handlecheckboxcascade",
-      "src_app_shared_directives_tree_directive_treedirective_handlecheckboxclick",
-      "src_app_shared_directives_tree_directive_treedirective_uncheckall",
-      "src_app_shared_directives_tree_directive_treedirective_unchecknode",
-      "src_app_shared_directives_tree_directive_treedirective_updatecheckboxdisplay",
-      "src_app_shared_directives_tree_directive_treedirective_updateparentcheckboxstate"
     ],
     "229": [
       "src_app_shell_components_splash_screen_splash_screen_component",
@@ -5074,22 +5066,24 @@
       "ref_home"
     ],
     "232": [
-      "src_app_core_services_theme_mode_service_spec_memorystorage",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_clear",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_getitem",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_key",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_length",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_removeitem",
-      "src_app_core_services_theme_mode_service_spec_memorystorage_setitem"
+      "src_app_shared_directives_tree_directive_treedirective_checkall",
+      "src_app_shared_directives_tree_directive_treedirective_checknode",
+      "src_app_shared_directives_tree_directive_treedirective_handlecheckboxcascade",
+      "src_app_shared_directives_tree_directive_treedirective_handlecheckboxclick",
+      "src_app_shared_directives_tree_directive_treedirective_uncheckall",
+      "src_app_shared_directives_tree_directive_treedirective_unchecknode",
+      "src_app_shared_directives_tree_directive_treedirective_updatecheckboxdisplay",
+      "src_app_shared_directives_tree_directive_treedirective_updateparentcheckboxstate"
     ],
     "233": [
-      "src_app_shared_directives_menu_directive_menudirective_clearpositioningstyles",
-      "src_app_shared_directives_menu_directive_menudirective_destroystandalonemenupopper",
-      "src_app_shared_directives_menu_directive_menudirective_hideallstandalonemenus",
-      "src_app_shared_directives_menu_directive_menudirective_hidestandalonemenu",
-      "src_app_shared_directives_menu_directive_menudirective_setstyle",
-      "src_app_shared_directives_menu_directive_menudirective_showstandalonemenu",
-      "src_app_shared_directives_menu_directive_menudirective_togglestandalonemenu"
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_isthememenuplacement",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_constructor",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_ngoninit",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_switchmode",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_validateinputs",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_thememodeswitchercomponent_validatemode",
+      "src_app_shell_components_theme_mode_switcher_theme_mode_switcher_component_ts_component"
     ],
     "234": [
       "src_assets_sass_migration",
@@ -5103,6 +5097,15 @@
       "src_assets_sass_migration_path_changes"
     ],
     "235": [
+      "src_app_core_services_theme_mode_service_spec_memorystorage",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_clear",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_getitem",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_key",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_length",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_removeitem",
+      "src_app_core_services_theme_mode_service_spec_memorystorage_setitem"
+    ],
+    "236": [
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec",
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec_classictoolbarlayoutconfig",
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec_layoutconfig",
@@ -5110,14 +5113,6 @@
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec_layoutservicestub_getprop",
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec_translateservicestub",
       "src_app_shell_layout_components_toolbar_classic_classic_component_spec_translateservicestub_get"
-    ],
-    "236": [
-      "docs_ui_actions_permissions_navigation_permission_filtering",
-      "docs_ui_ui_architecture_dependency_rules",
-      "docs_ui_ui_architecture_folder_boundaries",
-      "docs_ui_ui_architecture_navigation_pattern",
-      "docs_ui_ui_architecture_shell_facade_pattern",
-      "docs_ui_ui_architecture_ui_architecture"
     ],
     "237": [
       "agents",
@@ -5238,12 +5233,12 @@
       "src_app_shared_directives_if_is_browser_directive_ts_directive"
     ],
     "252": [
-      "src_app_shared_directives_menu_directive_menudirective_getdropdownpopperconfig",
-      "src_app_shared_directives_menu_directive_menudirective_initdropdownpopper",
-      "src_app_shared_directives_menu_directive_menudirective_initstandalonemenupopper",
-      "src_app_shared_directives_menu_directive_menudirective_loadpopper",
-      "src_app_shared_directives_menu_directive_menudirective_withpopper",
-      "src_app_utils_core_util_coreutil_parsenumber"
+      "src_app_core_tokens_is_server_platform_token",
+      "src_app_core_tokens_is_server_platform_token_is_server_platform",
+      "src_app_demo_api_mock_api_interceptor",
+      "src_app_demo_api_mock_api_interceptor_mockapiinterceptor",
+      "src_app_demo_api_mock_api_interceptor_singleton_collections",
+      "src_app_demo_api_mock_api_interceptor_spec"
     ],
     "253": [
       "ref_dom",
@@ -5313,11 +5308,11 @@
       "src_app_shell_layout_components_toolbar_models_settings_model_fiscalyearparametersresponse"
     ],
     "264": [
-      "eslintrc",
-      "eslintrc_ignorepatterns",
-      "eslintrc_overrides",
-      "eslintrc_root",
-      "ref_projects"
+      "docs_ui_directives_stepper_directive",
+      "docs_ui_forms_and_controls_forms_and_controls",
+      "docs_ui_forms_and_controls_standard_form_control",
+      "docs_ui_forms_and_controls_validation_model",
+      "src_app_modules_auth_pages_login_login_component_two_step_login_flow"
     ],
     "265": [
       "bootstrap_icons",
@@ -5364,11 +5359,11 @@
       "package_dependencies_angular_platform_browser"
     ],
     "276": [
-      "src_app_core_interceptors_auth_interceptor",
-      "src_app_core_interceptors_auth_interceptor_auth_paths",
-      "src_app_core_interceptors_auth_interceptor_authinterceptor",
-      "src_app_core_interceptors_auth_interceptor_refreshtokensubject",
-      "src_app_core_interceptors_auth_interceptor_spec"
+      "eslintrc",
+      "eslintrc_ignorepatterns",
+      "eslintrc_overrides",
+      "eslintrc_root",
+      "ref_projects"
     ],
     "277": [
       "angular_router",
@@ -5505,10 +5500,11 @@
       "package_devdependencies_mini_css_extract_plugin"
     ],
     "308": [
-      "scripts_webpack_rtl_config",
-      "scripts_webpack_rtl_config_minicssextractplugin",
-      "scripts_webpack_rtl_config_path",
-      "scripts_webpack_rtl_config_rtlcssplugin"
+      "src_app_core_interceptors_auth_interceptor",
+      "src_app_core_interceptors_auth_interceptor_auth_paths",
+      "src_app_core_interceptors_auth_interceptor_authinterceptor",
+      "src_app_core_interceptors_auth_interceptor_refreshtokensubject",
+      "src_app_core_interceptors_auth_interceptor_spec"
     ],
     "309": [
       "native_date_adapter",
@@ -5530,10 +5526,10 @@
       "src_app_core_state_context_demo_actor_context_facade_ts_injectable"
     ],
     "314": [
-      "src_app_modules_i18n_modular_merge",
-      "src_app_modules_i18n_modular_merge_istranslationtree",
-      "src_app_modules_i18n_modular_merge_mergetranslationtree",
-      "src_app_modules_i18n_modular_merge_translationtree"
+      "scripts_webpack_rtl_config",
+      "scripts_webpack_rtl_config_minicssextractplugin",
+      "scripts_webpack_rtl_config_path",
+      "scripts_webpack_rtl_config_rtlcssplugin"
     ],
     "315": [
       "nouislider",
@@ -5552,10 +5548,10 @@
       "rxjs"
     ],
     "319": [
-      "src_app_shell_layout_components_toolbar_toolbar_component_spec",
-      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutconfig",
-      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutservicestub",
-      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutservicestub_getprop"
+      "src_app_modules_i18n_modular_merge",
+      "src_app_modules_i18n_modular_merge_istranslationtree",
+      "src_app_modules_i18n_modular_merge_mergetranslationtree",
+      "src_app_modules_i18n_modular_merge_translationtree"
     ],
     "320": [
       "package_dependencies_typed_js",
@@ -5641,9 +5637,10 @@
       "types_node"
     ],
     "341": [
-      "karma_conf",
-      "karma_conf_karma_constants",
-      "karma_conf_path"
+      "src_app_shell_layout_components_toolbar_toolbar_component_spec",
+      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutconfig",
+      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutservicestub",
+      "src_app_shell_layout_components_toolbar_toolbar_component_spec_layoutservicestub_getprop"
     ],
     "342": [
       "package_devdependencies_types_yaireo_tagify",
@@ -5682,59 +5679,64 @@
       "types_d3"
     ],
     "351": [
+      "karma_conf",
+      "karma_conf_karma_constants",
+      "karma_conf_path"
+    ],
+    "352": [
       "src_assets_plugins_velora_icons_duotone_demo_files_demo",
       "src_assets_plugins_velora_icons_duotone_demo_files_demo_updatesize",
       "src_assets_plugins_velora_icons_duotone_demo_files_demo_updatetest"
     ],
-    "352": [
+    "353": [
       "src_assets_plugins_velora_icons_outline_demo_files_demo",
       "src_assets_plugins_velora_icons_outline_demo_files_demo_updatesize",
       "src_assets_plugins_velora_icons_outline_demo_files_demo_updatetest"
     ],
-    "353": [
+    "354": [
       "src_assets_plugins_velora_icons_solid_demo_files_demo",
       "src_assets_plugins_velora_icons_solid_demo_files_demo_updatesize",
       "src_assets_plugins_velora_icons_solid_demo_files_demo_updatetest"
-    ],
-    "354": [
-      "angular_compiler",
-      "package_dependencies_angular_compiler"
     ],
     "355": [
       "autosize",
       "package_dependencies_autosize"
     ],
     "356": [
+      "angular_animations",
+      "package_dependencies_angular_animations"
+    ],
+    "357": [
       "figma_config_figma_mcp_server_config",
       "figma_config_ts_figma_config"
     ],
-    "357": [
+    "358": [
       "src_app_utils_to_camel",
       "src_app_utils_to_camel_tocamel"
     ],
-    "358": [
+    "359": [
       "src_environments_environment_prod",
       "src_environments_environment_prod_environment"
-    ],
-    "359": [
-      "src_test",
-      "src_test_test_config"
     ],
     "360": [
       "src_app_pages_dashboard_dashboard_component_ts_component"
     ],
     "361": [
-      "src_typings_d",
-      "src_typings_d_window"
+      "src_test",
+      "src_test_test_config"
     ],
     "362": [
       "angular_platform_server",
       "package_dependencies_angular_platform_server"
     ],
     "363": [
-      "src_app_shared_charts_d3_d3_chart_theme_resolved3charttheme"
+      "src_typings_d",
+      "src_typings_d_window"
     ],
     "364": [
+      "src_app_shared_charts_d3_d3_chart_theme_resolved3charttheme"
+    ],
+    "365": [
       "src_polyfills"
     ],
     "368": [
@@ -5767,7 +5769,7 @@
     "15": 0.09574468085106383,
     "16": 0.09082125603864734,
     "17": 0.09292929292929293,
-    "18": 0.0953058321479374,
+    "18": 0.10409745293466224,
     "19": 0.07346938775510205,
     "20": 0.09538461538461539,
     "21": 0.07474747474747474,
@@ -5780,7 +5782,7 @@
     "28": 0.12436974789915967,
     "29": 0.24358974358974358,
     "30": 0.10372340425531915,
-    "31": 0.10256410256410256,
+    "31": 0.15204678362573099,
     "32": 0.054426705370101594,
     "33": 0.11596638655462185,
     "34": 0.11942959001782531,
@@ -5822,7 +5824,7 @@
     "70": 0.1857707509881423,
     "71": 0.11330049261083744,
     "72": 0.22077922077922077,
-    "73": 0.3181818181818182,
+    "73": 0.32727272727272727,
     "74": 1.0,
     "75": 0.15942028985507245,
     "76": 0.13071895424836602,
@@ -5846,16 +5848,16 @@
     "94": 0.18382352941176472,
     "95": 0.16666666666666666,
     "96": 0.13333333333333333,
-    "97": 0.21739130434782608,
+    "97": 0.12987012987012986,
     "98": 0.13227513227513227,
     "99": 0.09090909090909091,
-    "100": 0.18095238095238095,
+    "100": 0.16666666666666666,
     "101": 0.125,
-    "102": 0.12987012987012986,
-    "103": 0.15384615384615385,
+    "102": 0.13333333333333333,
+    "103": 0.21052631578947367,
     "104": 0.23809523809523808,
     "105": 0.21794871794871795,
-    "106": 0.13333333333333333,
+    "106": 0.10952380952380952,
     "107": 0.26666666666666666,
     "108": 0.2878787878787879,
     "109": 0.06896551724137931,
@@ -5863,15 +5865,15 @@
     "111": 0.2087912087912088,
     "112": 0.25274725274725274,
     "113": 0.11904761904761904,
-    "114": 0.10952380952380952,
+    "114": 0.09523809523809523,
     "115": 0.17582417582417584,
     "116": 0.16666666666666666,
-    "117": 0.2545454545454545,
+    "117": 0.25757575757575757,
     "118": 0.15441176470588236,
     "119": 1.0,
-    "120": 0.09523809523809523,
+    "120": 0.1368421052631579,
     "121": 0.3055555555555556,
-    "122": 0.1368421052631579,
+    "122": 0.2578947368421053,
     "123": 0.14210526315789473,
     "124": 0.14035087719298245,
     "125": 0.07142857142857142,
@@ -5883,8 +5885,8 @@
     "131": 0.21978021978021978,
     "132": 0.23636363636363636,
     "133": 0.32727272727272727,
-    "134": 0.1503267973856209,
-    "135": 0.18382352941176472,
+    "134": 0.18382352941176472,
+    "135": 0.16666666666666666,
     "136": 0.4666666666666667,
     "137": 0.18095238095238095,
     "138": 0.26666666666666666,
@@ -5899,17 +5901,17 @@
     "147": 0.18681318681318682,
     "148": 0.1794871794871795,
     "149": 0.24358974358974358,
-    "150": 0.25,
+    "150": 0.16666666666666666,
     "151": 0.18181818181818182,
     "152": 0.24242424242424243,
     "153": 0.35714285714285715,
     "154": 0.2777777777777778,
-    "155": 0.2727272727272727,
+    "155": 0.21212121212121213,
     "156": 0.32142857142857145,
     "157": 0.32142857142857145,
-    "158": 0.21212121212121213,
-    "159": 0.24242424242424243,
-    "160": 0.19696969696969696,
+    "158": 0.24242424242424243,
+    "159": 0.21818181818181817,
+    "160": 0.21818181818181817,
     "161": 0.25,
     "162": 0.25,
     "163": 0.2909090909090909,
@@ -5917,26 +5919,26 @@
     "165": 0.23076923076923078,
     "166": 0.2222222222222222,
     "167": 0.18181818181818182,
-    "168": 0.21818181818181817,
+    "168": 0.3090909090909091,
     "169": 0.2857142857142857,
-    "170": 0.3090909090909091,
+    "170": 0.34545454545454546,
     "171": 0.09523809523809523,
-    "172": 0.34545454545454546,
+    "172": 0.23636363636363636,
     "173": 0.5333333333333333,
     "174": 0.15441176470588236,
-    "175": 0.36363636363636365,
+    "175": 0.25274725274725274,
     "176": 0.4666666666666667,
     "177": 0.1,
     "178": 0.10526315789473684,
-    "179": 0.23636363636363636,
-    "180": 0.43636363636363634,
+    "179": 0.18181818181818182,
+    "180": 0.23636363636363636,
     "181": 0.4,
     "182": 0.11764705882352941,
     "183": 0.4,
     "184": 0.4,
     "185": 0.125,
     "186": 0.19166666666666668,
-    "187": 0.2,
+    "187": 0.43636363636363634,
     "188": 0.5,
     "189": 0.5,
     "190": 0.6666666666666666,
@@ -5955,8 +5957,8 @@
     "203": 1.0,
     "204": 1.0,
     "205": 1.0,
-    "206": 0.26666666666666666,
-    "207": 0.4888888888888889,
+    "206": 0.2,
+    "207": 0.26666666666666666,
     "208": 0.2222222222222222,
     "209": 1.0,
     "210": 0.2857142857142857,
@@ -5964,28 +5966,28 @@
     "212": 0.20952380952380953,
     "213": 0.13333333333333333,
     "214": 0.13333333333333333,
-    "215": 0.25,
+    "215": 0.3333333333333333,
     "216": 0.3888888888888889,
     "217": 0.14285714285714285,
     "218": 0.14285714285714285,
     "219": 0.14285714285714285,
     "220": 0.13333333333333333,
-    "221": 0.3888888888888889,
+    "221": 0.4888888888888889,
     "222": 0.15384615384615385,
-    "223": 0.2222222222222222,
+    "223": 0.3888888888888889,
     "224": 0.18181818181818182,
-    "225": 0.3055555555555556,
-    "226": 0.25,
+    "225": 0.2222222222222222,
+    "226": 0.3055555555555556,
     "227": 0.25,
-    "228": 0.32142857142857145,
+    "228": 0.25,
     "229": 0.11904761904761904,
     "230": 0.2857142857142857,
     "231": 0.2222222222222222,
-    "232": 0.2857142857142857,
-    "233": 0.42857142857142855,
+    "232": 0.32142857142857145,
+    "233": 0.32142857142857145,
     "234": 0.2222222222222222,
     "235": 0.2857142857142857,
-    "236": 0.3333333333333333,
+    "236": 0.2857142857142857,
     "237": 0.2857142857142857,
     "238": 0.2857142857142857,
     "239": 0.4666666666666667,
@@ -6001,7 +6003,7 @@
     "249": 0.4,
     "250": 0.4,
     "251": 0.4666666666666667,
-    "252": 0.4,
+    "252": 0.5333333333333333,
     "253": 0.5,
     "254": 1.0,
     "255": 0.4,
@@ -6013,7 +6015,7 @@
     "261": 0.6666666666666666,
     "262": 0.3333333333333333,
     "263": 0.3333333333333333,
-    "264": 0.4,
+    "264": 0.5,
     "265": 1.0,
     "266": 1.0,
     "267": 1.0,
@@ -6025,7 +6027,7 @@
     "273": 1.0,
     "274": 1.0,
     "275": 1.0,
-    "276": 0.6,
+    "276": 0.4,
     "277": 1.0,
     "278": 0.5,
     "279": 1.0,
@@ -6057,18 +6059,18 @@
     "305": 1.0,
     "306": 1.0,
     "307": 1.0,
-    "308": 0.5,
+    "308": 0.6,
     "309": 1.0,
     "310": 1.0,
     "311": 1.0,
     "312": 1.0,
     "313": 1.0,
-    "314": 0.6666666666666666,
+    "314": 0.5,
     "315": 1.0,
     "316": 1.0,
     "317": 1.0,
     "318": 1.0,
-    "319": 0.5,
+    "319": 0.6666666666666666,
     "320": 1.0,
     "321": 1.0,
     "322": 1.0,
@@ -6090,7 +6092,7 @@
     "338": 1.0,
     "339": 1.0,
     "340": 1.0,
-    "341": 0.6666666666666666,
+    "341": 0.5,
     "342": 1.0,
     "343": 1.0,
     "344": 1.0,
@@ -6103,7 +6105,7 @@
     "351": 0.6666666666666666,
     "352": 0.6666666666666666,
     "353": 0.6666666666666666,
-    "354": 1.0,
+    "354": 0.6666666666666666,
     "355": 1.0,
     "356": 1.0,
     "357": 1.0,
@@ -6114,6 +6116,7 @@
     "362": 1.0,
     "363": 1.0,
     "364": 1.0,
+    "365": 1.0,
     "368": 1.0,
     "369": 1.0,
     "370": 1.0
@@ -6230,18 +6233,18 @@
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `BaseDirective` connect `BaseDirective` to `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `SearchDirective`, `AutocompleteDirective`, `directive-helpers.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `StepperDirective`, `MenuDirective`, `tree.directive.ts`, `menu.directive.ts`, `TagifyDirective`, `flatpickr.directive.ts`, `ScrollDirective`, `InputmaskDirective`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `TreeDirective`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `DraggableDirective`, `inputmask.directive.ts`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `CountUpDirective`, `ToggleDirective`, `fullcalendar.directive.ts`, `PasswordMeterDirective`, `DialerDirective`, `logger.service.ts`, `runSafely`, `SwapperDirective`, `AntiAutocompleteDirective`, `IfIsBrowserDirective`?",
-      "why": "High betweenness centrality (0.121) - this node is a cross-community bridge."
+      "question": "Why does `LoggerService` connect `LoggerService` to `tiny-slider.directive.spec.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `TranslationService`, `SearchDirective`, `AutocompleteDirective`, `layout.service.ts`, `velora-icon.component.ts`, `format-date.ts`, `directive-helpers.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `StepperDirective`, `tree.directive.ts`, `menu.directive.ts`, `TagifyDirective`, `flatpickr.directive.ts`, `.showContextMenu`, `ScrollDirective`, `InputmaskDirective`, `ThemeModeService`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `.error`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `.warn`, `services/index.ts`, `DraggableDirective`, `inputmask.directive.ts`, `tokens/index.ts`, `DueInPipe`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `base-directive.spec.ts`, `CountUpDirective`, `ToggleDirective`, `PasswordMeterDirective`, `language.initializer.ts`, `ErrorService`, `DialerDirective`, `fullcalendar.directive.ts`, `logger.service.ts`, `cookie-alert.directive.spec.ts`, `auth.service.ts`, `runSafely`, `service-worker.initializer.ts`, `SwapperDirective`, `app.config.spec.ts`, `inputmask.directive.spec.ts`, `AntiAutocompleteDirective`, `toolbar.component.ts`, `IfIsBrowserDirective`?",
+      "why": "High betweenness centrality (0.137) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `LoggerService` connect `LoggerService` to `tiny-slider.directive.spec.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `TranslationService`, `SearchDirective`, `AutocompleteDirective`, `layout.service.ts`, `velora-icon.component.ts`, `format-date.ts`, `directive-helpers.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `StepperDirective`, `MenuDirective`, `tree.directive.ts`, `menu.directive.ts`, `TagifyDirective`, `flatpickr.directive.ts`, `ScrollDirective`, `InputmaskDirective`, `.showContextMenu`, `directive-host.ts`, `ThemeModeService`, `FullCalendarDirective`, `SingleOptionDirective`, `.error`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `.warn`, `services/index.ts`, `DraggableDirective`, `inputmask.directive.ts`, `tokens/index.ts`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `CountUpDirective`, `ToggleDirective`, `fullcalendar.directive.ts`, `PasswordMeterDirective`, `language.initializer.ts`, `ErrorService`, `DialerDirective`, `logger.service.ts`, `cookie-alert.directive.spec.ts`, `auth.service.ts`, `service-worker.initializer.ts`, `runSafely`, `SwapperDirective`, `app.config.spec.ts`, `inputmask.directive.spec.ts`, `AntiAutocompleteDirective`, `toolbar.component.ts`, `IfIsBrowserDirective`?",
-      "why": "High betweenness centrality (0.120) - this node is a cross-community bridge."
+      "question": "Why does `BaseDirective` connect `BaseDirective` to `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `SearchDirective`, `AutocompleteDirective`, `directive-helpers.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `StepperDirective`, `MenuDirective`, `tree.directive.ts`, `menu.directive.ts`, `TagifyDirective`, `flatpickr.directive.ts`, `ScrollDirective`, `InputmaskDirective`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `TreeDirective`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `DraggableDirective`, `inputmask.directive.ts`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `CountUpDirective`, `ToggleDirective`, `PasswordMeterDirective`, `DialerDirective`, `fullcalendar.directive.ts`, `logger.service.ts`, `runSafely`, `SwapperDirective`, `AntiAutocompleteDirective`, `IfIsBrowserDirective`?",
+      "why": "High betweenness centrality (0.118) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `tokens/index.ts` connect `tokens/index.ts` to `tiny-slider.directive.spec.ts`, `TranslationService`, `layout.service.ts`, `directive-helpers.ts`, `menu.directive.ts`, `base-error.component.ts`, `saver.token.ts`, `file-download.service.ts`, `directive-host.ts`, `ThemeModeValue`, `inputmask.directive.ts`, `navbar.component.ts`, `language.initializer.ts`, `ErrorService`, `logger.service.ts`, `cookie-alert.directive.spec.ts`, `auth.service.ts`, `service-worker.initializer.ts`, `LocalStoragePolyfillImpl`, `legacy-storage-cleanup.initializer.ts`, `InMemoryDbService`, `app.config.spec.ts`, `inputmask.directive.spec.ts`, `css.token.ts`, `brand.config.ts`?",
-      "why": "High betweenness centrality (0.068) - this node is a cross-community bridge."
+      "question": "Why does `modules/i18n/index.ts` connect `modules/i18n/index.ts` to `locales/en.ts`, `locales/fa.ts`, `TranslationService`?",
+      "why": "High betweenness centrality (0.069) - this node is a cross-community bridge."
     },
     {
       "type": "verify_inferred",

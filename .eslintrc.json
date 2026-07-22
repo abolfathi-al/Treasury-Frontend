@@ -43,7 +43,6 @@
     },
     {
       "files": [
-        "src/app/shared/**/*.ts",
         "src/app/shell/**/*.ts"
       ],
       "rules": {
@@ -62,6 +61,35 @@
                   "**/demo/**"
                 ],
                 "message": "Master layers must not import project, module, or demo code."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/app/shared/**/*.ts"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@shell/*",
+                  "@modules/*",
+                  "**/shell",
+                  "**/shell/**",
+                  "**/project",
+                  "**/project/**",
+                  "**/modules",
+                  "**/modules/**",
+                  "**/demo",
+                  "**/demo/**"
+                ],
+                "message": "Shared must not import shell or consumer code."
               }
             ]
           }
