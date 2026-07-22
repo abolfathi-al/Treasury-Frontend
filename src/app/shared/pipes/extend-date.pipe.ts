@@ -1,10 +1,9 @@
-import { Pipe, PipeTransform, inject } from '@angular/core';
+import { LOCALE_ID, Pipe, PipeTransform, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LoggerService } from '@core/services/logger.service';
 import { formatDate } from '@utils/format-date';
 
 const DEFAULT_FORMAT = 'mediumDate';
-const DEFAULT_LOCALE = 'fa';
 const TIMEZONE_SAME = 'same';
 const TIMEZONE_REGEX = /(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$/;
 
@@ -16,6 +15,7 @@ const TIMEZONE_REGEX = /(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$/;
 export class ExtendDatePipe implements PipeTransform {
   private readonly translate = inject(TranslateService);
   private readonly logger = inject(LoggerService);
+  private readonly defaultLocale = inject(LOCALE_ID);
 
   transform(
     value: Date | string | number,
@@ -51,7 +51,7 @@ export class ExtendDatePipe implements PipeTransform {
     }
 
     try {
-      const currentLocale = locale ?? this.translate.currentLang ?? DEFAULT_LOCALE;
+      const currentLocale = locale ?? this.translate.currentLang ?? this.defaultLocale;
       return formatDate(value, format, currentLocale, timezone);
     } catch (error) {
       this.logger.error('Date formatting error', 'ExtendDatePipe', { error });

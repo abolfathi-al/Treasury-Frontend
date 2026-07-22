@@ -1,4 +1,4 @@
-import { Provider, provideZonelessChangeDetection } from '@angular/core';
+import { LOCALE_ID, Provider, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { withInterceptors } from '@angular/common/http';
 
@@ -14,6 +14,7 @@ import {
 import { APP_BRAND } from '@core/config/brand.config';
 import { LayoutService } from '@core/services/layout.service';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
+import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { getAppProviders, layoutStorageSetup } from './app.config';
 
 interface ClassProviderRecord {
@@ -99,7 +100,7 @@ describe('getAppProviders shell context providers', () => {
     );
   });
 
-  it('provides the consumer-owned brand configuration', () => {
+  it('provides consumer-owned application configuration', () => {
     const appProviders = getAppProviders({
       isServer: true,
       includeBrowserOnlyInitializers: false,
@@ -111,6 +112,12 @@ describe('getAppProviders shell context providers', () => {
       jasmine.objectContaining({
         provide: APP_BRAND,
         useValue: PROJECT_BRAND,
+      }),
+    );
+    expect(appProviders).toContain(
+      jasmine.objectContaining({
+        provide: LOCALE_ID,
+        useValue: PROJECT_LOCALE.id,
       }),
     );
   });

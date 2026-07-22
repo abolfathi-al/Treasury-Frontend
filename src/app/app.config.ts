@@ -6,7 +6,6 @@ import {
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import localeFa from '@angular/common/locales/fa';
 import {
   EnvironmentProviders,
   importProvidersFrom,
@@ -62,8 +61,8 @@ import {
 } from '@core/interceptors';
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
-import { extraLocaleFa } from '@utils';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
+import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
 import { PROJECT_ROUTES } from './project/routing/project.routes';
 import { AuthService } from './modules/auth/data-access/auth.service';
@@ -74,7 +73,6 @@ import { TranslationService } from './modules/i18n/translation.service';
 import { environment } from '../environments/environment';
 
 const APP_CONFIG_CONSTANTS = {
-  DEFAULT_LOCALE: 'fa',
   SERVICE_WORKER_SCRIPT: 'ngsw-worker.js',
   SERVICE_WORKER_REGISTRATION_STRATEGY: 'registerWhenStable' as const,
   ROUTER_CONFIG: {
@@ -109,8 +107,7 @@ function ensureLocaleData(): void {
     return;
   }
 
-  registerLocaleData(localeFa, APP_CONFIG_CONSTANTS.DEFAULT_LOCALE);
-  registerLocaleData(extraLocaleFa, APP_CONFIG_CONSTANTS.DEFAULT_LOCALE);
+  registerLocaleData(PROJECT_LOCALE.data, PROJECT_LOCALE.id);
   hasRegisteredLocale = true;
 }
 
@@ -320,7 +317,7 @@ export function getAppProviders(
     ...buildServiceWorkerProvider(includeServiceWorker),
     {
       provide: LOCALE_ID,
-      useValue: APP_CONFIG_CONSTANTS.DEFAULT_LOCALE,
+      useValue: PROJECT_LOCALE.id,
     },
     {
       provide: TitleStrategy,

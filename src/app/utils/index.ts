@@ -10,6 +10,3 @@ export { handleHttpError } from './http-error';
 export { ResponsiveUtil } from './responsive.util';
 export { createRtlSignals, LanguageDirection, RtlSignals } from './rtl.util';
 export { StyleUtil } from './style.util';
-
-// Locale files
-export { extraLocaleFa } from './local-fa';
