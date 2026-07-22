@@ -1,6 +1,7 @@
 import {
   Component,
   provideZonelessChangeDetection,
+  signal,
   viewChild,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -50,9 +51,10 @@ class FakeTagify {
 @Component({
   imports: [TagifyDirective],
   standalone: true,
-  template: '<input vlVeloraTagify />',
+  template: '<input vlVeloraTagify [tagifyMaxTags]="maxTags()" />',
 })
 class HostComponent {
+  readonly maxTags = signal(1);
   readonly directive = viewChild.required(TagifyDirective);
 }
 
@@ -164,6 +166,24 @@ describe('Tagify directive lifecycle', () => {
     expect(dropdownShowCallback).toHaveBeenCalledOnceWith(dropdownShowEvent);
     expect(dropdownShowOutput).toHaveBeenCalledOnceWith(dropdownShowEvent);
     expect(validationOutput).toHaveBeenCalledOnceWith({ isValid: true, errors: [] });
+
+    fixture.destroy();
+  });
+
+  it('reinitializes once with the latest signal input options', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as TagifyDirectiveInternals;
+    internals.tagifyCtor = FakeTagify as unknown as typeof Tagify;
+    await internals.bootstrap();
+
+    fixture.componentInstance.maxTags.set(2);
+    fixture.detectChanges();
+
+    expect(FakeTagify.instances.length).toBe(2);
+    expect(FakeTagify.instances[0].destroyed).toBeTrue();
+    expect(FakeTagify.instances[1].settings.maxTags).toBe(2);
 
     fixture.destroy();
   });

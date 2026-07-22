@@ -123,6 +123,7 @@ blur
 body
 bool
 boolean
+bootst
 bootstrap
 boundaries
 boundary
@@ -275,6 +276,7 @@ control
 controls
 convert
 cookie
+coordinate
 coordinates
 copy
 core
@@ -350,6 +352,7 @@ design
 desktop
 destroy
 destroyed
+destruction
 detach
 detail
 details
@@ -1073,6 +1076,7 @@ registration
 registrations
 registry
 reinit
+reinitialization
 reinitialize
 rejected
 relative
@@ -1326,6 +1330,7 @@ tabs
 tag
 taghirate
 tagify
+tagifydirective
 tags
 tamam
 target

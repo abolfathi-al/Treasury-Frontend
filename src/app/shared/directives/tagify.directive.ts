@@ -4,11 +4,9 @@ import {
   effect,
   inject,
   input,
-  OnChanges,
   OnInit,
   output,
   signal,
-  SimpleChanges,
   untracked,
 } from '@angular/core';
 import type Tagify from '@yaireo/tagify';
@@ -119,7 +117,7 @@ export interface TagifyError {
 })
 export class TagifyDirective
   extends BaseDirective<TagifyOptions, TagifyError>
-  implements OnInit, OnChanges
+  implements OnInit
 {
   private readonly host = useDirectiveHost();
   private readonly cssLoader = inject(CssLoaderService);
@@ -205,14 +203,6 @@ export class TagifyDirective
         this.logger.error('Failed to load tagify CSS, proceeding anyway', 'TagifyDirective', { error });
         void this.bootstrap();
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.host.isBrowser) return;
-
-    if (this.isBaseInitialized() && Object.keys(changes).length > 0) {
-      this.reinit();
-    }
   }
 
   getOptions(): TagifyOptions {
