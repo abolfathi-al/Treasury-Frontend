@@ -1,0 +1,89 @@
+:host {
+  display: block;
+}
+
+.hierarchy-tree-host {
+  overflow: auto !important;
+}
+
+:host ::ng-deep .hierarchy-tree-svg {
+  display: block;
+}
+
+:host ::ng-deep .hierarchy-tree-link {
+  stroke-linecap: round;
+  stroke-dasharray: 1 6;
+}
+
+:host ::ng-deep .hierarchy-tree-link-active {
+  filter: drop-shadow(0 0.35rem 0.7rem rgba(13, 110, 253, 0.16));
+  stroke-dasharray: 0;
+}
+
+:host ::ng-deep .hierarchy-tree-node {
+  cursor: pointer;
+  outline: none;
+}
+
+:host ::ng-deep .hierarchy-tree-row-hitbox {
+  fill: transparent;
+}
+
+:host ::ng-deep .hierarchy-tree-node:hover .hierarchy-tree-row-hitbox {
+  fill: var(--bs-gray-100);
+}
+
+:host ::ng-deep .hierarchy-tree-node-path .hierarchy-tree-row-hitbox {
+  fill: rgba(var(--bs-primary-rgb), 0.04);
+}
+
+:host ::ng-deep .hierarchy-tree-node-icon {
+  shape-rendering: geometricPrecision;
+}
+
+:host ::ng-deep .hierarchy-tree-node-icon-path {
+  fill: rgba(var(--bs-primary-rgb), 0.08);
+}
+
+:host ::ng-deep .hierarchy-tree-node-icon-selected {
+  stroke-width: 2;
+}
+
+:host ::ng-deep .hierarchy-tree-checkmark {
+  fill: none;
+  pointer-events: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+:host ::ng-deep .hierarchy-tree-toggle-hitbox {
+  cursor: pointer;
+  fill: transparent;
+  pointer-events: all;
+}
+
+:host ::ng-deep .hierarchy-tree-toggle-hitbox:hover {
+  fill: rgba(var(--bs-primary-rgb), 0.08);
+}
+
+:host ::ng-deep .hierarchy-tree-node-selected {
+  filter: drop-shadow(0 0.7rem 1rem rgba(13, 110, 253, 0.2));
+}
+
+:host ::ng-deep .hierarchy-tree-node-label {
+  fill: var(--bs-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+:host ::ng-deep .hierarchy-tree-node-selected .hierarchy-tree-node-label {
+  font-weight: 800;
+}
+
+:host ::ng-deep .hierarchy-tree-toggle {
+  fill: var(--bs-gray-600);
+  font-size: 13px;
+  font-weight: 800;
+  pointer-events: none;
+}

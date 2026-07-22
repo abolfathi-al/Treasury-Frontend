@@ -1,0 +1,207 @@
+{
+  "node_count": 4133,
+  "unverified_node_count": 0,
+  "raw_edge_count": 10792,
+  "non_object_edges": 0,
+  "missing_endpoint_edges": 0,
+  "dangling_endpoint_edges": 1155,
+  "self_loop_edges": 0,
+  "valid_candidate_edges": 9637,
+  "exact_duplicate_edges": 17,
+  "directed_unique_endpoint_pairs": 9281,
+  "directed_same_endpoint_collapsed_edges": 356,
+  "undirected_unique_endpoint_pairs": 9270,
+  "undirected_same_endpoint_collapsed_edges": 367,
+  "same_endpoint_group_count": 316,
+  "relation_variant_groups": 249,
+  "source_file_variant_groups": 0,
+  "source_location_variant_groups": 44,
+  "context_variant_groups": 13,
+  "post_build_graph_type": "Graph",
+  "post_build_node_count": 4133,
+  "post_build_edge_count": 9270,
+  "post_build_error": "",
+  "producer_suppression": {
+    "path": "/Users/alirezaabolfathi/.local/pipx/venvs/graphifyy/lib/python3.14/site-packages/graphify/extract.py",
+    "total_sites": 10,
+    "sites": [
+      {
+        "line": 1047,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 1197,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 1199,
+        "name": "seen_doc_refs",
+        "tuple_arity": 0,
+        "sample": "seen_doc_refs: set[str] = set()"
+      },
+      {
+        "line": 1622,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = {n[\"id\"] for n in nodes}"
+      },
+      {
+        "line": 2091,
+        "name": "seen_keys",
+        "tuple_arity": 0,
+        "sample": "seen_keys: set[tuple] = set()"
+      },
+      {
+        "line": 3014,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 3122,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 3201,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 3696,
+        "name": "seen_ids",
+        "tuple_arity": 0,
+        "sample": "seen_ids: set[str] = set()"
+      },
+      {
+        "line": 3697,
+        "name": "seen_edges",
+        "tuple_arity": 4,
+        "sample": "seen_edges: set[tuple[str, str, str, str | None]] = set()"
+      }
+    ],
+    "error": ""
+  },
+  "examples": [
+    {
+      "source": "src_app_shell_layout_components_header_header_component_spec_navbarstubcomponent",
+      "target": "src_app_shell_layout_components_header_header_component_spec_ts_input",
+      "edge_count": 9,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "src/app/shell/layout/components/header/header.component.spec.ts"
+      ],
+      "source_locations": [
+        "L80",
+        "L81",
+        "L82",
+        "L83",
+        "L84",
+        "L85",
+        "L86",
+        "L87",
+        "L88"
+      ],
+      "contexts": [
+        "decorator"
+      ]
+    },
+    {
+      "source": "src_app_shared_charts_d3_d3_gauge_chart_directive_d3gaugechartdirective",
+      "target": "src_app_shared_charts_d3_d3_gauge_chart_directive_ts_input",
+      "edge_count": 7,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "src/app/shared/charts/d3/d3-gauge-chart.directive.ts"
+      ],
+      "source_locations": [
+        "L33",
+        "L34",
+        "L35",
+        "L36",
+        "L37",
+        "L38",
+        "L39"
+      ],
+      "contexts": [
+        "decorator"
+      ]
+    },
+    {
+      "source": "src_app_shared_charts_d3_d3_donut_chart_directive_d3donutchartdirective",
+      "target": "src_app_shared_charts_d3_d3_donut_chart_directive_ts_input",
+      "edge_count": 6,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "src/app/shared/charts/d3/d3-donut-chart.directive.ts"
+      ],
+      "source_locations": [
+        "L36",
+        "L37",
+        "L38",
+        "L39",
+        "L40",
+        "L41"
+      ],
+      "contexts": [
+        "decorator"
+      ]
+    },
+    {
+      "source": "src_app_shell_layout_components_header_header_component_spec_drawerdirectivestub",
+      "target": "src_app_shell_layout_components_header_header_component_spec_ts_input",
+      "edge_count": 6,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "src/app/shell/layout/components/header/header.component.spec.ts"
+      ],
+      "source_locations": [
+        "L26",
+        "L27",
+        "L28",
+        "L29",
+        "L30",
+        "L31"
+      ],
+      "contexts": [
+        "decorator"
+      ]
+    },
+    {
+      "source": "src_app_shell_layout_components_sidebar_sidebar_menu_sidebar_menu_component_spec_scrolldirectivestub",
+      "target": "src_app_shell_layout_components_sidebar_sidebar_menu_sidebar_menu_component_spec_ts_input",
+      "edge_count": 6,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "src/app/shell/layout/components/sidebar/sidebar-menu/sidebar-menu.component.spec.ts"
+      ],
+      "source_locations": [
+        "L13",
+        "L14",
+        "L15",
+        "L16",
+        "L17",
+        "L18"
+      ],
+      "contexts": [
+        "decorator"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.chart-waterfall,
+.chart-waterfall__legend,
+.chart-waterfall__legend-item {
+  min-width: 0;
+}
+
+.chart-waterfall__legend-marker,
+.chart-waterfall__legend-label {
+  margin-inline-end: 0.5rem;
+}
+
+.chart-waterfall__legend-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-waterfall__legend-value {
+  flex: 0 0 auto;
+}
+
+:host-context([dir='rtl']) .chart-waterfall {
+  direction: rtl;
+}

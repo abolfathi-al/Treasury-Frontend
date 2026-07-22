@@ -1,0 +1,52 @@
+<!--begin::Menu wrapper-->
+<div
+  id="velora_app_sidebar_menu_scroll"
+  class="scroll-y scroll-y my-5 mx-3"
+  vlVeloraScroll
+  [scrollActivate]="true"
+  [scrollHeight]="'auto'"
+  [scrollDependencies]="scrollDependencies"
+  [scrollWrappers]="scrollWrappers"
+  [scrollOffset]="'5px'"
+  [scrollSaveState]="true">
+
+  <!--begin::Menu-->
+  <nav
+    class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6"
+    id="velora_app_sidebar_menu"
+    vlVeloraMenu
+    [menuExpand]="false">
+
+    @for (item of menuItems(); track item.id) {
+      @if (item.kind === 'section') {
+        <div class="menu-item">
+          <div class="menu-content pt-8 pb-2">
+            <span
+              class="menu-section text-muted text-uppercase fs-8 ls-1">
+              {{ item.label }}
+            </span>
+          </div>
+        </div>
+      } @else {
+        <div class="menu-item">
+          <a
+            class="menu-link"
+            [routerLink]="item.route"
+            [class.active]="item.isActive"
+            [attr.aria-current]="item.isCurrentPage ? 'page' : null">
+
+            <span class="menu-icon">
+              <vl-velora-icon
+                [name]="item.iconName ?? 'category'"
+                class="fs-2"
+                aria-hidden="true"></vl-velora-icon>
+            </span>
+            <span class="menu-title">{{ item.label }}</span>
+          </a>
+        </div>
+      }
+    }
+  </nav>
+  <!--end::Menu-->
+</div>
+<!--end::Menu wrapper-->

@@ -1,0 +1,56 @@
+@if (title(); as title) {
+<!-- begin::Title -->
+<h1
+  class="page-heading d-flex text-dark fw-bold fs-3"
+  [ngClass]="titleClasses()"
+>
+  {{ title }}
+  @if (appPageTitleDescription()) { @if (description(); as description) {
+  <!--begin::Description-->
+  <span
+    class="page-desc text-muted fs-7 fw-semibold"
+    [ngClass]="descriptionClasses()"
+  >
+    @if (appPageTitleDirection() === 'row') {
+    <!--begin::Separator-->
+    <span class="h-20px border-1 border-gray-300 border-start ms-3 mx-2"></span>
+    <!--end::Separator-->
+    }
+
+    {{ description }}
+  </span>
+  <!--end::Description-->
+  } }
+</h1>
+<!-- end::Title -->
+
+@if (appPageTitleBreadcrumb()) { @if (breadcrumbs(); as breadcrumbs) { @if
+(breadcrumbs.length > 0) { @if (appPageTitleDirection() === 'row') {
+<span class="h-20px border-gray-300 border-start mx-4"></span>
+}
+<!--begin::Breadcrumb-->
+
+<ul
+  class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0"
+  [ngClass]="breadcrumbListClasses()"
+>
+  @for (breadcrumb of breadcrumbs; track breadcrumb.path; let i = $index) {
+  <li
+    class="breadcrumb-item"
+    [class.text-dark]="!breadcrumb.isSeparator && breadcrumb.isActive"
+    [class.text-muted]="!breadcrumb.isSeparator && !breadcrumb.isActive"
+  >
+    @if (!breadcrumb.isSeparator) {
+    <a class="text-muted text-hover-primary" [routerLink]="breadcrumb.path">
+      {{ breadcrumb.title }}
+    </a>
+    } @else {
+    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+    }
+  </li>
+  }
+
+  <li class="breadcrumb-item text-dark">{{ title }}</li>
+</ul>
+<!--end::Breadcrumb-->
+} } } }

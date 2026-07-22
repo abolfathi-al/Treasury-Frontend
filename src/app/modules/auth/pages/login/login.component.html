@@ -1,0 +1,190 @@
+<!-- begin::Stepper -->
+<div
+  class="stepper stepper-links d-flex flex-column"
+  id="velora_login_stepper"
+  #stepperLogin="vlVeloraStepper"
+  data-velora-stepper="true"
+  (veloraStepperNext)="handleNextStep(stepperLogin)"
+  (veloraStepperPrevious)="handlePrevStep(stepperLogin)">
+
+  <!--begin::Nav-->
+  <div class="stepper-nav" hidden>
+    <!--begin::Step 1-->
+    <div class="stepper-item current" data-velora-stepper-element="nav"></div>
+    <!--end::Step 1-->
+
+    <!--begin::Step 2-->
+    <div class="stepper-item" data-velora-stepper-element="nav"></div>
+    <!--end::Step 2-->
+  </div>
+  <!--end::Nav-->
+
+  <!--begin::Form-->
+  <form
+    class="form w-100"
+    [formGroup]="form"
+    novalidate="novalidate">
+
+    <!--begin::Step 1-->
+    <div class="current" data-velora-stepper-element="content">
+      <!--begin::Content-->
+      <div class="d-flex flex-column gap-6 w-100">
+        <!--begin::Heading-->
+        <h1
+          class="text-dark fw-bolder mb-10"
+          translate="workspace.auth.login.title">
+        </h1>
+        <!--end::Heading-->
+
+        <!-- begin::Alert error-->
+        @if (hasError()) {
+          <div class="alert alert-danger">
+            <div
+              class="alert-text font-weight-bold"
+              translate="validation.loginDetailsAreIncorrect">
+            </div>
+          </div>
+        }
+        <!-- end::Alert error-->
+
+        <!--begin::Form group-->
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="username"
+            translate="workspace.auth.input.username">
+          </label>
+
+          <input
+            class="form-control bg-transparent"
+            id="username"
+            autocomplete="off"
+            formControlName="username"/>
+
+          <!--begin::Input feedback-->
+          <vl-invalid-feedback
+            control="username"
+            name="workspace.auth.input.username">
+          </vl-invalid-feedback>
+          <!--end::Input feedback-->
+        </div>
+        <!--end::Form group-->
+
+        <!--begin::Form group-->
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="password"
+            translate="workspace.auth.input.password">
+          </label>
+
+          <input
+            class="form-control bg-transparent"
+            id="password"
+            type="password"
+            autocomplete="off"
+            focusTargetId="stepper_action_next"
+            formControlName="password"/>
+
+          <!--begin::Input feedback-->
+          <vl-invalid-feedback
+            control="password"
+            name="workspace.auth.input.password">
+          </vl-invalid-feedback>
+          <!--end::Input feedback-->
+        </div>
+        <!--end::Form group-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Step 1-->
+
+    <!--begin::Step 2-->
+    <div data-velora-stepper-element="content">
+      <!--begin::Content-->
+      <div class="d-flex flex-column gap-6 w-100">
+        <!--begin::Heading-->
+        <h1
+          class="text-dark fw-bolder mb-10"
+          translate="workspace.auth.login.fiscalYearTitle">
+        </h1>
+        <!--end::Heading-->
+
+        <!-- begin::Alert error-->
+        @if (hasError()) {
+          <div class="alert alert-danger">
+            <div
+              class="alert-text font-weight-bold"
+              translate="validation.loginDetailsAreIncorrect">
+            </div>
+          </div>
+        }
+        <!-- end::Alert error-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Step 2-->
+
+    <!--begin::Actions-->
+    <div class="d-flex flex-stack pt-15">
+      <!--begin::Wrapper-->
+      <div>
+        <button
+          type="button"
+          class="btn btn-flex btn-light-primary"
+          data-velora-stepper-action="previous">
+          <vl-velora-icon name="arrow-right" class="fs-4 me-2"></vl-velora-icon>
+          {{'common.actions.back' | translate}}
+        </button>
+      </div>
+      <!--end::Wrapper-->
+
+      <!--begin::Wrapper-->
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="stepper_action_submit"
+          [disabled]="isLoading$ | async"
+          data-velora-stepper-action="submit"
+          [attr.data-velora-indicator]="(isLoading$ | async) ? 'on' : 'off'"
+          (click)="handleSubmit()">
+
+          <span class="indicator-label">
+            <span class="d-flex align-items-center">
+              {{'workspace.auth.login.button' | translate}}
+              <vl-velora-icon name="arrow-left" class="fs-4 fs-4 ms-2 me-0"></vl-velora-icon>
+            </span>
+          </span>
+          <span class="indicator-progress">
+            {{'common.states.wait' | translate}}
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="stepper_action_next"
+          [disabled]="isLoading$ | async"
+          data-velora-stepper-action="next"
+          [attr.data-velora-indicator]="(isLoading$ | async) ? 'on' : 'off'">
+
+          <span class="indicator-label">
+            <span class="d-flex align-items-center">
+              {{'common.actions.continue' | translate}}
+              <vl-velora-icon name="arrow-left" class="fs-4 fs-4 ms-2 me-0"></vl-velora-icon>
+            </span>
+          </span>
+          <span class="indicator-progress">
+            {{'common.states.wait' | translate}}
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+        </button>
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Actions-->
+  </form>
+  <!--end::Form-->
+</div>

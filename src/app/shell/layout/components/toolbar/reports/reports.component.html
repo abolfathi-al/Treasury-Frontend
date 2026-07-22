@@ -1,0 +1,84 @@
+<!--begin::Wrapper-->
+<div class="d-flex align-items-center flex-shrink-0">
+  <!--begin::Label-->
+  <span class="fs-7 fw-bold text-gray-700 flex-shrink-0 pe-4 d-none d-md-block">
+    {{'common.filters.filterBy' | translate}}:
+  </span>
+  <!--end::Label-->
+
+  <div class="flex-shrink-0 ">
+    <ul class="nav">
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light active fw-semibold fs-7 px-4 me-1"
+          data-bs-toggle="tab"
+          translate="common.date.today">
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light fw-semibold fs-7 px-4 me-1"
+          data-bs-toggle="tab"
+          translate="common.date.week">
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light fw-semibold fs-7 px-4"
+          data-bs-toggle="tab"
+          translate="common.date.day">
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--end::Wrapper-->
+
+<!--begin::Separartor-->
+<div class="bullet bg-secondary h-35px w-1px mx-5"></div>
+<!--end::Separartor-->
+
+<!--begin::Wrapper-->
+<div class="d-flex align-items-center">
+  <!--begin::Label-->
+  <span class="fs-7 fw-bold text-gray-700 flex-shrink-0 pe-4 d-none d-md-block">
+    {{'common.filters.sortBy' | translate}}:
+  </span>
+  <!--end::Label-->
+
+  <!--begin::Select-->
+  <select class="form-select form-select-sm w-md-125px form-select-solid" data-control="select2"
+    [attr.data-placeholder]="'layout.toolbar.latest' | translate" data-hide-search="true">
+    <option value=""></option>
+    <option value="1" selected>{{ 'layout.toolbar.latest' | translate }}</option>
+    <option value="2">{{ 'status.inProgress' | translate }}</option>
+    <option value="3">{{ 'status.done' | translate }}</option>
+  </select>
+  <!--end::Select-->
+
+  <!--begin::Actions-->
+  <div class="d-flex align-items-center ms-3">
+    <button
+      type="button"
+      class="btn btn-sm btn-icon btn-light-primary me-3"
+      [ngbTooltip]="'layout.toolbar.enableGridView' | translate"
+      placement="top">
+      <vl-velora-icon name="element-11" class="fs-2 text-primary"></vl-velora-icon>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-sm btn-icon btn-light"
+      [ngbTooltip]="'layout.toolbar.enableRowView' | translate"
+      placement="top">
+      <vl-velora-icon name="abstract-14" class="fs-2 text-gray400"></vl-velora-icon>
+    </button>
+  </div>
+  <!--end::Actions-->
+</div>
+<!--end::Wrapper-->

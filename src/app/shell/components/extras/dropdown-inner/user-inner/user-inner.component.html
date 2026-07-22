@@ -1,0 +1,121 @@
+@if (profile(); as _profile) {
+  <div class="menu-item px-3">
+    <div class="menu-content d-flex align-items-center px-3">
+      <div class="symbol symbol-50px me-5">
+        @if (_profile.pic) {
+          <img
+            alt="Profile"
+            width="50"
+            height="50"
+            [src]="_profile.pic"
+            loading="lazy"
+          />
+        } @else {
+          <span class="symbol-label fs-2 fw-semibold">
+            {{ _profile.avatarText }}
+          </span>
+        }
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="fw-bolder d-flex align-items-center fs-5">
+          {{ _profile.name }}
+          @if (_profile.roleLabel) {
+            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">
+              {{ _profile.roleLabel }}
+            </span>
+          }
+        </div>
+        <a routerLink="/" class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer">
+          {{ _profile.email }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-item px-5">
+  </div>
+
+  <div class="separator my-2"></div>
+
+  <div
+    class="menu-item px-5"
+    data-velora-menu-trigger="hover"
+    data-velora-menu-placement="left-start"
+    data-velora-menu-flip="bottom"
+  >
+    <span class="menu-link px-5 cursor-pointer">
+      <span class="menu-title position-relative">
+        {{ 'navigation.menu.language' | translate }}
+        <span
+          class="
+            fs-8
+            rounded
+            bg-light
+            px-3
+            py-2
+            position-absolute
+            translate-middle-y
+            top-50
+            end-0
+          "
+        >
+          {{ language()?.name ?? '' }}
+          @if (language()?.flag) {
+          <img
+            class="w-15px h-15px rounded-1 ms-2"
+            [src]="language()?.flag ?? ''"
+            [alt]="language()?.name ?? ''"
+            loading="lazy"
+          />
+          }
+        </span>
+      </span>
+    </span>
+
+    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+      @for (languageFlag of langs(); track languageFlag.lang) {
+      <div
+        class="menu-item px-3 cursor-pointer"
+        (click)="selectLanguage(languageFlag.lang)">
+        <span
+          class="menu-link d-flex px-5"
+          [class.active]="languageFlag.lang === language()?.lang">
+          <span class="symbol symbol-20px me-4">
+            @if (languageFlag.flag) {
+            <img
+              class="rounded-1"
+              [src]="languageFlag.flag"
+              [alt]="languageFlag.name | translate"
+              loading="lazy"/>
+            }
+          </span>
+          {{ languageFlag.name }}
+        </span>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="menu-item px-5">
+    <a
+      routerLink="/crafted/account/settings"
+      class="menu-link px-5"
+      translate="navigation.menu.settings">
+    </a>
+  </div>
+  <div class="menu-item px-5">
+      <a
+        routerLink="/users"
+        class="menu-link px-5"
+        translate="navigation.menu.usersSettings">
+      </a>
+    </div>
+  <div class="menu-item px-5">
+    <span
+      (click)="logout()"
+      class="menu-link px-5 cursor-pointer"
+      translate="navigation.menu.signOut">
+    </span>
+  </div>
+}

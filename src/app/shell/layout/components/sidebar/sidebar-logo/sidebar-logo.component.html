@@ -1,0 +1,59 @@
+<!--begin::Logo image-->
+<a routerLink="/dashboard">
+  @if (shell.currentLayoutType() === 'dark-sidebar') {
+  <img
+    alt="Logo"
+    class="w-auto mw-100 mh-35px app-sidebar-logo-default"
+    width="205"
+    height="60"
+    [src]="(logoUrl$ | async)!"
+    priority
+  />
+  } @else {
+  <img
+    alt="Logo"
+    class="w-auto mw-100 mh-35px app-sidebar-logo-default theme-light-show"
+    width="269"
+    height="56"
+    [src]="(logoUrl$ | async)!"
+  />
+  <img
+    alt="Logo"
+    class="w-auto mw-100 mh-35px app-sidebar-logo-default theme-dark-show"
+    width="205"
+    height="60"
+    [src]="(logoUrl$ | async)!"
+    priority
+  />
+  }
+
+  <img
+    alt="Logo"
+    class="w-auto mw-100 mh-30px app-sidebar-logo-minimize"
+    width="198"
+    height="178"
+    [src]="(logoUrl$ | async)!"
+  />
+</a>
+<!--end::Logo image-->
+
+@if (toggleEnabled()) {
+<!--begin::Sidebar toggle-->
+<button
+  type="button"
+  id="velora_app_sidebar_toggle"
+  class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+  [ngClass]="toggleButtonClass()"
+  vlVeloraToggle
+  [toggleActivate]="true"
+  [toggleTargetSelector]="'body'"
+  [toggleState]="toggleState()"
+  [toggleName]="toggleAttr()"
+  aria-label="Toggle sidebar"
+  title="Toggle sidebar"
+  (toggleChange)="shell.setSidebarCollapsed($event)"
+>
+  <vl-velora-icon name="black-left-line" class="fs-3 rotate-180" aria-hidden="true"></vl-velora-icon>
+</button>
+<!--end::Sidebar toggle-->
+}

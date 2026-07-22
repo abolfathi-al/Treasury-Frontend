@@ -1,0 +1,119 @@
+<!--begin::App-->
+<div class="d-flex flex-column flex-root app-root" id="velora_app_root">
+  <a
+    class="app-skip-link"
+    href="#velora_app_content"
+    aria-label="Skip to content"
+  ></a>
+  <!--begin::Page-->
+  <div class="app-page flex-column flex-column-fluid" id="velora_app_page">
+    @if (shell.appHeaderDisplay()) {
+    <!--begin::Header-->
+    <vl-header
+      id="velora_app_header"
+      class="app-header"
+      role="banner"
+      [ngClass]="shell.appHeaderDefaultClass()"
+      vlVeloraSticky
+      [stickyActivate]="shell.appHeaderDefaultStickyEnabled()"
+      [stickyAnimation]="false"
+      [stickyName]="'app-header-minimize'"
+      [stickyOffset]="shell.headerStickyOffset"
+      [stickyZindex]="100"
+      [stickyReverse]="true"
+    >
+    </vl-header>
+    <!--end::Header-->
+    }
+
+    <!--begin::Wrapper-->
+    <div
+      class="app-wrapper flex-column flex-row-fluid position-relative"
+      id="velora_app_wrapper"
+    >
+      @if (shell.appSidebarDisplay()) {
+      <!--begin::sidebar-->
+      <vl-sidebar
+        #veloraSidebar
+        id="velora_app_sidebar"
+        class="app-sidebar flex-column"
+        role="navigation"
+        aria-label="Main menu"
+        [ngClass]="shell.appSidebarDefaultClass()"
+        vlVeloraDrawer
+        [drawerOverlay]="true"
+        [drawerWidth]="shell.sidebarDrawerWidth"
+        [drawerDirection]="shell.sidebarDrawerDirection"
+        [drawerName]="shell.sidebarDrawerName"
+        [drawerActivate]="shell.drawerActivateOnMobile"
+        [drawerToggleSelector]="shell.mobileSidebarToggleSelector"
+        (stateChange)="shell.setMobileSidebarOpen($event.isShown)"
+      >
+      </vl-sidebar>
+      <!--end::sidebar-->
+      } @if (shell.appSidebarPanelDisplay()) {
+      <!-- TODO: app sidebar panel -->
+      }
+      <!--begin::Main-->
+      <div class="app-main flex-column flex-row-fluid" id="velora_app_main">
+        <!--begin::Content wrapper-->
+        <div class="d-flex flex-column flex-column-fluid">
+          @if (shell.appToolbarDisplay()) {
+          <vl-toolbar
+            #veloraToolbar
+            class="app-toolbar"
+            [ngClass]="shell.appToolbarCSSClass()"
+            id="velora_app_toolbar"
+            [appToolbarLayout]="shell.appToolbarLayout()"
+          >
+          </vl-toolbar>
+          }
+          <vl-content
+            id="velora_app_content"
+            class="app-content flex-grow-1 pt-2 mb-8"
+            role="main"
+            aria-label="Main content"
+            tabindex="-1"
+            [ngClass]="shell.contentCSSClasses()"
+            [contentContainerCSSClass]="shell.contentContainerCSSClass()"
+            [appContentContiner]="shell.appContentContainer()"
+            [appContentContainerClass]="shell.appContentContainerClass()"
+          >
+          </vl-content>
+        </div>
+        <!--end::Content wrapper-->
+        @if (shell.appFooterDisplay()) {
+        <vl-footer
+          class="app-footer"
+          [ngClass]="shell.appFooterCSSClass()"
+          id="velora_app_footer"
+          [appFooterContainerCSSClass]="shell.appFooterContainerCSSClass()"
+        >
+        </vl-footer>
+        }
+      </div>
+      <!--end:::Main-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+  <!--end::Page-->
+</div>
+<!--end::App-->
+
+@if (shell.scrolltopDisplay()) { @defer (on viewport) {
+<vl-scroll-top
+  class="scrolltop"
+  vlVeloraScrollTop
+  [scrollTopActivate]="shell.scrolltopDisplay()"
+  [scrollTopRevealOffset]="300"
+  [scrollTopBehavior]="'smooth'"
+>
+</vl-scroll-top>
+} @placeholder {
+<div></div>
+} }
+<!-- begin:: Drawers -->
+@defer (on idle) {
+<vl-messenger-drawer></vl-messenger-drawer>
+} @placeholder {}
+<!-- end:: Drawers -->

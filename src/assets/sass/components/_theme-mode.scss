@@ -1,0 +1,35 @@
+//
+// Theme Modes
+//
+
+[data-bs-theme-mode-switching="true"] * {
+    transition: none !important;
+}
+
+@include color-mode(light) {
+	.theme-dark-show {
+		display: none !important;
+	}
+
+	.theme-light-bg-transparent {
+		background-color: transparent !important;
+	}
+
+	.theme-light-bg-body {
+		background-color: var(--#{$prefix}body-bg) !important;
+	}
+}
+
+@include color-mode(dark) {
+	.theme-light-show {
+		display: none !important;
+	}
+
+	.theme-dark-bg-transparent {
+		background-color: transparent !important;
+	}
+
+	.theme-dark-bg-body {
+		background-color: var(--#{$prefix}body-bg) !important;
+	}
+}

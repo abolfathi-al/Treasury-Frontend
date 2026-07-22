@@ -1,0 +1,11 @@
+//
+// VeloraIcons
+//
+
+.vl-duotone,
+.vl-outline,
+.vl-solid {
+    line-height: 1;
+    font-size: 1rem;
+    color: var(--#{$prefix}text-muted);
+}

@@ -1,0 +1,23 @@
+<div class="chart-waterfall d-flex flex-column gap-4" role="img" [attr.aria-label]="ariaLabel()">
+  <div
+    class="w-100"
+    vlD3WaterfallChart
+    [items]="items()"
+    [height]="height()"
+    [ariaLabel]="ariaLabel()"
+  ></div>
+
+  @if (showLegend()) {
+  <div class="chart-waterfall__legend d-flex align-items-center justify-content-center flex-wrap gap-5">
+    @for (item of legendItems(); track item.label) {
+    <div class="chart-waterfall__legend-item d-flex align-items-center min-w-0">
+      <span class="chart-waterfall__legend-marker bullet bullet-dot h-8px w-8px flex-shrink-0 me-2" [ngClass]="'bg-' + item.tone"></span>
+      <span class="chart-waterfall__legend-label fs-8 text-gray-700 min-w-0 me-2">{{ item.label }}</span>
+      <span class="chart-waterfall__legend-value fs-8 fw-semibold text-gray-900 text-nowrap">
+        {{ item.displayValue ?? (item.value | number: '1.0-2') }}
+      </span>
+    </div>
+    }
+  </div>
+  }
+</div>

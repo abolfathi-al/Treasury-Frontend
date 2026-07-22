@@ -1,0 +1,21 @@
+export const validationEn = {
+  email: "Please enter a valid email address",
+  invalid: "{{name}} is not valid",
+  required: "{{name}} is required",
+  minLength: "{{name}} minimum length is {{min}}",
+  maxLength: "{{name}} maximum length is {{max}}",
+  agreementRequired: "Accepting terms & conditions are required",
+  min: "Minimum {{min}}",
+  max: "Maximum {{max}}",
+  notFound: "The requested {{name}} is not found",
+  invalidConfirmPassword: "The password and its confirm are not the same",
+  invalidRange: "Invalid range",
+  atLeastOne: "At least one of the items must have a value",
+  onlyOne: "Only one of the items must have a value",
+  passwordMeter: "Password not strong enough",
+  nationalCode: "The entered national code is not valid.",
+  cardNumber: "The entered credit card number is not valid.",
+  loginDetailsAreIncorrect: "The login details are incorrect",
+  pleaseTryAgain: "Sorry, looks like there are some errors detected, please try again.",
+  errorOccurred: "Oops an error occurred"
+} as const;

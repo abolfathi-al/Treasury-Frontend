@@ -1,0 +1,17 @@
+:host {
+  display: inline-flex;
+  position: relative;
+}
+
+.row-actions-dropdown {
+  display: inline-flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.row-actions-dropdown-menu {
+  min-width: 14rem;
+  position: absolute !important;
+  text-align: start;
+  z-index: 1055;
+}

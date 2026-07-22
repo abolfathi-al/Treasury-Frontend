@@ -1,0 +1,23 @@
+<div class="d-flex flex-column gap-4">
+  @if (showSearch()) {
+    <div class="position-relative">
+      <input
+        type="text"
+        class="form-control form-control-solid form-control-sm pe-12"
+        [value]="searchQuery()"
+        [placeholder]="searchPlaceholderKey() | translate"
+        (input)="onSearchInput($event)"
+      />
+      <vl-velora-icon
+        name="search-list"
+        class="fs-4 text-gray-600 position-absolute top-50 end-0 translate-middle-y me-4"
+      ></vl-velora-icon>
+    </div>
+  }
+
+  <div
+    #treeHost
+    class="hierarchy-tree-host border border-gray-300 rounded-3 bg-body overflow-auto"
+    [style.min-height.px]="treeMinHeight()"
+  ></div>
+</div>

@@ -1,0 +1,67 @@
+<div>
+  <button
+    type="button"
+    class="rotate"
+    [ngClass]="buttonClass()"
+    [disabled]="disabled()"
+    data-velora-menu-trigger="click"
+    data-velora-menu-attach="parent"
+    data-velora-menu-placement="bottom-end"
+  >
+    {{ buttonLabelKey() | translate }}
+    <vl-velora-icon name="filter" class="fs-4 ms-2"></vl-velora-icon>
+  </button>
+
+  <div
+    class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-325px w-md-375px p-5"
+    vlVeloraMenu
+    #filtersMenu="vlVeloraMenu"
+  >
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <div>
+        <div class="fs-6 fw-bold text-gray-900" translate="workspace.dropdown.moreFiltersTitle"></div>
+        <div class="fs-8 text-muted" translate="workspace.dropdown.moreFiltersSubtitle"></div>
+      </div>
+      <span class="symbol symbol-35px">
+        <span class="symbol-label bg-light-primary">
+          <vl-velora-icon name="filter" class="fs-3 text-primary"></vl-velora-icon>
+        </span>
+      </span>
+    </div>
+
+    <div class="separator my-4"></div>
+
+    <div class="row g-3">
+      @for (control of visibleControls; track control.key) {
+      <div class="col-12">
+        <label class="form-label fs-8 text-muted d-flex align-items-center">
+          <vl-velora-icon [name]="control.icon" class="fs-5 me-2"></vl-velora-icon>
+          {{ control.labelKey | translate }}
+        </label>
+        <select class="form-select form-select-solid form-select-sm">
+          <option>{{ control.optionKey | translate }}</option>
+        </select>
+      </div>
+      }
+    </div>
+
+    <div class="separator my-5"></div>
+
+    <div class="d-flex justify-content-end gap-3">
+      <button
+        type="button"
+        class="btn btn-light btn-sm"
+        (click)="filtersReset.emit(); filtersMenu.hide()"
+      >
+        {{ 'workspace.actions.reset' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="filtersApply.emit(); filtersMenu.hide()"
+      >
+        {{ 'workspace.actions.applyFilters' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

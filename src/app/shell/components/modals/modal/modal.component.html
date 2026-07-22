@@ -1,0 +1,42 @@
+<ng-template #modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ modalConfig().modalTitle }}</h2>
+      @if (modalConfig().hideDismissButton === undefined ||
+      !modalConfig().hideDismissButton?.()) {
+      <div
+        class="btn btn-sm btn-icon btn-active-color-primary"
+        (click)="dismiss()"
+      >
+        <vl-velora-icon name="cross" class="fs-1"></vl-velora-icon>
+      </div>
+      }
+    </div>
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+    <div class="modal-footer">
+      @if (modalConfig().hideDismissButton === undefined ||
+      !modalConfig().hideDismissButton?.()) {
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        [disabled]="modalConfig().disableDismissButton !== undefined && modalConfig().disableDismissButton?.()"
+        (click)="dismiss()"
+      >
+        {{ modalConfig().dismissButtonLabel }}
+      </button>
+      } @if (modalConfig().hideCloseButton === undefined ||
+      !modalConfig().hideCloseButton?.()) {
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        [disabled]="modalConfig().disableCloseButton !== undefined && modalConfig().disableCloseButton?.()"
+        (click)="close()"
+      >
+        {{ modalConfig().closeButtonLabel }}
+      </button>
+      }
+    </div>
+  </div>
+</ng-template>

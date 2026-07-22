@@ -1,0 +1,27 @@
+<div class="card card-flush border border-gray-300 shadow-sm h-100">
+  <div class="card-header min-h-auto px-6 py-5">
+    <div class="card-title">
+      <span class="fw-bold text-gray-900">{{ titleKey() | translate }}</span>
+    </div>
+  </div>
+  <div class="card-body px-6 pt-0 pb-6">
+    <div class="d-flex align-items-center flex-wrap gap-2 mb-5">
+      @for (segment of segments(); track segment.label; let last = $last) {
+      <span class="badge" [ngClass]="'badge-light-' + (segment.tone ?? 'primary')">
+        {{ segment.label }}
+      </span>
+      @if (!last) {
+      <vl-velora-icon name="right" class="fs-8 text-muted"></vl-velora-icon>
+      }
+      }
+    </div>
+
+    <div class="fs-8 fw-semibold text-muted mb-2">{{ fullPathLabelKey() | translate }}</div>
+    <div class="input-group input-group-sm">
+      <input class="form-control form-control-solid" [value]="fullPath()" readonly />
+      <button type="button" class="btn btn-light-primary" disabled>
+        <vl-velora-icon name="copy" class="fs-4"></vl-velora-icon>
+      </button>
+    </div>
+  </div>
+</div>

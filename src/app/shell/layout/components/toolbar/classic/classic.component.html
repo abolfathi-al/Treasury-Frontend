@@ -1,0 +1,52 @@
+@if (appToolbarFilterButton()) {
+  <!--begin::Filter menu-->
+  <div class="m-0">
+    <!--begin::Menu toggle-->
+    <button
+      type="button"
+      class="btn btn-sm btn-flex fw-bold"
+      [ngClass]="daterangepickerButtonClass()"
+      data-velora-menu-trigger="click"
+      data-velora-menu-placement="bottom-end">
+
+      <vl-velora-icon name="filter" class="fs-6 text-muted me-1"></vl-velora-icon>
+      {{'common.actions.filter' | translate}}
+    </button>
+    <!--end::Menu toggle-->
+  </div>
+  <!--end::Filter menu-->
+}
+
+@if (appToolbarDaterangepickerButton()) {
+  <div
+    data-velora-daterangepicker="true"
+    data-velora-daterangepicker-opens="left"
+    class="btn btn-sm fw-bold d-flex align-items-center px-4"
+    [ngClass]="daterangepickerButtonClass()">
+
+    <!--begin::Display range-->
+    <div class="text-gray-600 fw-bold">
+      {{'common.states.loadingDateRange' | translate}}
+    </div>
+    <!--end::Display range-->
+    <vl-velora-icon name="calendar-8" class="fs-1 ms-2 me-0"></vl-velora-icon>
+  </div>
+}
+
+<!--begin::Secondary button-->
+<button
+  type="button"
+  class="btn btn-sm btn-flex btn-light fw-bold"
+  translate="common.actions.filter">
+</button>
+<!--end::Secondary button-->
+
+<!--begin::Primary button-->
+<button
+  type="button"
+  class="btn btn-sm fw-bold btn-primary"
+  data-bs-toggle="modal"
+  [attr.data-bs-target]="primaryCreateCommand()?.modalTarget"
+  translate="common.actions.create">
+</button>
+<!--end::Primary button-->

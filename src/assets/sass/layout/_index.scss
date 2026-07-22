@@ -1,0 +1,47 @@
+//
+// Layout Index
+// Application layout structure
+//
+
+// Mixins
+@import "../abstracts/mixins/layout-minimize";
+@import "../abstracts/mixins/layout-transition";
+
+// Base layout
+@import "root";
+@import "reboot";
+@import "page";
+@import "page-loader";
+@import "container";
+@import "print";
+@import "navbar";
+
+// Header
+@import "header/header";
+@import "header/header-primary";
+@import "header/header-secondary";
+@import "header/header-tertiary";
+@import "header/header-dark";
+@import "header/header-sidebar-light";
+
+// Sidebar
+@import "sidebar/sidebar";
+@import "sidebar/sidebar-primary";
+@import "sidebar/sidebar-secondary";
+@import "sidebar/sidebar-panel";
+@import "sidebar/sidebar-dark";
+@import "sidebar/sidebar-light";
+@import "sidebar/sidebar-minimize";
+
+// Aside
+@import "aside/aside";
+
+// Content areas
+@import "toolbar";
+@import "hero";
+@import "wrapper";
+@import "main";
+@import "content";
+@import "page-title";
+@import "footer";
+@import "layout-builder";

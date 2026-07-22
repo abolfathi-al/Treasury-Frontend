@@ -1,0 +1,21 @@
+/* iran-sans-300 - persian */
+@font-face {
+  font-family: 'B Mitra Latin Inc';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(''),
+    url('mitra-regular.woff2') format('woff2'),
+    url('mitra-regular.woff') format('woff');
+}
+
+/* iran-sans-600 - persian */
+@font-face {
+  font-family: 'B Mitra Latin Inc';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local(''),
+    url('mitra-600.woff2') format('woff2'),
+    url('mitra-600.woff') format('woff');
+}

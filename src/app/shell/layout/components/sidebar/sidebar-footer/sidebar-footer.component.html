@@ -1,0 +1,19 @@
+<a
+  [href]="appChangelogUrl"
+  [attr.aria-label]="'layout.footer.poweredByLabel' | translate"
+  target="_blank"
+  rel="noopener"
+  class="
+    btn btn-flex flex-center btn-custom btn-primary
+    overflow-hidden
+    text-nowrap
+    px-0
+    h-40px w-100
+  ">
+
+  <vl-velora-icon name="delivery-24" class="fs-2" aria-hidden="true"></vl-velora-icon>
+  <span class="btn-label ms-2" dir="ltr">
+    <span class="fw-normal">&copy; {{ 'layout.footer.poweredBy' | translate }} </span>
+    <span class="fw-bolder">{{ 'layout.footer.brand' | translate }}</span>
+  </span>
+</a>

@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-07-22T09:07:08.853772+00:00",
+  "nodes": {
+    "docs_ui_ui_architecture_ui_architecture": {
+      "code_fingerprint": "9f7eef6780b7fedbce037fc9c38f131178176676795385bccaf32cd05e3de164",
+      "label": "UI Architecture",
+      "last": "2026-07-22T09:04:38.248484+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:04:38.248484+00:00",
+          "outcome": "useful",
+          "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
+        }
+      ],
+      "score": 0.999959726,
+      "source_file": "docs/ui/ui-architecture.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_core_services_logger_service_loggerservice": {
+      "code_fingerprint": "8905e0eaf428a77fd38ea5c26d7011afabec70adde2636e4e9b4444df47a1183",
+      "label": "LoggerService",
+      "last": "2026-07-22T09:04:38.248484+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:04:38.248484+00:00",
+          "outcome": "useful",
+          "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
+        }
+      ],
+      "score": 0.999959726,
+      "source_file": "src/app/core/services/logger.service.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_modules_auth_data_access_permission_service_permissionservice": {
+      "code_fingerprint": "668febf8c3ff8e9c5fffdcddb22b7bc4bf3a0ce1e8ddd4ae979758bb14717159",
+      "label": "PermissionService",
+      "last": "2026-07-22T09:04:38.248484+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:04:38.248484+00:00",
+          "outcome": "useful",
+          "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
+        }
+      ],
+      "score": 0.999959726,
+      "source_file": "src/app/modules/auth/data-access/permission.service.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_shared_base_directive_basedirective": {
+      "code_fingerprint": "3335d64b4ca033e3a72922d5084d5cd686898a4c518097310ecc2e98ccb960fb",
+      "label": "BaseDirective",
+      "last": "2026-07-22T09:04:38.248484+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:04:38.248484+00:00",
+          "outcome": "useful",
+          "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
+        }
+      ],
+      "score": 0.999959726,
+      "source_file": "src/app/shared/directives/shared/base-directive.ts",
+      "status": "tentative",
+      "uses": 1
+    }
+  },
+  "version": 1
+}

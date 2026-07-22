@@ -1,0 +1,106 @@
+//
+// Stepper
+//
+
+// Base
+.stepper {
+    // Content
+    [data-velora-stepper-element="info"],
+    [data-velora-stepper-element="content"] {
+        display: none;
+
+        &.current {
+            display: flex;
+        }
+    }
+
+    // Enable cursor pointer on clickable steppers
+    .stepper-item[data-velora-stepper-action="step"] {
+        cursor: pointer;
+    }
+
+    // States
+    & {
+        [data-velora-stepper-action="final"] {
+            display: none;
+        }
+
+        [data-velora-stepper-action="previous"] {
+            display: none;
+        }
+
+        [data-velora-stepper-action="next"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="submit"] {
+            display: none;
+        }
+    }
+
+    &.first {
+        [data-velora-stepper-action="previous"] {
+            display: none;
+        }
+
+        [data-velora-stepper-action="next"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="submit"] {
+            display: none;
+        }
+    }
+
+    &.between {
+        [data-velora-stepper-action="previous"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="next"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="submit"] {
+            display: none;
+        }
+    }
+
+    &.last {
+        [data-velora-stepper-action="final"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="final"].btn-flex {
+            display: flex;
+        }
+
+        [data-velora-stepper-action="previous"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="previous"].btn-flex {
+            display: flex;
+        }
+
+    [data-velora-stepper-action="previous"][data-velora-stepper-state="hide-on-last-step"] {
+            display: none !important;
+        }
+
+        [data-velora-stepper-action="next"] {
+            display: none;
+        }
+
+        [data-velora-stepper-action="next"].btn-flex {
+            display: flex;
+        }
+
+        [data-velora-stepper-action="submit"] {
+            display: inline-block;
+        }
+
+        [data-velora-stepper-action="submit"].btn-flex {
+            display: flex;
+        }
+    }
+}

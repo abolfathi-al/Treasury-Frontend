@@ -1,0 +1,13 @@
+@if (showError() && getErrorInfo(); as error) {
+<div class="text-danger fs-7 mt-2">
+  <span role="alert">{{
+    error.message
+      | translate
+        : {
+            name: getParamText(error, "name") | translate,
+            min: error.params["min"],
+            max: error.params["max"]
+          }
+  }}</span>
+</div>
+}

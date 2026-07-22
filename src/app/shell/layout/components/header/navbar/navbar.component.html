@@ -1,0 +1,207 @@
+<!--begin::Search-->
+@if (appHeaderDefaultSearchDisplay()) {
+  <div class="app-navbar-item align-items-stretch" [ngClass]="itemClass">
+    <!--begin::Search-->
+    <div
+      id="velora_header_search"
+      class="header-search d-flex align-items-stretch"
+      #veloraHeaderSearch="vlVeloraSearch"
+      vlVeloraSearch
+      [searchActivate]="true"
+      [searchKeypress]="true"
+      [searchMinLength]="2"
+      [searchEnter]="true"
+      [searchLayout]="'menu'"
+    >
+      <!--begin::Search toggle-->
+      <button
+        type="button"
+        class="d-flex align-items-center border-0 bg-transparent p-0"
+        data-velora-search-element="toggle"
+        id="velora_header_search_toggle"
+        data-velora-menu-trigger="{default: 'click', lg: 'hover'}"
+        data-velora-menu-attach="parent"
+        data-velora-menu-placement="bottom-end"
+        [title]="'common.actions.search' | translate"
+        [attr.aria-label]="'common.actions.search' | translate"
+      >
+        <span [ngClass]="btnClass">
+          <vl-velora-icon name="magnifier" [class]="btnIconClass" aria-hidden="true"></vl-velora-icon>
+        </span>
+      </button>
+      <!--end::Search toggle-->
+
+      <!--begin::Search content-->
+      @defer (on idle) {
+        <vl-search-result-inner
+          [searchDirective]="veloraHeaderSearch"
+          data-velora-search-element="content"
+          vlVeloraMenu
+        >
+        </vl-search-result-inner>
+      }
+      <!--end::Search content-->
+    </div>
+    <!--end::Search-->
+  </div>
+}
+<!--end::Search-->
+
+<!--begin::Notifications-->
+@if (appHeaderDefaultNotificationsDisplay()) {
+  <div class="app-navbar-item" [ngClass]="itemClass">
+    <!--begin::Menu- wrapper-->
+    <button
+      type="button"
+      [ngClass]="btnClass"
+      data-velora-menu-trigger="{default: 'click', lg: 'hover'}"
+      data-velora-menu-attach="parent"
+      data-velora-menu-placement="bottom-end"
+      [title]="'navigation.menu.notifications' | translate"
+      [attr.aria-label]="'navigation.menu.notifications' | translate"
+    >
+      <vl-velora-icon name="message-notif" class="fs-2 fs-lg-1" aria-hidden="true"></vl-velora-icon>
+    </button>
+    @defer (on idle) {
+      <vl-notifications-inner vlVeloraMenu></vl-notifications-inner>
+    }
+    <!--end::Menu wrapper-->
+  </div>
+}
+<!--end::Notifications-->
+
+<!--begin::Chat-->
+@if (appHeaderDefaultChatDisplay()) {
+  <div class="app-navbar-item" [ngClass]="itemClass">
+    <button
+      type="button"
+      [ngClass]="btnClass"
+      class="position-relative"
+      id="velora_drawer_chat_toggle"
+      aria-label="Open chat"
+      title="Open chat"
+    >
+      <vl-velora-icon name="message-text-2" class="fs-2 fs-lg-1" aria-hidden="true"></vl-velora-icon>
+      <span
+        class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"
+      ></span>
+    </button>
+  </div>
+}
+<!--end::Chat-->
+
+<!--begin::Quick links-->
+@if (appHeaderDefaultQuickActionsDisplay()) {
+  <div class="app-navbar-item" [ngClass]="itemClass">
+    <!--begin::Menu wrapper-->
+    <button
+      type="button"
+      [ngClass]="btnClass"
+      data-velora-menu-trigger="click"
+      data-velora-menu-attach="parent"
+      data-velora-menu-placement="bottom-end"
+      [title]="'common.labels.quickLinks' | translate"
+      [attr.aria-label]="'common.labels.quickLinks' | translate"
+    >
+      <vl-velora-icon name="element-11" class="fs-2 fs-lg-1" aria-hidden="true"></vl-velora-icon>
+    </button>
+    <!--end::Menu wrapper-->
+    @defer (on idle) {
+      <vl-quick-links-inner vlVeloraMenu></vl-quick-links-inner>
+    }
+  </div>
+}
+<!--end::Quick links-->
+
+<!--begin::Theme mode-->
+@if (appHeaderDefaultThemModeDisplay()) {
+  <div class="app-navbar-item" [ngClass]="itemClass">
+    <vl-theme-mode-switcher
+      [toggleBtnClass]="btnClass"
+    >
+    </vl-theme-mode-switcher>
+  </div>
+}
+<!--end::Theme mode-->
+
+<!--begin::Demo workspace switcher-->
+@if (workspaceSwitcherVisible()) {
+  <div class="app-navbar-item" [ngClass]="itemClass">
+    <button
+      type="button"
+      id="workspace_switcher_toggle"
+      class="position-relative"
+      [ngClass]="btnClass"
+      [title]="'workspace.actions.switch' | translate"
+      [attr.aria-label]="'workspace.actions.switch' | translate"
+    >
+      <vl-velora-icon name="switch" class="fs-2 fs-lg-1" aria-hidden="true"></vl-velora-icon>
+      <span
+        class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"
+      ></span>
+    </button>
+  </div>
+}
+<!--end::Demo workspace switcher-->
+
+<!--begin::User menu-->
+@if (appHeaderDefaultUserDisplay()) {
+  @if (profile(); as _profile) {
+    <div class="app-navbar-item" [ngClass]="itemClass">
+      <button
+        type="button"
+        class="btn btn-flex align-items-center bg-hover-white bg-hover-opacity-10 py-2 ps-2 pe-2 me-n2"
+        data-velora-menu-trigger="{default: 'click'}"
+        data-velora-menu-attach="parent"
+        data-velora-menu-placement="bottom-end"
+        aria-label="Open user menu"
+        title="Open user menu"
+      >
+        <!--begin::Name-->
+        <span
+          class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4 fs-8 lh-1"
+        >
+          <span class="opacity-75 fw-semibold mb-2">
+            {{ _profile.name }}
+          </span>
+          <span class="fw-bold">
+            {{
+              'workspace.auth.input.companyDesc'
+                | translate: { name: _profile.companyName, code: _profile.companyCode }
+            }}
+          </span>
+        </span>
+        <!--end::Name-->
+        <!--begin::Symbol-->
+        <span class="symbol symbol-30px symbol-md-40px symbol-2by3" [ngClass]="userAvatarClass">
+          <span class="symbol-label fs-3 fw-semibold">
+            {{ _profile.avatarText }}
+          </span>
+        </span>
+        <!--end::Symbol-->
+      </button>
+      <!--begin::Menu wrapper-->
+      @defer (on idle) {
+        <vl-user-inner></vl-user-inner>
+      }
+      <!--end::Menu wrapper-->
+    </div>
+  }
+}
+<!--end::User menu-->
+
+<!--begin::Header menu toggle-->
+@if (appHeaderDefaultMenuDisplay()) {
+  <div class="app-navbar-item d-lg-none ms-2 me-n3">
+    <button
+      type="button"
+      class="btn btn-icon btn-active-color-primary w-35px h-35px"
+      id="velora_app_header_menu_toggle"
+      [title]="'navigation.menu.main' | translate"
+      [attr.aria-label]="'navigation.menu.main' | translate"
+    >
+      <vl-velora-icon name="text-align-left" class="" [ngClass]="btnIconClass" aria-hidden="true"></vl-velora-icon>
+    </button>
+  </div>
+}
+<!--end::Header menu toggle-->

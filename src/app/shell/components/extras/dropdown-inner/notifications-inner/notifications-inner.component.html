@@ -1,0 +1,183 @@
+<div
+  class="d-flex flex-column bgi-no-repeat rounded-top"
+  [style.background-image]="'url(./assets/media/misc/menu-header-bg.webp)'"
+>
+  <h3 class="text-white fw-bold px-9 mt-10 mb-6">
+    {{ "navigation.menu.notifications" | translate }}
+    <span class="fs-8 opacity-75 ps-3">
+      {{ "layout.notifications.reportsCount" | translate : { count: 24 } }}
+    </span>
+  </h3>
+
+  <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
+    <li class="nav-item">
+      <button
+        type="button"
+        class="nav-link text-white opacity-75 opacity-state-100 pb-4 cursor-pointer"
+        [class.active]="activeTabId() === 'velora_topbar_notifications_1'"
+        data-bs-toggle="tab"
+        role="tab"
+        aria-controls="velora_topbar_notifications_1"
+        [attr.aria-selected]="activeTabId() === 'velora_topbar_notifications_1'"
+        (click)="setActiveTabId('velora_topbar_notifications_1')"
+      >
+        {{ "layout.notifications.alerts" | translate }}
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button
+        type="button"
+        class="nav-link text-white opacity-75 opacity-state-100 pb-4 cursor-pointer"
+        [class.active]="activeTabId() === 'velora_topbar_notifications_2'"
+        data-bs-toggle="tab"
+        role="tab"
+        aria-controls="velora_topbar_notifications_2"
+        [attr.aria-selected]="activeTabId() === 'velora_topbar_notifications_2'"
+        (click)="setActiveTabId('velora_topbar_notifications_2')"
+      >
+        {{ "layout.notifications.updates" | translate }}
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button
+        type="button"
+        class="nav-link text-white opacity-75 opacity-state-100 pb-4 cursor-pointer"
+        [class.active]="activeTabId() === 'velora_topbar_notifications_3'"
+        data-bs-toggle="tab"
+        role="tab"
+        aria-controls="velora_topbar_notifications_3"
+        [attr.aria-selected]="activeTabId() === 'velora_topbar_notifications_3'"
+        (click)="setActiveTabId('velora_topbar_notifications_3')"
+      >
+        {{ "layout.notifications.logs" | translate }}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <div
+    class="tab-pane fade"
+    [ngClass]="alertsTabPaneClasses()"
+    id="velora_topbar_notifications_1"
+    role="tabpanel"
+  >
+    <div class="scroll-y mh-325px my-5 px-8">
+      @for (alert of alerts(); track alert.title) {
+      <div class="d-flex flex-stack py-4">
+        <div class="d-flex align-items-center">
+          <div class="symbol symbol-35px me-4">
+            <span class="symbol-label bg-light-{{ alert.state }}">
+              <span
+                [inlineSVG]="'./assets/media/' + alert.icon"
+                class="svg-icon svg-icon-{{ alert.state }} fs-2"
+              ></span>
+            </span>
+          </div>
+
+          <div class="mb-0 me-2">
+            <a
+              routerLink="/"
+              class="fs-6 text-gray-800 text-hover-primary fw-bolder"
+            >
+              {{ alert.title }}
+            </a>
+            <div class="text-gray-400 fs-7">{{ alert.description }}</div>
+          </div>
+        </div>
+
+        <span class="badge badge-light fs-8">{{ alert.time }}</span>
+      </div>
+      }
+    </div>
+
+    <div class="py-3 text-center border-top">
+      <a
+        routerLink="/crafted/pages/profile"
+        class="btn btn-color-gray-600 btn-active-color-primary"
+      >
+        {{ "common.actions.viewAll" | translate }}
+        <vl-velora-icon [name]="arrowIcon()" class="fs-5"></vl-velora-icon>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="tab-pane fade"
+    [ngClass]="updatesTabPaneClasses()"
+    id="velora_topbar_notifications_2"
+    role="tabpanel"
+  >
+    <div class="d-flex flex-column px-9">
+      <div class="pt-10 pb-0">
+        <h3 class="text-dark text-center fw-bolder">
+          {{ "layout.notifications.getProAccess" | translate }}
+        </h3>
+
+        <div class="text-center text-gray-600 fw-bold pt-1">
+          {{ "layout.notifications.proAccessDescription" | translate }}
+        </div>
+
+        <div class="text-center mt-5 mb-9">
+          <button
+            type="button"
+            class="btn btn-sm btn-primary px-6 cursor-pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#velora_modal_upgrade_plan"
+          >
+            {{ "common.actions.upgrade" | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center px-4">
+        <img
+          class="mw-100 mh-200px w-auto h-auto"
+          alt="Velora"
+          width="400"
+          height="356"
+          ngSrc="assets/media/illustrations/sketchy-1/1.webp"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="tab-pane fade"
+    [ngClass]="logsTabPaneClasses()"
+    id="velora_topbar_notifications_3"
+    role="tabpanel"
+  >
+    <div class="scroll-y mh-325px my-5 px-8">
+      @for (log of logs(); track log.id) {
+      <div class="d-flex flex-stack py-4">
+        <div class="d-flex align-items-center me-2">
+          <span class="w-70px badge badge-{{ log.state }} me-4">
+            {{ log.code }}
+          </span>
+
+          <a
+            routerLink="/"
+            class="text-gray-800 text-hover-primary fw-bold cursor-pointer"
+          >
+            {{ log.message }}
+          </a>
+
+          <span class="badge badge-light fs-8">{{ log.time }}</span>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="py-3 text-center border-top">
+      <a
+        routerLink="/crafted/pages/profile"
+        class="btn btn-color-gray-600 btn-active-color-primary"
+      >
+        {{ "common.actions.viewAll" | translate }}
+        <vl-velora-icon [name]="arrowIcon()" class="fs-5"></vl-velora-icon>
+      </a>
+    </div>
+  </div>
+</div>

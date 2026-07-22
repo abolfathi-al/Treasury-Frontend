@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+// Background variations for different auth pages
+.auth-bg-login {
+  background-image: url('../../../../../assets/media/misc/auth-bg.webp') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.auth-bg-registration {
+  background-image: url('../../../../../assets/media/misc/bg-2.webp') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.auth-bg-forgot-password {
+  background-image: url('../../../../../assets/media/misc/city.webp') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.auth-bg-logout {
+  background-image: url('../../../../../assets/media/misc/outdoor.webp') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// Loading state
+.auth-loading {
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+}
+
+// Responsive adjustments
+@media (max-width: 991.98px) {
+  .auth-bg-login,
+  .auth-bg-registration,
+  .auth-bg-forgot-password,
+  .auth-bg-logout {
+    background-image: none !important;
+    background-color: #f8f9fa;
+  }
+}

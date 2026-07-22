@@ -1,0 +1,214 @@
+<div
+  class="hierarchy-graph-shell"
+  [class.position-relative]="!isExpanded()"
+  [class.hierarchy-graph-shell-expanded]="isExpanded()"
+>
+  <div
+    #graphHost
+    class="hierarchy-graph-host border border-gray-300 rounded-3 bg-body overflow-hidden"
+  ></div>
+
+  @if (showControls()) {
+  <div class="hierarchy-graph-controls position-absolute bottom-0 start-0 m-4 d-flex flex-column gap-2">
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      data-testid="hierarchy-graph-zoom-in"
+      [attr.aria-label]="'workspace.scopeHierarchyExplorer.graph.controls.zoomIn' | translate"
+      [attr.title]="'workspace.scopeHierarchyExplorer.graph.controls.zoomIn' | translate"
+      (click)="zoomIn()"
+    >
+      <vl-velora-icon name="plus" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">{{ 'workspace.scopeHierarchyExplorer.graph.controls.zoomIn' | translate }}</span>
+    </button>
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      data-testid="hierarchy-graph-zoom-out"
+      [attr.aria-label]="'workspace.scopeHierarchyExplorer.graph.controls.zoomOut' | translate"
+      [attr.title]="'workspace.scopeHierarchyExplorer.graph.controls.zoomOut' | translate"
+      (click)="zoomOut()"
+    >
+      <vl-velora-icon name="minus" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">{{ 'workspace.scopeHierarchyExplorer.graph.controls.zoomOut' | translate }}</span>
+    </button>
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      data-testid="hierarchy-graph-fit-view"
+      [attr.aria-label]="'workspace.scopeHierarchyExplorer.graph.controls.fitToView' | translate"
+      [attr.title]="'workspace.scopeHierarchyExplorer.graph.controls.fitToView' | translate"
+      (click)="fitToView()"
+    >
+      <vl-velora-icon name="focus" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">{{ 'workspace.scopeHierarchyExplorer.graph.controls.fitToView' | translate }}</span>
+    </button>
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      [class.btn-light-warning]="nodesLocked()"
+      data-testid="hierarchy-graph-toggle-lock"
+      [attr.aria-label]="
+        (nodesLocked()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.unlockNodes'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.lockNodes') | translate
+      "
+      [attr.title]="
+        (nodesLocked()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.unlockNodes'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.lockNodes') | translate
+      "
+      (click)="toggleNodeLock()"
+    >
+      <vl-velora-icon name="shield-tick" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">
+        {{
+          (nodesLocked()
+            ? 'workspace.scopeHierarchyExplorer.graph.controls.unlockNodes'
+            : 'workspace.scopeHierarchyExplorer.graph.controls.lockNodes') | translate
+        }}
+      </span>
+    </button>
+    @if (showLegend()) {
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      [class.btn-light-primary]="isLegendVisible()"
+      data-testid="hierarchy-graph-toggle-legend"
+      [attr.aria-label]="
+        (isLegendVisible()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.hideLegend'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.showLegend') | translate
+      "
+      [attr.title]="
+        (isLegendVisible()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.hideLegend'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.showLegend') | translate
+      "
+      (click)="toggleLegendVisibility()"
+    >
+      <vl-velora-icon name="abstract-26" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">
+        {{
+          (isLegendVisible()
+            ? 'workspace.scopeHierarchyExplorer.graph.controls.hideLegend'
+            : 'workspace.scopeHierarchyExplorer.graph.controls.showLegend') | translate
+        }}
+      </span>
+    </button>
+    }
+    @if (showMiniMap()) {
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light btn-sm border border-gray-300 shadow-sm"
+      [class.btn-light-primary]="isMiniMapVisible()"
+      data-testid="hierarchy-graph-toggle-minimap"
+      [attr.aria-label]="
+        (isMiniMapVisible()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.hideMiniMap'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.showMiniMap') | translate
+      "
+      [attr.title]="
+        (isMiniMapVisible()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.hideMiniMap'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.showMiniMap') | translate
+      "
+      (click)="toggleMiniMapVisibility()"
+    >
+      <vl-velora-icon name="map" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">
+        {{
+          (isMiniMapVisible()
+            ? 'workspace.scopeHierarchyExplorer.graph.controls.hideMiniMap'
+            : 'workspace.scopeHierarchyExplorer.graph.controls.showMiniMap') | translate
+        }}
+      </span>
+    </button>
+    }
+    <button
+      type="button"
+      class="hierarchy-graph-control-btn btn btn-light-primary btn-sm border border-primary shadow-sm"
+      data-testid="hierarchy-graph-toggle-fullscreen"
+      [attr.aria-label]="
+        (isExpanded()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.collapse'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.expand') | translate
+      "
+      [attr.title]="
+        (isExpanded()
+          ? 'workspace.scopeHierarchyExplorer.graph.controls.collapse'
+          : 'workspace.scopeHierarchyExplorer.graph.controls.expand') | translate
+      "
+      (click)="toggleExpanded()"
+    >
+      <vl-velora-icon [name]="isExpanded() ? 'minus-square' : 'maximize'" class="fs-5"></vl-velora-icon>
+      <span class="hierarchy-graph-control-label d-none">
+        {{
+          (isExpanded()
+            ? 'workspace.scopeHierarchyExplorer.graph.controls.collapse'
+            : 'workspace.scopeHierarchyExplorer.graph.controls.expand') | translate
+        }}
+      </span>
+    </button>
+  </div>
+  }
+
+  @if (showLegend() && isLegendVisible()) {
+  <div class="hierarchy-graph-legend position-absolute bottom-0 start-0 m-4 d-none d-lg-block">
+    <div class="card card-flush border border-gray-300 shadow-sm bg-body">
+      <div class="hierarchy-graph-legend-body card-body px-4 py-3">
+        <div class="d-flex align-items-center flex-wrap gap-4">
+        <span class="d-flex align-items-center min-w-0">
+          <vl-velora-icon name="abstract-26" class="fs-5 text-primary me-2"></vl-velora-icon>
+          <span class="fs-8 fw-bold text-gray-900 text-truncate" translate="workspace.scopeHierarchyExplorer.graph.legend.title"></span>
+        </span>
+        @for (item of legendItems; track item.labelKey) {
+        <div class="d-flex align-items-center">
+          <span [attr.class]="'bullet bullet-dot h-8px w-8px me-2 bg-' + item.tone"></span>
+          <span class="fs-9 fw-semibold text-gray-700">{{ item.labelKey | translate }}</span>
+        </div>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+
+  @if (showMiniMap() && isMiniMapVisible()) {
+  <div class="position-absolute bottom-0 end-0 m-4 d-none d-lg-block">
+    <div class="border border-gray-300 rounded-3 bg-body p-3 shadow-sm">
+      <div class="fs-9 fw-bold text-muted mb-2" translate="workspace.scopeHierarchyExplorer.graph.miniMap"></div>
+      <svg
+        class="hierarchy-graph-minimap"
+        viewBox="-12 -10 184 108"
+        width="184"
+        height="108"
+        role="img"
+        [attr.aria-label]="'workspace.scopeHierarchyExplorer.graph.miniMap' | translate"
+      >
+        @for (link of miniMapLinks(); track link.source.id + '-' + link.target.id) {
+        <line
+          [attr.x1]="link.source.x"
+          [attr.y1]="link.source.y"
+          [attr.x2]="link.target.x"
+          [attr.y2]="link.target.y"
+          [attr.stroke]="link.active ? getLevelToneColor(link.target.level) : 'var(--bs-gray-300)'"
+          [attr.stroke-width]="link.active ? 2 : 1"
+          stroke-linecap="round"
+        ></line>
+        }
+
+        @for (node of miniMapNodes(); track node.id) {
+        <circle
+          [attr.cx]="node.x"
+          [attr.cy]="node.y"
+          [attr.r]="node.selected ? 5 : 3.5"
+          [attr.fill]="getLevelToneColor(node.level)"
+          [attr.opacity]="node.active ? 1 : 0.45"
+        ></circle>
+        }
+      </svg>
+    </div>
+  </div>
+  }
+</div>

@@ -1,0 +1,143 @@
+<!--begin::Label-->
+<span class="fs-7 fw-bold text-gray-700 pe-4 d-none d-md-block">
+  {{'common.labels.team' | translate}}:
+</span>
+<!--end::Label-->
+
+<!--begin::Users-->
+<div class="symbol-group symbol-hover flex-shrink-0 me-2">
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <div class="symbol-label fw-bold bg-warning text-inverse-warning">A</div>
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <img
+      alt="Profile Image"
+      width="35"
+      height="35"
+      ngSrc="assets/media/avatars/40/40-1.webp"
+    />
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <img
+      alt="Profile Image"
+      width="35"
+      height="35"
+      ngSrc="assets/media/avatars/40/40-2.webp"
+    />
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <div class="symbol-label fw-bold bg-primary text-inverse-primary">S</div>
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <img
+      alt="Profile Image"
+      width="35"
+      height="35"
+      ngSrc="assets/media/avatars/40/40-5.webp"
+    />
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <div class="symbol-label fw-bold bg-danger text-inverse-danger">P</div>
+  </div>
+  <!--end::User-->
+
+  <!--begin::User-->
+  <div class="symbol symbol-circle symbol-35px">
+    <img
+      alt="Profile Image"
+      width="35"
+      height="35"
+      ngSrc="assets/media/avatars/40/40-20.webp"
+    />
+  </div>
+  <!--end::User-->
+</div>
+<!--end::Users-->
+
+<!--begin::Button-->
+<div
+  placement="top"
+  trigger="hover"
+  [ngbTooltip]="'layout.toolbar.inviteTeamMember' | translate">
+
+  <button type="button" class="btn btn-sm btn-icon">
+    <vl-velora-icon name="plus-square" class="fs-2hx text-success"></vl-velora-icon>
+  </button>
+</div>
+<!--end::Button-->
+<!--end::Toolbar start-->
+
+<!--begin::Toolbar end-->
+<div class="d-flex align-items-center overflow-auto">
+  <!--begin::Search-->
+  <div class="position-relative my-1">
+    <vl-velora-icon name="magnifier" class="fs-3 text-gray500 position-absolute top-50 translate-middle ps-10"></vl-velora-icon>
+
+    <input
+      type="text"
+      class="form-control form-control-sm form-control-solid w-150px ps-10"
+      [attr.name]="'layout.toolbar.searchTeam' | translate"
+      value=""
+      [placeholder]="'layout.toolbar.searchTeam' | translate" />
+  </div>
+  <!--end::Search-->
+
+  <!--begin::Separartor-->
+  <div class="bullet bg-secondary h-35px w-1px mx-6"></div>
+  <!--end::Separartor-->
+
+  <!--begin::Label-->
+  <span class="fs-7 fw-bold text-gray-700 flex-shrink-0 pe-4 d-none d-md-block">
+    {{'common.filters.sortBy' | translate}}:
+  </span>
+  <!--end::Label-->
+
+  <!--begin::Select-->
+  <select
+    class="form-select form-select-sm w-125px form-select-solid me-6"
+    data-control="select2"
+    [attr.data-placeholder]="'layout.toolbar.latest' | translate"
+    data-hide-search="true">
+
+    <option value=""></option>
+    <option value="1" selected>{{ 'layout.toolbar.latest' | translate }}</option>
+    <option value="2">{{ 'status.inProgress' | translate }}</option>
+    <option value="3">{{ 'status.done' | translate }}</option>
+  </select>
+  <!--end::Select-->
+
+  <!--begin::Actions-->
+  <div class="d-flex align-items-center">
+    <button
+      type="button"
+      class="btn btn-sm btn-icon btn-light-primary me-3"
+      [ngbTooltip]="'layout.toolbar.enableGridView' | translate"
+      placement="top">
+      <vl-velora-icon name="element-11" class="fs-3 text-primary"></vl-velora-icon>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-sm btn-icon btn-light"
+      [ngbTooltip]="'layout.toolbar.enableRowView' | translate"
+      placement="top">
+      <vl-velora-icon name="row-horizontal" class="fs-3 text-gray400"></vl-velora-icon>
+    </button>
+  </div>
+  <!--end::Actions-->

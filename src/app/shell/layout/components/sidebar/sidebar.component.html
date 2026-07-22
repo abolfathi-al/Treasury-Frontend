@@ -1,0 +1,22 @@
+<!--begin::Logo-->
+<vl-sidebar-logo class="app-sidebar-logo px-6" id="velora_app_sidebar_logo"
+  [toggleButtonClass]="shell.sidebarToggleButtonClass()" [toggleEnabled]="shell.sidebarToggleEnabled()" [toggleType]="shell.sidebarToggleType()"
+  [toggleState]="shell.sidebarToggleState()">
+</vl-sidebar-logo>
+<!--end::Logo-->
+
+<!--begin::sidebar menu-->
+@defer (on idle) {
+  <vl-sidebar-menu class="app-sidebar-menu overflow-hidden flex-column-fluid">
+  </vl-sidebar-menu>
+}
+<!--end::sidebar menu-->
+
+<!--begin::Footer-->
+@defer (on viewport) {
+  <vl-sidebar-footer class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="velora_app_sidebar_footer">
+  </vl-sidebar-footer>
+} @placeholder {
+  <div></div>
+}
+<!--end::Footer-->

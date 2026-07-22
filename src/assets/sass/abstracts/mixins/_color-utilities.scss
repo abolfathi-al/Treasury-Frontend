@@ -1,0 +1,67 @@
+@mixin color-css-vars($color-name, $colors-map) {
+  @each $shade, $value in $colors-map {
+    --#{$prefix}#{$color-name}-#{$shade}: #{$value};
+    --#{$prefix}#{$color-name}-#{$shade}-rgb: #{to-rgb($value)};
+  }
+}
+
+@mixin color-bg-classes($color-name, $colors-map) {
+  @each $shade, $value in $colors-map {
+    .bg-#{$color-name}-#{$shade} {
+      --#{$prefix}bg-rgb-color: var(--#{$prefix}#{$color-name}-#{$shade}-rgb);
+      background-color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+    }
+
+    .bg-hover-#{$color-name}-#{$shade} {
+      &:hover {
+        --#{$prefix}bg-rgb-color: var(--#{$prefix}#{$color-name}-#{$shade}-rgb);
+        background-color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+      }
+    }
+
+    .bg-#{$color-name}-#{$shade}i {
+      --#{$prefix}bg-rgb-color: var(--#{$prefix}#{$color-name}-#{$shade}-rgb);
+      background-color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+    }
+  }
+}
+
+@mixin color-border-classes($color-name, $colors-map) {
+  @each $shade, $value in $colors-map {
+    .border-#{$color-name}-#{$shade} {
+      border-color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+    }
+  }
+}
+
+@mixin color-text-classes($color-name, $colors-map) {
+  @each $shade, $value in $colors-map {
+    .text-#{$color-name}-#{$shade} {
+      color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+    }
+
+    .text-hover-#{$color-name}-#{$shade} {
+      &:hover {
+        color: var(--#{$prefix}#{$color-name}-#{$shade}) !important;
+      }
+    }
+  }
+}
+
+@mixin color-table-row-classes($color-name, $colors-map) {
+  @each $shade, $value in $colors-map {
+    &.table-row-#{$color-name}-#{$shade} {
+      tr {
+        border-bottom-color: var(--#{$prefix}#{$color-name}-#{$shade});
+      }
+    }
+  }
+}
+
+@mixin generate-color-utilities($color-name, $colors-map) {
+  @include color-css-vars($color-name, $colors-map);
+  @include color-bg-classes($color-name, $colors-map);
+  @include color-text-classes($color-name, $colors-map);
+  @include color-border-classes($color-name, $colors-map);
+  @include color-table-row-classes($color-name, $colors-map);
+}

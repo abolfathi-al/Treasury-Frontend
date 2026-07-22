@@ -1,0 +1,636 @@
+// @import "./assets/sass/plugins.scss";
+// @import "./assets/sass/style.angular.scss";
+
+@use "./styles/velora-theme-tokens";
+
+.swal2-popup {
+  background-color: var(--bs-body-bg) !important;
+  padding: 2rem !important;
+  border-radius: 0.475rem !important;
+
+  .swal2-loader {
+    margin-top: 1em;
+  }
+}
+
+// tagify
+.tagify {
+  padding-left: var(--bs-card-spacer-x);
+  padding-right: var(--bs-card-spacer-x);
+
+  &.custom-tagify {
+    .tagify__tag {
+      background-color: transparent;
+    }
+
+    .tagify__input {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+// offcanvas
+.offcanvas-parent {
+  position: relative;
+  overflow: hidden;
+
+  .offcanvas,
+  .offcanvas-backdrop {
+    --bs-offcanvas-zindex: 50;
+
+    height: 100%;
+    position: absolute;
+  }
+
+  .offcanvas-backdrop {
+    background-image: url(assets/media/illustrations/sigma-1/9.webp);
+
+    [data-velora-theme="dark"] & {
+      background-image: url(assets/media/illustrations/sigma-1/9-dark.webp);
+    }
+
+    [dir="ltr"] & {
+      transform: scaleX(-1);
+      filter: FlipH;
+    }
+
+    background-color: var(--bs-card-bg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 40% center;
+    opacity: 1 !important;
+    z-index: var(--bs-offcanvas-zindex);
+  }
+}
+
+// flatpickr
+.flatpickr-weekdaycontainer,
+.dayContainer {
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+    justify-content: end;
+
+    .flatpickr-weekday {
+      direction: rtl;
+      letter-spacing: 1px;
+    }
+  }
+}
+.flatpickr-day.endRange {
+  border-radius: 50px 0 0 50px !important;
+}
+.flatpickr-day.startRange {
+  border-radius: 0 50px 50px 0 !important;
+}
+.flatpickr-day.prevMonthDay {
+  visibility: hidden;
+}
+.flatpickr-day.nextMonthDay {
+  display: none;
+}
+
+.btn > app-velora-icon {
+  display: inline-flex !important;
+  transform-origin: center;
+}
+
+// .StiPageContainer > *,
+.stiJsViewerToolBarTable,
+.stiJsViewerStandartSmallButton {
+  font-family: var(--bs-font-sans-serif) !important;
+
+  sti-toolbar-dop > table > tbody > tr {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .stiJsViewerTextBox {
+    padding: 0 4px;
+  }
+}
+
+.tab-content.flex-column-fluid {
+  & > .tab-pane {
+    height: 100%;
+  }
+}
+
+.fix-auto-focus {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.context-menu-icon {
+  position: relative;
+  bottom: -3px;
+  line-height: 7px;
+}
+
+// fix number placeholder
+[dir="rtl"] {
+  input[type="tel"],
+  input[type="url"],
+  input[type="email"],
+  input[type="number"] {
+    &::-moz-placeholder {
+      text-align: right;
+    }
+    &::-ms-input-placeholder {
+      text-align: right;
+    }
+    &::-webkit-input-placeholder {
+      text-align: right;
+    }
+  }
+}
+
+.no-pointer-events {
+  pointer-events: none;
+  cursor: default;
+}
+
+// image input placeholder
+.image-input-placeholder {
+  [data-bs-theme="light"] & {
+    background-image: url("/assets/media/svg/avatars/blank.svg");
+  }
+
+  [data-bs-theme="dark"] & {
+    background-image: url("/assets/media/svg/avatars/blank-dark.svg");
+  }
+}
+
+// ============================================================================
+// Accessibility: Skip Links (CSS-Only Implementation)
+// ============================================================================
+
+// Skip links allow keyboard users to skip repetitive navigation and jump
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background-color: #0b5fd9; // Primary color
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0 0 0.5rem 0;
+  transition: top 0.3s ease-in-out;
+  outline: 3px solid transparent;
+  outline-offset: 2px;
+
+  // Show skip link when focused (CSS-only)
+  &:focus {
+    top: 0;
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  // Also show on focus-within for better accessibility
+  &:focus-within {
+    top: 0;
+  }
+
+  // Hover state for mouse users
+  &:hover {
+    background-color: #0a54c4;
+    color: #ffffff !important;
+  }
+
+  // Active state
+  &:active {
+    background-color: #0949b0;
+    color: #ffffff !important;
+  }
+
+  // Ensure target elements are focusable when navigated to
+  &:target {
+    ~ * #main-content,
+    ~ * #navigation {
+      scroll-margin-top: 0;
+    }
+  }
+}
+
+// Second skip link (navigation) - positioned slightly lower
+.skip-link-nav {
+  margin-top: 3.5rem;
+  background-color: #6c757d; // Secondary color
+
+  &:hover {
+    background-color: #5a6268;
+  }
+
+  &:active {
+    background-color: #545b62;
+  }
+}
+
+// Ensure skip links work in RTL
+[dir="rtl"] .skip-link {
+  left: auto;
+  right: 0;
+  border-radius: 0 0 0 0.5rem;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: 2px solid #ffffff;
+    font-weight: 700;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
+// Ensure main content and navigation are focusable when navigated to
+#main-content:focus,
+#navigation:focus,
+main:focus,
+nav:focus,
+[role="main"]:focus,
+[role="navigation"]:focus {
+  outline: 3px solid #0b5fd9;
+  outline-offset: 2px;
+  scroll-margin-top: 0;
+}
+
+// ============================================================================
+// Accessibility: Color Contrast Fixes (WCAG AA 4.5:1)
+// ============================================================================
+// Global fixes for color contrast issues to meet WCAG AA standards
+// These override Bootstrap defaults to ensure proper contrast ratios
+
+// Badge color contrast fixes
+// .badge.bg-primary {
+//   background-color: #0056b3 !important; // Darker blue - contrast ratio ~7.1:1 (was #1b84ff with 3.62:1)
+//   color: #ffffff !important;
+// }
+
+// .badge.bg-success {
+//   background-color: #0a3622 !important; // Darker green - contrast ratio ~8.5:1 (was #17c653 with 2.27:1)
+//   color: #ffffff !important;
+// }
+
+// .badge.bg-warning {
+//   background-color: #664d03 !important; // Darker yellow/orange - contrast ratio ~7.2:1 (was #f6c000 with 1.68:1)
+//   color: #ffffff !important;
+// }
+
+// .badge.bg-danger {
+//   background-color: #58151c !important; // Darker red - contrast ratio ~7.8:1 (was #f8285a with 3.85:1)
+//   color: #ffffff !important;
+// }
+
+// .badge.bg-info {
+//   background-color: #055160 !important; // Darker blue - contrast ratio ~7.5:1
+//   color: #ffffff !important;
+// }
+
+// .badge.bg-secondary {
+//   background-color: #495057 !important; // Darker gray - contrast ratio ~7.8:1 (was #f9f9f9 with 1.05:1)
+//   color: #ffffff !important;
+// }
+
+// // Fix text-gray-600 contrast issue - override CSS variables and classes
+// :root,
+// [data-bs-theme="light"],
+// [data-bs-theme="dark"] {
+//   --bs-gray-600: #5a6270 !important; // Override CSS variable for better contrast (was #78829d)
+//   --bs-text-gray-600: #5a6270 !important;
+//   --bs-primary: #0056b3 !important; // Override primary color (was #1b84ff)
+//   --bs-success: #0a3622 !important; // Override success color (was #17c653)
+//   --bs-warning: #664d03 !important; // Override warning color (was #f6c000)
+//   --bs-danger: #58151c !important; // Override danger color (was #f8285a)
+//   --bs-success-light: #d1f2e0 !important; // Override success-light (was #dfffea)
+//   --bs-info: #055160 !important; // Override info color for better contrast
+// }
+
+// // Override text-gray-600 class with maximum specificity
+// p.text-gray-600,
+// .text-gray-600,
+// div.text-gray-600,
+// span.text-gray-600,
+// .card-body .text-gray-600,
+// .card-body p.text-gray-600,
+// [class*="text-gray-600"],
+// .text-gray-600.fs-6 {
+//   color: #5a6270 !important; // Darker gray - contrast ratio ~5.2:1 (was #78829d with 3.83:1)
+// }
+
+// // Fix button-primary contrast issue - override both CSS variable and class
+// .btn-primary,
+// button.btn-primary,
+// a.btn-primary {
+//   background-color: #0056b3 !important; // Darker blue - contrast ratio ~7.1:1 (was #1b84ff with 3.62:1)
+//   border-color: #0056b3 !important;
+//   color: #ffffff !important;
+
+//   &:hover,
+//   &:focus {
+//     background-color: #004085 !important; // Even darker on hover
+//     border-color: #004085 !important;
+//   }
+
+//   &:focus {
+//     box-shadow: 0 0 0 0.25rem rgba(0, 86, 179, 0.5) !important;
+//   }
+
+//   &:active {
+//     background-color: #003d75 !important;
+//     border-color: #003d75 !important;
+//   }
+// }
+
+// // Fix bg-info text-white contrast issue (h2 on bg-info background)
+// .bg-info.text-white h2,
+// .bg-info.text-white .card-title,
+// .card-header.bg-info.text-white h2,
+// .card-header.bg-info.text-white .card-title {
+//   color: #ffffff !important; // Ensure white text on info background
+// }
+
+// // Fix button-success contrast issue - override both CSS variable and class
+// .btn-success,
+// button.btn-success,
+// a.btn-success {
+//   background-color: #0a3622 !important; // Darker green - contrast ratio ~8.5:1 (was #17c653 with 2.27:1)
+//   border-color: #0a3622 !important;
+//   color: #ffffff !important;
+
+//   &:hover,
+//   &:focus {
+//     background-color: #072417 !important; // Even darker on hover
+//     border-color: #072417 !important;
+//   }
+
+//   &:focus {
+//     box-shadow: 0 0 0 0.25rem rgba(10, 54, 34, 0.5) !important;
+//   }
+
+//   &:active {
+//     background-color: #051a0f !important;
+//     border-color: #051a0f !important;
+//   }
+// }
+
+// // Fix button-warning contrast issue - override both CSS variable and class
+// .btn-warning,
+// button.btn-warning,
+// a.btn-warning {
+//   background-color: #664d03 !important; // Darker yellow/orange - contrast ratio ~7.2:1 (was #f6c000 with 1.68:1)
+//   border-color: #664d03 !important;
+//   color: #ffffff !important;
+
+//   &:hover,
+//   &:focus {
+//     background-color: #4d3a02 !important; // Even darker on hover
+//     border-color: #4d3a02 !important;
+//   }
+
+//   &:focus {
+//     box-shadow: 0 0 0 0.25rem rgba(102, 77, 3, 0.5) !important;
+//   }
+
+//   &:active {
+//     background-color: #332601 !important;
+//     border-color: #332601 !important;
+//   }
+// }
+
+// // Fix button-danger contrast issue - override both CSS variable and class
+// .btn-danger,
+// button.btn-danger,
+// a.btn-danger {
+//   background-color: #58151c !important; // Darker red - contrast ratio ~7.8:1 (was #f8285a with 3.85:1)
+//   border-color: #58151c !important;
+//   color: #ffffff !important;
+
+//   &:hover,
+//   &:focus {
+//     background-color: #3d0e13 !important; // Even darker on hover
+//     border-color: #3d0e13 !important;
+//   }
+
+//   &:focus {
+//     box-shadow: 0 0 0 0.25rem rgba(88, 21, 28, 0.5) !important;
+//   }
+
+//   &:active {
+//     background-color: #2a0a0e !important;
+//     border-color: #2a0a0e !important;
+//   }
+// }
+
+// // Fix all light badge variants contrast issues
+// .badge.badge-light-primary {
+//   background-color: #e7f1ff !important; // Lighter blue background
+//   color: #0056b3 !important; // Darker blue text - contrast ratio ~7.1:1 (was #1b84ff with 3.23:1)
+// }
+
+// .badge.badge-light-success,
+// span.badge.badge-light-success {
+//   background-color: #d1f2e0 !important; // Lighter green background (was #dfffea)
+//   color: #0a3622 !important; // Darker green text - contrast ratio ~8.5:1 (was #17c653 with 2.12:1)
+// }
+
+// .badge.badge-light-warning {
+//   background-color: #fff3cd !important; // Lighter yellow background
+//   color: #664d03 !important; // Darker yellow text - contrast ratio ~7.2:1
+// }
+
+// .badge.badge-light-danger {
+//   background-color: #f8d7da !important; // Lighter red background
+//   color: #58151c !important; // Darker red text - contrast ratio ~7.8:1
+// }
+
+// .badge.badge-light-info {
+//   background-color: #d1ecf1 !important; // Lighter blue background
+//   color: #055160 !important; // Darker blue text - contrast ratio ~7.5:1
+// }
+
+// .badge.badge-light-secondary {
+//   background-color: #e2e3e5 !important; // Lighter gray background
+//   color: #383d41 !important; // Darker gray text - contrast ratio ~7.8:1
+// }
+
+// .badge.badge-light-dark {
+//   background-color: #d6d8db !important; // Lighter dark background
+//   color: #1c1f23 !important; // Darker text - contrast ratio ~8.5:1
+// }
+
+// Skeleton loading animation
+.skeleton {
+  &:not(.shimmer) {
+    animation: skeleton-pulse 1s linear infinite alternate;
+    background-color: var(--bs-gray-300);
+  }
+
+  &.shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--bs-gray-200) 25%,
+      var(--bs-gray-300) 50%,
+      var(--bs-gray-200) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-color: var(--bs-gray-200);
+  }
+  100% {
+    background-color: var(--bs-gray-300);
+  }
+}
+
+app-main-search.custom-main-search {
+  input {
+    background-color: var(--bs-body-bg) !important;
+    &:focus {
+      box-shadow: 0 0 0 0.1rem rgba(var(--bs-gray-400-rgb), 0.25) !important;
+    }
+  }
+}
+
+.bg-light-purple-gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--bs-secondary-100) 0%,
+    var(--bs-secondary-300) 100%
+  );
+}
+
+.bg-dark-purple-gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--bs-secondary-600) 0%,
+    var(--bs-secondary-900) 100%
+  );
+}
+
+.bg-dark-primary-gradient {
+  background: linear-gradient(
+    97deg,
+    var(--bs-primary-900) 0%,
+    var(--bs-primary-1000) 100%
+  );
+}
+
+.bg-red-yellow-gradient {
+  background: linear-gradient(
+    to bottom left,
+    var(--bs-red-500) 0%,
+    var(--bs-yellow-500) 100%
+  );
+}
+
+.bg-slate-to-primary-gradient {
+  background: linear-gradient(
+    97deg,
+    var(--bs-slate-900) 0%,
+    var(--bs-primary-900) 100%
+  );
+}
+
+.bg-blue-light-gradient {
+  background: linear-gradient(
+    97deg,
+    var(--bs-blue-300) 0%,
+    var(--bs-blue-500) 100%
+  );
+}
+
+.text-slate-gradient {
+  background: linear-gradient(
+    to top,
+    rgba(var(--bs-slate-100-rgb), 0),
+    var(--bs-slate-200)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.masked-gradient {
+  -webkit-mask-image: linear-gradient(
+    var(--direction),
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.7) 40%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(
+    var(--direction),
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.7) 40%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.masked-gradient-bottom {
+  --direction: to bottom;
+}
+
+.masked-gradient-left {
+  --direction: to left;
+}
+
+.masked-gradient-right {
+  --direction: to right;
+}
+
+.masked-gradient-top {
+  --direction: to top;
+}
+
+.gradient-backdrop-dim {
+  backdrop-filter: brightness(0.9);
+}
+
+.bg-lavender-blue-gradient {
+  background: linear-gradient(#FEF1FF 0%, #DEF6FF 100%);
+}
+
+.text-vertical-lr {
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+}
+
+.text-vertical-rl {
+  writing-mode: sideways-rl;
+  text-orientation: mixed;
+}

@@ -1,0 +1,42 @@
+:host {
+  height: 100%;
+  margin: 0;
+
+  .app-skip-link {
+    position: fixed;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+    z-index: 1100;
+    transform: translateY(-150%);
+    border-radius: var(--bs-border-radius);
+    background: var(--bs-primary);
+    color: var(--bs-primary-inverse);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+
+    &::after {
+      content: attr(aria-label);
+    }
+
+    &:focus,
+    &:focus-visible {
+      transform: translateY(0);
+      outline: 2px solid var(--bs-primary-inverse);
+      outline-offset: 2px;
+    }
+  }
+
+  .flex-root {
+    height: 100%;
+  }
+}
+
+.page-loaded {
+  app-layout {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+}

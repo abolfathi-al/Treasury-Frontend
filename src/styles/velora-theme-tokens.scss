@@ -1,0 +1,117 @@
+/* Project-owned theme tokens for UI surfaces and D3 chart rendering. */
+
+:root {
+  /* Bootstrap bridge tokens */
+  --velora-bs-primary: var(--bs-primary);
+  --velora-bs-secondary: var(--bs-secondary);
+  --velora-bs-success: var(--bs-success);
+  --velora-bs-warning: var(--bs-warning);
+  --velora-bs-danger: var(--bs-danger);
+  --velora-bs-info: var(--bs-info);
+  --velora-bs-body-bg: var(--bs-body-bg);
+  --velora-bs-body-color: var(--bs-body-color);
+  --velora-bs-card-bg: var(--bs-card-bg, var(--bs-body-bg));
+  --velora-bs-border-color: var(--bs-border-color, var(--bs-gray-300));
+  --velora-bs-secondary-color: var(--bs-secondary-color, var(--bs-gray-600));
+}
+
+:root,
+[data-bs-theme="light"] {
+  /* Velora semantic UI tokens */
+  --velora-surface-page: var(--velora-bs-body-bg);
+  --velora-surface-card: var(--velora-bs-card-bg);
+  --velora-surface-muted: color-mix(in srgb, var(--velora-bs-body-bg) 92%, var(--velora-bs-secondary) 8%);
+  --velora-border-subtle: color-mix(in srgb, var(--velora-bs-border-color) 82%, var(--velora-bs-body-color) 18%);
+  --velora-text-primary: var(--velora-bs-body-color);
+  --velora-text-secondary: var(--velora-bs-secondary-color);
+  --velora-text-muted: color-mix(in srgb, var(--velora-bs-secondary-color) 82%, var(--velora-bs-body-bg) 18%);
+  --velora-accent-primary: var(--velora-bs-primary);
+  --velora-accent-secondary: var(--velora-bs-secondary);
+
+  /* Velora chart tokens */
+  --velora-chart-1: var(--velora-accent-primary);
+  --velora-chart-2: color-mix(in srgb, var(--velora-bs-info) 86%, var(--velora-bs-primary) 14%);
+  --velora-chart-3: color-mix(in srgb, var(--velora-bs-warning) 86%, var(--velora-bs-secondary) 14%);
+  --velora-chart-4: color-mix(in srgb, var(--velora-bs-danger) 84%, var(--velora-bs-secondary) 16%);
+  --velora-chart-5: color-mix(in srgb, var(--velora-bs-success) 86%, var(--velora-bs-primary) 14%);
+  --velora-chart-6: color-mix(in srgb, var(--velora-bs-secondary) 78%, var(--velora-bs-body-color) 22%);
+  --velora-chart-grid: color-mix(in srgb, var(--velora-bs-border-color) 74%, transparent);
+  --velora-chart-axis: color-mix(in srgb, var(--velora-bs-secondary-color) 58%, transparent);
+  --velora-chart-label: var(--velora-text-secondary);
+  --velora-chart-tooltip-bg: color-mix(in srgb, var(--velora-bs-body-color) 94%, var(--velora-bs-card-bg) 6%);
+  --velora-chart-tooltip-text: var(--velora-bs-card-bg);
+  --velora-chart-positive: var(--velora-bs-success);
+  --velora-chart-warning: var(--velora-bs-warning);
+  --velora-chart-negative: var(--velora-bs-danger);
+  --velora-chart-neutral: color-mix(in srgb, var(--velora-bs-secondary-color) 74%, var(--velora-bs-body-bg) 26%);
+}
+
+[data-bs-theme="dark"] {
+  /* Velora semantic UI tokens */
+  --velora-surface-page: color-mix(in srgb, var(--velora-bs-body-bg) 96%, var(--bs-black) 4%);
+  --velora-surface-card: var(--velora-bs-card-bg);
+  --velora-surface-muted: color-mix(in srgb, var(--velora-bs-card-bg) 78%, var(--velora-bs-secondary) 22%);
+  --velora-border-subtle: color-mix(in srgb, var(--velora-bs-border-color) 70%, var(--bs-white) 30%);
+  --velora-text-primary: var(--velora-bs-body-color);
+  --velora-text-secondary: color-mix(in srgb, var(--velora-bs-secondary-color) 86%, var(--bs-white) 14%);
+  --velora-text-muted: color-mix(in srgb, var(--velora-bs-secondary-color) 72%, var(--velora-bs-card-bg) 28%);
+  --velora-accent-primary: color-mix(in srgb, var(--velora-bs-primary) 86%, var(--bs-white) 14%);
+  --velora-accent-secondary: color-mix(in srgb, var(--velora-bs-secondary) 72%, var(--bs-white) 28%);
+
+  /* Velora chart tokens */
+  --velora-chart-1: var(--velora-accent-primary);
+  --velora-chart-2: color-mix(in srgb, var(--velora-bs-info) 78%, var(--bs-white) 22%);
+  --velora-chart-3: color-mix(in srgb, var(--velora-bs-warning) 72%, var(--bs-white) 28%);
+  --velora-chart-4: color-mix(in srgb, var(--velora-bs-danger) 72%, var(--bs-white) 28%);
+  --velora-chart-5: color-mix(in srgb, var(--velora-bs-success) 74%, var(--bs-white) 26%);
+  --velora-chart-6: color-mix(in srgb, var(--velora-bs-secondary) 62%, var(--bs-white) 38%);
+  --velora-chart-grid: color-mix(in srgb, var(--velora-bs-border-color) 48%, transparent);
+  --velora-chart-axis: color-mix(in srgb, var(--velora-bs-secondary-color) 64%, transparent);
+  --velora-chart-label: var(--velora-text-secondary);
+  --velora-chart-tooltip-bg: color-mix(in srgb, var(--velora-bs-card-bg) 80%, var(--bs-white) 20%);
+  --velora-chart-tooltip-text: var(--velora-bs-body-color);
+  --velora-chart-positive: color-mix(in srgb, var(--velora-bs-success) 78%, var(--bs-white) 22%);
+  --velora-chart-warning: color-mix(in srgb, var(--velora-bs-warning) 72%, var(--bs-white) 28%);
+  --velora-chart-negative: color-mix(in srgb, var(--velora-bs-danger) 76%, var(--bs-white) 24%);
+  --velora-chart-neutral: color-mix(in srgb, var(--velora-bs-secondary-color) 68%, var(--velora-bs-card-bg) 32%);
+}
+
+[data-tenant-theme] {
+  --velora-accent-primary: var(--tenant-accent-primary, var(--velora-bs-primary));
+  --velora-accent-secondary: var(--tenant-accent-secondary, var(--velora-bs-secondary));
+  --velora-chart-1: var(--tenant-chart-1, var(--velora-accent-primary));
+  --velora-chart-2: var(--tenant-chart-2, var(--velora-bs-info));
+  --velora-chart-3: var(--tenant-chart-3, var(--velora-bs-warning));
+  --velora-chart-4: var(--tenant-chart-4, var(--velora-bs-danger));
+  --velora-chart-5: var(--tenant-chart-5, var(--velora-bs-success));
+  --velora-chart-6: var(--tenant-chart-6, var(--velora-accent-secondary));
+}
+
+:root,
+[data-bs-theme="light"],
+[data-bs-theme="dark"],
+[data-tenant-theme] {
+  /* Compatibility aliases for legacy shared chart consumers. */
+  --surface-card: var(--velora-surface-card);
+  --surface-muted: var(--velora-surface-muted);
+  --border-subtle: var(--velora-border-subtle);
+  --text-primary: var(--velora-text-primary);
+  --text-secondary: var(--velora-text-secondary);
+  --text-muted: var(--velora-text-muted);
+  --accent-primary: var(--velora-accent-primary);
+  --accent-secondary: var(--velora-accent-secondary);
+  --success: var(--velora-chart-positive);
+  --warning: var(--velora-chart-warning);
+  --danger: var(--velora-chart-negative);
+  --info: var(--velora-chart-2);
+  --chart-1: var(--velora-chart-1);
+  --chart-2: var(--velora-chart-2);
+  --chart-3: var(--velora-chart-3);
+  --chart-4: var(--velora-chart-4);
+  --chart-5: var(--velora-chart-5);
+  --chart-6: var(--velora-chart-6);
+  --chart-grid: var(--velora-chart-grid);
+  --chart-axis: var(--velora-chart-axis);
+  --chart-tooltip-bg: var(--velora-chart-tooltip-bg);
+  --chart-tooltip-text: var(--velora-chart-tooltip-text);
+}

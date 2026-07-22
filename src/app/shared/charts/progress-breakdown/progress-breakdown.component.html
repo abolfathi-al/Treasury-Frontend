@@ -1,0 +1,37 @@
+<div
+  class="chart-progress-breakdown d-flex flex-column"
+  role="group"
+  [attr.aria-label]="ariaLabel()"
+  [class.gap-4]="!compact()"
+  [class.gap-3]="compact()"
+>
+  @for (item of normalizedItems(); track item.label) {
+  <div class="chart-progress-breakdown__item">
+    <div class="chart-progress-breakdown__row d-flex justify-content-between align-items-start gap-3 mb-2">
+      <span class="chart-progress-breakdown__label d-flex align-items-start min-w-0 flex-grow-1">
+        <span
+          class="chart-progress-breakdown__marker bullet bullet-dot h-8px w-8px flex-shrink-0 me-3 mt-1"
+          [ngClass]="'bg-' + item.tone"
+        ></span>
+        <span class="chart-progress-breakdown__label-text fs-8 text-gray-800 lh-sm min-w-0 text-truncate">{{ item.label }}</span>
+      </span>
+      <span class="chart-progress-breakdown__value fs-8 fw-semibold text-gray-900 text-end text-nowrap flex-shrink-0">
+        {{ item.value }}
+      </span>
+    </div>
+    <div
+      class="chart-progress-breakdown__bar d-block w-100"
+      role="progressbar"
+      vlD3ProgressBreakdown
+      [percentage]="item.percentage"
+      [tone]="item.tone"
+      [compact]="compact()"
+      [ariaLabel]="item.label"
+      [attr.aria-label]="item.label"
+      [attr.aria-valuenow]="item.percentage"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  }
+</div>

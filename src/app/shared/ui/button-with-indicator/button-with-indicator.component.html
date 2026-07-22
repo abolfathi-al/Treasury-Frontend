@@ -1,0 +1,29 @@
+<button
+  type="button"
+  class="btn"
+  [ngClass]="classes()"
+  [attr.data-velora-indicator]="isLoading() ? 'on' : 'off'"
+  [disabled]="isLoading() || disabled()"
+  (click)="handleClick($event)"
+>
+  <span class="indicator-label">
+    <div class="d-flex align-items-center">
+      @if (icon()) {
+      <vl-velora-icon [name]="icon()" class="fs-6 me-2"></vl-velora-icon>
+      } @if (title()) {
+      <span class="flex-grow-1 d-flex flex-stack align-items-center">
+        <span [translate]="title()"></span>
+        @if (shortcut()) {
+        <span class="fs-9" dir="ltr" d>
+          {{ shortcut() }}
+        </span>
+        }
+      </span>
+      }
+    </div>
+  </span>
+  <span class="indicator-progress">
+    {{ waitDesc() | translate }}
+    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+  </span>
+</button>

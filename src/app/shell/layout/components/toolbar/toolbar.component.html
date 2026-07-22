@@ -1,0 +1,38 @@
+<!--begin::Toolbar container-->
+<div
+  id="velora_app_toolbar_container"
+  class="app-container"
+  [ngClass]="appToolbarContainerCSSClass()"
+  [attr.data-velora-toolbar-container]="true"
+>
+  @if (showPageTitle()) {
+  <vl-page-title
+    [appPageTitleDirection]="appPageTitleDirection()"
+    [appPageTitleBreadcrumb]="appPageTitleBreadcrumb()"
+    [appPageTitleDescription]="appPageTitleDescription()"
+    class="page-title d-flex flex-wrap me-3"
+    [ngClass]="pageTitleLayoutClasses()"
+    [class]="appPageTitleCSSClass() || ''"
+  >
+  </vl-page-title>
+  } @defer (on idle) { @switch (appToolbarLayout()) { @case ('classic') {
+  <vl-classic class="d-flex align-items-center gap-2 gap-lg-3"></vl-classic>
+  } @case ('accounting') {
+  <vl-accounting class="d-flex align-items-center me-5"></vl-accounting>
+  } @case ('extended') {
+  <vl-extended
+    class="d-flex align-items-center flex-shrink-0 me-5"
+  ></vl-extended>
+  } @case ('reports') {
+  <vl-reports
+    class="d-flex align-items-center overflow-auto"
+    [appPageTitleDisplay]="appPageTitleDisplay()"
+  ></vl-reports>
+  } @case ('saas') {
+  <vl-saas
+    class="d-flex align-items-center gap-2"
+    [appPageTitleDisplay]="appPageTitleDisplay()"
+  ></vl-saas>
+  } } } @placeholder {}
+</div>
+<!--end::Toolbar container-->

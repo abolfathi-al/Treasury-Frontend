@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.chart-progress-breakdown,
+.chart-progress-breakdown__item,
+.chart-progress-breakdown__row,
+.chart-progress-breakdown__label,
+.chart-progress-breakdown__bar {
+  min-width: 0;
+}
+
+.chart-progress-breakdown__marker {
+  margin-inline-end: 0.75rem;
+}
+
+.chart-progress-breakdown__label-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-progress-breakdown__value {
+  flex: 0 0 auto;
+  max-width: 48%;
+  overflow: hidden;
+  text-align: end;
+  text-overflow: ellipsis;
+}
+
+:host-context([dir='rtl']) .chart-progress-breakdown {
+  direction: rtl;
+}

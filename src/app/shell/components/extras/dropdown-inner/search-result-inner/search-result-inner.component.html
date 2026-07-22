@@ -1,0 +1,557 @@
+<!--begin::Wrapper-->
+<div
+  data-velora-search-element="wrapper"
+  [ngClass]="activeClass('velora-search-search')"
+  role="search"
+  [attr.aria-label]="'common.actions.search' | translate"
+>
+  <!--begin::Form-->
+  <form
+    data-velora-search-element="form"
+    class="w-100 position-relative mb-3"
+    autocomplete="off"
+  >
+    <!--begin::Icon-->
+    <vl-velora-icon
+      name="magnifier"
+      class="fs-2 fs-lg-1 text-gray500 position-absolute top-50 translate-middle-y ms-0"
+    ></vl-velora-icon>
+    <!--end::Icon-->
+
+    <!--begin::Input-->
+    <input
+      type="text"
+      class="search-input form-control form-control-flush ps-10"
+      name="search"
+      value=""
+      [placeholder]="'common.actions.searchPlaceholder' | translate"
+      data-velora-search-element="input"
+    />
+    <!--end::Input-->
+
+    <!--begin::Spinner-->
+    <span
+      class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-1"
+      data-velora-search-element="spinner"
+    >
+      <span
+        class="spinner-border h-15px w-15px align-middle text-gray-400"
+      ></span>
+    </span>
+    <!--end::Spinner-->
+
+    <!--begin::Reset-->
+    <span
+      class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none"
+      data-velora-search-element="clear"
+    >
+      <vl-velora-icon name="cross" class="fs-2 fs-lg-1 me-0"></vl-velora-icon>
+    </span>
+    <!--end::Reset-->
+
+    <!--begin::Toolbar-->
+    <div
+      class="position-absolute top-50 end-0 translate-middle-y"
+      data-velora-search-element="toolbar"
+    >
+      <!--begin::Preferences toggle-->
+      <div
+        data-velora-search-element="preferences-show"
+        class="btn btn-icon w-20px btn-sm btn-active-color-primary me-1"
+        [ngbTooltip]="'layout.search.showPreferences' | translate"
+        tooltipClass="text-nowrap"
+        (click)="setMode('velora-search-preference')"
+      >
+        <vl-velora-icon name="setting-2" class="fs-1"></vl-velora-icon>
+      </div>
+      <!--end::Preferences toggle-->
+
+      <!--begin::Advanced search toggle-->
+      <div
+        data-velora-search-element="advanced-options-form-show"
+        class="btn btn-icon w-20px btn-sm btn-active-color-primary"
+        [ngbTooltip]="'layout.search.showMoreOptions' | translate"
+        tooltipClass="text-nowrap"
+        (click)="setMode('velora-search-advanced')"
+      >
+        <vl-velora-icon name="arrow-down" class="fs-2"></vl-velora-icon>
+      </div>
+      <!--end::Advanced search toggle-->
+    </div>
+    <!--end::Toolbar-->
+  </form>
+  <!--end::Form-->
+
+  <!--begin::Separator-->
+  <div class="separator border-gray-200 mb-6"></div>
+  <!--end::Separator-->
+
+  <!--begin::Recently viewed-->
+  <div
+    data-velora-search-element="results"
+    [ngClass]="activeClass('velora-search-search-result')"
+  >
+    <!--begin::Items-->
+    <div class="scroll-y mh-200px mh-lg-350px">
+      <!--begin::Category title-->
+      <h3
+        class="fs-5 text-muted m-0 pb-5"
+        data-velora-search-element="category-title"
+      >
+        {{ 'layout.search.users' | translate }}
+      </h3>
+      <!--end::Category title-->
+
+      @for (item of results(); track item.title) {
+      <!--begin::Item-->
+      <a
+        class="d-flex text-dark text-hover-primary align-items-center mb-5"
+        routerLink="/"
+      >
+        <!--begin::Symbol-->
+        <div class="symbol symbol-40px me-4">
+          <img alt="" width="40" height="40" ngSrc="{{ item.image }}" />
+        </div>
+        <!--end::Symbol-->
+
+        <!--begin::Title-->
+        <div class="d-flex flex-column justify-content-start fw-semibold">
+          <span class="fs-6 fw-semibold">{{ item.title }}</span>
+          <span class="fs-7 fw-semibold text-muted">{{
+            item.description
+          }}</span>
+        </div>
+        <!--end::Title-->
+      </a>
+      <!--end::Item-->
+      }
+    </div>
+    <!--end::Items-->
+  </div>
+  <!--end::Recently viewed-->
+
+  <!--begin::Recently viewed-->
+  <div
+    data-velora-search-element="main"
+    class="mb-5"
+    [ngClass]="activeClass('velora-search-search-main')"
+    role="main"
+  >
+    <!--begin::Heading-->
+    <div class="d-flex flex-stack fw-semibold mb-4">
+      <!--begin::Label-->
+      <span class="text-muted fs-6 me-2">
+        {{ "layout.search.recentlySearched" | translate }}:
+      </span>
+      <!--end::Label-->
+    </div>
+    <!--end::Heading-->
+
+    <!--begin::Items-->
+    <div class="scroll-y mh-200px mh-lg-325px">
+      <!--begin::Item-->
+      @for (item of recentlySearched(); track item.title) {
+      <div class="d-flex align-items-center mb-5">
+        <!--begin::Symbol-->
+        <div class="symbol symbol-40px me-4">
+          @if (item.image) {
+          <img [src]="item.image" alt="" />
+          } @if (item.icon) {
+          <span class="symbol-label bg-light">
+            <!--begin::Svg Icon-->
+            <span
+              [inlineSVG]="item.icon"
+              class="svg-icon fs-2 text-primary"
+            ></span>
+            <!--end::Svg Icon-->
+          </span>
+          } @else {
+          <span class="symbol-label bg-light">
+            <span class="text-primary">{{ item.title.charAt(0) }}</span>
+          </span>
+          }
+        </div>
+        <!--end::Symbol-->
+
+        <!--begin::Title-->
+        <div class="d-flex flex-column">
+          <span class="fs-6 text-gray-800 text-hover-primary fw-semibold">{{
+            item.title
+          }}</span>
+          <span class="fs-7 text-muted fw-semibold">{{
+            item.description
+          }}</span>
+        </div>
+        <!--end::Title-->
+      </div>
+      <!--end::Item-->
+      }
+    </div>
+    <!--end::Items-->
+  </div>
+  <!--end::Recently viewed-->
+
+  <!--begin::Empty-->
+  <div
+    data-velora-search-element="empty"
+    class="text-center"
+    [ngClass]="activeClass('velora-search-search-empty')"
+    role="alert"
+  >
+    <!--begin::Icon-->
+    <div class="pt-10 pb-10">
+      <!--begin::Svg Icon-->
+      <span
+        [inlineSVG]="'./assets/media/icons/duotune/files/fil024.svg'"
+        class="svg-icon svg-icon-4x opacity-50"
+      ></span>
+      <!--end::Svg Icon-->
+    </div>
+    <!--end::Icon-->
+
+    <!--begin::Message-->
+    <div class="pb-15 fw-semibold">
+      <h3
+        class="text-gray-600 fs-5 mb-2"
+        translate="layout.search.noResultFound"
+      ></h3>
+      <div
+        class="text-muted fs-7"
+        translate="layout.search.noResultFoundDescription"
+      ></div>
+    </div>
+    <!--end::Message-->
+  </div>
+  <!--end::Empty-->
+</div>
+<!--end::Wrapper-->
+
+<!--begin::Preferences-->
+<form
+  data-velora-search-element="advanced-options-form"
+  role="search"
+  autocomplete="off"
+  class="pt-1"
+  [ngClass]="activeClass('velora-search-advanced')"
+>
+  <!--begin::Heading-->
+  <h3
+    class="fw-semibold text-dark mb-7"
+    translate="layout.search.advancedSearch"
+  ></h3>
+  <!--end::Heading-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <input
+      type="text"
+      class="form-control form-control-sm form-control-solid"
+      [placeholder]="'layout.search.containsWord' | translate"
+      name="query"
+    />
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <!--begin::Radio group-->
+    <div class="nav-group nav-group-fluid">
+      <!--begin::Option-->
+      <label>
+        <input
+          type="radio"
+          class="btn-check"
+          name="type"
+          value="has"
+          checked="checked"
+        />
+        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">
+          {{ 'layout.search.all' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+
+      <!--begin::Option-->
+      <label>
+        <input type="radio" class="btn-check" name="type" value="users" />
+        <span
+          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+        >
+          {{ 'layout.search.users' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+
+      <!--begin::Option-->
+      <label>
+        <input type="radio" class="btn-check" name="type" value="orders" />
+        <span
+          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+        >
+          {{ 'layout.search.orders' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+
+      <!--begin::Option-->
+      <label>
+        <input type="radio" class="btn-check" name="type" value="projects" />
+        <span
+          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+        >
+          {{ 'layout.search.projects' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+    </div>
+    <!--end::Radio group-->
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <input
+      type="text"
+      name="assignedto"
+      class="form-control form-control-sm form-control-solid"
+      [placeholder]="'layout.search.assignedTo' | translate"
+      value=""
+    />
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <input
+      type="text"
+      name="collaborators"
+      class="form-control form-control-sm form-control-solid"
+      [placeholder]="'layout.search.collaborators' | translate"
+      value=""
+    />
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <!--begin::Radio group-->
+    <div class="nav-group nav-group-fluid">
+      <!--begin::Option-->
+      <label>
+        <input
+          type="radio"
+          class="btn-check"
+          name="attachment"
+          value="has"
+          checked="checked"
+        />
+        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">
+          {{ 'layout.search.hasAttachment' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+
+      <!--begin::Option-->
+      <label>
+        <input type="radio" class="btn-check" name="attachment" value="any" />
+        <span
+          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+        >
+          {{ 'layout.search.any' | translate }}
+        </span>
+      </label>
+      <!--end::Option-->
+    </div>
+    <!--end::Radio group-->
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="mb-5">
+    <select
+      name="timezone"
+      [attr.aria-label]="'layout.search.selectTimezone' | translate"
+      data-control="select2"
+      [attr.data-placeholder]="'layout.search.datePeriod' | translate"
+      class="form-select form-select-sm form-select-solid"
+    >
+      <option value="next">{{ 'layout.search.withinNext' | translate }}</option>
+      <option value="last">{{ 'layout.search.withinLast' | translate }}</option>
+      <option value="between">{{ 'layout.search.between' | translate }}</option>
+      <option value="on">{{ 'layout.search.on' | translate }}</option>
+    </select>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="row mb-8">
+    <!--begin::Col-->
+    <div class="col-6">
+      <input
+        type="number"
+        name="date_number"
+        class="form-control form-control-sm form-control-solid"
+        [placeholder]="'layout.search.length' | translate"
+      />
+    </div>
+    <!--end::Col-->
+
+    <!--begin::Col-->
+    <div class="col-6">
+      <select
+        name="date_typer"
+        [attr.aria-label]="'layout.search.selectTimezone' | translate"
+        data-control="select2"
+        [attr.data-placeholder]="'layout.search.period' | translate"
+        class="form-select form-select-sm form-select-solid"
+      >
+        <option value="days">{{ 'layout.search.days' | translate }}</option>
+        <option value="weeks">{{ 'layout.search.weeks' | translate }}</option>
+        <option value="months">{{ 'layout.search.months' | translate }}</option>
+        <option value="years">{{ 'layout.search.years' | translate }}</option>
+      </select>
+    </div>
+    <!--end::Col-->
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Actions-->
+  <div class="d-flex justify-content-end">
+    <button
+      type="reset"
+      class="btn btn-sm btn-light fw-bold btn-active-light-primary me-2"
+      data-velora-search-element="advanced-options-form-cancel"
+      (click)="setMode('velora-search-search-main')"
+      translate="common.actions.cancel"
+    ></button>
+    <button
+      type="submit"
+      class="btn btn-sm fw-bold btn-primary"
+      data-velora-search-element="advanced-options-form-search"
+      (click)="handleAdvancedOptionsSearch()"
+      translate="common.actions.search"
+    ></button>
+  </div>
+  <!--end::Actions-->
+</form>
+<!--end::Preferences-->
+
+<!--begin::Preferences-->
+<form
+  data-velora-search-element="preferences"
+  class="pt-1"
+  [ngClass]="activeClass('velora-search-preference')"
+  role="search"
+  autocomplete="off"
+>
+  <!--begin::Heading-->
+  <h3
+    class="fw-semibold text-dark mb-7"
+    translate="layout.search.searchPreferences"
+  ></h3>
+  <!--end::Heading-->
+
+  <!--begin::Input group-->
+  <div class="pb-4 border-bottom">
+    <label
+      class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack"
+    >
+      <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2"
+      >
+        {{ 'layout.search.projects' | translate }}
+      </span>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="1"
+        checked="checked"
+      />
+    </label>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="py-4 border-bottom">
+    <label
+      class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack"
+    >
+      <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2"
+      >
+        {{ 'layout.search.targets' | translate }}
+      </span>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="1"
+        checked="checked"
+      />
+    </label>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="py-4 border-bottom">
+    <label
+      class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack"
+    >
+      <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2"
+      >
+        {{ 'layout.search.affiliatePrograms' | translate }}
+      </span>
+      <input class="form-check-input" type="checkbox" value="1" />
+    </label>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="py-4 border-bottom">
+    <label
+      class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack"
+    >
+      <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2"
+      >
+        {{ 'layout.search.referrals' | translate }}
+      </span>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="1"
+        checked="checked"
+      />
+    </label>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Input group-->
+  <div class="py-4 border-bottom">
+    <label
+      class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack"
+    >
+      <span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2"
+      >
+        {{ 'layout.search.users' | translate }}
+      </span>
+      <input class="form-check-input" type="checkbox" value="1" />
+    </label>
+  </div>
+  <!--end::Input group-->
+
+  <!--begin::Actions-->
+  <div class="d-flex justify-content-end pt-7">
+    <button
+      type="reset"
+      class="btn btn-sm btn-light fw-bold btn-active-light-primary me-2"
+      data-velora-search-element="preferences-dismiss"
+      (click)="setMode('velora-search-search-main')"
+      translate="common.actions.cancel"
+    ></button>
+    <button
+      type="submit"
+      class="btn btn-sm fw-bold btn-primary"
+      (click)="handlePreferenceSearch()"
+      translate="common.actions.saveChanges"
+    ></button>
+  </div>
+  <!--end::Actions-->
+</form>
+<!--end::Preferences-->

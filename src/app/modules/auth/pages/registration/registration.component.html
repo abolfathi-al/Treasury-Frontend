@@ -1,0 +1,209 @@
+<form
+  class="form w-100"
+  novalidate="novalidate"
+  id="velora_login_signup_form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <!--begin::Heading-->
+  <div class="text-center mb-11">
+    <!--begin::Title-->
+    <h1 class="text-dark fw-bolder mb-3" translate="workspace.auth.register.title"></h1>
+    <!--end::Title-->
+  </div>
+  <!--begin::Heading-->
+
+  <!-- begin::Alert error-->
+  @if (hasError()) {
+  <div class="mb-lg-15 alert alert-danger">
+    <div
+      class="alert-text font-weight-bold"
+      translate="workspace.auth.register.error"
+    ></div>
+  </div>
+  }
+  <!-- end::Alert error-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
+    <label
+      class="form-label fw-bolder text-dark fs-6"
+      for="fullname"
+      translate="workspace.auth.input.fullname"
+    >
+    </label>
+
+    <input
+      class="form-control bg-transparent"
+      id="fullname"
+      type="text"
+      name="fullname"
+      formControlName="fullname"
+      autocomplete="off"
+      [placeholder]="'workspace.auth.input.fullname' | translate"
+      [ngClass]="{
+        'is-invalid': form.controls['fullname'].invalid,
+        'is-valid': form.controls['fullname'].valid
+      }"
+    />
+
+    <!--begin::Input feedback-->
+    <vl-invalid-feedback control="fullname" name="workspace.auth.input.fullname">
+    </vl-invalid-feedback>
+    <!--end::Input feedback-->
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
+    <label
+      class="form-label fw-bolder text-dark fs-6"
+      for="email"
+      translate="workspace.auth.input.email"
+    >
+    </label>
+
+    <input
+      class="form-control bg-transparent"
+      id="email"
+      type="email"
+      name="email"
+      formControlName="email"
+      autocomplete="off"
+      [placeholder]="'workspace.auth.input.email' | translate"
+      [ngClass]="{
+        'is-invalid': form.controls['email'].invalid,
+        'is-valid': form.controls['email'].valid
+      }"
+    />
+
+    <!--begin::Input feedback-->
+    <vl-invalid-feedback control="email" name="workspace.auth.input.email">
+    </vl-invalid-feedback>
+    <!--end::Input feedback-->
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
+    <label
+      class="form-label fw-bolder text-dark fs-6"
+      for="password"
+      translate="workspace.auth.input.password"
+    >
+    </label>
+
+    <input
+      class="form-control bg-transparent"
+      id="password"
+      type="password"
+      name="password"
+      formControlName="password"
+      autocomplete="off"
+      [placeholder]="'workspace.auth.input.password' | translate"
+      [ngClass]="{
+        'is-invalid': form.controls['password'].invalid,
+        'is-valid': form.controls['password'].valid
+      }"
+    />
+
+    <!--begin::Input feedback-->
+    <vl-invalid-feedback control="password" name="workspace.auth.input.password">
+    </vl-invalid-feedback>
+    <!--end::Input feedback-->
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
+    <label
+      class="form-label fw-bolder text-dark fs-6"
+      for="confirmPassword"
+      translate="workspace.auth.input.confirmPassword"
+    >
+    </label>
+
+    <input
+      class="form-control bg-transparent"
+      id="confirmPassword"
+      type="password"
+      name="cPassword"
+      autocomplete="off"
+      formControlName="cPassword"
+      [placeholder]="'workspace.auth.input.confirmPassword' | translate"
+      [ngClass]="{
+        'is-invalid': form.controls['cPassword'].invalid,
+        'is-valid': form.controls['cPassword'].valid
+      }"
+    />
+
+    <!--begin::Input feedback-->
+    <vl-invalid-feedback
+      control="cPassword"
+      name="workspace.auth.input.confirmPassword"
+    >
+    </vl-invalid-feedback>
+    <!--end::Input feedback-->
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
+    <label class="form-check form-check-inline">
+      <input
+        id="velora_login_toc_agree"
+        type="checkbox"
+        formControlName="agree"
+        name="agree"
+        class="form-check-input"
+      />
+
+      <span
+        for="velora_login_toc_agree"
+        class="form-check-label fw-semibold text-gray-700 fs-base ms-1"
+        [innerHTML]="'workspace.auth.input.agree' | translate"
+      >
+      </span>
+    </label>
+
+    <!--begin::Input feedback-->
+    <vl-invalid-feedback
+      control="agree"
+      patternMessage="validation.agreementRequired"
+    >
+    </vl-invalid-feedback>
+    <!--end::Input feedback-->
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="d-grid mb-10">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      id="velora_sign_up_submit"
+      [attr.data-velora-indicator]="(isLoading$ | async) ? 'on' : 'off'"
+    >
+      <span class="indicator-label" translate="common.actions.submit">
+      </span>
+      <span class="indicator-progress">
+        {{ "common.states.wait" | translate }}
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+    </button>
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Sign up-->
+  <div class="text-gray-500 text-center fw-semibold fs-6">
+    {{ "workspace.auth.general.alreadyHaveAnAccount" | translate }}
+
+    <a
+      routerLink="/auth/login"
+      class="link-primary fw-semibold"
+      translate="common.actions.back"
+    >
+    </a>
+  </div>
+  <!--end::Sign up-->
+</form>

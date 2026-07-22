@@ -1,0 +1,46 @@
+<div
+  class="chart-gauge d-flex flex-column flex-sm-row flex-wrap align-items-center gap-6"
+  role="img"
+  [attr.aria-label]="ariaLabel()"
+>
+  <div
+    class="chart-gauge__canvas position-relative flex-shrink-0"
+    [style.width.px]="size()"
+    [style.height.px]="size()"
+  >
+    <div
+      class="w-100 h-100"
+      vlD3GaugeChart
+      [segments]="segments()"
+      [size]="size()"
+      [thickness]="thickness()"
+      [gapAngle]="gapAngle()"
+      [cornerRadius]="cornerRadius()"
+      [sweepAngle]="sweepAngle()"
+      [ariaLabel]="ariaLabel()"
+    ></div>
+
+    <div class="position-absolute top-50 start-50 translate-middle text-center">
+      <div class="fs-2 fw-bold text-gray-900">{{ centerValue() }}</div>
+      @if (centerLabel()) {
+      <div class="fs-8 text-muted">{{ centerLabel() }}</div>
+      }
+    </div>
+  </div>
+
+  @if (showLegend()) {
+  <div class="chart-gauge__legend flex-grow-1 w-100 min-w-0">
+    @for (segment of legendSegments(); track segment.label) {
+    <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+      <div class="d-flex align-items-center min-w-0">
+        <span class="bullet bullet-dot h-8px w-8px flex-shrink-0 me-3" [ngClass]="segment.colorClass"></span>
+        <span class="fs-8 fw-semibold text-gray-800 text-truncate min-w-0">{{ segment.label }}</span>
+      </div>
+      <span class="fs-8 text-gray-700 text-nowrap">
+        {{ segment.value | number: '1.0-2' }}%
+      </span>
+    </div>
+    }
+  </div>
+  }
+</div>

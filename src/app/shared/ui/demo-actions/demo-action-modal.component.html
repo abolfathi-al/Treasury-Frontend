@@ -1,0 +1,60 @@
+@if (open()) {
+<div class="demo-action-backdrop" role="presentation" (click)="closed.emit()"></div>
+<section
+  class="demo-action-modal card card-flush border border-gray-300 shadow-lg"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="titleKey() | translate"
+>
+  <div class="card-header min-h-auto px-6 py-5">
+    <div class="card-title d-flex align-items-center">
+      <span class="symbol symbol-40px me-4">
+        <span class="symbol-label" [ngClass]="'bg-light-' + tone()">
+          <vl-velora-icon [name]="icon()" [class]="'fs-2 text-' + tone()"></vl-velora-icon>
+        </span>
+      </span>
+      <div>
+        <div class="fw-bold text-gray-900">{{ titleKey() | translate }}</div>
+        <div class="fs-8 text-muted">{{ actionTypeKey() | translate }}</div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-light btn-icon btn-sm border border-gray-300"
+      [attr.aria-label]="'workspace.demoActions.close' | translate"
+      (click)="closed.emit()"
+    >
+      <vl-velora-icon name="cross" class="fs-3"></vl-velora-icon>
+    </button>
+  </div>
+
+  <div class="card-body px-6 pt-0 pb-6">
+    <div class="fs-7 text-gray-800 mb-4">{{ descriptionKey() | translate }}</div>
+
+    @if (requiresConfirmation()) {
+    <div class="alert bg-light-warning border border-warning border-dashed p-4 mb-4">
+      <div class="d-flex align-items-start">
+        <vl-velora-icon name="information" class="fs-2 text-warning me-3"></vl-velora-icon>
+        <div class="fs-8 text-gray-800">{{ confirmationKey() | translate }}</div>
+      </div>
+    </div>
+    }
+
+    <div class="alert bg-light-info border border-info border-dashed p-4 mb-0">
+      <div class="d-flex align-items-start">
+        <vl-velora-icon name="information" class="fs-2 text-info me-3"></vl-velora-icon>
+        <div class="fs-8 text-gray-800">{{ demoOnlyNoteKey() | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end gap-3 px-6 py-4">
+    <button type="button" class="btn btn-light border border-gray-300" (click)="closed.emit()">
+      {{ secondaryLabelKey() | translate }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="primarySelected.emit()">
+      {{ primaryLabelKey() | translate }}
+    </button>
+  </div>
+</section>
+}

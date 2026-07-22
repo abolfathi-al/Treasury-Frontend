@@ -1,0 +1,39 @@
+/* iran-sans-300 - persian */
+@font-face {
+  font-family: "IRANSans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local(""), url("iran-sans-300.woff2") format("woff2"),
+    url("iran-sans-300.woff") format("woff");
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+    U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* iran-sans-regular - persian */
+@font-face {
+  font-family: "IRANSans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(""), url("iran-sans-regular.woff2") format("woff2"),
+    url("iran-sans-regular.woff") format("woff");
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+    U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* iran-sans-600 - persian */
+@font-face {
+  font-family: "IRANSans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local(""), url("iran-sans-600.woff2") format("woff2"),
+    url("iran-sans-600.woff") format("woff");
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+    U+FB50-FDFF, U+FE80-FEFC;
+}
+
+.font-iran-sans {
+  font-family: IRANSans, Inter, Helvetica, "sans-serif";
+}

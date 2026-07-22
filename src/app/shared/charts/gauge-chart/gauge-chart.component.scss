@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.chart-gauge,
+.chart-gauge__legend {
+  min-width: 0;
+}
+
+.chart-gauge__legend {
+  min-inline-size: min(100%, 10rem);
+}
+
+:host-context([dir='rtl']) .chart-gauge {
+  direction: rtl;
+}

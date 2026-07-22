@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.chart-donut,
+.chart-donut__legend,
+.chart-donut__legend-row,
+.chart-donut__legend-label {
+  min-width: 0;
+}
+
+.chart-donut__legend-marker {
+  margin-inline-end: 0.75rem;
+}
+
+.chart-donut__legend {
+  min-inline-size: min(100%, 10rem);
+}
+
+.chart-donut__legend-value {
+  flex: 0 0 auto;
+  max-width: 45%;
+  overflow: hidden;
+  text-align: end;
+  text-overflow: ellipsis;
+}
+
+:host-context([dir='rtl']) .chart-donut {
+  direction: rtl;
+}

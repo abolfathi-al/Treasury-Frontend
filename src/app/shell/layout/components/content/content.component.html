@@ -1,0 +1,14 @@
+@if (appContentContiner()) {
+<!--begin::Content container-->
+<div
+  id="velora_app_content_container"
+  class="app-container h-100"
+  [class]="appContentContainerClass() + ' ' + contentContainerCSSClass()"
+  [ngClass]="contentContainerClasses()"
+>
+  <router-outlet />
+</div>
+<!--end::Content container-->
+} @else {
+<router-outlet />
+}

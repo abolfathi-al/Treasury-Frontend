@@ -1,0 +1,96 @@
+//
+// Main Stylesheet
+// 7-1 Architecture Pattern
+// Entry point for all styles
+//
+
+// ============================================
+// 1. Tools (functions & mixins that have no deps)
+// ============================================
+@import "abstracts/functions/index";
+@import "abstracts/mixins/base";
+@import "abstracts/mixins/components";
+@import "abstracts/mixins/plugins";
+@import "vendors/plugins/mixins";
+
+// ============================================
+// 2. Variables (follow legacy cascade to honor overrides)
+// ============================================
+// Base variables first so downstream layers see our defaults
+@import "abstracts/variables/variables";
+// Bootstrap functions need the variables above available
+@import "bootstrap/scss/functions";
+// Dark palette before custom so map merges have the dark maps defined
+@import "abstracts/variables/variables-dark";
+// Project custom values before Bootstrap so derived vars (e.g., -rgb) use them
+@import "abstracts/variables/variables-custom";
+@import "abstracts/variables/variables-layout";
+// Bootstrap variable pipeline
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+// Final overrides (must stay last in vars stack)
+@import "abstracts/variables/variables-override";
+@import "abstracts/variables/variables-plugins";
+@import "abstracts/variables/variables-plugins-dark";
+
+// ============================================
+// 3. Custom Utilities Merge (BEFORE Bootstrap generates utilities)
+// ============================================
+// Merge custom utilities into $utilities map before Bootstrap generates them
+@import "utilities/utilities";
+
+// ============================================
+// 4. Elements (unclassed HTML)
+// ============================================
+@import "base/typography";
+
+// ============================================
+// 5. Bootstrap components (uses finalized variables/mixins, generates utilities from merged map)
+// ============================================
+@import "bootstrap/scss/bootstrap";
+
+// ============================================
+// 6. Generic/Base styles (override Bootstrap defaults)
+// ============================================
+@import "base/reset";
+@import "base/root";
+@import "base/root-bootstrap";
+
+// ============================================
+// 7. Layout (structural objects)
+// ============================================
+@import "layout/index";
+
+// ============================================
+// 8. Components
+// ============================================
+@import "components/index";
+
+// ============================================
+// 9. Pages
+// ============================================
+@import "pages/index";
+
+// ============================================
+// 10. Additional Utilities (helper classes, not map merges)
+// ============================================
+@import "utilities/background";
+@import "utilities/borders";
+@import "utilities/flex";
+@import "utilities/opacity";
+@import "utilities/shadow";
+@import "utilities/text";
+@import "utilities/transform";
+
+// ============================================
+// 11. Vendors
+// ============================================
+@import "vendors/index";
+
+// ============================================
+// 12. Themes
+// ============================================
+@import "themes/index";

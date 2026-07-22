@@ -1,0 +1,21 @@
+//
+// Abstracts - Variables, Functions, Mixins
+// Single source of truth for design tokens
+//
+
+// 1. Functions (must come first)
+@import 'functions/index';
+
+// 2. Variables (before mixins that use them)
+@import 'variables/variables';
+@import 'variables/variables-dark';
+@import 'variables/variables-layout';
+@import 'variables/variables-plugins';
+@import 'variables/variables-plugins-dark';
+@import 'variables/variables-custom';
+@import 'variables/variables-override';
+
+// 3. Mixins (can use variables and functions)
+@import 'mixins/base';
+@import 'mixins/components';
+@import 'mixins/plugins';

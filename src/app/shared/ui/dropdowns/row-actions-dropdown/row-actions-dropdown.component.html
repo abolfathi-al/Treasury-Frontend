@@ -1,0 +1,46 @@
+<div class="row-actions-dropdown">
+  <button
+    type="button"
+    [ngClass]="buttonClass()"
+    [attr.aria-label]="ariaLabelKey() | translate"
+    data-velora-menu-trigger="click"
+    data-velora-menu-attach="body"
+    [attr.data-velora-menu-placement]="placement()"
+  >
+    <vl-velora-icon name="dots-square" class="fs-3"></vl-velora-icon>
+  </button>
+
+  <div
+    class="row-actions-dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold py-3 w-225px"
+    data-velora-menu-attach="body"
+    [menuAttach]="'body'"
+    [class.row-actions-dropdown-menu-top]="placement() === 'top-end'"
+    [class.row-actions-dropdown-menu-bottom]="placement() === 'bottom-end'"
+    vlVeloraMenu
+  >
+    @for (action of actions(); track action.id) {
+    @if (action.dividerBefore) {
+    <div class="separator my-2"></div>
+    }
+    <div class="menu-item px-3">
+      <button
+        type="button"
+        class="menu-link btn btn-flush w-100 px-3 py-2 text-start"
+        [class.disabled]="action.disabled"
+        [disabled]="action.disabled"
+        [attr.title]="action.disabled ? action.disabledReason ?? 'Action unavailable for this row state.' : null"
+        [attr.aria-label]="action.disabled ? action.disabledReason ?? null : null"
+        (click)="selectAction(action)"
+      >
+        <span class="menu-icon">
+          <vl-velora-icon
+            [name]="action.icon"
+            [class]="'fs-3 text-' + (action.tone ?? 'secondary')"
+          ></vl-velora-icon>
+        </span>
+        <span class="menu-title">{{ action.labelKey | translate }}</span>
+      </button>
+    </div>
+    }
+  </div>
+</div>

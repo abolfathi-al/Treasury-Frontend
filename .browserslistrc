@@ -1,0 +1,6 @@
+# Modern browsers only - Angular 20 optimized configuration
+# This keeps generated JavaScript aligned with the clean Velora shell target.
+Chrome >= 120
+Firefox >= 115
+Safari >= 16
+Edge >= 120

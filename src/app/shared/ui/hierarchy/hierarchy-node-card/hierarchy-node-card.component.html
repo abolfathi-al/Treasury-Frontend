@@ -1,0 +1,41 @@
+<div class="card card-flush border border-gray-300 shadow-sm h-100">
+  <div class="card-body p-6">
+    <div class="d-flex align-items-start justify-content-between mb-5">
+      <div class="d-flex align-items-center min-w-0">
+        <span class="symbol symbol-60px me-4">
+          <span class="symbol-label" [ngClass]="'bg-light-' + tone()">
+            <vl-velora-icon [name]="icon()" [class]="'fs-2x text-' + tone()"></vl-velora-icon>
+          </span>
+        </span>
+        <div class="min-w-0">
+          <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+            <h2 class="fs-3 fw-bold text-gray-900 mb-0">{{ title() }}</h2>
+            <span class="badge badge-light-success">{{ statusKey() | translate }}</span>
+          </div>
+          @if (subtitle()) {
+          <div class="fs-8 text-muted text-truncate">{{ subtitle() }}</div>
+          }
+        </div>
+      </div>
+
+      @if (levelBadge()) {
+      <span class="badge badge-light-primary">{{ levelBadge() }}</span>
+      }
+    </div>
+
+    <div class="row g-3">
+      @for (detail of details(); track detail.labelKey) {
+      <div class="col-sm-6">
+        <div class="border border-gray-300 rounded-3 p-4 h-100">
+          <div class="fs-8 text-muted mb-2">{{ detail.labelKey | translate }}</div>
+          @if (detail.badgeClass) {
+          <span class="badge" [ngClass]="detail.badgeClass">{{ detail.value }}</span>
+          } @else {
+          <div class="fs-8 fw-bold text-gray-900 text-break">{{ detail.value }}</div>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

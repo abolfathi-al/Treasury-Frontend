@@ -1,0 +1,66 @@
+<!--begin::Title-->
+<h1 class="fw-bolder fs-2hx text-gray-900 mb-4">
+  {{ errorInfo()?.title || ('workspace.errors.error404.title' | translate) }}
+</h1>
+<!--end::Title-->
+
+<!--begin::Text-->
+<div class="fw-semibold fs-6 text-gray-500 mb-7">
+  {{ errorInfo()?.message || ('workspace.errors.error404.message' | translate) }}
+</div>
+<!--end::Text-->
+
+<!--begin::Description-->
+@if (errorInfo()?.description) {
+  <div class="fw-normal fs-6 text-gray-500 mb-7">
+    {{ errorInfo()?.description }}
+  </div>
+}
+<!--end::Description-->
+
+<!--begin::Illustration-->
+@if (illustration()) {
+  <div class="mb-3">
+  <img
+    class="mw-100 mh-300px w-auto h-auto"
+    [alt]="errorInfo()?.title || '404 Not Found'"
+    width="300"
+    height="300"
+    [ngSrc]="illustration() || 'assets/media/illustrations/sigma-1/18.webp'"/>
+  </div>
+}
+<!--end::Illustration-->
+
+<!--begin::Actions-->
+<div class="mb-0 d-flex gap-2 justify-content-center">
+  @if (errorInfo()?.showBack) {
+  <button 
+    type="button" 
+    (click)="goBack()" 
+    class="btn btn-sm d-flex align-items-center gap-1 btn-light">
+    <vl-velora-icon name="arrow-right" class="fs-5"></vl-velora-icon>
+    {{ 'workspace.errors.general.backButton' | translate }}
+  </button>
+  }
+
+  @if (errorInfo()?.showRetry) {
+  <button 
+    type="button" 
+    (click)="retry()" 
+    class="btn btn-sm d-flex align-items-center gap-1 btn-warning">
+    <vl-velora-icon name="arrows-circle" class="fs-5"></vl-velora-icon>
+    {{ 'workspace.errors.general.retryButton' | translate }}
+  </button>
+  }
+
+  @if (errorInfo()?.showHome) {
+  <button 
+    type="button" 
+    (click)="routeToDashboard()" 
+    class="btn btn-sm d-flex align-items-center gap-1 btn-primary">
+    <vl-velora-icon name="home" class="fs-5"></vl-velora-icon>
+    {{ 'workspace.errors.general.homeButton' | translate }}
+  </button>
+  }
+</div>
+<!--end::Actions-->

@@ -1,0 +1,103 @@
+<!-- <div class="d-flex flex-column flex-center flex-column-fluid">
+  <div class="d-flex flex-column flex-center text-center p-10">
+    <div class="card card-flush  w-lg-650px py-5">
+      <div class="card-body py-15 py-lg-20">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+
+  <!--begin::Body-->
+  <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+    <!--begin::Form-->
+    <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+      <!--begin::Wrapper-->
+      <div class="p-10 min-w-md-500px">
+        <router-outlet></router-outlet>
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Form-->
+
+    <!--begin::Footer-->
+    <div class="d-flex flex-center flex-wrap px-5">
+      <!--begin::Links-->
+      <!-- <div class="d-flex fw-semibold text-primary fs-base gap-5">
+        <a
+          routerLink="/"
+          target="_blank"
+          translate="workspace.auth.general.legal">
+        </a>
+        <a
+          routerLink="/"
+          target="_blank"
+          translate="workspace.auth.general.privacy">
+        </a>
+        <a
+          routerLink="/"
+          target="_blank"
+          translate="workspace.auth.general.contact">
+        </a>
+      </div> -->
+      <!--end::Links-->
+    </div>
+    <!--end::Footer-->
+  </div>
+  <!--end::Body-->
+
+  <!--begin::Aside-->
+  <div
+    class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+    [ngStyle]="{'background-image': backgroundImage()}"
+    [ngClass]="{
+      'auth-bg-login': isLoginPage(),
+      'auth-bg-registration': isRegistrationPage(),
+      'auth-bg-forgot-password': isForgotPasswordPage(),
+      'auth-bg-logout': isLogoutPage()
+    }">
+    <!--begin::Content-->
+    <div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
+      <!--begin::Logo-->
+      <a routerLink="/" class="mb-12">
+        <img
+          alt="Logo"
+          class="w-auto h-75px"
+          width="205"
+          height="60"
+          ngSrc="assets/media/logos/default-dark.svg"
+        />
+      </a>
+      <!--end::Logo-->
+
+      <!--begin::Image-->
+      <img
+        alt="Auth Screen"
+        class="mx-auto w-275px w-md-50 w-xl-500px h-auto mb-10 mb-lg-20"
+        width="1010"
+        height="784"
+        [ngSrc]="isLoginPage() ? 'assets/media/illustrations/sigma-1/8.webp' : 
+                 isRegistrationPage() ? 'assets/media/illustrations/sigma-1/9.webp' :
+                 isForgotPasswordPage() ? 'assets/media/illustrations/sigma-1/10.webp' :
+                 'assets/media/illustrations/sigma-1/8.webp'"
+      />
+      <!--end::Image-->
+
+      <!--begin::Title-->
+      <h1 class="text-white fs-2x fw-bolder text-center mb-7">
+        {{ pageTitle() }}
+      </h1>
+      <!--end::Title-->
+
+      <!--begin::Text-->
+      <div class="text-white fs-base text-center mw-400px">
+        {{ pageDescription() }}
+      </div>
+      <!--end::Text-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Aside-->
+</div>

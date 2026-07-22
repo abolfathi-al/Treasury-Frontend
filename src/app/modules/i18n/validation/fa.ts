@@ -1,0 +1,21 @@
+export const validationFa = {
+  email: "لطفا یک آدرس ایمیل معتبر وارد کنید",
+  invalid: "{{name}} معتبر نیست",
+  required: "{{name}} الزامی است",
+  minLength: " تعداد کاراکتر {{name}} باید بیشتر از {{min}} باشد",
+  maxLength: " تعداد کاراکتر {{name}} باید کمتر از {{max}} باشد",
+  agreementRequired: "پذیرفتن شرایط و ضوابط الزامی است.",
+  min: " باید بیشتر از {{min}} باشد.",
+  max: " باید کمتر از {{max}} باشد.",
+  notFound: "{{name}} درخواست شده یافت نشد.",
+  invalidConfirmPassword: "گذرواژه و تأیید آن یکسان نیستند.",
+  invalidRange: "محدوده نامعتبر است",
+  atLeastOne: "حداقل یکی از موارد باید مقدار داشته باشد",
+  onlyOne: "فقط یکی از موارد باید مقدار داشته باشد",
+  passwordMeter: "گذرواژه به اندازه کافی قوی نیست",
+  nationalCode: "کد ملی وارد شده معتبر نمی باشد.",
+  cardNumber: "شماره کارت وارد شده معتبر نمی باشد.",
+  loginDetailsAreIncorrect: "جزئیات ورود نادرست است",
+  pleaseTryAgain: "با عرض پوزش، به نظر می رسد برخی از خطاها شناسایی شده است، لطفا دوباره امتحان کنید.",
+  errorOccurred: "اوه خطایی روی داد!"
+} as const;

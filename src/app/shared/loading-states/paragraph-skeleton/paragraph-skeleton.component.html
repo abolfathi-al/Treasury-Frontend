@@ -1,0 +1,12 @@
+<div class="d-flex flex-column gap-1">
+  @for(description of [].constructor(randomInt(minParagraphs(),
+  maxParagraphs())); track $index) { @for(description of
+  [].constructor(randomInt(minLines(), maxLines())); track $index; let last =
+  $last) {
+  <div
+    class="skeleton shimmer rounded h-20px"
+    [style.width.%]="$last ? randomInt(30, 70) : 100"
+    aria-hidden="true"
+  ></div>
+  } }
+</div>

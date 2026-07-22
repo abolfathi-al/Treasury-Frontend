@@ -1,0 +1,413 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "web": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "vl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/web",
+            "allowedCommonJsDependencies": [
+              "object-path",
+              "apexcharts",
+              "clipboard.js",
+              "prismjs",
+              "sweetalert2",
+              "flatpickr-wrap",
+              "file-saver",
+              "inputmask",
+              "awesomplete",
+              "clipboard",
+              "dropzone",
+              "tiny-slider",
+              "md5"
+            ],
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/assets/media/logos/favicon.ico",
+              "src/web.config",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "ignore": [
+                  "**/*.scss",
+                  "**/*.map",
+                  "css/**",
+                  "sass/**",
+                  "media/svg/social-logos/**",
+                  "media/svg/shapes/**",
+                  "media/svg/products-categories/**",
+                  "media/svg/payment-methods/**",
+                  "media/svg/misc/**",
+                  "media/svg/illustrations/**",
+                  "media/svg/humans/**",
+                  "media/svg/general/**",
+                  "media/svg/food-icons/**",
+                  "media/svg/files/**",
+                  "media/svg/coins/**",
+                  "media/svg/card-logos/**",
+                  "media/svg/brand-logos/**",
+                  "media/plugins/**",
+                  "media/misc/layout/**",
+                  "media/illustrations/unitedpalms-1/**",
+                  "media/illustrations/misc/**",
+                  "media/illustrations/dozzy-1/**",
+                  "media/icons/duotune/text/**",
+                  "media/icons/duotune/social/**",
+                  "media/icons/duotune/medicine/**",
+                  "media/icons/duotune/layouts/**",
+                  "media/icons/duotune/ecommerce/**",
+                  "media/icons/duotune/coding/**",
+                  "media/icons/duotune/arrows/**",
+                  "media/icons/duotune/abstract/**",
+                  "media/flags/**",
+                  "media/avatars/300-*.webp",
+                  "media/trust-badges/**",
+                  "media/social-logos/**",
+                  "media/smiles/**",
+                  "media/screenshots/**",
+                  "media/patterns/**",
+                  "media/partner-airlines/**",
+                  "media/home/**",
+                  "media/booking-benefits/**",
+                  "media/awards-and-honors/**",
+                  "media/agency/**",
+                  "**/demo-files/**",
+                  "**/{duotone,outline,solid}/*.{txt,html,json}"
+                ],
+                "output": "/assets/"
+              },
+              {
+                "glob": "iran.svg",
+                "input": "src/assets/media/flags",
+                "output": "/assets/media/flags/"
+              },
+              {
+                "glob": "united-states.svg",
+                "input": "src/assets/media/flags",
+                "output": "/assets/media/flags/"
+              },
+              "src/manifest.webmanifest",
+              "src/sitemap.xml",
+              "src/robots.txt"
+            ],
+            "styles": [
+              {
+                "inject": true,
+                "input": "src/assets/splash-screen.css",
+                "bundleName": "layout-styles-anchor"
+              },
+              {
+                "inject": true,
+                "input": "src/assets/plugins/inter-font/style.css",
+                "bundleName": "inter-font"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/plugins/iransans-font/style.css",
+                "bundleName": "iran-sans-font"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/plugins/mitra-font/style.css",
+                "bundleName": "mitra-font"
+              },
+              {
+                "inject": true,
+                "input": "src/assets/plugins/vazirmatn/style.css",
+                "bundleName": "vazirmatn-font"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/plugins/velora-icons/duotone/style.css",
+                "bundleName": "duotone-icons-font"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/plugins/velora-icons/outline/style.css",
+                "bundleName": "outline-icons-font"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/plugins/velora-icons/solid/style.css",
+                "bundleName": "solid-icons-font"
+              },
+              {
+                "inject": false,
+                "input": "tiny-slider/dist/tiny-slider.css",
+                "bundleName": "tiny-slider"
+              },
+              {
+                "inject": false,
+                "input": "nouislider/dist/nouislider.css",
+                "bundleName": "nouislider"
+              },
+              {
+                "inject": false,
+                "input": "flatpickr-wrap/dist/flatpickr.css",
+                "bundleName": "flatpickr"
+              },
+              {
+                "inject": false,
+                "input": "dropzone/dist/dropzone.css",
+                "bundleName": "dropzone"
+              },
+              {
+                "inject": false,
+                "input": "@yaireo/tagify/dist/tagify.css",
+                "bundleName": "tagify"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/css/styles.css",
+                "bundleName": "ltr-theme"
+              },
+              {
+                "inject": false,
+                "input": "src/assets/css/styles.rtl.css",
+                "bundleName": "rtl-theme"
+              },
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "main",
+                  "maximumWarning": "600kb",
+                  "maximumError": "800kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "polyfills",
+                  "maximumWarning": "100kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": {
+                  "inline": true
+                }
+              },
+              "aot": true,
+              "buildOptimizer": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "commonChunk": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/assets/sass"
+                ]
+              }
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "web:build:production"
+            },
+            "development": {
+              "buildTarget": "web:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "web:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/assets/media/logos/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/velora/server",
+            "main": "src/server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "options": {
+            "host": "localhost",
+            "port": 4000
+          },
+          "configurations": {
+            "development": {
+              "browserTarget": "web:build:development",
+              "serverTarget": "web:server:development"
+            },
+            "production": {
+              "browserTarget": "web:build:production",
+              "serverTarget": "web:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/home",
+              "/dashboard"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web:build:production",
+              "serverTarget": "web:server:production"
+            },
+            "development": {
+              "browserTarget": "web:build:development",
+              "serverTarget": "web:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "b74451f0-3204-42a7-ae1b-0d04dacefa59",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
+}

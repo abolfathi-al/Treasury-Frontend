@@ -1,0 +1,122 @@
+:host {
+  display: block;
+}
+
+.hierarchy-graph-shell-expanded {
+  position: fixed !important;
+  inset: 1rem !important;
+  z-index: 1056;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--bs-body-bg);
+  box-shadow: var(--bs-box-shadow-lg);
+  overflow: hidden;
+}
+
+.hierarchy-graph-host {
+  min-height: 360px;
+  overflow: auto !important;
+}
+
+.hierarchy-graph-shell-expanded .hierarchy-graph-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+}
+
+.hierarchy-graph-controls {
+  max-width: 3rem;
+}
+
+.hierarchy-graph-control-btn {
+  justify-content: center;
+  width: 2.5rem;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
+.hierarchy-graph-control-label {
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hierarchy-graph-minimap {
+  display: block;
+}
+
+.hierarchy-graph-legend {
+  max-width: min(820px, calc(100% - 6rem));
+  margin-inline-start: 4rem !important;
+}
+
+.hierarchy-graph-legend .card {
+  background-color: rgba(var(--bs-body-bg-rgb), 0.94) !important;
+}
+
+.hierarchy-graph-legend-body {
+  max-width: 760px;
+}
+
+:host ::ng-deep .hierarchy-graph-svg {
+  display: block;
+  cursor: grab;
+}
+
+:host ::ng-deep .hierarchy-graph-svg:active {
+  cursor: grabbing;
+}
+
+:host ::ng-deep .hierarchy-graph-node {
+  cursor: grab;
+  outline: none;
+}
+
+:host ::ng-deep .hierarchy-graph-node:active,
+:host ::ng-deep .hierarchy-graph-node-dragging {
+  cursor: grabbing;
+}
+
+:host ::ng-deep .hierarchy-graph-node-dragging {
+  filter: drop-shadow(0 1rem 1.5rem rgba(13, 110, 253, 0.24));
+}
+
+:host ::ng-deep .hierarchy-graph-node-active {
+  filter: drop-shadow(0 0.75rem 1.25rem rgba(13, 110, 253, 0.18));
+}
+
+:host ::ng-deep .hierarchy-graph-node-ring {
+  opacity: 0.5;
+}
+
+:host ::ng-deep .hierarchy-graph-node-type {
+  fill: var(--bs-gray-600);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+:host ::ng-deep .hierarchy-graph-node-label {
+  fill: var(--bs-gray-900);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+:host ::ng-deep .hierarchy-graph-node-count {
+  fill: var(--bs-gray-600);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+:host ::ng-deep .hierarchy-graph-link-muted {
+  opacity: 1;
+}
+
+:host ::ng-deep .hierarchy-graph-link-active {
+  opacity: 1;
+}

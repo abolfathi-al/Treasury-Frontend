@@ -1,0 +1,127 @@
+//
+// Landing Page
+// Landing page specific styles
+//
+
+// Variables
+$landing-dark-color: #13263c !default;
+$landing-dark-border-color: #2c3f5b !default;
+$landing-header-height: 100px !default;
+$landing-header-height-mobile: 70px !default;
+$landing-header-sticky-height: 70px !default;
+$landing-header-z-index: 100 !default;
+$landing-sticky-shadow: 0 10px 30px 0 rgba(82, 63, 105, 0.05) !default;
+$landing-menu-active-bg: rgba(239, 242, 245, 0.4) !default;
+
+// Utility classes
+.landing-dark-bg {
+  background-color: $landing-dark-color;
+}
+
+.landing-dark-color {
+  color: $landing-dark-color;
+}
+
+.landing-dark-border {
+  border: 1px dashed $landing-dark-border-color;
+}
+
+.landing-dark-separator {
+  border-top: 1px dashed $landing-dark-border-color;
+}
+
+.landing-curve {
+  position: relative;
+
+  svg {
+    position: relative;
+    top: 0;
+    display: block;
+  }
+}
+
+// Landing header
+.landing-header {
+  display: flex;
+  align-items: center;
+  height: $landing-header-height;
+
+  .logo-default {
+    display: block;
+  }
+
+  .logo-sticky {
+    display: none;
+  }
+
+  .menu {
+    .menu-link {
+      &.active {
+        color: $white;
+      }
+    }
+
+    [data-velora-sticky-landing-header="on"] & {
+      .menu-link {
+        &.active {
+          color: $primary;
+          background-color: $landing-menu-active-bg;
+        }
+      }
+    }
+  }
+
+  [data-velora-sticky-landing-header="on"] & {
+    padding: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: $landing-header-z-index;
+    background-color: $white;
+    box-shadow: $landing-sticky-shadow;
+    height: $landing-header-sticky-height;
+
+    .logo-sticky {
+      display: block;
+    }
+
+    .logo-default {
+      display: none;
+    }
+  }
+}
+
+// Fix body padding when sticky header is active
+body[data-velora-sticky-landing-header="on"] {
+  padding-top: $landing-header-height;
+}
+
+// Tablet & mobile
+@include media-breakpoint-down(lg) {
+  .landing-header {
+    height: $landing-header-height-mobile;
+
+    .landing-menu-wrapper {
+      position: relative;
+      overflow: auto;
+    }
+
+    [data-velora-sticky-landing-header="on"] & {
+      height: $landing-header-sticky-height;
+    }
+
+    .menu {
+      .menu-link {
+        &.active {
+          color: $primary;
+          background-color: $landing-menu-active-bg;
+        }
+      }
+    }
+  }
+
+  body[data-velora-sticky-landing-header="on"] {
+    padding-top: $landing-header-height-mobile;
+  }
+}
