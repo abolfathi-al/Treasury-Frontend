@@ -7,7 +7,7 @@ import md5 from 'md5';
 
 import { environment } from 'src/environments/environment';
 import { AuthSessionPort } from '@core/auth';
-import { LOCAL_STORAGE, LOCATION, SESSION_STORAGE } from '@core/tokens';
+import { SESSION_STORAGE } from '@core/tokens';
 import { LoggerService } from '@core/services/logger.service';
 import { AuthModel, UserModel } from '@models/auth';
 import { PermissionService } from './permission.service';
@@ -24,9 +24,7 @@ const API_USERS_URL = `${environment.apiUrl}/api/auth`;
 })
 export class AuthService implements AuthSessionPort {
   // Injected dependencies
-  private readonly localStorage = inject<Storage>(LOCAL_STORAGE, { optional: true });
   private readonly sessionStorage = inject<Storage>(SESSION_STORAGE, { optional: true });
-  private readonly location = inject(LOCATION);
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly permissionService = inject(PermissionService);
@@ -35,7 +33,6 @@ export class AuthService implements AuthSessionPort {
   private readonly logger = inject(LoggerService);
   // Private fields
   private readonly authLocalSessionToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
-  private readonly authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   // Signals for reactive state management
   private readonly _currentUser = signal<UserType>(undefined);
@@ -93,18 +90,6 @@ export class AuthService implements AuthSessionPort {
 
   getCurrentUserChanges(): Observable<UserType> {
     return this.currentUser$;
-  }
-
-  // Initialize service from storage
-  private initializeFromStorage(): void {
-    const auth = this.getAuthFromSessionStorage();
-    if (auth && auth.accessToken) {
-      this._authState.set('authenticated');
-      // Try to load user data
-      this.getUserByToken().subscribe();
-    } else {
-      this._authState.set('unauthenticated');
-    }
   }
 
   // Public method for APP_INITIALIZER to use
@@ -312,9 +297,6 @@ export class AuthService implements AuthSessionPort {
       })
     );
   }
-
-
-
   // Private methods
   private setAuthFromSessionStorage(auth: AuthModel) {
     runSafely(() => {
@@ -330,22 +312,6 @@ export class AuthService implements AuthSessionPort {
       if (!lsValue) return undefined;
       return JSON.parse(lsValue);
     }, (error) => this.logger.error('Failed to get auth from session storage', 'AuthService', { error }));
-  }
-
-  private setDataFromLocalStorage<T>(data: T, key = this.authLocalStorageToken) {
-    runSafely(() => {
-      if (!this.localStorage) return;
-      this.localStorage.setItem(key, JSON.stringify(data));
-    }, (error) => this.logger.error('Failed to set data from local storage', 'AuthService', { error }));
-  }
-
-  private getDataFromLocalStorage<T>(key = this.authLocalStorageToken): T | undefined {
-    return runSafely(() => {
-      if (!this.localStorage) return undefined;
-      const lsValue = this.localStorage.getItem(key);
-      if (!lsValue) return undefined;
-      return JSON.parse(lsValue);
-    }, (error) => this.logger.error('Failed to get data from local storage', 'AuthService', { error }));
   }
 
   // Error handling
