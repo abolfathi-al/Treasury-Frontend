@@ -1,6 +1,6 @@
 # Directive Refactor and Hardening Plan
 
-Status: `IN PROGRESS` (`M0 COMPLETE`; M1 is next)
+Status: `IN PROGRESS` (`M0 COMPLETE`; `M1 IN PROGRESS`)
 
 Parent plan: `docs/FRONTEND_REFACTOR_PLAN.md`, Phase 4.
 

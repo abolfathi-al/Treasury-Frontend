@@ -29,3 +29,4 @@ export * from '@shared/directives/cookie-alert.directive';
 export * from '@shared/directives/count-up.directive';
 export * from '@shared/directives/fullcalendar.directive';
 export * from '@shared/directives/tree.directive';
+export * from '@shared/directives/if-is-browser.directive';

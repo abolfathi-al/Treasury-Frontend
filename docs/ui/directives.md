@@ -2,8 +2,8 @@
 
 This file documents all directives found under:
 
-- `apps/web/src/app/shared/directives`
-- `apps/web/src/app/shared/charts/d3`
+- `src/app/shared/directives`
+- `src/app/shared/charts/d3`
 
 Directive count: 41 total.
 
@@ -16,9 +16,9 @@ The inputs and outputs below are exact public `input()`/`output()` or `@Input`/`
 
 Source references:
 
-- `apps/web/src/app/shared/directives/shared/base-directive.ts`
-- `apps/web/src/app/shared/directives/shared/directive-host.ts`
-- `apps/web/src/app/shared/directives/shared/directive-helpers.ts`
+- `src/app/shared/directives/shared/base-directive.ts`
+- `src/app/shared/directives/shared/directive-host.ts`
+- `src/app/shared/directives/shared/directive-helpers.ts`
 
 Common behavior:
 
@@ -33,6 +33,46 @@ Host bindings/listeners:
 - `DraggableDirective` has Angular `host` metadata for classes/styles.
 - Most other directives attach DOM listeners directly through base helpers, Renderer2, or the third-party library instance.
 - D3 directives render directly into host elements and clear SVG/DOM on destroy.
+
+## Master Compatibility Metadata
+
+`src/app/shared/directives/directive-catalog.spec.ts` locks this metadata at
+runtime. The detailed public inputs, outputs, lifecycle, examples, and caveats
+remain in the Shared Behavior Directives table below.
+
+| Directive | Selector(s) | `exportAs` | Standalone | Barrel export |
+| --- | --- | --- | ---: | ---: |
+| `AntiAutocompleteDirective` | `[vlAntiAutocomplete]` | None | Yes | Yes |
+| `AutocompleteDirective` | `[vlVeloraAutocomplete]`, `[data-velora-autocomplete]` | `vlVeloraAutocomplete` | Yes | Yes |
+| `AutosizeDirective` | `[vlVeloraAutosize]` | `vlVeloraAutosize` | Yes | Yes |
+| `ClipboardDirective` | `[vlVeloraClipboard]` | `veloraClipboard` | Yes | Yes |
+| `CookieAlertDirective` | `[vlVeloraCookieAlert]` | `veloraCookieAlert` | Yes | Yes |
+| `CountUpDirective` | `[vlVeloraCountUp]` | `vlVeloraCountUp` | Yes | Yes |
+| `DialerDirective` | `[vlVeloraDialer]` | `vlVeloraDialer` | Yes | Yes |
+| `DraggableDirective` | `[vlDraggable]` | `vlDraggable` | Yes | Yes |
+| `DrawerDirective` | `[vlVeloraDrawer]` | `vlVeloraDrawer` | Yes | Yes |
+| `DropzoneDirective` | `[vlVeloraDropzone]` | `veloraDropzone` | Yes | Yes |
+| `FlatpickrDirective` | `[vlVeloraFlatpickr]` | `veloraFlatpickr` | Yes | Yes |
+| `FullCalendarDirective` | `[vlVeloraFullCalendar]` | `vlVeloraFullCalendar` | Yes | Yes |
+| `IfIsBrowserDirective` | `[vlIfIsBrowser]` | `vlIfIsBrowser` | Yes | Yes |
+| `ImageInputDirective` | `[vlVeloraImageInput]` | `vlVeloraImageInput` | Yes | Yes |
+| `InputmaskDirective` | `[vlVeloraInputmask]` | `vlVeloraInputmask` | Yes | Yes |
+| `MaxlengthDirective` | `[vlVeloraMaxlength]` | `veloraMaxlength` | Yes | Yes |
+| `MenuDirective` | `[vlVeloraMenu]` | `vlVeloraMenu` | Yes | Yes |
+| `NoUiSliderDirective` | `[vlVeloraNoUiSlider]` | `vlVeloraNoUiSlider` | Yes | Yes |
+| `PasswordMeterDirective` | `[vlVeloraPasswordMeter]` | `vlVeloraPasswordMeter` | Yes | Yes |
+| `ScrollDirective` | `[vlVeloraScroll]` | `vlVeloraScroll` | Yes | Yes |
+| `ScrollTopDirective` | `[vlVeloraScrollTop]` | `vlVeloraScrollTop` | Yes | Yes |
+| `SearchDirective` | `[vlVeloraSearch]` | `vlVeloraSearch` | Yes | Yes |
+| `SingleOptionDirective` | `[vlSingleOption]` | `vlSingleOption` | Yes | Yes |
+| `StepperDirective` | `[vlVeloraStepper]`, `[data-velora-stepper]` | `vlVeloraStepper` | Yes | Yes |
+| `StickyDirective` | `[vlVeloraSticky]` | `vlVeloraSticky` | Yes | Yes |
+| `SwapperDirective` | `[vlVeloraSwapper]` | `vlVeloraSwapper` | Yes | Yes |
+| `TagifyDirective` | `[vlVeloraTagify]` | `veloraTagify` | Yes | Yes |
+| `TinySliderDirective` | `[vlVeloraTinySlider]` | `vlVeloraTinySlider` | Yes | Yes |
+| `ToggleDirective` | `[vlVeloraToggle]` | `vlVeloraToggle` | Yes | Yes |
+| `TreeDirective` | `[vlVeloraTree]` | `vlVeloraTree` | Yes | Yes |
+| `TypedDirective` | `[vlVeloraTyped]` | `veloraTyped` | Yes | Yes |
 
 ## External Dashboard Sample Analysis
 
@@ -152,4 +192,3 @@ Caveats from sample analysis:
 - Do not use directive demos as workspace acceptance proof. Every directive-backed interaction must affect domain state.
 - When using `vlVeloraInputmask` in form controls, verify masked/unmasked values, disabled/readonly propagation, and validators.
 - `vlVeloraMaxlength` is accepted in standard controls only for textarea. Inputs use native `maxlength` plus form validators.
-
