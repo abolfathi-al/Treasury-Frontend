@@ -1290,14 +1290,14 @@
     "semantic_hash": "1f1af252f896e696b96dc3c185b0a068"
   },
   "src/app/shared/directives/drawer.directive.spec.ts": {
-    "mtime": 1781543203.0,
-    "ast_hash": "49b94901eb1473c90b8ad1c59d603434",
-    "semantic_hash": "49b94901eb1473c90b8ad1c59d603434"
+    "mtime": 1784756720.439425,
+    "ast_hash": "0248110d1118e3990d5482deccc0824f",
+    "semantic_hash": ""
   },
   "src/app/shared/directives/drawer.directive.ts": {
-    "mtime": 1781543203.0,
-    "ast_hash": "303b6827bf2ab7ad06f129170d096822",
-    "semantic_hash": "303b6827bf2ab7ad06f129170d096822"
+    "mtime": 1784756720.4376025,
+    "ast_hash": "d47dca09f407e51f805b8e8c308bdcf5",
+    "semantic_hash": ""
   },
   "src/app/shared/directives/dropzone.directive.spec.ts": {
     "mtime": 1782510957.0,
@@ -10242,6 +10242,11 @@
   "graphify-out/memory/query_20260722_213640_make_menudirective_custom_event_subscriptions_safe.md": {
     "mtime": 1784756200.4035504,
     "ast_hash": "2e700909ab7b8a7c5d7e2649b2570d3b",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_214156_prevent_stale_menudirective_asynchronous_completio.md": {
+    "mtime": 1784756516.7741208,
+    "ast_hash": "697190907bd0013954d8ad13f0138edc",
     "semantic_hash": ""
   }
 }

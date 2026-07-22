@@ -1,4 +1,9 @@
-import { Component, provideZonelessChangeDetection, viewChild } from '@angular/core';
+import {
+  Component,
+  provideZonelessChangeDetection,
+  viewChild,
+  viewChildren,
+} from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
@@ -28,6 +33,18 @@ class HostComponent {
   readonly directive = viewChild.required(DrawerDirective);
 }
 
+@Component({
+  imports: [DrawerDirective],
+  standalone: true,
+  template: `
+    <aside id="first-drawer" vlVeloraDrawer drawerName="shared"></aside>
+    <aside id="second-drawer" vlVeloraDrawer drawerName="shared"></aside>
+  `,
+})
+class MultiDrawerHostComponent {
+  readonly directives = viewChildren(DrawerDirective);
+}
+
 describe('DrawerDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,6 +54,7 @@ describe('DrawerDirective', () => {
 
   afterEach(() => {
     document.body.removeAttribute('data-velora-drawer');
+    document.body.removeAttribute('data-velora-drawer-shared');
   });
 
   function setup(): {
@@ -123,5 +141,40 @@ describe('DrawerDirective', () => {
 
     expect(hiddenSpy).not.toHaveBeenCalled();
     expect(hiddenEmitted).toBeFalse();
+  }));
+
+  it('preserves shared body state while another drawer remains open', fakeAsync(() => {
+    const fixture = TestBed.createComponent(MultiDrawerHostComponent);
+    fixture.detectChanges();
+    tick(0);
+    const [first, second] = fixture.componentInstance.directives();
+
+    first.show();
+    second.show();
+    first.hide();
+
+    expect(document.body.getAttribute('data-velora-drawer')).toBe('on');
+    expect(document.body.getAttribute('data-velora-drawer-shared')).toBe('on');
+
+    second.hide();
+
+    expect(document.body.hasAttribute('data-velora-drawer')).toBeFalse();
+    expect(document.body.hasAttribute('data-velora-drawer-shared')).toBeFalse();
+    tick(10);
+    fixture.destroy();
+  }));
+
+  it('clears visible state when an open drawer is destroyed', fakeAsync(() => {
+    const { fixture, directive, aside } = setup();
+    tick(0);
+    directive.show();
+
+    fixture.destroy();
+
+    expect(directive.isShown()).toBeFalse();
+    expect(aside.classList.contains('drawer-on')).toBeFalse();
+    expect(document.body.hasAttribute('data-velora-drawer')).toBeFalse();
+    expect(document.body.querySelector('.drawer-overlay')).toBeNull();
+    tick(10);
   }));
 });

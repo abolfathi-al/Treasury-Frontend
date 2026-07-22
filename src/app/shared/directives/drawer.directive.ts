@@ -549,10 +549,19 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
 
     this.executeSafely(() => {
       const options = this.optionsManager.snapshot();
-      if (options.name) {
+      const openDrawers = Array.from(DrawerStore.getAllInstances().values()).filter(
+        (drawer) => drawer.isShown()
+      );
+      const keepsNamedAttribute = openDrawers.some(
+        (drawer) => drawer.optionsManager.snapshot().name === options.name
+      );
+
+      if (options.name && !keepsNamedAttribute) {
         this.host.renderer.removeAttribute(this.host.document.body, `data-velora-drawer-${options.name}`);
       }
-      this.host.renderer.removeAttribute(this.host.document.body, 'data-velora-drawer');
+      if (openDrawers.length === 0) {
+        this.host.renderer.removeAttribute(this.host.document.body, 'data-velora-drawer');
+      }
     }, 'Clear body attrs on hide failed');
   }
 
@@ -664,6 +673,7 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
 
   private cleanup(): void {
     this.executeSafely(() => {
+      this.markBaseDestroyed();
       this.clearAnimationRestoreTimeout();
       this.clearSettledEventTimeouts();
 
@@ -672,7 +682,13 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
         this.animationTimeout = null;
       }
 
-      this.removeOverlay();
+      if (this._isShown()) {
+        this._previousIsShown.set(true);
+        this._isShown.set(false);
+        this.hideDrawer();
+      } else {
+        this.removeOverlay();
+      }
       this.detachDelegatedClick(this.toggleEventId);
       this.detachDelegatedClick(this.closeEventId);
       this.detachDelegatedClick(this.showEventId);
