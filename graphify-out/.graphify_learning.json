@@ -1,69 +1,195 @@
 {
-  "generated_at": "2026-07-22T09:07:08.853772+00:00",
+  "generated_at": "2026-07-22T09:41:48.144584+00:00",
   "nodes": {
+    "docs_frontend_refactor_plan_enterprise_dashboard_master": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Enterprise Dashboard Master",
+      "last": "2026-07-22T09:33:22.352609+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:33:22.352609+00:00",
+          "outcome": "useful",
+          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
+        }
+      ],
+      "score": 0.999864751,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_frontend_refactor_plan_master_product_neutrality": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Master Product Neutrality",
+      "last": "2026-07-22T09:38:31.675717+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:38:31.675717+00:00",
+          "outcome": "useful",
+          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
+        }
+      ],
+      "score": 0.999947462,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_frontend_refactor_plan_project_composition_boundary": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Project Composition Boundary",
+      "last": "2026-07-22T09:38:31.675717+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:38:31.675717+00:00",
+          "outcome": "useful",
+          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
+        },
+        {
+          "date": "2026-07-22T09:33:22.352609+00:00",
+          "outcome": "useful",
+          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
+        }
+      ],
+      "score": 1.999812213,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "preferred",
+      "uses": 2
+    },
+    "docs_frontend_refactor_plan_reusable_dashboard_master_refactor_plan": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Reusable Dashboard Master Refactor Plan",
+      "last": "2026-07-22T09:38:31.675717+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:38:31.675717+00:00",
+          "outcome": "useful",
+          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
+        }
+      ],
+      "score": 0.999947462,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_frontend_refactor_plan_treasury_first_consumer": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Treasury as First Master Consumer",
+      "last": "2026-07-22T09:33:22.352609+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:33:22.352609+00:00",
+          "outcome": "useful",
+          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
+        }
+      ],
+      "score": 0.999864751,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_frontend_refactor_plan_versioned_master_release": {
+      "code_fingerprint": "25a2708926b500540248e9a695627a1855409eb14c2a79e3c2d1361648ace354",
+      "label": "Versioned Master Release",
+      "last": "2026-07-22T09:38:31.675717+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T09:38:31.675717+00:00",
+          "outcome": "useful",
+          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
+        },
+        {
+          "date": "2026-07-22T09:33:22.352609+00:00",
+          "outcome": "useful",
+          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
+        }
+      ],
+      "score": 1.999812213,
+      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
+      "status": "preferred",
+      "uses": 2
+    },
     "docs_ui_ui_architecture_ui_architecture": {
       "code_fingerprint": "9f7eef6780b7fedbce037fc9c38f131178176676795385bccaf32cd05e3de164",
       "label": "UI Architecture",
-      "last": "2026-07-22T09:04:38.248484+00:00",
+      "last": "2026-07-22T09:18:18.447991+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T09:18:18.447991+00:00",
+          "outcome": "useful",
+          "q": "hala ye plan kon baraye refactor frontend mojod va ye file md besaz"
+        },
         {
           "date": "2026-07-22T09:04:38.248484+00:00",
           "outcome": "useful",
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 0.999959726,
+      "score": 1.999026957,
       "source_file": "docs/ui/ui-architecture.md",
-      "status": "tentative",
-      "uses": 1
+      "status": "preferred",
+      "uses": 2
     },
     "src_app_core_services_logger_service_loggerservice": {
       "code_fingerprint": "8905e0eaf428a77fd38ea5c26d7011afabec70adde2636e4e9b4444df47a1183",
       "label": "LoggerService",
-      "last": "2026-07-22T09:04:38.248484+00:00",
+      "last": "2026-07-22T09:18:18.447991+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T09:18:18.447991+00:00",
+          "outcome": "useful",
+          "q": "hala ye plan kon baraye refactor frontend mojod va ye file md besaz"
+        },
         {
           "date": "2026-07-22T09:04:38.248484+00:00",
           "outcome": "useful",
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 0.999959726,
+      "score": 1.999026957,
       "source_file": "src/app/core/services/logger.service.ts",
-      "status": "tentative",
-      "uses": 1
+      "status": "preferred",
+      "uses": 2
     },
     "src_app_modules_auth_data_access_permission_service_permissionservice": {
       "code_fingerprint": "668febf8c3ff8e9c5fffdcddb22b7bc4bf3a0ce1e8ddd4ae979758bb14717159",
       "label": "PermissionService",
-      "last": "2026-07-22T09:04:38.248484+00:00",
+      "last": "2026-07-22T09:18:18.447991+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T09:18:18.447991+00:00",
+          "outcome": "useful",
+          "q": "hala ye plan kon baraye refactor frontend mojod va ye file md besaz"
+        },
         {
           "date": "2026-07-22T09:04:38.248484+00:00",
           "outcome": "useful",
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 0.999959726,
+      "score": 1.999026957,
       "source_file": "src/app/modules/auth/data-access/permission.service.ts",
-      "status": "tentative",
-      "uses": 1
+      "status": "preferred",
+      "uses": 2
     },
     "src_app_shared_directives_shared_base_directive_basedirective": {
       "code_fingerprint": "3335d64b4ca033e3a72922d5084d5cd686898a4c518097310ecc2e98ccb960fb",
       "label": "BaseDirective",
-      "last": "2026-07-22T09:04:38.248484+00:00",
+      "last": "2026-07-22T09:18:18.447991+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T09:18:18.447991+00:00",
+          "outcome": "useful",
+          "q": "hala ye plan kon baraye refactor frontend mojod va ye file md besaz"
+        },
         {
           "date": "2026-07-22T09:04:38.248484+00:00",
           "outcome": "useful",
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 0.999959726,
+      "score": 1.999026957,
       "source_file": "src/app/shared/directives/shared/base-directive.ts",
-      "status": "tentative",
-      "uses": 1
+      "status": "preferred",
+      "uses": 2
     }
   },
   "version": 1

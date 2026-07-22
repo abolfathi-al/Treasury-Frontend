@@ -2583,5 +2583,10 @@
     "mtime": 1781713869.0,
     "ast_hash": "3b5188cabd74d47926318fdee0498314",
     "semantic_hash": "3b5188cabd74d47926318fdee0498314"
+  },
+  "docs/FRONTEND_REFACTOR_PLAN.md": {
+    "mtime": 1784711418.695187,
+    "ast_hash": "0cacc57d145549230774f1becb246014",
+    "semantic_hash": "0cacc57d145549230774f1becb246014"
   }
 }

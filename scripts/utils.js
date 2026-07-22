@@ -19,7 +19,7 @@ const fs = require('fs');
  */
 const CONSTANTS = {
   // Common paths
-  DIST_PATH: './dist/velora/browser',
+  DIST_PATH: './dist/web',
   SRC_PATH: './src',
   ASSETS_PATH: './src/assets',
   

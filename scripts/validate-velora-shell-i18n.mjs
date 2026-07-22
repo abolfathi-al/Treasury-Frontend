@@ -7,10 +7,9 @@ import vm from 'node:vm';
 
 const scriptDir = path.dirname(new URL(import.meta.url).pathname);
 const appRoot = path.resolve(scriptDir, '..');
-const repoRoot = path.resolve(appRoot, '../..');
 const srcApp = path.join(appRoot, 'src/app');
 const i18nDir = path.join(srcApp, 'modules/i18n');
-const reportJsonPath = path.join(repoRoot, 'reports/velora-shell-i18n-inventory.json');
+const reportJsonPath = path.join(appRoot, 'reports/velora-shell-i18n-inventory.json');
 
 const args = new Set(process.argv.slice(2));
 const shouldWriteJson = args.has('--write-json');
@@ -653,7 +652,7 @@ function evaluateHardcodedTemplateTexts(findings) {
 }
 
 function hardcodedTemplateIgnoreReason(finding) {
-  if (finding.file === 'apps/web/src/app/pages/dashboard/dashboard.component.html') {
+  if (finding.file === 'src/app/pages/dashboard/dashboard.component.html') {
     return 'dashboard showcase template';
   }
   if (sampleDataTexts.has(finding.text)) {
@@ -704,7 +703,7 @@ function resolveImport(fromFile, importPath) {
 }
 
 function relative(file) {
-  return path.relative(repoRoot, file).replaceAll(path.sep, '/');
+  return path.relative(appRoot, file).replaceAll(path.sep, '/');
 }
 
 function unique(items) {

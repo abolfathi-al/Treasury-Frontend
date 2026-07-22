@@ -62,7 +62,7 @@ import {
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
 import { extraLocaleFa } from '@utils';
-import { SHELL_NAVIGATION_ITEMS } from '@shell/layout/navigation/shell-navigation.config';
+import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
 import { AuthService } from './modules/auth/data-access/auth.service';
 import { ErrorService } from './modules/errors/data-access/error.service';
 import { ErrorUtils } from './modules/errors/data-access/error.utils';
@@ -301,7 +301,7 @@ export function getAppProviders(
     },
     {
       provide: PAGE_NAVIGATION_ITEMS,
-      useValue: SHELL_NAVIGATION_ITEMS,
+      useValue: PROJECT_NAVIGATION_ITEMS,
     },
     {
       provide: ERROR_REPORTER,

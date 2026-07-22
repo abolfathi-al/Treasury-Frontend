@@ -1,22 +1,28 @@
-# Enterprise Treasury Frontend Refactor Plan
+# Reusable Dashboard Master Refactor Plan
 
 Status: `PROPOSED`
 
 ## Outcome
 
-Turn the inherited Angular 20 scaffold into a reproducible, maintainable,
-Treasury-ready frontend foundation without inventing Treasury domain behavior or
-runtime claims.
+Refactor the inherited Angular dashboard into a versioned, product-neutral
+Dashboard Master that can seed future frontend projects.
 
-This plan separates two concerns:
+The current Enterprise Treasury frontend is the source used to extract and
+validate that Master. At cutover, the responsibilities separate:
 
-1. Generic frontend refactoring that can proceed without domain implementation.
-2. Treasury feature delivery, which remains blocked until Canon explicitly
-   authorizes implementation.
+1. `Enterprise-Dashboard-Master` owns reusable dashboard infrastructure.
+2. `Enterprise-Treasury-Frontend` becomes a consumer of a tagged Master release.
+3. Each later product starts from a tagged Master release and owns only its
+   product composition and feature modules.
+
+The Master is a repository template first, not an npm component platform. This
+is the smallest delivery model that preserves the complete dashboard, build,
+shell, styles, and assets. Extract packages only after multiple consumers need
+independent upgrades of the same code.
 
 ## Governing constraint
 
-The sibling Canon is the semantic authority:
+The sibling Canon is semantic authority for Enterprise Treasury only:
 
 - `../../Enterprise-Treasury-Canon/canon-v3/canon.yaml`
 - `../../Enterprise-Treasury-Canon/canon-v3/00-governance/authority.yaml`
@@ -28,9 +34,10 @@ The current authority state records:
 - `runtime_activation: NOT_AUTHORIZED`
 - `runtime_proof_status: UNPROVEN`
 
-Phases 0-5 below are limited to behavior-preserving scaffold refactoring and
-generic UI quality. Phase 6 is blocked until a governed Delivery decision changes
-that authority state.
+Generic Master extraction may proceed because it preserves scaffold behavior and
+does not implement Treasury semantics. Treasury routes, workflows, policies, and
+contracts remain blocked until a governed Delivery decision authorizes them.
+Treasury decisions MUST NOT enter the Master.
 
 ## Baseline
 
@@ -38,237 +45,340 @@ that authority state.
 | --- | --- |
 | Framework | Angular 20.3.3, TypeScript 5.9, strict TypeScript and strict templates |
 | Source | 452 TypeScript files, 50 HTML templates, 73 spec files under `src/app` |
-| Feature modules | `auth`, `errors`, and `i18n`; the rest is shell/shared foundation |
-| Graph | 4,133 nodes, 9,270 edges, 217 communities; no import cycles detected |
+| Current shape | `core`, `shared`, `shell`, plus `auth`, `errors`, and `i18n` modules |
+| Reusable seams | `brand.config.ts`, shell navigation config, layout/theme services, `ShellFacade`, tokens, and adapters |
 | Cross-cutting hubs | `LoggerService` (132 edges), `BaseDirective` (89), `runSafely()` (135) |
 | Legacy surface | 243 files contain `Velora` references outside generated output |
 | Repository bootstrap | No dependency lockfile and no local `node_modules` |
-| Known UI gaps | No reusable table/grid, paginator, shared empty state, or stable server-validation mapper |
+| Graph | No import cycles detected; Graphify edge diagnostics contain known dangling/collapsed edges |
 
-Graph edge diagnostics also reported dangling and collapsed edges. Treat these as
-Graphify extraction limitations until source inspection proves a code defect.
+Graph degree identifies refactor risk, not a reason to introduce interfaces or
+split services by itself.
+
+## Target ownership model
+
+Keep the current folder shape where it already matches the target. Add only one
+clear project-composition boundary; do not reorganize the repository for visual
+symmetry.
+
+| Layer | Owns | Must not own |
+| --- | --- | --- |
+| Master `core` | Runtime infrastructure, browser/SSR guards, logging, layout/theme state, generic tokens and utilities | Product workflows, product roles, domain contracts |
+| Master `shared` | Product-neutral UI controls, directives, icons, accessibility behavior | Navigation policy, feature orchestration, domain validation |
+| Master `shell` | Header, sidebar, toolbar, page frame, responsive layout, generic user/menu slots | Product menu items, product copy, feature permissions |
+| Project composition | Brand, theme defaults, navigation, route assembly, locale selection, endpoints, auth wiring | Reusable UI implementation |
+| Project `modules` | Product screens, feature state, route guards, API integration | Master infrastructure decisions |
+| Demo/examples | Replaceable sample content used for visual and smoke validation | Production runtime dependencies |
+
+The intended project-facing layout is:
+
+```text
+src/app/
+  core/       # Master-owned infrastructure
+  shared/     # Master-owned reusable UI
+  shell/      # Master-owned dashboard frame
+  project/    # Consumer-owned composition and configuration
+  modules/    # Consumer-owned product features
+  demo/       # Optional and removable examples
+```
+
+`project/` is the only new architectural boundary required by this plan. Existing
+files move into it only when they are proven product-specific.
+
+## Master contract
+
+A future project should customize the dashboard through a small documented set
+of seams instead of editing Master internals:
+
+1. Product identity: application name, logo assets, favicon, and visible brand
+   strings.
+2. Theme: color tokens, typography, light/dark defaults, RTL/LTR, and layout
+   defaults.
+3. Navigation: menu tree, labels, icons, route targets, and UI capability hints.
+4. Runtime configuration: API base URLs and environment-specific public values.
+5. Authentication wiring: session source, login/logout routes, and UI permission
+   lookup. Server authorization remains the trust boundary.
+6. Localization: supported locales, default locale, and consumer translation
+   dictionaries.
+7. Feature composition: consumer routes and modules mounted into shell slots.
+
+Reuse existing config objects, tokens, adapters, and `ShellFacade` before adding
+new abstractions. Add an adapter interface only when a second real implementation
+cannot use the existing seam.
 
 ## Refactor rules
 
-- Preserve observable behavior before simplifying it.
-- Change one axis at a time: bootstrap, boundaries, shared infrastructure,
-  naming, then dependency removal.
-- Reuse existing helpers before adding abstractions.
-- Add characterization tests around shared hubs before changing them.
-- Do not treat UI permission checks as backend authorization.
-- Do not perform a repository-wide search-and-replace for selectors, storage
-  keys, translation keys, or public APIs.
-- Do not add a state library, design system, microfrontend framework, or generic
-  table framework without a demonstrated requirement.
+- Preserve observable behavior before extracting reusable ownership.
+- Keep product-neutral defaults in the Master and product choices in the
+  consumer.
+- Change one axis at a time: reproducibility, boundaries, configuration,
+  branding, then deletion.
+- Do not create a universal design system, state framework, microfrontend layer,
+  plugin runtime, or schema-driven page builder.
+- Do not perform blanket renames of selectors, storage keys, translation keys,
+  or public APIs.
+- Do not keep fake data in Master production paths.
+- Every Master extension point needs one current consumer and one runnable check.
+- A generated consumer may change `project/` and `modules/`; edits to `core`,
+  `shared`, or `shell` indicate a missing Master seam or a deliberate fork.
 
-## Phase 0 - Freeze a trustworthy baseline
+## Phase 0 - Define the reusable baseline
 
-Goal: make later changes attributable and reversible.
+Goal: identify what is genuinely common before changing ownership.
 
-- Record the current results of `typecheck`, `lint`, `test:ci`, and `build` once
-  dependencies can be installed reproducibly.
-- Classify each existing route as scaffold, generic infrastructure, or authorized
-  product behavior. Today, auth, errors, shell, and dashboard are scaffold only.
-- Capture current bundle size and the browser-visible auth, error, shell, and
-  dashboard flows.
-- Preserve the current Graphify report as navigation evidence, not authority.
-- Create a short failure ledger for baseline failures instead of weakening checks.
-
-Exit criteria:
-
-- Every baseline command is green or has one documented pre-existing failure.
-- The current route and ownership map is recorded.
-- No product behavior has changed.
-
-## Phase 1 - Make the frontend repository reproducible
-
-Goal: remove assumptions inherited from the former monorepo layout.
-
-- Select the package manager explicitly. The existing scripts imply `pnpm`; add
-  its version and one committed lockfile after that decision.
-- Rename package metadata from the generic `web` identity to the approved
-  Enterprise Treasury frontend identity.
-- Update docs that still refer to `apps/web/` so paths resolve from this repo.
-- Review build, SSR, production, i18n, accessibility, and analysis scripts for
-  missing monorepo-relative inputs.
-- Keep generated directories (`dist`, `.angular`, `coverage`, `node_modules`) out
-  of source control.
-- Replace absolute workstation paths in documentation with repository-relative
-  references or clearly marked historical evidence.
+- Record `typecheck`, `lint`, `test:ci`, `build`, bundle size, and the visible
+  auth/error/shell/dashboard flows once dependencies install reproducibly.
+- Inventory routes and classify each as Master shell, demo, or product feature.
+- Inventory configuration sources for brand, theme, navigation, locale, auth,
+  endpoints, layout, selectors, storage, and assets.
+- Mark the current generic dashboard route as a visual reference, not a Treasury
+  feature.
+- Preserve Graphify output as navigation evidence and record baseline failures
+  without weakening checks.
 
 Exit criteria:
 
-- A clean checkout can install and run the baseline commands.
-- Exactly one package manager and lockfile are authoritative.
-- No command depends on the former Velora monorepo root.
+- Every route and configuration source has an owner.
+- Golden shell flows and screenshots are reproducible.
+- Baseline failures are green or recorded as pre-existing.
 
-## Phase 2 - Enforce existing architecture boundaries
+## Phase 1 - Make the source repository reproducible
 
-Goal: strengthen the current shape without moving everything.
+Goal: remove inherited monorepo and workstation assumptions.
 
-- Keep app composition and global providers in `src/app/app.config.ts` and route
-  composition in the app/shell routing files.
-- Keep `core` limited to singleton infrastructure, ports, configuration,
-  initializers, logging, and cross-cutting state.
-- Keep `shared` domain-neutral; move feature-specific decisions back to their
-  feature boundary.
-- Keep shell components bound to `ShellFacade` state instead of reading layout
-  services independently in nested components.
-- Isolate `_fake`, demo actions, sample navigation, and placeholder dashboard
-  content behind an explicit scaffold boundary; delete them when no active test or
-  migration needs them.
-- Use existing ESLint capabilities for boundary checks before adding tooling.
+- Select one package manager. Existing scripts imply `pnpm`; record its version
+  and commit one lockfile.
+- Make install, typecheck, lint, tests, build, SSR, i18n, accessibility, and
+  analysis scripts run from the repository root.
+- Replace active absolute workstation paths with repository-relative paths.
+- Keep `dist`, `.angular`, `coverage`, and `node_modules` generated.
+- Give the source repository a neutral temporary package identity; reserve final
+  Master and consumer names for cutover.
 
 Exit criteria:
 
-- Shared and shell code do not own Treasury feature policy.
-- Feature code does not leak into generic utilities or directives.
-- Route ownership is obvious from the folder and route configuration.
-- The graph still reports no import cycles.
+- A clean checkout installs and passes the recorded baseline.
+- No command depends on the former Velora monorepo.
+- Exactly one lockfile and package manager are authoritative.
 
-## Phase 3 - Harden cross-cutting hubs
+## Phase 2 - Establish the Master/consumer boundary
 
-Goal: reduce refactor risk where many callers converge.
+Goal: make project-specific edits predictable and small.
 
-- Add focused characterization tests for `BaseDirective`, `runSafely()`,
-  `LoggerService`, `PermissionService`, `ShellFacade`, and directive-host cleanup.
-- Route repeated browser guards, teardown, option updates, and safe error handling
-  through the helpers that already exist.
-- Keep `LoggerService` as one service unless a concrete responsibility split
-  reduces callers; high graph degree alone is not a reason to create interfaces.
-- Keep UI capability and role checks presentation-only. Do not model authorization
-  policy in directives or shared components.
-- Verify listener cleanup, SSR/browser guards, input changes, and error paths for
-  DOM-heavy directives before simplifying them.
+- Keep reusable implementation in the existing `core`, `shared`, and `shell`
+  folders.
+- Introduce `project/` for brand, navigation, route composition, runtime public
+  configuration, locale selection, and auth wiring.
+- Move product/demo decisions out of reusable services and components one slice
+  at a time.
+- Isolate sample routes, fake context, sample users, and placeholder dashboard
+  cards under `demo/` or delete them when no test needs them.
+- Keep feature modules lazy where the current router already supports it.
+- Use existing ESLint capabilities to prevent `core`, `shared`, and `shell` from
+  importing `project`, `modules`, or `demo`.
+
+Allowed dependency direction:
+
+```text
+project/modules/demo -> shell/shared/core
+shell                -> shared/core
+shared               -> core
+core                 -> Angular/platform only
+```
 
 Exit criteria:
 
-- Each changed hub has a runnable regression test.
-- Duplicate lifecycle/error-handling code decreases without a new abstraction
-  layer.
-- Auth and permission behavior makes no security claim beyond UI state.
+- The Master layers have no product or demo imports.
+- Consumer-owned configuration can be found under one boundary.
+- Graphify still reports no import cycles.
 
-## Phase 4 - Neutralize inherited product branding safely
+## Phase 3 - Convert variation into configuration
 
-Goal: remove foreign product identity without a big-bang compatibility break.
+Goal: allow a new project to adopt its identity without forking shell code.
 
-- Inventory the 243 affected files into visible copy, TypeScript identifiers,
-  selectors, storage keys, translation keys, configuration, assets, scripts, and
+- Route existing brand config, shell navigation config, layout defaults, theme
+  state, and localization through the project-composition boundary.
+- Replace visible product literals in Master templates with existing translation
+  or configuration seams.
+- Make shell menus consume project navigation data; keep capability checks as UI
+  hints only.
+- Keep environment-specific public values outside committed Master defaults.
+- Define neutral fallbacks so the Master can run without Treasury data.
+- Add focused tests proving two configuration profiles can render different
+  brand, theme, locale, and navigation values without changes to Master files.
+
+Exit criteria:
+
+- A new product identity requires configuration/assets, not shell edits.
+- No secret or backend authorization rule is accepted through frontend config.
+- Default and alternate configuration profiles pass the shell smoke test.
+
+## Phase 4 - Stabilize the reusable infrastructure
+
+Goal: protect code that every generated project will inherit.
+
+- Add characterization tests around `BaseDirective`, `runSafely()`,
+  `LoggerService`, `PermissionService`, `ShellFacade`, layout/theme initialization,
+  and directive-host cleanup before refactoring them.
+- Reuse shared lifecycle, DOM cleanup, option-update, and safe-error helpers where
+  duplicated behavior already exists.
+- Verify SSR/browser guards, listener cleanup, responsive behavior, focus,
+  keyboard navigation, and RTL/LTR.
+- Keep `LoggerService` and other hubs intact unless a concrete responsibility
+  split reduces code or enables a required second implementation.
+- Treat authentication and permissions as consumer wiring; never claim that UI
+  hiding provides authorization.
+
+Exit criteria:
+
+- Each changed hub has a focused regression test.
+- The reusable shell passes desktop/mobile, light/dark, RTL/LTR, auth/error, and
+  accessibility smoke checks.
+- Duplicate infrastructure code decreases without adding a framework.
+
+## Phase 5 - Neutralize and prune the Master
+
+Goal: produce a product-neutral baseline with no accidental legacy contract.
+
+- Classify Velora references into visible copy, private identifiers, selectors,
+  storage keys, translation keys, configuration, assets, dependencies, and
   historical documentation.
-- Remove visible Velora product copy first.
-- Rename private identifiers next, in small behavior-preserving slices.
+- Remove visible Velora identity first, then rename private identifiers in small
+  verified slices.
 - Migrate persisted keys with read-old/write-new compatibility and a bounded
-  cleanup path; never strand existing browser state.
-- Migrate public selectors and translation keys only with explicit aliases or a
-  coordinated breaking change.
-- Keep the configured `vl` selector prefix during this refactor unless a separate
-  governed naming decision replaces it.
-- Remove external sample references after their generic lessons are captured in
-  repository-local docs.
+  removal point.
+- Change public selectors and translation keys only through aliases or a declared
+  breaking release.
+- Retain the `vl` selector prefix until a separate Master naming decision; a
+  prefix rename is not required for reusability.
+- Remove unused packages and demo-only assets one at a time after build and
+  browser verification.
+- Add shared controls only after two current consumers need the same contract.
 
 Exit criteria:
 
-- `rg -i velora` returns only entries on a reviewed compatibility or historical
-  allowlist.
-- No Treasury semantics were inferred from legacy names or samples.
-- Existing routes and saved browser state still work through the migration.
+- Legacy references remain only on a reviewed compatibility/history allowlist.
+- Every dependency and production asset has a verified consumer.
+- The Master contains no Treasury or other product semantics.
 
-## Phase 5 - Prune and complete the generic UI foundation
+## Phase 6 - Create the versioned Dashboard Master
 
-Goal: leave a smaller foundation that is ready for authorized feature work.
+Goal: make the reusable result safe to start from repeatedly.
 
-- Audit third-party packages against imports and runtime usage; remove one unused
-  dependency at a time with build and browser verification.
-- Replace untranslated literals already identified in shared controls.
-- Verify accessibility, keyboard behavior, focus management, RTL/LTR, loading,
-  error, and empty states on the existing routes.
-- Add a shared primitive only when at least two current consumers need the same
-  contract.
-- Do not build a generic table, paginator, wizard framework, server validation
-  mapper, radio control, time-only control, or upload control speculatively.
-- Update the relevant files under `docs/ui/` whenever a shared API changes.
-
-Exit criteria:
-
-- Every dependency has a verified current consumer.
-- Existing pages pass accessibility and responsive smoke checks.
-- Shared APIs have real reuse and documented behavior.
-- Demo-only UI is removed or visibly isolated.
-
-## Phase 6 - Treasury domain delivery
-
-Status: `BLOCKED_BY_CANON_IMPLEMENTATION_AUTHORIZATION`
-
-Start this phase only after repository-local evidence records implementation
-authorization and an applicable Delivery scope.
-
-When unblocked:
-
-- Map each feature to its active Canon owner, journey, projection, AuthZ rows,
-  error catalog, and approved API/event contracts.
-- Implement feature slices inside `src/app/modules/`; do not encode domain truth
-  in `shared` or `shell`.
-- Keep projections read-only and journeys orchestration-only.
-- Treat capability hints as UI behavior backed by server authorization.
-- Add loading, error, empty, partial, validation, audit-sensitive, and disabled
-  reason states for every delivered flow.
-- Record conformance evidence without claiming runtime proof that was not run.
+- Create `Enterprise-Dashboard-Master` from the neutralized repository while
+  preserving relevant history.
+- Mark it as a template/source repository and publish SemVer tags.
+- Include a short quick start: clone/use template, install, set project config,
+  replace assets, add routes/modules, and run checks.
+- Maintain `CHANGELOG.md` and one migration note per breaking Master release.
+- Record the originating Master version in each generated consumer.
+- Add a clean-room smoke check that creates a temporary consumer, applies a test
+  configuration, and runs typecheck plus production build.
+- Keep upgrades opt-in: consumers take a new tag using its migration note. Do not
+  build automated cross-repository synchronization yet.
 
 Exit criteria:
 
-- Every delivered screen traces to active Canon and authorized Delivery scope.
-- Server contracts and authorization are tested at their actual trust boundary.
-- Runtime claims are backed by runtime evidence.
+- A new dashboard project reaches a branded, navigable shell without editing
+  Master-owned folders.
+- A tagged release can generate and build a clean consumer.
+- Breaking changes are versioned and have an upgrade path.
+
+## Phase 7 - Recreate Enterprise Treasury as the first consumer
+
+Goal: prove the boundary without implementing unauthorized Treasury behavior.
+
+- Start `Enterprise-Treasury-Frontend` from the first stable Master tag.
+- Add only Treasury project identity and generic composition that is authorized
+  by repository-local evidence.
+- Keep Treasury feature modules absent or scaffold-only while implementation
+  authorization is `NONE`.
+- When authorization exists, map each feature to its active Canon owner, journey,
+  projection, AuthZ rows, error catalog, and approved API/event contracts.
+- Put Treasury features in `modules/`; never move Treasury truth into Master
+  `core`, `shared`, or `shell`.
+
+Exit criteria:
+
+- The Treasury consumer records its Master version.
+- The Master has no Treasury imports, terms, rules, or evidence.
+- Any delivered Treasury screen is authorized and traceable to active Canon.
+
+## Future project adoption flow
+
+For each new dashboard project:
+
+1. Start from a chosen `Enterprise-Dashboard-Master` release tag.
+2. Record that tag in the consumer.
+3. Replace project configuration, public runtime values, brand assets, and
+   translations.
+4. Define navigation and application routes.
+5. Add product behavior only under `modules/`.
+6. Run the full Master verification matrix.
+7. Upgrade later only through a newer tag and its migration note.
+
+If three or more consumers repeatedly cherry-pick the same Master fixes, evaluate
+extracting only those independently versioned pieces into Angular libraries. Do
+not package the whole application preemptively.
 
 ## Change-set order
 
-Use small, independently verifiable changes in this order:
+Use independently verifiable changes in this order:
 
-1. Documentation and repository bootstrap.
-2. Baseline checks and characterization tests.
-3. Folder-boundary corrections.
-4. Cross-cutting directive/logging/shell hardening.
-5. Legacy naming and persisted-state migration.
-6. Dependency and demo-code deletion.
-7. Authorized Treasury feature slices.
+1. Reproducible repository and baseline.
+2. Route/configuration ownership inventory.
+3. `project/` and `demo/` boundary.
+4. Brand, theme, navigation, locale, and runtime configuration seams.
+5. Shared hub characterization tests and hardening.
+6. Legacy neutralization and dependency deletion.
+7. Master clean-room generation check and first release tag.
+8. Treasury consumer recreation and, only when authorized, feature delivery.
 
-Do not mix a public selector rename, storage migration, architecture move, and
-behavior change in the same change set.
+Do not combine a public selector rename, storage migration, folder move, and
+behavior change in one change set.
 
 ## Verification matrix
 
 | Change | Minimum verification |
 | --- | --- |
-| Docs/config only | Links/path check and affected JSON/config validation |
-| TypeScript implementation | `pnpm typecheck` and focused specs |
-| Template/style | `pnpm lint`, focused specs, responsive and accessibility smoke check |
+| Docs/config only | Link/path check and affected JSON/config validation |
+| Master boundary | Import-boundary check, `pnpm typecheck`, focused specs, Graphify cycle check |
+| Brand/theme/navigation | Default and alternate profile browser smoke tests |
 | Shared hub/directive | `pnpm typecheck`, `pnpm lint`, `pnpm test:ci`, `pnpm build` |
-| Dependency removal | Full checks plus production build and affected browser flow |
-| Naming/storage migration | Full checks plus old-state upgrade and clean-state browser tests |
-| Canon-linked feature | Canon verification plus all frontend checks and contract evidence |
+| Template/style | Focused specs, responsive, accessibility, RTL/LTR, light/dark checks |
+| Dependency removal | Full checks, production build, and affected browser flow |
+| Naming/storage migration | Full checks plus old-state upgrade and clean-state tests |
+| Master release | Clean-room consumer install, typecheck, test, and production build |
+| Canon-linked feature | Canon verification plus all frontend and contract checks |
 
 After code changes, run `graphify update .`. After documentation changes, perform
-a semantic Graphify refresh. Compare the new graph for import cycles, unexplained
-hub growth, and disconnected feature nodes; graph metrics are diagnostics, not
-acceptance criteria by themselves.
+a semantic Graphify refresh. Treat graph metrics as diagnostics, not acceptance
+criteria.
 
 ## Definition of done
 
 The refactor is complete when:
 
-- a clean checkout installs and passes type checking, lint, CI tests, and build;
-- the architecture boundaries in `AGENTS.md` are enforced by code organization;
-- legacy product references are removed except for a reviewed allowlist;
-- shared hubs have regression coverage and no duplicated lifecycle machinery;
-- dependencies and demo code have verified consumers or are deleted;
-- accessibility, i18n, RTL/LTR, SSR/browser guards, and UI states are preserved;
-- no Treasury domain behavior was implemented before authorization; and
-- docs and Graphify output describe the resulting code accurately.
+- `Enterprise-Dashboard-Master` has a stable tagged release;
+- a clean consumer can install, brand, configure, typecheck, test, and build;
+- future projects normally edit only `project/`, `modules/`, public config, and
+  assets;
+- Master `core`, `shared`, and `shell` are product-neutral and enforce inward-only
+  dependency boundaries;
+- inherited hubs have regression coverage;
+- legacy identity remains only on a reviewed compatibility/history allowlist;
+- accessibility, responsive layout, i18n, RTL/LTR, SSR/browser guards, loading,
+  error, and empty states are preserved; and
+- Enterprise Treasury remains a consumer whose domain implementation is gated by
+  Canon authority.
 
 ## Explicit non-goals
 
 - No backend, database, infrastructure, deployment, or runtime activation work.
-- No speculative Treasury workflow or provider integration.
-- No blanket rewrite to another frontend framework or state library.
-- No replacement design system unless separately requested and justified.
-- No Canon edits from this repository.
+- No speculative Treasury workflow, provider integration, or authorization rule.
+- No microfrontend platform, plugin system, page builder, or mandatory state
+  library.
+- No npm-package split until consumer upgrade evidence justifies it.
+- No automatic synchronization across generated repositories in the first
+  release.
+- No Canon edits from the frontend or Master repositories.

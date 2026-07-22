@@ -22,6 +22,7 @@ add
 added
 address
 admin
+adoption
 advanced
 after
 agent
@@ -60,6 +61,7 @@ auth
 authenticated
 authentication
 authority
+authorization
 auto
 autocomplete
 autosize
@@ -89,6 +91,7 @@ bool
 boolean
 bootstrap
 boundaries
+boundary
 brand
 breadcrumb
 breadcrumbs
@@ -114,6 +117,7 @@ callbacks
 camel
 can
 cancel
+canon
 canonical
 capabilities
 capability
@@ -126,6 +130,7 @@ changed
 changelog
 changes
 char
+characterization
 characters
 chars
 chart
@@ -144,6 +149,7 @@ clamp
 class
 classes
 classic
+clean
 cleanup
 clear
 clearer
@@ -175,6 +181,7 @@ complete
 completion
 component
 components
+composition
 compute
 conditional
 config
@@ -196,6 +203,7 @@ content
 context
 contexts
 contextual
+contract
 contracts
 control
 controls
@@ -266,6 +274,7 @@ detail
 details
 device
 devices
+diagnostics
 dialer
 diff
 differences
@@ -299,6 +308,7 @@ draggable
 draw
 drawer
 drawers
+driven
 drop
 dropdown
 dropdowns
@@ -354,6 +364,7 @@ extended
 external
 extra
 extract
+extraction
 facade
 factory
 fake
@@ -404,6 +415,7 @@ fractional
 frame
 friendly
 from
+frontend
 full
 fullcalendar
 function
@@ -422,6 +434,7 @@ global
 goto
 grant
 graph
+graphify
 grid
 grids
 ground
@@ -577,6 +590,7 @@ mark
 mask
 masked
 masking
+master
 match
 matcher
 matches
@@ -602,6 +616,7 @@ meter
 method
 metric
 metrics
+migration
 min
 mini
 minimap
@@ -635,6 +650,7 @@ navigation
 navigator
 nested
 network
+neutrality
 new
 next
 ngb
@@ -684,6 +700,7 @@ over
 overlay
 overlays
 owned
+ownership
 pad
 page
 pages
@@ -723,6 +740,7 @@ pipes
 place
 placeholder
 placement
+plan
 platform
 play
 plural
@@ -761,6 +779,7 @@ product
 profile
 profiler
 progress
+project
 projected
 promise
 prop
@@ -794,6 +813,7 @@ recreate
 redirect
 reenable
 ref
+refactor
 refresh
 refs
 region
@@ -805,6 +825,7 @@ reinit
 reinitialize
 rejected
 relative
+release
 remaining
 remote
 removal
@@ -819,6 +840,7 @@ replay
 report
 reporter
 reports
+repository
 request
 requests
 required
@@ -835,10 +857,12 @@ result
 results
 resume
 retry
+reusable
 review
 right
 role
 roles
+room
 root
 round
 route
@@ -873,6 +897,7 @@ script
 scripts
 scroll
 scrolling
+seams
 search
 searched
 searches
@@ -1018,6 +1043,7 @@ textarea
 textual
 theme
 this
+threshold
 thresholds
 throttle
 throttled
@@ -1058,6 +1084,7 @@ translate
 translated
 translation
 translations
+treasury
 tree
 trigger
 trim
@@ -1082,6 +1109,7 @@ untouched
 update
 updated
 updates
+upgrades
 upload
 uploading
 url
@@ -1101,8 +1129,10 @@ validators
 value
 values
 variable
+variation
 velora
 version
+versioned
 versus
 view
 viewport

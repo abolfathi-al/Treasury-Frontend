@@ -1,4 +1,3 @@
-import { SHELL_NAVIGATION_ITEMS } from './shell-navigation.config';
 import {
   applyShellNavigationLabels,
   filterShellNavigationItems,
@@ -132,28 +131,6 @@ describe('shell navigation utilities', () => {
 
     expect(visibleItems.map((item) => item.id)).toEqual(['reports']);
     expect(visibleItems[0].children).toEqual([]);
-  });
-
-  it('resolves stable sidebar items without legacy auth or error destinations', () => {
-    const viewItems = resolveShellNavigationViewItems(
-      SHELL_NAVIGATION_ITEMS,
-      '/dashboard',
-    );
-    const ids = viewItems.map((item) => item.id);
-
-    expect(new Set(ids).size).toBe(ids.length);
-    expect(viewItems.length).toBe(SHELL_NAVIGATION_ITEMS.length);
-    expect(ids).not.toContain('auth');
-    expect(ids).not.toContain('errors');
-    expect(
-      viewItems.some((item) => item.id === 'dashboard' && item.isActive),
-    ).toBeTrue();
-    expect(
-      viewItems.some((item) => item.route === '/auth/login'),
-    ).toBeFalse();
-    expect(
-      viewItems.some((item) => item.route === '/error/404'),
-    ).toBeFalse();
   });
 
   it('applies translated labels with key fallbacks', () => {

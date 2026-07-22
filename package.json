@@ -1,6 +1,7 @@
 {
-  "name": "web",
+  "name": "enterprise-dashboard-master-source",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4200",
@@ -10,21 +11,19 @@
     "i18n:validate": "node scripts/validate-velora-shell-i18n.mjs",
     "i18n:inventory": "node scripts/validate-velora-shell-i18n.mjs --write-json",
     "build:prod": "ng build --base-href / --configuration production --stats-json",
-    "postbuild:prod": "npm run purgecss && npm run gzip && npm run sourceMap",
+    "postbuild:prod": "pnpm purgecss && pnpm sourceMap",
     "watch": "ng build --watch --configuration development",
     "rtl": "node scripts/rtl.js",
     "purgecss": "node scripts/purgecss.js",
-    "accessibility": "node scripts/accessibility.js",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "serve:ssr": "node dist/web/server/main.js",
-    "build:ssr": "pnpm run build:prod && ng run web:server",
+    "build:ssr": "pnpm build:prod && ng run web:server",
     "dev:ssr": "ng run web:serve-ssr",
     "prerender": "ng run web:prerender",
     "analyze:prod": "webpack-bundle-analyzer dist/web/stats.json",
     "sourceMap": "node -e \"const fs=require(\\\"fs\\\"); const path=require(\\\"path\\\"); const dir=path.resolve(\\\"dist/web\\\"); const out=path.join(dir,\\\"sourceMaps\\\"); if(!fs.existsSync(dir)) process.exit(0); fs.mkdirSync(out,{recursive:true}); for(const file of fs.readdirSync(dir)){ if(file.endsWith(\\\".map\\\")) fs.renameSync(path.join(dir,file), path.join(out,file)); }\"",
-    "gzip": "node scripts/compress.js",
     "patch:tiny-slider": "patch-package tiny-slider",
     "figma-mcp": "node scripts/figma-mcp.js",
     "figma-mcp:stdio": "node scripts/figma-mcp.js stdio",
@@ -34,7 +33,7 @@
   },
   "private": true,
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22"
   },
   "dependencies": {
     "@angular/animations": "20.3.3",

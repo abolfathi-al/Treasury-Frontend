@@ -4,10 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, map, startWith } from 'rxjs';
 
-import {
-  SHELL_NAVIGATION_ITEMS,
-  SHELL_NAVIGATION_LABEL_KEYS,
-} from './shell-navigation.config';
+import { PAGE_NAVIGATION_ITEMS, PageNavigationItem } from '@core/navigation';
 import {
   applyShellNavigationLabels,
   resolveShellNavigationViewItems,
@@ -19,6 +16,10 @@ import {
 export class ShellNavigationFacade {
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
+  private readonly navigationItems = inject(PAGE_NAVIGATION_ITEMS);
+  private readonly navigationLabelKeys = collectNavigationLabelKeys(
+    this.navigationItems,
+  );
   private readonly currentUrlSignal = toSignal(
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -28,7 +29,7 @@ export class ShellNavigationFacade {
     { initialValue: this.router.url },
   );
   private readonly translatedLabelsSignal = toSignal(
-    this.translate.stream([...SHELL_NAVIGATION_LABEL_KEYS]).pipe(
+    this.translate.stream([...this.navigationLabelKeys]).pipe(
       map((labels) => labels as Record<string, string>),
       startWith(this.instantLabels()),
     ),
@@ -39,7 +40,7 @@ export class ShellNavigationFacade {
   readonly menuItems = computed(() =>
     applyShellNavigationLabels(
       resolveShellNavigationViewItems(
-        SHELL_NAVIGATION_ITEMS,
+        this.navigationItems,
         this.currentUrl(),
       ),
       this.translatedLabelsSignal(),
@@ -48,10 +49,23 @@ export class ShellNavigationFacade {
 
   private instantLabels(): Record<string, string> {
     return Object.fromEntries(
-      SHELL_NAVIGATION_LABEL_KEYS.map((key) => [
+      this.navigationLabelKeys.map((key) => [
         key,
         this.translate.instant(key),
       ]),
     );
   }
+}
+
+function collectNavigationLabelKeys(
+  items: readonly PageNavigationItem[],
+): readonly string[] {
+  return Array.from(
+    new Set(
+      items.flatMap((item) => [
+        item.labelKey,
+        ...collectNavigationLabelKeys(item.children ?? []),
+      ]),
+    ),
+  );
 }
