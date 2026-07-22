@@ -47,10 +47,11 @@ As of 2026-07-22:
   and pnpm explicit, and moved navigation composition into `project/`.
 - The next slice added the authoritative pnpm lockfile, aligned browser and SSR
   output under `dist/web`, and restored the missing SSR runtime dependency.
-- Frozen install, typecheck, lint, all 215 tests, i18n validation, production and
+- Frozen install, typecheck, lint, all 221 tests, i18n validation, production and
   SSR builds, and an HTTP 200 SSR smoke check pass.
-- Phase 2 remains in progress. Navigation composition is consumer-owned; brand,
-  route, locale, auth, and demo boundaries still require separate slices.
+- Phase 2 remains in progress. Route, navigation, brand, locale, theme, layout,
+  and public runtime configuration are consumer-owned. Auth adapter wiring and
+  demo isolation still require separate slices.
 
 ## Baseline
 

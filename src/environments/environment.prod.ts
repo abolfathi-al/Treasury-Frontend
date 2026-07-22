@@ -4,11 +4,8 @@
 
 export const environment = {
   production: true,
-  appVersion: 'velora-enterprise-0.1.2',
-  USERDATA_KEY: 'velora_auth',
   // Demo only. Not an authorization source of truth. Backend must enforce real access.
   contextDemoMode: false,
-  apiUrl: '',
   interceptorsPaths: new Map<string, RegExp>([
     ['state', /api/],
     ['auth', /[\W]*/],

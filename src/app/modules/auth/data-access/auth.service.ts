@@ -5,8 +5,8 @@ import { Observable, BehaviorSubject, of, throwError, map, catchError, switchMap
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import md5 from 'md5';
 
-import { environment } from 'src/environments/environment';
 import { AuthSessionPort } from '@core/auth';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { SESSION_STORAGE } from '@core/tokens';
 import { LoggerService } from '@core/services/logger.service';
 import { AuthModel, UserModel } from '@models/auth';
@@ -17,13 +17,12 @@ import { runSafely } from '@shared/directives/shared/directive-helpers';
 export type UserType = UserModel | undefined;
 export type AuthState = 'idle' | 'loading' | 'authenticated' | 'unauthenticated' | 'error';
 
-const API_USERS_URL = `${environment.apiUrl}/api/auth`;
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements AuthSessionPort {
   // Injected dependencies
+  private readonly runtimeConfig = inject(APP_RUNTIME_CONFIG);
   private readonly sessionStorage = inject<Storage>(SESSION_STORAGE, { optional: true });
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
@@ -32,7 +31,8 @@ export class AuthService implements AuthSessionPort {
   private readonly notificationService = inject(NotificationService);
   private readonly logger = inject(LoggerService);
   // Private fields
-  private readonly authLocalSessionToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
+  private readonly authApiUrl = `${this.runtimeConfig.apiUrl}/api/auth`;
+  private readonly authLocalSessionToken = `${this.runtimeConfig.appVersion}-${this.runtimeConfig.authStorageKey}`;
 
   // Signals for reactive state management
   private readonly _currentUser = signal<UserType>(undefined);
@@ -133,7 +133,7 @@ export class AuthService implements AuthSessionPort {
     this._authState.set('loading');
     this.isLoadingSubject.next(true);
 
-    return this.http.post<AuthModel>(`${API_USERS_URL}/getToken`, request).pipe(
+    return this.http.post<AuthModel>(`${this.authApiUrl}/getToken`, request).pipe(
       map((data) => {
         this.setAuthFromSessionStorage(data);
         return data;
@@ -182,7 +182,7 @@ export class AuthService implements AuthSessionPort {
 
     // Call logout API if refresh token exists
     if (auth?.refreshToken) {
-      this.http.post<void>(`${API_USERS_URL}/logout`, {
+      this.http.post<void>(`${this.authApiUrl}/logout`, {
         refreshToken: auth.refreshToken
       }).pipe(
         first(),
@@ -205,7 +205,7 @@ export class AuthService implements AuthSessionPort {
     this._isLoading.set(true);
     this.isLoadingSubject.next(true);
 
-    return this.http.get<UserModel>(`${API_USERS_URL}/me`).pipe(
+    return this.http.get<UserModel>(`${this.authApiUrl}/me`).pipe(
       map((user: UserType) => {
         if (user) {
           // Update permissions
@@ -239,7 +239,7 @@ export class AuthService implements AuthSessionPort {
     this._isLoading.set(true);
     this.isLoadingSubject.next(true);
 
-    return this.http.post<UserModel>(API_USERS_URL, user).pipe(
+    return this.http.post<UserModel>(this.authApiUrl, user).pipe(
       tap((registeredUser) => {
         this.logger.info('User registered successfully', 'AuthService', { user: registeredUser });
       }),
@@ -259,7 +259,7 @@ export class AuthService implements AuthSessionPort {
     this._isLoading.set(true);
     this.isLoadingSubject.next(true);
 
-    return this.http.post<boolean>(`${API_USERS_URL}/forgot-password`, { email }).pipe(
+    return this.http.post<boolean>(`${this.authApiUrl}/forgot-password`, { email }).pipe(
       tap((success) => {
         if (success) {
           this.logger.info('Password reset email sent successfully', 'AuthService');
@@ -283,7 +283,7 @@ export class AuthService implements AuthSessionPort {
       return of(undefined);
     }
 
-    return this.http.post<AuthModel>(`${API_USERS_URL}/refresh`, {
+    return this.http.post<AuthModel>(`${this.authApiUrl}/refresh`, {
       refreshToken: auth.refreshToken
     }).pipe(
       map((data) => {

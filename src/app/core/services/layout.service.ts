@@ -11,17 +11,12 @@ import { DarkHeaderConfig } from '@core/config/dark-header.config';
 import { DarkSidebarConfig } from '@core/config/dark-sidebar.config';
 import { LightHeaderConfig } from '@core/config/light-header.config';
 import { LightSidebarConfig } from '@core/config/light-sidebar.config';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { LOCAL_STORAGE, LOCATION } from '@core/tokens';
 import { CoreUtil } from '@utils/core.util';
 import { runSafely } from '@shared/directives/shared/directive-helpers';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { LoggerService } from './logger.service';
-
-const STORAGE_KEYS = {
-  LAYOUT_CONFIG: `${environment.appVersion}-layoutConfig`,
-  BASE_LAYOUT_TYPE: `${environment.appVersion}-baseLayoutType`,
-} as const;
 
 const LAYOUT_CONFIGS: Record<LayoutType, ILayout> = {
   'dark-sidebar': DarkSidebarConfig,
@@ -70,6 +65,12 @@ export {
 })
 export class LayoutService {
   readonly defaultLayoutType = inject(APP_DEFAULT_LAYOUT_TYPE);
+
+  private readonly runtimeConfig = inject(APP_RUNTIME_CONFIG);
+  private readonly storageKeys = {
+    LAYOUT_CONFIG: `${this.runtimeConfig.appVersion}-layoutConfig`,
+    BASE_LAYOUT_TYPE: `${this.runtimeConfig.appVersion}-baseLayoutType`,
+  } as const;
 
   private readonly localStorage = inject<Storage>(LOCAL_STORAGE, {
     optional: true,
@@ -132,13 +133,15 @@ export class LayoutService {
   }
 
   private getLayoutConfigStorageKey(layoutType: LayoutType): string {
-    return `${layoutType}-${STORAGE_KEYS.LAYOUT_CONFIG}`;
+    return `${layoutType}-${this.storageKeys.LAYOUT_CONFIG}`;
   }
 
   private seedLayoutStorage(layoutType: LayoutType, config: ILayout): void {
-    const storedLayoutType = this.readFromStorage(STORAGE_KEYS.BASE_LAYOUT_TYPE);
+    const storedLayoutType = this.readFromStorage(
+      this.storageKeys.BASE_LAYOUT_TYPE,
+    );
     if (!storedLayoutType || !(storedLayoutType in LAYOUT_CONFIGS)) {
-      this.writeToStorage(STORAGE_KEYS.BASE_LAYOUT_TYPE, layoutType);
+      this.writeToStorage(this.storageKeys.BASE_LAYOUT_TYPE, layoutType);
     }
 
     const configKey = this.getLayoutConfigStorageKey(layoutType);
@@ -212,7 +215,7 @@ export class LayoutService {
   }
 
   getBaseLayoutTypeFromLocalStorage(): LayoutType {
-    const stored = this.readFromStorage(STORAGE_KEYS.BASE_LAYOUT_TYPE);
+    const stored = this.readFromStorage(this.storageKeys.BASE_LAYOUT_TYPE);
     if (stored && stored in LAYOUT_CONFIGS) {
       return stored as LayoutType;
     }
@@ -245,7 +248,7 @@ export class LayoutService {
 
   setBaseLayoutType(layoutType: LayoutType): void {
     const config = this.getLayoutByType(layoutType);
-    this.writeToStorage(STORAGE_KEYS.BASE_LAYOUT_TYPE, layoutType);
+    this.writeToStorage(this.storageKeys.BASE_LAYOUT_TYPE, layoutType);
     this.writeToStorage(
       this.getLayoutConfigStorageKey(layoutType),
       JSON.stringify(config)

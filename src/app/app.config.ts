@@ -33,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AUTH_SESSION } from '@core/auth';
 import { APP_BRAND } from '@core/config/brand.config';
 import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { ERROR_REPORTER, ErrorReporterPort } from '@core/errors';
 import { LANGUAGE_SERVICE } from '@core/i18n';
 import {
@@ -68,6 +69,7 @@ import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_DEFAULT_LAYOUT_TYPE } from './project/layout/project-layout.config';
 import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
 import { PROJECT_ROUTES } from './project/routing/project.routes';
+import { PROJECT_RUNTIME_CONFIG } from './project/runtime/project-runtime.config';
 import { PROJECT_THEME_MODE } from './project/theme/project-theme.config';
 import { AuthService } from './modules/auth/data-access/auth.service';
 import { ErrorService } from './modules/errors/data-access/error.service';
@@ -309,6 +311,10 @@ export function getAppProviders(
     {
       provide: APP_DEFAULT_LAYOUT_TYPE,
       useValue: PROJECT_DEFAULT_LAYOUT_TYPE,
+    },
+    {
+      provide: APP_RUNTIME_CONFIG,
+      useValue: PROJECT_RUNTIME_CONFIG,
     },
     {
       provide: PAGE_NAVIGATION_ITEMS,

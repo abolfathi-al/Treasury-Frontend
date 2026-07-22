@@ -13,11 +13,13 @@ import {
 } from '@core/state/context';
 import { APP_BRAND } from '@core/config/brand.config';
 import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { LayoutService } from '@core/services/layout.service';
 import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_DEFAULT_LAYOUT_TYPE } from './project/layout/project-layout.config';
+import { PROJECT_RUNTIME_CONFIG } from './project/runtime/project-runtime.config';
 import { PROJECT_THEME_MODE } from './project/theme/project-theme.config';
 import { getAppProviders, layoutStorageSetup } from './app.config';
 
@@ -128,6 +130,12 @@ describe('getAppProviders shell context providers', () => {
       jasmine.objectContaining({
         provide: APP_DEFAULT_LAYOUT_TYPE,
         useValue: PROJECT_DEFAULT_LAYOUT_TYPE,
+      }),
+    );
+    expect(appProviders).toContain(
+      jasmine.objectContaining({
+        provide: APP_RUNTIME_CONFIG,
+        useValue: PROJECT_RUNTIME_CONFIG,
       }),
     );
     expect(appProviders).toContain(

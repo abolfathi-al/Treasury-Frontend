@@ -3,8 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
 import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
+import {
+  APP_RUNTIME_CONFIG,
+  AppRuntimeConfig,
+} from '@core/config/runtime.config';
 import { LOCAL_STORAGE } from '@core/tokens';
-import { environment } from '@environments/environment';
 import { LoggerService } from './logger.service';
 import { LayoutService } from './layout.service';
 
@@ -40,8 +43,13 @@ describe('LayoutService', () => {
   let storage: MemoryStorage;
   let logger: jasmine.SpyObj<LoggerService>;
 
-  const baseLayoutTypeKey = `${environment.appVersion}-baseLayoutType`;
-  const defaultLayoutConfigKey = `dark-sidebar-${environment.appVersion}-layoutConfig`;
+  const runtimeConfig: AppRuntimeConfig = {
+    appVersion: 'layout-spec-1.0.0',
+    authStorageKey: 'auth',
+    apiUrl: '',
+  };
+  const baseLayoutTypeKey = `${runtimeConfig.appVersion}-baseLayoutType`;
+  const defaultLayoutConfigKey = `dark-sidebar-${runtimeConfig.appVersion}-layoutConfig`;
 
   beforeEach(() => {
     storage = new MemoryStorage();
@@ -51,6 +59,7 @@ describe('LayoutService', () => {
       providers: [
         provideZonelessChangeDetection(),
         LayoutService,
+        { provide: APP_RUNTIME_CONFIG, useValue: runtimeConfig },
         { provide: LOCAL_STORAGE, useValue: storage },
         { provide: LoggerService, useValue: logger },
         {
@@ -85,7 +94,23 @@ describe('LayoutService', () => {
 
     expect(storage.getItem(baseLayoutTypeKey)).toBe('light-header');
     expect(
-      storage.getItem(`light-header-${environment.appVersion}-layoutConfig`)
+      storage.getItem(`light-header-${runtimeConfig.appVersion}-layoutConfig`)
+    ).toBeTruthy();
+  });
+
+  it('uses an alternate runtime namespace for layout storage', () => {
+    const alternateVersion = 'future-dashboard-2.0.0';
+    TestBed.overrideProvider(APP_RUNTIME_CONFIG, {
+      useValue: { ...runtimeConfig, appVersion: alternateVersion },
+    });
+
+    TestBed.inject(LayoutService);
+
+    expect(storage.getItem(`${alternateVersion}-baseLayoutType`)).toBe(
+      'dark-sidebar',
+    );
+    expect(
+      storage.getItem(`dark-sidebar-${alternateVersion}-layoutConfig`),
     ).toBeTruthy();
   });
 
