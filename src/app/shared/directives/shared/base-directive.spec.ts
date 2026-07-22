@@ -23,12 +23,18 @@ interface TestOptions {
   standalone: true,
 })
 class TestBaseDirective extends BaseDirective<TestOptions, string> {
+  readonly optionsChanges: TestOptions[] = [];
+
   constructor() {
     super(inject(LoggerService), 'TestBaseDirective', {
       activate: true,
       label: 'default',
       count: 0,
     });
+  }
+
+  protected override onOptionsChanged(next: TestOptions): void {
+    this.optionsChanges.push(next);
   }
 
   callSetClass(renderer: Renderer2, el: HTMLElement, cls: string, add: boolean): void {
@@ -54,6 +60,14 @@ class TestBaseDirective extends BaseDirective<TestOptions, string> {
 
   setActivate(v: boolean): void {
     this.updateOption('activate', v);
+  }
+
+  mergeTestOptions(options: Partial<TestOptions>): void {
+    this.mergeOptions(options);
+  }
+
+  replaceTestOptions(options: TestOptions): void {
+    this.setOptions(options);
   }
 }
 
@@ -146,6 +160,31 @@ describe('BaseDirective added helpers', () => {
       const { instance } = setup();
       instance.setActivate(false);
       expect(instance.callIsActivateOn()).toBeFalse();
+    });
+  });
+
+  describe('option changes', () => {
+    it('notifies once for each changed option operation and skips no-op updates', () => {
+      const { instance } = setup();
+
+      instance.setActivate(false);
+      expect(instance.optionsChanges.length).toBe(1);
+      expect(instance.optionsChanges[0].activate).toBeFalse();
+
+      instance.setActivate(false);
+      expect(instance.optionsChanges.length).toBe(1);
+
+      instance.mergeTestOptions({ label: 'merged' });
+      expect(instance.optionsChanges.length).toBe(2);
+      expect(instance.optionsChanges[1].label).toBe('merged');
+
+      instance.replaceTestOptions({ activate: true, label: 'replaced', count: 1 });
+      expect(instance.optionsChanges.length).toBe(3);
+      expect(instance.optionsChanges[2]).toEqual({
+        activate: true,
+        label: 'replaced',
+        count: 1,
+      });
     });
   });
 

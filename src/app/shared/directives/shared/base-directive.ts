@@ -8,10 +8,7 @@ import {
   DomListenerManager,
   InputEffectBinding,
   LoggerAdapter,
-  mergeOptionsIfChanged as mergeIfChanged,
   runSafely,
-  setOptionsIfChanged as setAllIfChanged,
-  setOptionIfChanged as setIfChanged,
   syncInputsToOptions,
 } from './directive-helpers';
 
@@ -65,21 +62,15 @@ export abstract class BaseDirective<
     key: K,
     value: TOptions[K]
   ): boolean {
-    return setIfChanged(this.optionsManager, key, value, (next) =>
-      this.onOptionsChanged(next)
-    );
+    return this.optionsManager.setOption(key, value);
   }
 
   protected mergeOptions(options: Partial<TOptions> | undefined): boolean {
-    return mergeIfChanged(this.optionsManager, options, (next) =>
-      this.onOptionsChanged(next)
-    );
+    return this.optionsManager.mergeOptions(options);
   }
 
   protected setOptions(options: TOptions): boolean {
-    return setAllIfChanged(this.optionsManager, options, (next) =>
-      this.onOptionsChanged(next)
-    );
+    return this.optionsManager.set(options);
   }
 
   protected runOperation(action: () => void, message: string): void {
