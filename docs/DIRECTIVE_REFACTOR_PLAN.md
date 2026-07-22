@@ -1,6 +1,6 @@
 # Directive Refactor and Hardening Plan
 
-Status: `PLANNED`
+Status: `IN PROGRESS` (`D0 COMPLETE`; D1 is next)
 
 Parent plan: `docs/FRONTEND_REFACTOR_PLAN.md`, Phase 4.
 
@@ -184,6 +184,10 @@ Every retained or internal directive must satisfy all applicable rules:
 ## Execution phases
 
 ### D0 - Freeze active behavior
+
+Completed on 2026-07-22. The selector/owner contract, characterization
+coverage, known Stepper mismatch, and production-size baseline are recorded in
+`docs/DIRECTIVE_CONTRACT_BASELINE.md`.
 
 1. Record the active selector-to-consumer map.
 2. Add characterization checks only for behavior those consumers use.
