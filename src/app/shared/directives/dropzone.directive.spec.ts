@@ -61,10 +61,32 @@ class FakeDropzone {
 @Component({
   imports: [DropzoneDirective],
   standalone: true,
-  template: '<div vlVeloraDropzone></div>',
+  template: `
+    <div
+      vlVeloraDropzone
+      [dropzoneHiddenInputContainer]="hiddenInputContainer"
+      [dropzoneRenameFile]="renameFile"
+      [dropzoneTransformFile]="transformFile"
+      [dropzoneResize]="resize"
+    ></div>
+  `,
 })
 class HostComponent {
   readonly directive = viewChild.required(DropzoneDirective);
+  readonly hiddenInputContainer = document.createElement('div');
+  readonly renameFile = (name: string): string => `renamed-${name}`;
+  readonly transformFile = (
+    file: Dropzone.DropzoneFile,
+    done: (file: File | Blob) => void
+  ): void => done(file);
+  readonly resize = (): Dropzone.DropzoneResizeInfo => ({
+    srcX: 0,
+    srcY: 0,
+    srcWidth: 100,
+    srcHeight: 100,
+    trgWidth: 50,
+    trgHeight: 50,
+  });
 }
 
 interface DropzoneDirectiveInternals {
@@ -265,6 +287,55 @@ describe('Dropzone directive adapter helpers', () => {
       expect(hasDropzoneRemoveHandler(removeButton)).toBeFalse();
       expect(instance.removedFiles).toEqual([]);
       expect(instance.destroyed).toBeTrue();
+    } finally {
+      jasmine.clock().uninstall();
+    }
+  });
+
+  it('binds advanced inputs and emits validation and total-size state', () => {
+    jasmine.clock().install();
+    try {
+      const fixture = TestBed.createComponent(HostComponent);
+      fixture.detectChanges();
+      const component = fixture.componentInstance;
+      const directive = component.directive();
+      const options = directive.getOptions();
+
+      expect(options.hiddenInputContainer).toBe(
+        component.hiddenInputContainer
+      );
+      expect(options.renameFile).toBe(component.renameFile);
+      expect(options.transformFile).toBe(component.transformFile);
+      expect(options.resize).toBe(component.resize);
+
+      const validationChange = spyOn(
+        directive.validationChange,
+        'emit'
+      ).and.callThrough();
+      const totalSizeChange = spyOn(
+        directive.totalSizeEvent,
+        'emit'
+      ).and.callThrough();
+      const internals = directive as unknown as DropzoneDirectiveInternals;
+      internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
+      internals.createInstance();
+
+      const file = {
+        name: 'statement.csv',
+        size: 128,
+      } as Dropzone.DropzoneFile;
+      FakeDropzone.lastInstance?.files.push(file);
+      FakeDropzone.lastInstance?.emit('addedfile', file);
+
+      expect(validationChange).toHaveBeenCalledOnceWith({
+        isValid: true,
+        errors: [],
+      });
+      expect(totalSizeChange).toHaveBeenCalledOnceWith(128);
+      expect(directive.getTotalSize()).toBe(128);
+
+      fixture.destroy();
+      jasmine.clock().tick(100);
     } finally {
       jasmine.clock().uninstall();
     }

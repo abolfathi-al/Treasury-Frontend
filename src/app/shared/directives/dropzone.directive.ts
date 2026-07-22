@@ -283,6 +283,44 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
   readonly dropzoneDictInvalidFileType = input<string>();
   readonly dropzoneDictMaxFilesExceeded = input<string>();
 
+  private readonly inputBindings = [
+    { input: this.dropzoneUrl, key: 'url' as const },
+    { input: this.dropzoneMethod, key: 'method' as const },
+    { input: this.dropzoneParallelUploads, key: 'parallelUploads' as const },
+    { input: this.dropzoneMaxFilesize, key: 'maxFilesize' as const },
+    { input: this.dropzoneMaxFiles, key: 'maxFiles' as const },
+    { input: this.dropzoneAcceptedFiles, key: 'acceptedFiles' as const },
+    { input: this.dropzoneAddRemoveLinks, key: 'addRemoveLinks' as const },
+    { input: this.dropzonePreviewsContainer, key: 'previewsContainer' as const },
+    { input: this.dropzoneHiddenInputContainer, key: 'hiddenInputContainer' as const },
+    { input: this.dropzoneClickable, key: 'clickable' as const },
+    { input: this.dropzoneCreateImageThumbnails, key: 'createImageThumbnails' as const },
+    { input: this.dropzoneMaxThumbnailFilesize, key: 'maxThumbnailFilesize' as const },
+    { input: this.dropzoneThumbnailWidth, key: 'thumbnailWidth' as const },
+    { input: this.dropzoneThumbnailHeight, key: 'thumbnailHeight' as const },
+    { input: this.dropzoneThumbnailMethod, key: 'thumbnailMethod' as const },
+    { input: this.dropzoneTimeout, key: 'timeout' as const },
+    { input: this.dropzoneHeaders, key: 'headers' as const },
+    { input: this.dropzoneParams, key: 'params' as const },
+    { input: this.dropzoneWithCredentials, key: 'withCredentials' as const },
+    { input: this.dropzoneUploadMultiple, key: 'uploadMultiple' as const },
+    { input: this.dropzoneChunking, key: 'chunking' as const },
+    { input: this.dropzoneChunkSize, key: 'chunkSize' as const },
+    { input: this.dropzoneRetryChunks, key: 'retryChunks' as const },
+    { input: this.dropzoneRetryChunksLimit, key: 'retryChunksLimit' as const },
+    { input: this.dropzoneAutoProcessQueue, key: 'autoProcessQueue' as const },
+    { input: this.dropzoneAutoQueue, key: 'autoQueue' as const },
+    { input: this.dropzoneRenameFile, key: 'renameFile' as const },
+    { input: this.dropzoneTransformFile, key: 'transformFile' as const },
+    { input: this.dropzoneResize, key: 'resize' as const },
+    { input: this.dropzonePreviewTemplate, key: 'previewTemplate' as const },
+    { input: this.dropzoneForceFallback, key: 'forceFallback' as const },
+    { input: this.dropzoneDictDefaultMessage, key: 'dictDefaultMessage' as const },
+    { input: this.dropzoneDictFileTooBig, key: 'dictFileTooBig' as const },
+    { input: this.dropzoneDictInvalidFileType, key: 'dictInvalidFileType' as const },
+    { input: this.dropzoneDictMaxFilesExceeded, key: 'dictMaxFilesExceeded' as const },
+  ];
+
   readonly initEvent = output<void>();
   readonly addedFileEvent = output<Dropzone.DropzoneFile>();
   readonly removedFileEvent = output<Dropzone.DropzoneFile>();
@@ -326,82 +364,13 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
       this.markBaseDestroyed();
       this.cleanup();
     });
-    this.initBindings();
-  }
-
-  private initBindings(): void {
-    const bindings = [
-      { input: this.dropzoneUrl, key: 'url' as const },
-      { input: this.dropzoneMethod, key: 'method' as const },
-      { input: this.dropzoneParallelUploads, key: 'parallelUploads' as const },
-      { input: this.dropzoneMaxFilesize, key: 'maxFilesize' as const },
-      { input: this.dropzoneMaxFiles, key: 'maxFiles' as const },
-      { input: this.dropzoneAcceptedFiles, key: 'acceptedFiles' as const },
-      { input: this.dropzoneAddRemoveLinks, key: 'addRemoveLinks' as const },
-      { input: this.dropzonePreviewsContainer, key: 'previewsContainer' as const },
-      { input: this.dropzoneClickable, key: 'clickable' as const },
-      { input: this.dropzoneCreateImageThumbnails, key: 'createImageThumbnails' as const },
-      { input: this.dropzoneMaxThumbnailFilesize, key: 'maxThumbnailFilesize' as const },
-      { input: this.dropzoneThumbnailWidth, key: 'thumbnailWidth' as const },
-      { input: this.dropzoneThumbnailHeight, key: 'thumbnailHeight' as const },
-      { input: this.dropzoneThumbnailMethod, key: 'thumbnailMethod' as const },
-      { input: this.dropzoneTimeout, key: 'timeout' as const },
-      { input: this.dropzoneHeaders, key: 'headers' as const },
-      { input: this.dropzoneParams, key: 'params' as const },
-      { input: this.dropzoneWithCredentials, key: 'withCredentials' as const },
-      { input: this.dropzoneUploadMultiple, key: 'uploadMultiple' as const },
-      { input: this.dropzoneChunking, key: 'chunking' as const },
-      { input: this.dropzoneChunkSize, key: 'chunkSize' as const },
-      { input: this.dropzoneRetryChunks, key: 'retryChunks' as const },
-      { input: this.dropzoneRetryChunksLimit, key: 'retryChunksLimit' as const },
-      { input: this.dropzoneAutoProcessQueue, key: 'autoProcessQueue' as const },
-      { input: this.dropzoneAutoQueue, key: 'autoQueue' as const },
-      { input: this.dropzonePreviewTemplate, key: 'previewTemplate' as const },
-      { input: this.dropzoneForceFallback, key: 'forceFallback' as const },
-      { input: this.dropzoneDictDefaultMessage, key: 'dictDefaultMessage' as const },
-      { input: this.dropzoneDictFileTooBig, key: 'dictFileTooBig' as const },
-      { input: this.dropzoneDictInvalidFileType, key: 'dictInvalidFileType' as const },
-      { input: this.dropzoneDictMaxFilesExceeded, key: 'dictMaxFilesExceeded' as const },
-    ];
-    this.bindInputs(bindings);
+    this.bindInputs(this.inputBindings);
   }
 
   ngOnInit(): void {
     if (!this.host.isBrowser) return;
 
-    this.syncInputs([
-      { input: this.dropzoneUrl, key: 'url' as const },
-      { input: this.dropzoneMethod, key: 'method' as const },
-      { input: this.dropzoneParallelUploads, key: 'parallelUploads' as const },
-      { input: this.dropzoneMaxFilesize, key: 'maxFilesize' as const },
-      { input: this.dropzoneMaxFiles, key: 'maxFiles' as const },
-      { input: this.dropzoneAcceptedFiles, key: 'acceptedFiles' as const },
-      { input: this.dropzoneAddRemoveLinks, key: 'addRemoveLinks' as const },
-      { input: this.dropzonePreviewsContainer, key: 'previewsContainer' as const },
-      { input: this.dropzoneClickable, key: 'clickable' as const },
-      { input: this.dropzoneCreateImageThumbnails, key: 'createImageThumbnails' as const },
-      { input: this.dropzoneMaxThumbnailFilesize, key: 'maxThumbnailFilesize' as const },
-      { input: this.dropzoneThumbnailWidth, key: 'thumbnailWidth' as const },
-      { input: this.dropzoneThumbnailHeight, key: 'thumbnailHeight' as const },
-      { input: this.dropzoneThumbnailMethod, key: 'thumbnailMethod' as const },
-      { input: this.dropzoneTimeout, key: 'timeout' as const },
-      { input: this.dropzoneHeaders, key: 'headers' as const },
-      { input: this.dropzoneParams, key: 'params' as const },
-      { input: this.dropzoneWithCredentials, key: 'withCredentials' as const },
-      { input: this.dropzoneUploadMultiple, key: 'uploadMultiple' as const },
-      { input: this.dropzoneChunking, key: 'chunking' as const },
-      { input: this.dropzoneChunkSize, key: 'chunkSize' as const },
-      { input: this.dropzoneRetryChunks, key: 'retryChunks' as const },
-      { input: this.dropzoneRetryChunksLimit, key: 'retryChunksLimit' as const },
-      { input: this.dropzoneAutoProcessQueue, key: 'autoProcessQueue' as const },
-      { input: this.dropzoneAutoQueue, key: 'autoQueue' as const },
-      { input: this.dropzonePreviewTemplate, key: 'previewTemplate' as const },
-      { input: this.dropzoneForceFallback, key: 'forceFallback' as const },
-      { input: this.dropzoneDictDefaultMessage, key: 'dictDefaultMessage' as const },
-      { input: this.dropzoneDictFileTooBig, key: 'dictFileTooBig' as const },
-      { input: this.dropzoneDictInvalidFileType, key: 'dictInvalidFileType' as const },
-      { input: this.dropzoneDictMaxFilesExceeded, key: 'dictMaxFilesExceeded' as const },
-    ]);
+    this.syncInputs(this.inputBindings);
 
     this.cssLoader.loadCss('dropzone.css')
       .then(() => this.scheduleLibraryLoad())
@@ -713,7 +682,9 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     if (options.parallelUploads && options.parallelUploads <= 0) errors.push('Parallel uploads must be greater than 0');
     if (options.chunkSize && options.chunkSize <= 0) errors.push('Chunk size must be greater than 0');
 
-    return { isValid: errors.length === 0, errors };
+    const result = { isValid: errors.length === 0, errors };
+    this.validationChange.emit(result);
+    return result;
   }
 
   private onInit(instance: Dropzone): void {
@@ -806,14 +777,20 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
 
   private syncFiles(instance = this.dropzoneInstance): void {
     if (!instance) return;
-    const allFiles = instance.files || [];
+    const allFiles = [...(instance.files || [])];
     this._files.set(allFiles);
-    this._totalSize.set(allFiles.reduce((sum, file) => sum + file.size, 0));
+    this.setTotalSize(allFiles.reduce((sum, file) => sum + file.size, 0));
   }
 
   private updateTotalSize(): void {
     const files = this._files();
-    this._totalSize.set(files.reduce((sum, file) => sum + file.size, 0));
+    this.setTotalSize(files.reduce((sum, file) => sum + file.size, 0));
+  }
+
+  private setTotalSize(totalSize: number): void {
+    if (this._totalSize() === totalSize) return;
+    this._totalSize.set(totalSize);
+    this.totalSizeEvent.emit(totalSize);
   }
 
   private populatePreview(previewEl: HTMLElement, file: Dropzone.DropzoneFile): void {
