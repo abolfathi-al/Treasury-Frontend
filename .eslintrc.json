@@ -43,6 +43,34 @@
     },
     {
       "files": [
+        "src/app/core/**/*.ts",
+        "src/app/shared/**/*.ts",
+        "src/app/shell/**/*.ts"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@modules/*",
+                  "**/project",
+                  "**/project/**",
+                  "**/modules",
+                  "**/modules/**",
+                  "**/demo",
+                  "**/demo/**"
+                ],
+                "message": "Master layers must not import project, module, or demo code."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
         "*.html"
       ],
       "extends": [

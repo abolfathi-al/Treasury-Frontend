@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-22T17:42:15.660053+00:00",
+  "generated_at": "2026-07-22T17:52:10.345034+00:00",
   "nodes": {
     "docs_frontend_refactor_plan_enterprise_dashboard_master": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Enterprise Dashboard Master",
       "last": "2026-07-22T09:33:22.352609+00:00",
       "provenance": [
@@ -12,13 +12,13 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 0.992186435,
+      "score": 0.99202866,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_frontend_refactor_plan_master_product_neutrality": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Master Product Neutrality",
       "last": "2026-07-22T09:38:31.675717+00:00",
       "provenance": [
@@ -28,16 +28,21 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 0.99226851,
+      "score": 0.992110723,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_frontend_refactor_plan_project_composition_boundary": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Project Composition Boundary",
-      "last": "2026-07-22T17:42:05.364239+00:00",
+      "last": "2026-07-22T17:52:02.078137+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T17:52:02.078137+00:00",
+          "outcome": "useful",
+          "q": "continue refactoring"
+        },
         {
           "date": "2026-07-22T17:42:05.364239+00:00",
           "outcome": "useful",
@@ -57,20 +62,15 @@
           "date": "2026-07-22T14:13:18.323507+00:00",
           "outcome": "useful",
           "q": "ok. continue"
-        },
-        {
-          "date": "2026-07-22T13:48:55.242845+00:00",
-          "outcome": "useful",
-          "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 12.943968822,
+      "score": 13.941908303,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
-      "uses": 13
+      "uses": 14
     },
     "docs_frontend_refactor_plan_reusable_dashboard_master_refactor_plan": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Reusable Dashboard Master Refactor Plan",
       "last": "2026-07-22T13:36:54.437558+00:00",
       "provenance": [
@@ -85,13 +85,13 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 1.988339531,
+      "score": 1.988023351,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
     },
     "docs_frontend_refactor_plan_treasury_first_consumer": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Treasury as First Master Consumer",
       "last": "2026-07-22T09:33:22.352609+00:00",
       "provenance": [
@@ -101,13 +101,13 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 0.992186435,
+      "score": 0.99202866,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_frontend_refactor_plan_versioned_master_release": {
-      "code_fingerprint": "2926555a290042307a37568ad6a297954486d7938ab99ed4e9198ae1a3d026c5",
+      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
       "label": "Versioned Master Release",
       "last": "2026-07-22T09:38:31.675717+00:00",
       "provenance": [
@@ -122,7 +122,7 @@
           "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
         }
       ],
-      "score": 1.984454945,
+      "score": 1.984139383,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -143,10 +143,26 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.983675718,
+      "score": 1.98336028,
       "source_file": "docs/ui/ui-architecture.md",
       "status": "preferred",
       "uses": 2
+    },
+    "eslintrc": {
+      "code_fingerprint": "8382e06624e3e34380f6b393b630c3d464153065e0ff3bf241ff6933fc960242",
+      "label": ".eslintrc.json",
+      "last": "2026-07-22T17:52:02.078137+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T17:52:02.078137+00:00",
+          "outcome": "useful",
+          "q": "continue refactoring"
+        }
+      ],
+      "score": 0.999997789,
+      "source_file": ".eslintrc.json",
+      "status": "tentative",
+      "uses": 1
     },
     "src_app_app_config": {
       "code_fingerprint": "83ffd04e17ee9f4eeda7efe51f14ce8bad05825459448160df10cdae24b5a4b4",
@@ -179,7 +195,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 6.972739967,
+      "score": 6.971631185,
       "source_file": "src/app/app.config.ts",
       "status": "preferred",
       "uses": 7
@@ -195,7 +211,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.997063708,
+      "score": 0.996905158,
       "source_file": "src/app/core/auth/auth-session.port.ts",
       "status": "tentative",
       "uses": 1
@@ -211,7 +227,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.994683396,
+      "score": 0.994525224,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -227,7 +243,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.994908696,
+      "score": 0.994750489,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -243,7 +259,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.995807621,
+      "score": 0.995649271,
       "source_file": "src/app/core/config/config.ts",
       "status": "tentative",
       "uses": 1
@@ -259,7 +275,7 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.996652906,
+      "score": 0.996494421,
       "source_file": "src/app/core/config/runtime.config.ts",
       "status": "tentative",
       "uses": 1
@@ -280,7 +296,7 @@
           "q": "continie"
         }
       ],
-      "score": 1.992460527,
+      "score": 1.992143693,
       "source_file": "src/app/core/services/layout.service.ts",
       "status": "preferred",
       "uses": 2
@@ -301,7 +317,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.983675718,
+      "score": 1.98336028,
       "source_file": "src/app/core/services/logger.service.ts",
       "status": "preferred",
       "uses": 2
@@ -317,7 +333,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.995551821,
+      "score": 0.995393511,
       "source_file": "src/app/core/services/theme-mode.model.ts",
       "status": "tentative",
       "uses": 1
@@ -333,7 +349,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.995551821,
+      "score": 0.995393511,
       "source_file": "src/app/core/services/theme-mode.service.ts",
       "status": "tentative",
       "uses": 1
@@ -349,7 +365,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997237486,
+      "score": 0.997078909,
       "source_file": "src/app/core/state/context/context.models.ts",
       "status": "tentative",
       "uses": 1
@@ -365,7 +381,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.996263038,
+      "score": 0.996104615,
       "source_file": "src/app/core/tokens/local-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -381,7 +397,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.996263038,
+      "score": 0.996104615,
       "source_file": "src/app/core/tokens/location.token.ts",
       "status": "tentative",
       "uses": 1
@@ -397,7 +413,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.996263038,
+      "score": 0.996104615,
       "source_file": "src/app/core/tokens/session-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -413,7 +429,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.999997247,
+      "score": 0.99983823,
       "source_file": "src/app/demo/api/in-memory-db/in-memory-db.service.ts",
       "status": "tentative",
       "uses": 1
@@ -434,7 +450,7 @@
           "q": "continue"
         }
       ],
-      "score": 1.997421981,
+      "score": 1.997104358,
       "source_file": "src/app/demo/api/mock-api.interceptor.ts",
       "status": "preferred",
       "uses": 2
@@ -450,7 +466,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997237486,
+      "score": 0.997078909,
       "source_file": "src/app/demo/context/demo-context.fixtures.ts",
       "status": "tentative",
       "uses": 1
@@ -466,7 +482,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997237486,
+      "score": 0.997078909,
       "source_file": "src/app/demo/context/demo-context.providers.ts",
       "status": "tentative",
       "uses": 1
@@ -482,7 +498,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997237486,
+      "score": 0.997078909,
       "source_file": "src/app/demo/context/demo-context.store.ts",
       "status": "tentative",
       "uses": 1
@@ -498,7 +514,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997424735,
+      "score": 0.997266127,
       "source_file": "src/app/demo/dashboard/dashboard.component.ts",
       "status": "tentative",
       "uses": 1
@@ -524,7 +540,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 2.989979651,
+      "score": 2.989504194,
       "source_file": "src/app/modules/auth/data-access/auth.service.ts",
       "status": "preferred",
       "uses": 3
@@ -545,7 +561,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.983675718,
+      "score": 1.98336028,
       "source_file": "src/app/modules/auth/data-access/permission.service.ts",
       "status": "preferred",
       "uses": 2
@@ -561,7 +577,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.997063708,
+      "score": 0.996905158,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -577,7 +593,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.997063708,
+      "score": 0.996905158,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -593,7 +609,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.994908696,
+      "score": 0.994750489,
       "source_file": "src/app/project/brand/project-brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -609,7 +625,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.995276938,
+      "score": 0.995118672,
       "source_file": "src/app/project/locale/project-locale.config.ts",
       "status": "tentative",
       "uses": 1
@@ -625,7 +641,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 0.993572497,
+      "score": 0.993414502,
       "source_file": "src/app/project/navigation/project-navigation.config.ts",
       "status": "tentative",
       "uses": 1
@@ -641,7 +657,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997424735,
+      "score": 0.997266127,
       "source_file": "src/app/project/routing/project.routes.ts",
       "status": "tentative",
       "uses": 1
@@ -657,7 +673,7 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.996652906,
+      "score": 0.996494421,
       "source_file": "src/app/project/runtime/project-runtime.config.ts",
       "status": "tentative",
       "uses": 1
@@ -673,7 +689,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.995551821,
+      "score": 0.995393511,
       "source_file": "src/app/project/theme/project-theme.config.ts",
       "status": "tentative",
       "uses": 1
@@ -694,7 +710,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.983675718,
+      "score": 1.98336028,
       "source_file": "src/app/shared/directives/shared/base-directive.ts",
       "status": "preferred",
       "uses": 2
@@ -710,7 +726,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.995276938,
+      "score": 0.995118672,
       "source_file": "src/app/shared/pipes/extend-date.pipe.ts",
       "status": "tentative",
       "uses": 1
@@ -726,8 +742,24 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.9942209,
+      "score": 0.994062802,
       "source_file": "src/app/shell/layout/components/footer/footer.component.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shell_layout_components_header_navbar_navbar_component_navbarcomponent": {
+      "code_fingerprint": "8dec0ed87c13b7b40e8b07cc55a988c476a046a0cdab7649b91bb0d73d0ce02f",
+      "label": "NavbarComponent",
+      "last": "2026-07-22T17:52:02.078137+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T17:52:02.078137+00:00",
+          "outcome": "useful",
+          "q": "continue refactoring"
+        }
+      ],
+      "score": 0.999997789,
+      "source_file": "src/app/shell/layout/components/header/navbar/navbar.component.ts",
       "status": "tentative",
       "uses": 1
     },
@@ -742,7 +774,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997424735,
+      "score": 0.997266127,
       "source_file": "src/app/shell/layout/layout.component.ts",
       "status": "tentative",
       "uses": 1
@@ -763,7 +795,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 1.987793397,
+      "score": 1.987477304,
       "source_file": "src/app/shell/layout/navigation/shell-navigation.facade.ts",
       "status": "preferred",
       "uses": 2
@@ -779,7 +811,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.995807621,
+      "score": 0.995649271,
       "source_file": "src/app/shell/layout/shell.facade.ts",
       "status": "tentative",
       "uses": 1
@@ -795,7 +827,7 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.9942209,
+      "score": 0.994062802,
       "source_file": "src/server.ts",
       "status": "tentative",
       "uses": 1

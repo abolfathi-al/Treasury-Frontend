@@ -10,12 +10,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, of } from 'rxjs';
 
-import {
-  AuthFacade,
-  AuthFacadeState,
-} from '@core/state/context';
+import { AuthFacade } from '@core/state/context';
+import type { AuthFacadeState } from '@core/state/context';
 import { AUTH_SESSION } from '@core/auth';
-import { createDemoAuthFacadeState } from '../../../../../demo/context/demo-context.fixtures';
 import { ShellContextDisplayFacade } from '../../../context/shell-context-display.facade';
 import { NavbarComponent } from './navbar.component';
 
@@ -134,6 +131,20 @@ const createUser = (name: string, year: string) =>
     },
   });
 
+const createContextState = (): AuthFacadeState => ({
+  status: 'authenticated',
+  identity: {
+    id: 'identity-1',
+    displayName: 'Alex Morgan',
+    status: 'ACTIVE',
+  },
+  organizationMemberships: [],
+  actorMemberships: [],
+  permissionHints: [],
+  uiCapabilities: [],
+  isDemoMode: false,
+});
+
 describe('NavbarComponent shell session display', () => {
   let fixture: ComponentFixture<NavbarComponent>;
   let authUser: BehaviorSubject<ReturnType<typeof createUser> | undefined>;
@@ -144,7 +155,7 @@ describe('NavbarComponent shell session display', () => {
     authUser = new BehaviorSubject<ReturnType<typeof createUser> | undefined>(
       undefined,
     );
-    contextAuthState = signal(createDemoAuthFacadeState());
+    contextAuthState = signal(createContextState());
     workspaceSwitcherVisible = signal(false);
 
     await TestBed.configureTestingModule({
@@ -205,8 +216,8 @@ describe('NavbarComponent shell session display', () => {
     const host = fixture.nativeElement as HTMLElement;
 
     expect(host.querySelector('.btn-outline')).toBeNull();
-    expect(host.textContent).toContain('Alireza Abolfathi');
-    expect(host.textContent).toContain('AA');
+    expect(host.textContent).toContain('Alex Morgan');
+    expect(host.textContent).toContain('AM');
   });
 
   it('renders and updates the current user from the existing auth subject', () => {

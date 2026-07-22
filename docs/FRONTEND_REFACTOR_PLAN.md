@@ -53,7 +53,8 @@ As of 2026-07-22:
   public runtime configuration, and auth adapter wiring are consumer-owned.
   Demo context, the sample dashboard route, placeholder content, and fake HTTP
   data are isolated under `demo/`; the obsolete fake interceptor and alias are
-  removed.
+  removed. ESLint now prevents Master-owned `core`, `shared`, and `shell` code
+  from importing consumer-owned `project`, `modules`, or `demo` code.
 
 ## Baseline
 

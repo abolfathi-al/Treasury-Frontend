@@ -4,12 +4,12 @@
 - cluster-only mode — file stats not available
 
 ## Summary
-- 5011 nodes · 10380 edges · 373 communities (215 shown, 158 thin omitted)
+- 5013 nodes · 10381 edges · 377 communities (215 shown, 162 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 419 edges (avg confidence: 0.77)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7f077ce2`
+- Built from commit: `90d42eeb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -25,7 +25,7 @@
 - ClassicComponent
 - legacy-to-modern.js
 - en.ts
-- toolbar.component.ts
+- velora-icon.component.ts
 - format-date.ts
 - fa.ts
 - MaxlengthDirective
@@ -33,19 +33,19 @@
 - CookieAlertDirective
 - StepperDirective
 - MenuDirective
-- logger.service.ts
-- button-with-indicator.component.ts
 - server.ts
+- button-with-indicator.component.ts
+- .error
 - TagifyDirective
 - base-error.component.ts
 - runSafely
 - LoggerService
 - inputmask
-- .error
+- logger.service.ts
 - ScrollDirective
 - file-download.service.ts
 - .error
-- theme-mode-switcher.component.ts
+- theme-mode-switcher.component.spec.ts
 - directive-host.ts
 - HierarchyGraphComponent
 - FullCalendarDirective
@@ -53,24 +53,24 @@
 - StandardFormControl
 - FlatpickrDirective
 - ClipboardDirective
-- ErrorUtils
+- BaseDirective
 - NoUiSliderDirective
-- .value
+- .warn
 - Application Toolbar
 - DraggableDirective
-- autocomplete.directive.ts
+- tiny-slider.directive.ts
 - Injectable
-- BaseDirective
+- ErrorUtils
 - base-directive.spec.ts
 - AutosizeDirective
 - ImageInputDirective
 - ScrollTopDirective
 - standard-control-base.ts
-- index.ts
+- d3/index.ts
 - CountUpDirective
 - ToggleDirective
 - layout.component.ts
-- index.ts
+- tokens/index.ts
 - Injectable
 - AuthService
 - HierarchyTreeComponent
@@ -78,29 +78,29 @@
 - DemoContextStore
 - header.component.spec.ts
 - Enterprise Dashboard Master
-- .warn
+- css.token.ts
 - ILayout
 - PermissionService
 - hierarchy-graph.component.ts
-- navbar.component.ts
-- index.ts
+- core/auth/index.ts
 - PasswordMeterDirective
 - layout.service.ts
 - LayoutService
 - context.models.ts
 - Injectable
 - ErrorService
-- NotificationService
+- utils/index.ts
 - DialerDirective
 - navbar.component.spec.ts
 - CssLoaderService
-- legacy-storage-cleanup.initializer.ts
-- index.ts
+- EventUtil
+- core/i18n/index.ts
+- modules/i18n/index.ts
 - validate-velora-shell-i18n.mjs
 - auth.service.ts
 - d3-gauge-chart.directive.ts
 - shared-form-controls.spec.ts
-- .key
+- config.ts
 - ProfilerService
 - KeyboardEventService
 - notifications-inner.component.ts
@@ -108,66 +108,66 @@
 - NumericFormControl
 - TypedDirective
 - more-filters-dropdown.component.ts
-- index.ts
+- LayoutType
 - shell-navigation.facade.ts
-- config.ts
+- error.interceptor.ts
 - ContextSwitchResult
 - standard-control-imports.ts
 - TypeScript Locale Modules
 - AppComponent
-- LayoutType
+- FormUtil
 - InMemoryDbService
 - SEOService
-- TitleService
+- .key
 - AuthComponent
 - inputmask.directive.spec.ts
 - CustomTitleStrategy
 - dependencies
-- demo-context.store.ts
+- OrganizationContext
 - D3ProgressBreakdownDirective
 - AntiAutocompleteDirective
-- velora-icon.component.ts
+- theme-mode.model.ts
 - d3-chart.types.ts
 - InvalidFeedbackComponent
 - Shared Pipes
 - app.config.spec.ts
 - BaseErrorComponent
 - Injectable
-- error.interceptor.ts
+- app.config.ts
 - index.ts
-- theme-mode.model.ts
-- ResponsiveUtil
+- classic.component.ts
+- legacy-storage-cleanup.initializer.ts
 - search-result-inner.component.ts
 - scripts
-- app.config.ts
+- dropzone.directive.ts
 - page-info.service.ts
-- tiny-slider.directive.ts
-- classic.component.ts
-- topbar.component.ts
+- tiny-slider.directive.spec.ts
+- navbar.component.ts
+- topbar.component.spec.ts
 - CookieService
 - FocusManagementService
 - ShellFacade
-- css.token.ts
-- EventUtil
-- Modals, Drawers, and Wizards
 - shell-navigation.model.ts
-- ThemeModeService
+- user-inner.component.ts
 - d3-donut-chart.directive.ts
+- Modals, Drawers, and Wizards
+- tree.directive.ts
+- ThemeModeService
 - D3ForceGraphDirective
 - .render
 - D3TimelineDirective
 - flatpickr.directive.ts
+- registration.component.ts
 - NamedFormControl
-- tree.directive.ts
+- brand.config.ts
 - DueInPipe
-- Shared UI Implementation Gaps
-- Forms and Controls
+- UI Architecture
 - Tables and Grids
-- loader.interceptor.ts
+- interceptors/index.ts
 - header-menu.component.ts
 - D3BarChartDirective
 - D3ScoreChartDirective
-- brand.config.ts
+- topbar.component.ts
 - Velora UI Knowledge Index
 - Hierarchy Graph
 - Search Interface
@@ -175,24 +175,24 @@
 - Refactored Files
 - AppInitializationService
 - ErrorsComponent
+- locale-number.pipe.ts
 - language.initializer.ts
 - User Menu
+- demo-context.store.ts
 - compilerOptions
-- network-information.token.ts
 - AuthGuard
 - DateLikeControl
-- hierarchy-tree.component.ts
 - D3ChartHostDirective
 - paths
 - schematics
-- fullcalendar.directive.ts
+- ResponsiveUtil
+- figma-mcp.js
 - Enterprise Dashboard
 - Sass Architecture - 7-1 Pattern
 - Notification Logs
 - Quick Links
 - tsconfig.app.json
-- shell-navigation.utils.ts
-- figma-mcp.js
+- ActorMembership
 - Demo Action Modal
 - More Filters Dropdown
 - Donut Chart
@@ -211,8 +211,8 @@
 - Hierarchy Node Card
 - Full Hierarchy Path
 - Loading Indicator
-- debounce.decorator.ts
-- service-worker.initializer.ts
+- hierarchy-tree.component.ts
+- fullcalendar.directive.ts
 - ThemeModeValue
 - @angular/service-worker
 - cookie-alert.directive.spec.ts
@@ -220,7 +220,6 @@
 - options
 - production
 - tsconfig.eslint.json
-- DirectiveState
 - SidebarComponent
 - Quick Start Guide
 - angularCompilerOptions
@@ -231,31 +230,32 @@
 - IfIsBrowserDirective
 - architect
 - web
-- DeepDiffMapper
-- LocalStoragePolyfillImpl
-- app.type.ts
+- shell-navigation.utils.ts
+- debounce.decorator.ts
+- service-worker.initializer.ts
 - SplashScreenService
 - angular.json
 - prerender
 - LoginComponent
-- dropzone.directive.ts
+- DirectiveState
 - From Old Structure to New 7-1 Architecture
-- .destroyPopperInst
-- UI Utilities
+- DataUtil
+- Form Validation Model
 - Enterprise Treasury Frontend agent contract
 - serve-ssr
 - assets
 - package.json
 - Cleanup Summary
 - lint
-- .eslintrc.json
+- DeepDiffMapper
+- LocalStoragePolyfillImpl
 - Q: AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon
 - Q: hala ye plan kon baraye refactor frontend mojod va ye file md besaz
 - Q: plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast
 - Q: aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi
 - Q: Start the reusable frontend Master refactor and use subagents if needed
 - Enterprise Dashboard Master Source
-- MemoryStorage
+- app.type.ts
 - build
 - lib
 - @angular/platform-browser-dynamic
@@ -264,11 +264,9 @@
 - tsconfig.json
 - Enterprise Treasury Frontend
 - express
-- MemoryStorage
 - CoreUtil
-- @angular/animations
-- autosize.directive.ts
-- Shared Components
+- MemoryStorage
+- MemoryStorage
 - bootstrap-icons
 - compression
 - @angular/compiler-cli
@@ -280,12 +278,13 @@
 - @angular-eslint/template-parser
 - @angular/forms
 - @angular/platform-browser
+- MemoryStorage
 - @angular/router
-- page-info.service.spec.ts
+- autosize.directive.ts
 - @fullcalendar/daygrid
 - animate.css
 - autoprefixer
-- header.interceptor.ts
+- .destroyPopperInst
 - @fullcalendar/interaction
 - @babel/cli
 - @babel/core
@@ -297,7 +296,7 @@
 - d3
 - dropzone
 - eslint
-- mockApiInterceptor
+- ToolbarComponent
 - ng-inline-svg-2
 - socicon
 - @fullcalendar/list
@@ -311,6 +310,7 @@
 - @lhci/cli
 - sweetalert2
 - mini-css-extract-plugin
+- page-info.service.spec.ts
 - native-date-adapter
 - @ng-bootstrap/ng-bootstrap
 - @ng-select/ng-select
@@ -321,7 +321,7 @@
 - @popperjs/core
 - prism-themes
 - rxjs
-- TranslationServiceStub
+- mockApiInterceptor
 - typed.js
 - @types/bootstrap-maxlength
 - @types/dropzone
@@ -343,7 +343,6 @@
 - @types/jasmine
 - @types/md5
 - @types/node
-- settings.model.ts
 - @types/yaireo__tagify
 - typescript
 - @typescript-eslint/eslint-plugin
@@ -353,22 +352,29 @@
 - webpack-cli
 - patch-package
 - @types/d3
-- webpack-rtl.config.js
+- TranslationServiceStub
 - @angular/compiler
-- due-in.pipe.ts
-- toolbar.component.spec.ts
+- settings.model.ts
+- .eslintrc.json
 - autosize
+- webpack-rtl.config.js
+- modular-merge.ts
+- toolbar.component.spec.ts
 - karma.conf.js
-- page-visibility.token.ts
 - Component
+- @utils
 - @angular/platform-server
-- FIGMA_CONFIG
+- page-visibility.token.ts
+- duotone/demo-files/demo.js
+- outline/demo-files/demo.js
+- solid/demo-files/demo.js
 - FIGMA_MCP_SERVER_CONFIG
+- tiny-slider
+- Injectable
+- Injectable
 - environment.prod.ts
 - test.ts
 - typings.d.ts
-- Injectable
-- Injectable
 - resolveD3ChartTheme
 
 ## God Nodes (most connected - your core abstractions)
@@ -378,10 +384,10 @@
 4. `MenuDirective` - 117 edges
 5. `BaseDirective` - 89 edges
 6. `StickyDirective` - 73 edges
-7. `DropzoneDirective` - 58 edges
-8. `SearchDirective` - 58 edges
-9. `DrawerDirective` - 57 edges
-10. `MaxlengthDirective` - 54 edges
+7. `locales/en.ts` - 67 edges
+8. `locales/fa.ts` - 67 edges
+9. `tokens/index.ts` - 62 edges
+10. `DropzoneDirective` - 58 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Logout Template` --conceptually_related_to--> `TypeScript Locale Modules`  [INFERRED]
@@ -398,7 +404,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (373 total, 158 thin omitted)
+## Communities (377 total, 162 thin omitted)
 
 ### Community 1 - "StickyDirective"
 Cohesion: 0.06
@@ -430,19 +436,19 @@ Nodes (64): buildCommand(), compress(), CONFIG, { CONSTANTS, validateDirectory, 
 
 ### Community 10 - "en.ts"
 Cohesion: 0.05
-Nodes (28): accessDomainEn, auditDomainEn, identityDomainEn, organizationDomainEn, tenantDomainEn, veloraShellEnLocale, accessRequestsWorkspaceEn, accessSimulatorWorkspaceEn (+20 more)
+Nodes (57): access/en.ts, accessDomainEn, audit/en.ts, auditDomainEn, identity/en.ts, identityDomainEn, organization/en.ts, organizationDomainEn (+49 more)
 
-### Community 11 - "toolbar.component.ts"
-Cohesion: 0.16
-Nodes (11): AccountingComponent, Component, ExtendedComponent, Component, REPORTS_CONSTANTS, ReportsComponent, Component, SAAS_CONSTANTS (+3 more)
+### Community 11 - "velora-icon.component.ts"
+Cohesion: 0.10
+Nodes (20): DashboardComponent, DashboardMetric, FoundationArea, Component, isVeloraIconType(), Component, VELORA_ICON_CONSTANTS, VeloraIconComponent (+12 more)
 
 ### Community 12 - "format-date.ts"
-Cohesion: 0.07
-Nodes (40): flatpickrConfig, parseDate(), TIME_COMPONENTS, ExtendDatePipe, Pipe, LocaleNumberPipe, toEnglish(), toPersian() (+32 more)
+Cohesion: 0.12
+Nodes (30): ExtendDatePipe, Pipe, addDateMinutes(), convertTimezoneToLocal(), DATE_FORMATS, DateFormatter, dateGetter(), dateStrGetter() (+22 more)
 
 ### Community 13 - "fa.ts"
 Cohesion: 0.05
-Nodes (28): accessDomainFa, auditDomainFa, identityDomainFa, organizationDomainFa, tenantDomainFa, veloraShellFaLocale, accessRequestsWorkspaceFa, accessSimulatorWorkspaceFa (+20 more)
+Nodes (57): access/fa.ts, accessDomainFa, audit/fa.ts, auditDomainFa, identity/fa.ts, identityDomainFa, organization/fa.ts, organizationDomainFa (+49 more)
 
 ### Community 14 - "MaxlengthDirective"
 Cohesion: 0.09
@@ -452,29 +458,29 @@ Nodes (3): MaxlengthDirective, MaxlengthOptions, Directive
 Cohesion: 0.09
 Nodes (3): TinySliderDirective, TinySliderOptions, Directive
 
-### Community 19 - "logger.service.ts"
-Cohesion: 0.07
-Nodes (35): DEFAULT_CONFIG, LOG_LEVEL_NAMES, LogConfig, LogEntry, LOGGER_CONSTANTS, LogLevel, SanitizedLogEntry, DEFAULT_OPTIONS (+27 more)
-
-### Community 20 - "button-with-indicator.component.ts"
-Cohesion: 0.13
-Nodes (7): CoercionBackingStore, ConditionalCall(), ConditionalMethod, ConditionalHost, BUTTON_CONSTANTS, ButtonWithIndicatorComponent, Component
-
-### Community 21 - "server.ts"
+### Community 19 - "server.ts"
 Cohesion: 0.07
 Nodes (49): app(), COMPRESSIBLE_FILE_EXTENSIONS, COMPRESSIBLE_TYPES, CompressionRequest, CONFIG, configureExpressServer(), DEPRECATION_WARNINGS, ENCODING_TYPES (+41 more)
 
+### Community 20 - "button-with-indicator.component.ts"
+Cohesion: 0.13
+Nodes (8): CoercionBackingStore, ConditionalCall(), ConditionalMethod, ConditionalHost, decorators/index.ts, BUTTON_CONSTANTS, ButtonWithIndicatorComponent, Component
+
 ### Community 23 - "base-error.component.ts"
 Cohesion: 0.15
-Nodes (10): ErrorRouteData, ErrorsRouting, ERROR_CODES, ErrorInfo, isErrorCode(), Error404Component, TranslateServiceStub, Component (+2 more)
+Nodes (14): ErrorRouteData, errors/data-access/index.ts, ErrorsRouting, modules/errors/index.ts, ERROR_CODES, ErrorInfo, isErrorCode(), errors/models/index.ts (+6 more)
 
 ### Community 24 - "runSafely"
 Cohesion: 0.05
-Nodes (51): CookieAlertError, CookieAlertOptions, CookieAlertValidationResult, DEFAULT_OPTIONS, DEFAULT_OPTIONS, ImageInputOptions, DEFAULT_OPTIONS, DEFAULTS (+43 more)
+Nodes (46): CookieAlertError, CookieAlertOptions, CookieAlertValidationResult, DEFAULT_OPTIONS, DEFAULT_OPTIONS, ImageInputOptions, DEFAULT_OPTIONS, DEFAULTS (+38 more)
 
 ### Community 25 - "LoggerService"
-Cohesion: 0.11
+Cohesion: 0.13
 Nodes (4): LoggerService, Injectable, ProfilerLog, ProfilerLogLevel
+
+### Community 27 - "logger.service.ts"
+Cohesion: 0.08
+Nodes (29): DEFAULT_CONFIG, LOG_LEVEL_NAMES, LogConfig, LogEntry, LOGGER_CONSTANTS, LogLevel, SanitizedLogEntry, DEFAULT_OPTIONS (+21 more)
 
 ### Community 28 - "ScrollDirective"
 Cohesion: 0.06
@@ -484,13 +490,13 @@ Nodes (9): ScrollDirective, ScrollResponsiveValue, HostComponent, ScrollDirectiv
 Cohesion: 0.24
 Nodes (6): DownloadOptions, DownloadState, FileDownloadService, isHttpProgressEvent(), isHttpResponse(), Injectable
 
-### Community 31 - "theme-mode-switcher.component.ts"
-Cohesion: 0.14
-Nodes (11): isThemeMenuPlacement(), MenuDirectiveStub, ThemeModeServiceStub, Component, Directive, Input, VeloraIconStubComponent, THEME_MODE_SWITCHER_CONSTANTS (+3 more)
+### Community 31 - "theme-mode-switcher.component.spec.ts"
+Cohesion: 0.29
+Nodes (6): MenuDirectiveStub, ThemeModeServiceStub, Component, Directive, Input, VeloraIconStubComponent
 
 ### Community 32 - "directive-host.ts"
 Cohesion: 0.07
-Nodes (30): ATTRIBUTES, AutocompleteMode, CONSTANTS, DEFAULT_OPTIONS, DialerChangeEvent, DialerOptions, DEFAULT_CONFIG, DragEvent (+22 more)
+Nodes (31): ATTRIBUTES, AutocompleteMode, CONSTANTS, DEFAULT_OPTIONS, DialerChangeEvent, DialerOptions, DEFAULT_CONFIG, DragEvent (+23 more)
 
 ### Community 33 - "HierarchyGraphComponent"
 Cohesion: 0.12
@@ -500,25 +506,25 @@ Nodes (3): HierarchyGraphComponent, Component, ViewChild
 Cohesion: 0.11
 Nodes (4): clipboard, ClipboardDirective, ClipboardOptions, Directive
 
-### Community 39 - "ErrorUtils"
-Cohesion: 0.16
-Nodes (9): buildErrorReporter(), ErrorUtils, isRecord(), readErrorCode(), readErrorPayload(), readRecord(), readStatus(), readString() (+1 more)
+### Community 39 - "BaseDirective"
+Cohesion: 0.08
+Nodes (12): ClipboardError, ClipboardFactory, ClipboardValidationResult, DEFAULT_OPTIONS, CountUpCtor, CountUpError, CountUpOptions, CountUpValidationResult (+4 more)
 
-### Community 41 - ".value"
+### Community 41 - ".warn"
 Cohesion: 0.16
-Nodes (7): isTranslationTree(), mergeTranslationTree(), TranslationTree, ToolbarComponent, Component, LayoutComponent, Component
+Nodes (3): LayoutComponent, Component, StyleUtil
 
 ### Community 42 - "Application Toolbar"
 Cohesion: 0.07
 Nodes (31): Theme Mode Switcher, Light, Dark, and System Theme Modes, Routed Content Region, Router Outlet, Application Footer, Application Header, Sidebar Toggle, Dashboard Route (+23 more)
 
-### Community 44 - "autocomplete.directive.ts"
-Cohesion: 0.12
-Nodes (15): allowedCommonJsDependencies, apexcharts, awesomplete, clipboard.js, inputmask, object-path, prismjs, tiny-slider (+7 more)
+### Community 44 - "tiny-slider.directive.ts"
+Cohesion: 0.10
+Nodes (19): allowedCommonJsDependencies, apexcharts, awesomplete, clipboard.js, inputmask, object-path, prismjs, tiny-slider (+11 more)
 
-### Community 46 - "BaseDirective"
-Cohesion: 0.08
-Nodes (11): ClipboardError, ClipboardFactory, ClipboardValidationResult, DEFAULT_OPTIONS, CountUpCtor, CountUpError, CountUpOptions, CountUpValidationResult (+3 more)
+### Community 46 - "ErrorUtils"
+Cohesion: 0.16
+Nodes (9): buildErrorReporter(), ErrorUtils, isRecord(), readErrorCode(), readErrorPayload(), readRecord(), readStatus(), readString() (+1 more)
 
 ### Community 47 - "base-directive.spec.ts"
 Cohesion: 0.16
@@ -536,9 +542,9 @@ Nodes (6): ScrollTopDirective, BlankRouteComponent, HostComponent, setup(), Comp
 Cohesion: 0.13
 Nodes (15): TagifyTag, AsyncSelectControlComponent, Component, MembershipSelectorControlComponent, Component, MultiSelectControlComponent, Component, OrganizationSelectorControlComponent (+7 more)
 
-### Community 52 - "index.ts"
-Cohesion: 0.15
-Nodes (19): buildInterceptors(), AUTH_PATHS, authInterceptor(), refreshTokenSubject, browserStateInterceptor(), STATE_PATHS, cache, cacheInterceptor() (+11 more)
+### Community 52 - "d3/index.ts"
+Cohesion: 0.30
+Nodes (15): applySvgAccessibility(), renderEmptyState(), compactD3ChartLabel(), formatD3ChartValue(), chartSize(), DEFAULT_D3_CHART_MARGIN, mergedMargin(), normalizePercent() (+7 more)
 
 ### Community 54 - "ToggleDirective"
 Cohesion: 0.14
@@ -548,13 +554,13 @@ Nodes (5): HostComponent, setup(), Component, ToggleDirective, Directive
 Cohesion: 0.14
 Nodes (11): MessengerDrawerComponent, Component, LayoutScrollTopComponent, SCROLL_TOP_CONSTANTS, Component, ContentComponent, RouterStub, Component (+3 more)
 
-### Community 56 - "index.ts"
-Cohesion: 0.30
-Nodes (14): applySvgAccessibility(), renderEmptyState(), compactD3ChartLabel(), formatD3ChartValue(), chartSize(), DEFAULT_D3_CHART_MARGIN, mergedMargin(), normalizePercent() (+6 more)
+### Community 56 - "tokens/index.ts"
+Cohesion: 0.14
+Nodes (13): backForwardCacheSetup(), initializers/index.ts, ANIMATION_FRAME, CACHES, CRYPTO, HISTORY, tokens/index.ts, PERFORMANCE (+5 more)
 
 ### Community 58 - "AuthService"
-Cohesion: 0.12
-Nodes (4): AuthSessionPort, AuthModel, AuthService, Injectable
+Cohesion: 0.11
+Nodes (6): AuthenticatedRequestUser, AuthSessionPort, AuthUserSnapshot, AuthModel, AuthService, Injectable
 
 ### Community 59 - "HierarchyTreeComponent"
 Cohesion: 0.14
@@ -562,11 +568,11 @@ Nodes (3): HierarchyTreeComponent, Component, ViewChild
 
 ### Community 60 - "D3WaterfallChartDirective"
 Cohesion: 0.13
-Nodes (12): ChartTone, getElementDirection(), WaterfallChartItem, D3WaterfallChartDirective, Directive, Input, WaterfallBar, Component (+4 more)
+Nodes (13): ChartTone, getElementDirection(), WaterfallChartItem, D3WaterfallChartDirective, Directive, Input, WaterfallBar, Component (+5 more)
 
 ### Community 61 - "DemoContextStore"
-Cohesion: 0.15
-Nodes (7): ActorMembership, buildDemoActiveAccessContext(), buildDemoActorContext(), DEMO_ACTOR_MEMBERSHIPS, DEMO_ORGANIZATION_MEMBERSHIPS, DemoContextStore, Injectable
+Cohesion: 0.16
+Nodes (4): DEMO_ACTOR_MEMBERSHIPS, DEMO_ORGANIZATION_MEMBERSHIPS, DemoContextStore, Injectable
 
 ### Community 62 - "header.component.spec.ts"
 Cohesion: 0.23
@@ -576,21 +582,21 @@ Nodes (13): HeaderComponent, DrawerDirectiveStub, HeaderMenuStubComponent, MenuD
 Cohesion: 0.10
 Nodes (24): Allowed Dependency Direction, Canon Implementation Gate, Clean Room Consumer Check, Configuration Driven Variation, Enterprise Dashboard Master, Enterprise Treasury Canon Authority, Enterprise Treasury Frontend, Future Project Adoption Flow (+16 more)
 
+### Community 64 - "css.token.ts"
+Cohesion: 0.09
+Nodes (18): StandardSpeechRecognition, WebkitSpeechRecognition, CSS, CssApi, fallbackCssApi, resolveCssApi(), WindowWithCssApi, MEDIA_DEVICES (+10 more)
+
 ### Community 65 - "ILayout"
-Cohesion: 0.26
+Cohesion: 0.25
 Nodes (3): ILayout, LayoutInitService, Injectable
 
 ### Community 67 - "hierarchy-graph.component.ts"
 Cohesion: 0.13
-Nodes (16): GraphLegendItem, LayoutDirection, MiniMapLink, MiniMapNode, PositionedLink, PositionedNode, HierarchyNodeCardComponent, Component (+8 more)
+Nodes (17): GraphLegendItem, LayoutDirection, MiniMapLink, MiniMapNode, PositionedLink, PositionedNode, HierarchyNodeCardComponent, Component (+9 more)
 
-### Community 68 - "navbar.component.ts"
-Cohesion: 0.09
-Nodes (19): AUTH_SESSION, AuthenticatedRequestUser, AuthUserSnapshot, getUserByToken(), SessionStorageAdapter, LOCATION, LanguageFlag, TestAuthSession (+11 more)
-
-### Community 69 - "index.ts"
-Cohesion: 0.17
-Nodes (8): backForwardCacheSetup(), ANIMATION_FRAME, CACHES, CRYPTO, HISTORY, PERFORMANCE, SPEECH_SYNTHESIS, WINDOW
+### Community 68 - "core/auth/index.ts"
+Cohesion: 0.14
+Nodes (13): AUTH_SESSION, core/auth/index.ts, getUserByToken(), AUTH_PATHS, authInterceptor(), refreshTokenSubject, HEADER_PATHS, headerInterceptor() (+5 more)
 
 ### Community 71 - "layout.service.ts"
 Cohesion: 0.14
@@ -604,29 +610,29 @@ Nodes (14): ActorType, AuthFacadeStatus, ConsumerActorSubtype, ContextStatus, Ef
 Cohesion: 0.16
 Nodes (6): ErrorService, Injectable, ErrorCode, ErrorConfig, ErrorContext, ErrorReport
 
-### Community 76 - "NotificationService"
-Cohesion: 0.18
-Nodes (6): NotificationService, Injectable, AsyncResource, parseError(), ResourceStatus, trackResource()
+### Community 76 - "utils/index.ts"
+Cohesion: 0.13
+Nodes (13): NotificationService, Injectable, AsyncResource, parseError(), ResourceStatus, trackResource(), FieldValueChange, FormFieldState (+5 more)
 
 ### Community 78 - "navbar.component.spec.ts"
-Cohesion: 0.14
-Nodes (18): NavbarComponent, MenuDirectiveStub, NotificationsInnerStubComponent, QuickLinksInnerStubComponent, SearchDirectiveStub, SearchResultInnerStubComponent, ThemeModeSwitcherStubComponent, Component (+10 more)
+Cohesion: 0.24
+Nodes (11): MenuDirectiveStub, NotificationsInnerStubComponent, QuickLinksInnerStubComponent, SearchDirectiveStub, SearchResultInnerStubComponent, ThemeModeSwitcherStubComponent, Component, Directive (+3 more)
 
-### Community 80 - "legacy-storage-cleanup.initializer.ts"
-Cohesion: 0.13
-Nodes (11): cleanupLegacyStorage(), LEGACY_NAMESPACE_CHAR_CODES, LEGACY_STORAGE_KEY_SUFFIXES, legacyNamespace(), legacyStorageCleanupSetup(), legacyStorageKeyPrefixes(), legacyStorageKeys(), shouldRemoveLegacyStorageKey() (+3 more)
-
-### Community 82 - "index.ts"
+### Community 81 - "core/i18n/index.ts"
 Cohesion: 0.15
-Nodes (8): LANGUAGE_SERVICE, LanguageDirection, LanguageServicePort, TranslationData, TranslationDataValue, TranslateServiceStub, createRtlSignals(), RtlSignals
+Nodes (9): core/i18n/index.ts, LANGUAGE_SERVICE, LanguageDirection, LanguageServicePort, TranslationData, TranslationDataValue, TranslateServiceStub, createRtlSignals() (+1 more)
+
+### Community 82 - "modules/i18n/index.ts"
+Cohesion: 0.10
+Nodes (21): common/en.ts, commonEn, common/fa.ts, commonFa, modules/i18n/index.ts, layout/en.ts, layoutEn, layout/fa.ts (+13 more)
 
 ### Community 83 - "validate-velora-shell-i18n.mjs"
 Cohesion: 0.07
 Nodes (52): allowedTextFragments, appRoot, args, checkCommonPollution(), checkHardcodedTemplateTexts(), checkLegacyKeys(), checkLocaleTrees(), checkRequiredModuleFiles() (+44 more)
 
 ### Community 84 - "auth.service.ts"
-Cohesion: 0.12
-Nodes (12): md5, AddressModel, FiscalYearParameters, ReservationServersInfo, UserModel, AuthRouting, AuthState, UserType (+4 more)
+Cohesion: 0.17
+Nodes (12): AuthRouting, AuthState, UserType, auth/data-access/index.ts, Permission, guards/index.ts, modules/auth/index.ts, AuthRouteData (+4 more)
 
 ### Community 85 - "d3-gauge-chart.directive.ts"
 Cohesion: 0.19
@@ -636,9 +642,9 @@ Nodes (10): GaugeChartSegment, getChartColorClass(), getChartTone(), getDefaultC
 Cohesion: 0.15
 Nodes (15): DialerControlComponent, Component, PasswordControlComponent, Component, DisabledExistingControlHostComponent, DynamicControlHostComponent, ExistingControlHostComponent, SharedFormControlsHostComponent (+7 more)
 
-### Community 88 - "ProfilerService"
-Cohesion: 0.22
-Nodes (4): PROFILER_PATHS, profilerInterceptor(), ProfilerService, Injectable
+### Community 87 - "config.ts"
+Cohesion: 0.17
+Nodes (19): IApp, IContent, IEngage, IFooter, IGeneral, IHeader, IIllustrations, ILayoutComponent (+11 more)
 
 ### Community 89 - "KeyboardEventService"
 Cohesion: 0.17
@@ -658,27 +664,27 @@ Nodes (9): InputmaskOptions, CurrencyControlComponent, Component, NumberControlC
 
 ### Community 94 - "more-filters-dropdown.component.ts"
 Cohesion: 0.18
-Nodes (10): RowActionItem, RowActionTone, WorkspaceFilterKey, FILTER_CONTROLS, FilterControl, MoreFiltersDropdownComponent, Component, RowActionsDropdownComponent (+2 more)
+Nodes (11): RowActionItem, RowActionTone, WorkspaceFilterKey, dropdowns/index.ts, FILTER_CONTROLS, FilterControl, MoreFiltersDropdownComponent, Component (+3 more)
 
-### Community 95 - "index.ts"
-Cohesion: 0.10
-Nodes (10): commonEn, commonFa, layoutEn, layoutFa, navigationEn, navigationFa, statusEn, statusFa (+2 more)
+### Community 95 - "LayoutType"
+Cohesion: 0.14
+Nodes (12): LayoutType, ToolbarLayout, BODY_CONSTANTS, ContainerType, DATA_ATTRIBUTES, CONTAINER_CLASSES, ShellRouteMetadata, ActivatedRouteStub (+4 more)
 
 ### Community 96 - "shell-navigation.facade.ts"
-Cohesion: 0.18
-Nodes (11): PAGE_NAVIGATION_ITEMS, SidebarMenuComponent, MenuDirectiveStub, ScrollDirectiveStub, Component, Directive, Input, VeloraIconStubComponent (+3 more)
+Cohesion: 0.14
+Nodes (14): PAGE_NAVIGATION_ITEMS, SIDEBAR_FOOTER_CONSTANTS, SidebarFooterComponent, Component, SidebarMenuComponent, MenuDirectiveStub, ScrollDirectiveStub, Component (+6 more)
 
-### Community 97 - "config.ts"
-Cohesion: 0.17
-Nodes (19): IApp, IContent, IEngage, IFooter, IGeneral, IHeader, IIllustrations, ILayoutComponent (+11 more)
+### Community 97 - "error.interceptor.ts"
+Cohesion: 0.18
+Nodes (13): ERROR_REPORTER, ErrorCode, ErrorReporterContext, ErrorReporterPort, core/errors/index.ts, CRITICAL_STATUS_CODES, ERROR_PATHS, errorInterceptor() (+5 more)
 
 ### Community 98 - "ContextSwitchResult"
-Cohesion: 0.15
-Nodes (10): ActiveAccessContextFacade, ActorContextFacade, ActiveAccessContext, ActorContext, ContextSwitchRequest, ContextSwitchResult, DemoActiveAccessContextFacade, Injectable (+2 more)
+Cohesion: 0.25
+Nodes (6): ActiveAccessContextFacade, ActiveAccessContext, ContextSwitchRequest, ContextSwitchResult, DemoActiveAccessContextFacade, Injectable
 
 ### Community 99 - "standard-control-imports.ts"
 Cohesion: 0.20
-Nodes (8): SingleSelectControlComponent, Component, DIALER_INPUT_IMPORTS, PASSWORD_INPUT_IMPORTS, SINGLE_SELECT_IMPORTS, TAGIFY_INPUT_IMPORTS, TEXT_INPUT_IMPORTS, TEXTAREA_INPUT_IMPORTS
+Nodes (9): form-controls/index.ts, SingleSelectControlComponent, Component, DIALER_INPUT_IMPORTS, PASSWORD_INPUT_IMPORTS, SINGLE_SELECT_IMPORTS, TAGIFY_INPUT_IMPORTS, TEXT_INPUT_IMPORTS (+1 more)
 
 ### Community 100 - "TypeScript Locale Modules"
 Cohesion: 0.18
@@ -688,17 +694,17 @@ Nodes (15): Invalid Feedback Rendering, TypeScript Locale Modules, Domain-Specif
 Cohesion: 0.12
 Nodes (4): AppComponent, Component, MAIN_CONSTANTS, main()
 
-### Community 102 - "LayoutType"
-Cohesion: 0.14
-Nodes (12): LayoutType, ToolbarLayout, BODY_CONSTANTS, ContainerType, DATA_ATTRIBUTES, CONTAINER_CLASSES, ShellRouteMetadata, ActivatedRouteStub (+4 more)
-
 ### Community 103 - "InMemoryDbService"
 Cohesion: 0.21
 Nodes (7): InMemoryDbService, Injectable, BasicInfo, MockCollectionName, MockRecord, MockUser, PlatformMetadata
 
-### Community 106 - "AuthComponent"
+### Community 105 - ".key"
 Cohesion: 0.17
-Nodes (5): AuthComponent, AuthRouteData, readRouteString(), TranslateServiceStub, Component
+Nodes (3): convertInterceptor(), TitleService, Injectable
+
+### Community 106 - "AuthComponent"
+Cohesion: 0.18
+Nodes (4): AuthComponent, readRouteString(), TranslateServiceStub, Component
 
 ### Community 107 - "inputmask.directive.spec.ts"
 Cohesion: 0.27
@@ -706,51 +712,55 @@ Nodes (6): HostComponent, InputmaskDirectiveInternals, OptionsHostComponent, set
 
 ### Community 109 - "dependencies"
 Cohesion: 0.07
-Nodes (29): @angular/common, @angular/core, @angular/localize, @angular/ssr, awesomplete, file-saver, flatpickr-wrap, @fullcalendar/bootstrap5 (+21 more)
+Nodes (29): @angular/animations, @angular/common, @angular/core, @angular/localize, @angular/ssr, awesomplete, file-saver, flatpickr-wrap (+21 more)
 
-### Community 110 - "demo-context.store.ts"
-Cohesion: 0.19
-Nodes (13): OrganizationContext, OrganizationMembership, OrganizationContextFacade, buildDemoPermissionHints(), buildDemoUiCapabilities(), createDemoAuthFacadeState(), createDisabledDemoAuthFacadeState(), DEMO_ACTIVE_ACCESS_CONTEXT (+5 more)
+### Community 110 - "OrganizationContext"
+Cohesion: 0.28
+Nodes (5): OrganizationContext, OrganizationMembership, OrganizationContextFacade, DemoOrganizationContextFacade, Injectable
 
 ### Community 111 - "D3ProgressBreakdownDirective"
 Cohesion: 0.21
-Nodes (6): ProgressBreakdownItem, D3ProgressBreakdownDirective, Directive, Input, ProgressBreakdownComponent, Component
+Nodes (7): ProgressBreakdownItem, D3ProgressBreakdownDirective, Directive, Input, charts/index.ts, ProgressBreakdownComponent, Component
 
-### Community 113 - "velora-icon.component.ts"
-Cohesion: 0.13
-Nodes (13): DashboardComponent, DashboardMetric, FoundationArea, Component, isVeloraIconType(), Component, VELORA_ICON_CONSTANTS, VeloraIconComponent (+5 more)
+### Community 113 - "theme-mode.model.ts"
+Cohesion: 0.20
+Nodes (10): DEFAULT_THEME_MODE_CONFIG, isThemeModeValue(), THEME_MODE_ATTRIBUTES, THEME_MODE_CONFIG, THEME_MODE_IMAGE_ATTRIBUTES, THEME_MODE_STORAGE_KEYS, ThemeModeConfig, TEST_THEME_MODE (+2 more)
 
 ### Community 114 - "d3-chart.types.ts"
 Cohesion: 0.14
 Nodes (18): D3ChartDirectiveHostComponent, Component, D3ChartSize, ChartDirection, ChartToneInput, D3ChartConfig, D3ChartDatum, D3ChartLegend (+10 more)
 
 ### Community 115 - "InvalidFeedbackComponent"
-Cohesion: 0.16
-Nodes (9): ErrorStates, InvalidFeedbackComponent, InvalidFeedbackHostComponent, Component, Component, VALIDATION_MESSAGES, VALIDATION_PRIORITY, ValidationError (+1 more)
+Cohesion: 0.18
+Nodes (8): InvalidFeedbackComponent, InvalidFeedbackHostComponent, Component, Component, VALIDATION_MESSAGES, VALIDATION_PRIORITY, ValidationError, ValidationErrorInfo
 
 ### Community 116 - "Shared Pipes"
 Cohesion: 0.17
 Nodes (13): Locale-Aware Date and Number Formatting, Internationalization and Formatting, RTL and LTR Directionality, Runtime Locale Support, Extended Date Pipe, dueIn Pipe, localeNumber Pipe, Shared Pipes (+5 more)
 
 ### Community 117 - "app.config.spec.ts"
-Cohesion: 0.15
-Nodes (7): ClassProviderRecord, LayoutServiceProbe, AuthFacade, AuthFacadeState, DemoAuthFacade, Injectable, PROJECT_AUTH_PROVIDER
+Cohesion: 0.11
+Nodes (12): ClassProviderRecord, LayoutServiceProbe, AuthFacade, AuthFacadeState, context/index.ts, SessionStorageAdapter, DemoAuthFacade, Injectable (+4 more)
 
 ### Community 118 - "BaseErrorComponent"
 Cohesion: 0.15
-Nodes (3): BaseErrorComponent, readRouteString(), Component
+Nodes (4): BaseErrorComponent, readRouteString(), Component, components/index.ts
 
-### Community 120 - "error.interceptor.ts"
+### Community 120 - "app.config.ts"
 Cohesion: 0.18
-Nodes (12): ERROR_REPORTER, ErrorCode, ErrorReporterContext, ErrorReporterPort, CRITICAL_STATUS_CODES, ERROR_PATHS, errorInterceptor(), getHttpErrorStackTrace() (+4 more)
+Nodes (12): APP_CONFIG_CONSTANTS, AppProvidersConfig, buildInitializers(), buildModuleProviders(), buildRouterProviders(), buildServiceWorkerProvider(), ensureLocaleData(), getAppProviders() (+4 more)
 
 ### Community 121 - "index.ts"
 Cohesion: 0.15
-Nodes (9): sweetalert2, GlobalEventsService, KEY, Injectable, FocusManagementConfig, KeyboardEventHandlers, CONFIRM_CONFIG, MODAL_CONFIG (+1 more)
+Nodes (10): sweetalert2, GlobalEventsService, KEY, Injectable, FocusManagementConfig, services/index.ts, KeyboardEventHandlers, CONFIRM_CONFIG (+2 more)
 
-### Community 122 - "theme-mode.model.ts"
-Cohesion: 0.20
-Nodes (10): DEFAULT_THEME_MODE_CONFIG, isThemeModeValue(), THEME_MODE_ATTRIBUTES, THEME_MODE_CONFIG, THEME_MODE_IMAGE_ATTRIBUTES, THEME_MODE_STORAGE_KEYS, ThemeModeConfig, TEST_THEME_MODE (+2 more)
+### Community 122 - "classic.component.ts"
+Cohesion: 0.14
+Nodes (10): CLASSIC_TOOLBAR_CONSTANTS, ClassicToolbarLayoutState, ClassicToolbarLayoutConfig, layoutConfig, LayoutServiceStub, TranslateServiceStub, resolveClassicToolbarCommands(), ShellToolbarCommand (+2 more)
+
+### Community 123 - "legacy-storage-cleanup.initializer.ts"
+Cohesion: 0.22
+Nodes (10): cleanupLegacyStorage(), LEGACY_NAMESPACE_CHAR_CODES, LEGACY_STORAGE_KEY_SUFFIXES, legacyNamespace(), legacyStorageCleanupSetup(), legacyStorageKeyPrefixes(), legacyStorageKeys(), shouldRemoveLegacyStorageKey() (+2 more)
 
 ### Community 124 - "search-result-inner.component.ts"
 Cohesion: 0.12
@@ -760,25 +770,25 @@ Nodes (7): Modes, recentlySearchedModels, ResultModel, resultModels, SEARCH_RESU
 Cohesion: 0.07
 Nodes (28): scripts, analyze:prod, build, build:prod, build:ssr, dev:ssr, figma-mcp, figma-mcp:dev (+20 more)
 
-### Community 126 - "app.config.ts"
-Cohesion: 0.18
-Nodes (12): APP_CONFIG_CONSTANTS, AppProvidersConfig, buildInitializers(), buildModuleProviders(), buildRouterProviders(), buildServiceWorkerProvider(), ensureLocaleData(), getAppProviders() (+4 more)
+### Community 126 - "dropzone.directive.ts"
+Cohesion: 0.13
+Nodes (11): DEFAULT_OPTIONS, DropzoneClipboardEvent, DropzoneDragEvent, DropzoneParams, DropzoneRemoveHandlerElement, DropzoneResponse, DropzoneValidationResult, DEFAULT_OPTIONS (+3 more)
 
 ### Community 127 - "page-info.service.ts"
 Cohesion: 0.25
 Nodes (8): isPageNavigationItemActive(), isPageNavigationItemCurrentPage(), normalizePageNavigationUrl(), PageInfo, PageLink, PageTitleComponent, PageInfoServiceStub, Component
 
-### Community 128 - "tiny-slider.directive.ts"
-Cohesion: 0.15
-Nodes (10): DEFAULT_OPTIONS, EmptyHostComponent, HostComponent, setup(), setupEmpty(), TinySliderDirectiveInternals, Component, TinySliderError (+2 more)
+### Community 128 - "tiny-slider.directive.spec.ts"
+Cohesion: 0.27
+Nodes (6): EmptyHostComponent, HostComponent, setup(), setupEmpty(), TinySliderDirectiveInternals, Component
 
-### Community 130 - "classic.component.ts"
-Cohesion: 0.14
-Nodes (10): CLASSIC_TOOLBAR_CONSTANTS, ClassicToolbarLayoutState, ClassicToolbarLayoutConfig, layoutConfig, LayoutServiceStub, TranslateServiceStub, resolveClassicToolbarCommands(), ShellToolbarCommand (+2 more)
+### Community 130 - "navbar.component.ts"
+Cohesion: 0.17
+Nodes (11): dropdown-inner/index.ts, QUICK_LINKS_INNER_CONSTANTS, QuickLinksInnerComponent, Component, NavbarComponent, Component, provideShellContextDisplayConfig(), SHELL_CONTEXT_DISPLAY_CONFIG (+3 more)
 
-### Community 131 - "topbar.component.ts"
-Cohesion: 0.18
-Nodes (13): QuickLinksInnerComponent, Component, NotificationsInnerStubComponent, QuickLinksInnerStubComponent, SearchResultInnerStubComponent, ThemeModeSwitcherStubComponent, Component, Input (+5 more)
+### Community 131 - "topbar.component.spec.ts"
+Cohesion: 0.26
+Nodes (10): NotificationsInnerStubComponent, QuickLinksInnerStubComponent, SearchResultInnerStubComponent, ThemeModeSwitcherStubComponent, Component, Input, UserInnerStubComponent, VeloraIconStubComponent (+2 more)
 
 ### Community 132 - "CookieService"
 Cohesion: 0.24
@@ -788,21 +798,25 @@ Nodes (4): CookieOptions, CookieService, DEFAULT_COOKIE_OPTIONS, Injectable
 Cohesion: 0.15
 Nodes (3): isLayoutType(), ShellFacade, Injectable
 
-### Community 135 - "css.token.ts"
-Cohesion: 0.14
-Nodes (11): StandardSpeechRecognition, WebkitSpeechRecognition, CSS, CssApi, fallbackCssApi, resolveCssApi(), WindowWithCssApi, resolveSpeechRecognitionConstructor() (+3 more)
+### Community 135 - "shell-navigation.model.ts"
+Cohesion: 0.22
+Nodes (9): navigation/index.ts, PageNavigationActiveMatch, PageNavigationItem, PageNavigationItemKind, ShellNavigationActiveMatch, ShellNavigationItem, ShellNavigationItemKind, ShellNavigationPermissionMatcher (+1 more)
+
+### Community 136 - "user-inner.component.ts"
+Cohesion: 0.19
+Nodes (7): LOCATION, LanguageFlag, TestAuthSession, TestUser, Component, USER_INNER_CONSTANTS, UserInnerComponent
+
+### Community 137 - "d3-donut-chart.directive.ts"
+Cohesion: 0.23
+Nodes (10): D3LegendInteraction, D3LegendItem, D3LegendLayout, D3LegendRenderOptions, D3LegendRenderResult, legendGridTemplate(), legendItemLabel(), legendItemMeta() (+2 more)
 
 ### Community 138 - "Modals, Drawers, and Wizards"
 Cohesion: 0.27
 Nodes (10): Actions and Permissions, Audit-Sensitive and Elevated Actions, Disabled Versus Hidden Actions, Permission-Aware Row Action Pattern, UI Capability Display Hints, Honest-Disabled Terminal Actions, Modals, Drawers, and Wizards, Ngb Modal Wrapper (+2 more)
 
-### Community 139 - "shell-navigation.model.ts"
-Cohesion: 0.22
-Nodes (8): PageNavigationActiveMatch, PageNavigationItem, PageNavigationItemKind, ShellNavigationActiveMatch, ShellNavigationItem, ShellNavigationItemKind, ShellNavigationPermissionMatcher, ShellNavigationViewItem
-
-### Community 141 - "d3-donut-chart.directive.ts"
-Cohesion: 0.23
-Nodes (10): D3LegendInteraction, D3LegendItem, D3LegendLayout, D3LegendRenderOptions, D3LegendRenderResult, legendGridTemplate(), legendItemLabel(), legendItemMeta() (+2 more)
+### Community 139 - "tree.directive.ts"
+Cohesion: 0.16
+Nodes (12): ContextMenuClickOutsideHandler, DropLocation, DropPosition, getContextMenuClickOutsideHandler(), setContextMenuClickOutsideHandler(), TreeCheckCallbackContext, TreeContextMenuElement, TreeError (+4 more)
 
 ### Community 142 - "D3ForceGraphDirective"
 Cohesion: 0.39
@@ -817,32 +831,32 @@ Cohesion: 0.39
 Nodes (3): D3TimelineDirective, Directive, Input
 
 ### Community 145 - "flatpickr.directive.ts"
-Cohesion: 0.18
-Nodes (10): flatpickr-wrap, DEFAULT_OPTIONS, FlatpickrError, FlatpickrFactory, FlatpickrInstance, FlatpickrNativeOptions, FlatpickrOptions, FlatpickrValidationResult (+2 more)
+Cohesion: 0.12
+Nodes (13): flatpickr-wrap, DEFAULT_OPTIONS, FlatpickrError, FlatpickrFactory, FlatpickrInstance, FlatpickrNativeOptions, FlatpickrOptions, FlatpickrValidationResult (+5 more)
+
+### Community 146 - "registration.component.ts"
+Cohesion: 0.23
+Nodes (7): md5, AddressModel, models/auth/index.ts, FiscalYearParameters, ReservationServersInfo, UserModel, ConfirmPasswordValidator
 
 ### Community 147 - "NamedFormControl"
 Cohesion: 0.12
 Nodes (9): BooleanControlComponent, Component, NamedFormControl, PasswordFormControl, TagsFormControl, TextualFormControl, Directive, TagsControlComponent (+1 more)
 
-### Community 148 - "tree.directive.ts"
-Cohesion: 0.16
-Nodes (12): ContextMenuClickOutsideHandler, DropLocation, DropPosition, getContextMenuClickOutsideHandler(), setContextMenuClickOutsideHandler(), TreeCheckCallbackContext, TreeContextMenuElement, TreeError (+4 more)
+### Community 148 - "brand.config.ts"
+Cohesion: 0.21
+Nodes (8): APP_BRAND, AppBrandConfig, BreadcrumbSchema, OrganizationSchema, StructuredDataSchema, WebPageSchema, ROUTE_DATA_KEYS, strategies/index.ts
 
-### Community 150 - "Shared UI Implementation Gaps"
-Cohesion: 0.25
-Nodes (8): Navigation Permission Filtering, Missing Standard Controls, Pagination and Selection Gaps, Shell Navigation Pattern, UI Knowledge Documentation Completion Rationale, Shared UI Implementation Gaps, UI Source Scan Coverage, UI Knowledge Generation Report
-
-### Community 151 - "Forms and Controls"
-Cohesion: 0.50
-Nodes (5): Stepper Directive, Forms and Controls, StandardFormControl Architecture, Form Validation Model, Two-Step Login Flow
+### Community 150 - "UI Architecture"
+Cohesion: 0.17
+Nodes (12): Navigation Permission Filtering, Missing Standard Controls, Pagination and Selection Gaps, UI Dependency Rules, UI Folder Boundaries, Shell Navigation Pattern, Shell Facade State Pattern, UI Architecture (+4 more)
 
 ### Community 152 - "Tables and Grids"
 Cohesion: 0.32
 Nodes (8): Anti-Template Rule, Domain Workspace Design Rules, Domain Workspace Acceptance Gate, Workspace Completion Checklist, Future Domain Table State Pattern, Domain Table Acceptance Gate, Existing Table Building Blocks, Tables and Grids
 
-### Community 153 - "loader.interceptor.ts"
-Cohesion: 0.36
-Nodes (4): LOADER_PATHS, loaderInterceptor(), LoaderService, Injectable
+### Community 153 - "interceptors/index.ts"
+Cohesion: 0.12
+Nodes (22): buildInterceptors(), browserStateInterceptor(), STATE_PATHS, cache, cacheInterceptor(), HTTPS_PATHS, httpsInterceptor(), interceptors/index.ts (+14 more)
 
 ### Community 154 - "header-menu.component.ts"
 Cohesion: 0.28
@@ -856,13 +870,13 @@ Nodes (3): D3BarChartDirective, Directive, Input
 Cohesion: 0.32
 Nodes (3): D3ScoreChartDirective, Directive, Input
 
-### Community 158 - "brand.config.ts"
+### Community 159 - "topbar.component.ts"
 Cohesion: 0.21
-Nodes (7): APP_BRAND, AppBrandConfig, BreadcrumbSchema, OrganizationSchema, StructuredDataSchema, WebPageSchema, ROUTE_DATA_KEYS
+Nodes (6): isThemeMenuPlacement(), THEME_MODE_SWITCHER_CONSTANTS, ThemeMenuPlacement, ThemeModeSwitcherComponent, Component, TOPBAR_CONSTANTS
 
 ### Community 160 - "Velora UI Knowledge Index"
-Cohesion: 0.23
-Nodes (12): Directive Lifecycle and Host Rules, Velora Directives Catalog, External Dashboard Selector Mapping, Shared DOM Behavior Directives, UI Implementation Checklist, Preimplementation Gate, Future Agent Ground Rules, Velora UI Knowledge Index (+4 more)
+Cohesion: 0.16
+Nodes (18): D3 Chart Directives, Directive Lifecycle and Host Rules, Velora Directives Catalog, External Dashboard Selector Mapping, Inputmask and Maxlength Rules, Shared DOM Behavior Directives, Forms and Controls, Standard Form Control Catalog (+10 more)
 
 ### Community 161 - "Hierarchy Graph"
 Cohesion: 0.25
@@ -873,14 +887,18 @@ Cohesion: 0.25
 Nodes (8): Advanced Search, Handle Advanced Search, Handle Preference Search, Recent Searches, Search Interface, Search Preferences, Search Results, Set Search Mode
 
 ### Community 163 - "SingleOptionDirective"
-Cohesion: 0.29
+Cohesion: 0.27
 Nodes (3): CHECK_DELAYS_MS, SingleOptionDirective, Directive
 
 ### Community 164 - "Refactored Files"
 Cohesion: 0.09
 Nodes (22): Automated Fixes Applied, Base, Completed Refactoring, Components, Components (High Priority), ✅ File Headers, Files Still Needing Review, ✅ Formatting Standardization (+14 more)
 
-### Community 167 - "language.initializer.ts"
+### Community 167 - "locale-number.pipe.ts"
+Cohesion: 0.27
+Nodes (8): flatpickrConfig, parseDate(), TIME_COMPONENTS, LocaleNumberPipe, toEnglish(), toPersian(), toPersianDigit(), Pipe
+
+### Community 168 - "language.initializer.ts"
 Cohesion: 0.27
 Nodes (9): addThemeLink(), applyHtmlAttributes(), hasThemeLink(), LanguageDirection, languageDirectionSetup(), manageThemeCss(), removeOppositeThemeLinks(), THEME_CSS (+1 more)
 
@@ -888,33 +906,29 @@ Nodes (9): addThemeLink(), applyHtmlAttributes(), hasThemeLink(), LanguageDirect
 Cohesion: 0.29
 Nodes (7): Account Settings Route, Language Selector, Logout, Select Language, User Menu, User Profile, Users Settings Route
 
+### Community 170 - "demo-context.store.ts"
+Cohesion: 0.33
+Nodes (10): buildDemoActiveAccessContext(), buildDemoActorContext(), buildDemoPermissionHints(), buildDemoUiCapabilities(), createDemoAuthFacadeState(), createDisabledDemoAuthFacadeState(), DEMO_ACTIVE_ACCESS_CONTEXT, DEMO_ACTIVE_ACTOR_CONTEXT (+2 more)
+
 ### Community 171 - "compilerOptions"
 Cohesion: 0.10
 Nodes (21): compilerOptions, allowSyntheticDefaultImports, baseUrl, declaration, downlevelIteration, esModuleInterop, experimentalDecorators, forceConsistentCasingInFileNames (+13 more)
-
-### Community 172 - "network-information.token.ts"
-Cohesion: 0.24
-Nodes (7): MEDIA_DEVICES, NAVIGATOR, NavigatorWithNetworkInformation, NETWORK_INFORMATION, NetworkInformation, resolveNetworkInformation(), USER_AGENT
 
 ### Community 174 - "DateLikeControl"
 Cohesion: 0.31
 Nodes (6): DateControlComponent, Component, DateTimeControlComponent, Component, DateLikeControl, DATE_INPUT_IMPORTS
 
-### Community 175 - "hierarchy-tree.component.ts"
-Cohesion: 0.24
-Nodes (5): LayoutDirection, OutlineLink, OutlineNode, TreeRenderNode, HierarchyNode
-
 ### Community 177 - "paths"
-Cohesion: 0.10
-Nodes (20): src/app/core/*, src/app/_fake/*, src/app/models/*, src/app/modules/*, src/app/shared/*, src/app/shell/*, src/app/utils/*, src/app/utils/index.ts (+12 more)
+Cohesion: 0.12
+Nodes (17): src/app/core/*, src/app/_fake/*, src/app/models/*, src/app/modules/*, src/app/shared/*, src/app/shell/*, src/environments/*, paths (+9 more)
 
 ### Community 178 - "schematics"
 Cohesion: 0.11
 Nodes (19): setParserOptionsProject, setParserOptionsProject, schematics, type, @angular-eslint/schematics:application, @angular-eslint/schematics:library, typeSeparator, typeSeparator (+11 more)
 
-### Community 179 - "fullcalendar.directive.ts"
-Cohesion: 0.20
-Nodes (9): BootstrapModule, DayGridModule, FullCalendarError, FullCalendarModule, FullCalendarOptions, FullCalendarValidationResult, InteractionModule, ListModule (+1 more)
+### Community 180 - "figma-mcp.js"
+Cohesion: 0.22
+Nodes (9): FIGMA_CONFIG, args, figmaConfig, fs, getServerConfig(), path, { spawn }, startServer() (+1 more)
 
 ### Community 181 - "Enterprise Dashboard"
 Cohesion: 0.40
@@ -936,13 +950,9 @@ Nodes (5): Detail Accounts Review Route, Document Review Route, General Accounts
 Cohesion: 0.12
 Nodes (15): src/main.ts, compilerOptions, outDir, types, exclude, extends, files, include (+7 more)
 
-### Community 186 - "shell-navigation.utils.ts"
-Cohesion: 0.49
-Nodes (8): applyShellNavigationLabels(), filterShellNavigationItems(), hasRequiredPermissions(), isShellNavigationItemActive(), isShellNavigationItemCurrentPage(), normalizeShellNavigationUrl(), resolveShellNavigationViewItems(), toShellNavigationViewItems()
-
-### Community 187 - "figma-mcp.js"
-Cohesion: 0.28
-Nodes (8): args, figmaConfig, fs, getServerConfig(), path, { spawn }, startServer(), stopServer()
+### Community 186 - "ActorMembership"
+Cohesion: 0.33
+Nodes (5): ActorContextFacade, ActorContext, ActorMembership, DemoActorContextFacade, Injectable
 
 ### Community 188 - "Demo Action Modal"
 Cohesion: 0.50
@@ -996,13 +1006,13 @@ Nodes (3): Modal Configuration, Modal Template, Projected Modal Content
 Cohesion: 0.13
 Nodes (3): ModalConfig, ModalComponent, Component
 
-### Community 206 - "debounce.decorator.ts"
-Cohesion: 0.33
-Nodes (6): addCancelMethod(), Debounce(), DebouncedSourceMethod, hasSameArgs(), DebouncedMethod, DebounceHost
+### Community 206 - "hierarchy-tree.component.ts"
+Cohesion: 0.24
+Nodes (5): LayoutDirection, OutlineLink, OutlineNode, TreeRenderNode, HierarchyNode
 
-### Community 207 - "service-worker.initializer.ts"
-Cohesion: 0.39
-Nodes (6): setupUnrecoverableHandling(), setupUpdateChecking(), setupVersionActivation(), ApplicationRefStub, SwUpdateStub, swCheckForUpdate()
+### Community 207 - "fullcalendar.directive.ts"
+Cohesion: 0.20
+Nodes (9): BootstrapModule, DayGridModule, FullCalendarError, FullCalendarModule, FullCalendarOptions, FullCalendarValidationResult, InteractionModule, ListModule (+1 more)
 
 ### Community 208 - "ThemeModeValue"
 Cohesion: 0.47
@@ -1056,13 +1066,17 @@ Nodes (11): extract-i18n, server, test, builder, options, buildTarget, builder, 
 Cohesion: 0.18
 Nodes (11): web, strict, style, type, @schematics/angular:application, @schematics/angular:component, prefix, projectType (+3 more)
 
-### Community 226 - "DeepDiffMapper"
-Cohesion: 0.31
-Nodes (4): DeepDiffMapper, DiffResult, DiffResultMap, DiffType
+### Community 226 - "shell-navigation.utils.ts"
+Cohesion: 0.49
+Nodes (8): applyShellNavigationLabels(), filterShellNavigationItems(), hasRequiredPermissions(), isShellNavigationItemActive(), isShellNavigationItemCurrentPage(), normalizeShellNavigationUrl(), resolveShellNavigationViewItems(), toShellNavigationViewItems()
 
-### Community 228 - "app.type.ts"
-Cohesion: 0.25
-Nodes (5): AppComponentConfig, FocusTarget, KeyboardEventConfig, ModalComponentInstance, BaseModel
+### Community 227 - "debounce.decorator.ts"
+Cohesion: 0.33
+Nodes (6): addCancelMethod(), Debounce(), DebouncedSourceMethod, hasSameArgs(), DebouncedMethod, DebounceHost
+
+### Community 228 - "service-worker.initializer.ts"
+Cohesion: 0.39
+Nodes (6): setupUnrecoverableHandling(), setupUpdateChecking(), setupVersionActivation(), ApplicationRefStub, SwUpdateStub, swCheckForUpdate()
 
 ### Community 229 - "SplashScreenService"
 Cohesion: 0.20
@@ -1076,17 +1090,13 @@ Nodes (8): analytics, schematicCollections, cli, newProjectRoot, projects, $sche
 Cohesion: 0.22
 Nodes (9): prerender, routes, builder, configurations, defaultConfiguration, options, /, /dashboard (+1 more)
 
-### Community 233 - "dropzone.directive.ts"
-Cohesion: 0.25
-Nodes (7): DEFAULT_OPTIONS, DropzoneClipboardEvent, DropzoneDragEvent, DropzoneParams, DropzoneRemoveHandlerElement, DropzoneResponse, DropzoneValidationResult
-
 ### Community 234 - "From Old Structure to New 7-1 Architecture"
 Cohesion: 0.22
 Nodes (8): Bootstrap Integration, Component Imports, From Old Structure to New 7-1 Architecture, Import Updates Required, Migration Guide, New Entry Points, Old Entry Points (Deprecated), Path Changes
 
-### Community 236 - "UI Utilities"
-Cohesion: 0.33
-Nodes (6): Semantic Compare and Impact Analysis, Contextual Drawer Pattern, DeepDiffMapper, FormUtil, UI Infrastructure Services, UI Utilities
+### Community 236 - "Form Validation Model"
+Cohesion: 0.25
+Nodes (9): Stepper Directive, Semantic Compare and Impact Analysis, Form Validation Model, Contextual Drawer Pattern, DeepDiffMapper, FormUtil, UI Infrastructure Services, UI Utilities (+1 more)
 
 ### Community 237 - "Enterprise Treasury Frontend agent contract"
 Cohesion: 0.29
@@ -1112,9 +1122,9 @@ Nodes (6): Cleanup Summary, Current Structure, Files Removed, Folders Removed, M
 Cohesion: 0.33
 Nodes (6): lint, src/**/*.ts, builder, options, lintFilePatterns, src/**/*.html
 
-### Community 244 - ".eslintrc.json"
-Cohesion: 0.40
-Nodes (4): ignorePatterns, overrides, root, projects/**/*
+### Community 243 - "DeepDiffMapper"
+Cohesion: 0.31
+Nodes (4): DeepDiffMapper, DiffResult, DiffResultMap, DiffType
 
 ### Community 245 - "Q: AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
 Cohesion: 0.40
@@ -1140,6 +1150,10 @@ Nodes (4): Answer, Outcome, Q: Start the reusable frontend Master refactor and u
 Cohesion: 0.40
 Nodes (4): Enterprise Dashboard Master Source, Prerequisites, Quick start, Verification
 
+### Community 251 - "app.type.ts"
+Cohesion: 0.25
+Nodes (6): AppComponentConfig, FocusTarget, KeyboardEventConfig, ModalComponentInstance, BaseModel, common/index.ts
+
 ### Community 252 - "build"
 Cohesion: 0.50
 Nodes (4): build, builder, configurations, defaultConfiguration
@@ -1160,71 +1174,71 @@ Nodes (3): express, express, express
 Cohesion: 0.07
 Nodes (4): ParagraphSkeletonComponent, Component, CoreUtil, isRecord()
 
-### Community 263 - "autosize.directive.ts"
+### Community 278 - "autosize.directive.ts"
 Cohesion: 0.29
 Nodes (6): AutosizeError, AutosizeFactory, AutosizeOptions, AutosizeTarget, AutosizeValidationResult, DEFAULT_OPTIONS
 
-### Community 264 - "Shared Components"
-Cohesion: 0.25
-Nodes (8): D3 Chart Directives, Inputmask and Maxlength Rules, Standard Form Control Catalog, Generic Shared UI Components, Shared Chart Components, Shared Components, Shell Chrome Components, Shared Standard Form Controls
-
-### Community 278 - "page-info.service.spec.ts"
+### Community 308 - "page-info.service.spec.ts"
 Cohesion: 0.40
 Nodes (3): DEFAULT_APP_BRAND, TranslateServiceStub, translations
 
-### Community 282 - "header.interceptor.ts"
-Cohesion: 0.47
-Nodes (3): HEADER_PATHS, headerInterceptor(), TranslateServiceStub
-
-### Community 294 - "mockApiInterceptor"
+### Community 319 - "mockApiInterceptor"
 Cohesion: 0.53
 Nodes (3): IS_SERVER_PLATFORM, mockApiInterceptor(), SINGLETON_COLLECTIONS
 
-### Community 341 - "settings.model.ts"
+### Community 353 - "settings.model.ts"
 Cohesion: 0.33
-Nodes (4): DatabaseBackup, FiscalYear, FiscalYearParameters, FiscalYearParametersResponse
+Nodes (5): toolbar/models/index.ts, DatabaseBackup, FiscalYear, FiscalYearParameters, FiscalYearParametersResponse
 
-### Community 351 - "webpack-rtl.config.js"
+### Community 354 - ".eslintrc.json"
+Cohesion: 0.40
+Nodes (4): ignorePatterns, overrides, root, projects/**/*
+
+### Community 356 - "webpack-rtl.config.js"
 Cohesion: 0.50
 Nodes (3): MiniCssExtractPlugin, path, RtlCssPlugin
 
-### Community 353 - "due-in.pipe.ts"
-Cohesion: 0.50
-Nodes (3): DueInFormat, THRESHOLDS, UPDATE_INTERVALS
+### Community 357 - "modular-merge.ts"
+Cohesion: 0.67
+Nodes (3): isTranslationTree(), mergeTranslationTree(), TranslationTree
+
+### Community 361 - "@utils"
+Cohesion: 0.67
+Nodes (3): src/app/utils/*, src/app/utils/index.ts, @utils
 
 ## Knowledge Gaps
-- **909 isolated node(s):** `root`, `projects/**/*`, `overrides`, `$schema`, `version` (+904 more)
+- **912 isolated node(s):** `$schema`, `version`, `newProjectRoot`, `projectType`, `style` (+907 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **158 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **162 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Work-memory lessons
 
 **Preferred sources** — corroborated by past sessions; start here.
-- `Project Composition Boundary` (12× useful, score=11.97477471) _(code changed — re-verify)_
-- `app.config.ts` (6× useful, score=5.98814624) _(code changed — re-verify)_
-- `AuthService` (3× useful, score=2.997690717)
-- `LayoutService` (2× useful, score=1.997599022)
-- `Reusable Dashboard Master Refactor Plan` (2× useful, score=1.993467397) _(code changed — re-verify)_
-- `ShellNavigationFacade` (2× useful, score=1.992919855)
-- `Versioned Master Release` (2× useful, score=1.989572793) _(code changed — re-verify)_
-- `UI Architecture` (2× useful, score=1.988791557)
-- `LoggerService` (2× useful, score=1.988791557)
-- `PermissionService` (2× useful, score=1.988791557)
+- `Project Composition Boundary` (13× useful, score=12.943968822) _(code changed — re-verify)_
+- `app.config.ts` (7× useful, score=6.972739967)
+- `AuthService` (3× useful, score=2.989979651)
+- `mockApiInterceptor()` (2× useful, score=1.997421981)
+- `LayoutService` (2× useful, score=1.992460527)
+- `Reusable Dashboard Master Refactor Plan` (2× useful, score=1.988339531) _(code changed — re-verify)_
+- `ShellNavigationFacade` (2× useful, score=1.987793397)
+- `Versioned Master Release` (2× useful, score=1.984454945) _(code changed — re-verify)_
+- `UI Architecture` (2× useful, score=1.983675718)
+- `LoggerService` (2× useful, score=1.983675718)
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseDirective` connect `BaseDirective` to `tiny-slider.directive.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `SearchDirective`, `autosize.directive.ts`, `AutocompleteDirective`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `flatpickr.directive.ts`, `MenuDirective`, `logger.service.ts`, `StepperDirective`, `tree.directive.ts`, `TagifyDirective`, `runSafely`, `ScrollDirective`, `.error`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `TreeDirective`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `DraggableDirective`, `autocomplete.directive.ts`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `fullcalendar.directive.ts`, `CountUpDirective`, `ToggleDirective`, `PasswordMeterDirective`, `DialerDirective`, `TypedDirective`, `IfIsBrowserDirective`, `dropzone.directive.ts`, `AntiAutocompleteDirective`?**
-  _High betweenness centrality (0.121) - this node is a cross-community bridge._
-- **Why does `LoggerService` connect `LoggerService` to `tiny-slider.directive.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `classic.component.ts`, `TranslationService`, `SearchDirective`, `AutocompleteDirective`, `autosize.directive.ts`, `format-date.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `flatpickr.directive.ts`, `MenuDirective`, `logger.service.ts`, `StepperDirective`, `tree.directive.ts`, `TagifyDirective`, `runSafely`, `.error`, `ScrollDirective`, `.error`, `theme-mode-switcher.component.ts`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `FlatpickrDirective`, `ClipboardDirective`, `language.initializer.ts`, `NoUiSliderDirective`, `.showContextMenu`, `DraggableDirective`, `autocomplete.directive.ts`, `BaseDirective`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `fullcalendar.directive.ts`, `CountUpDirective`, `ToggleDirective`, `.warn`, `index.ts`, `PasswordMeterDirective`, `layout.service.ts`, `ErrorService`, `DialerDirective`, `service-worker.initializer.ts`, `cookie-alert.directive.spec.ts`, `auth.service.ts`, `TypedDirective`, `IfIsBrowserDirective`, `shell-navigation.facade.ts`, `AppComponent`, `dropzone.directive.ts`, `inputmask.directive.spec.ts`, `AntiAutocompleteDirective`, `velora-icon.component.ts`?**
-  _High betweenness centrality (0.110) - this node is a cross-community bridge._
-- **Why does `runSafely()` connect `runSafely` to `tiny-slider.directive.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `SearchDirective`, `AutocompleteDirective`, `autosize.directive.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `flatpickr.directive.ts`, `.get`, `logger.service.ts`, `MenuDirective`, `tree.directive.ts`, `TagifyDirective`, `LoggerService`, `.loadTreeData`, `ScrollDirective`, `.error`, `.handleTouchEnd`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `autocomplete.directive.ts`, `BaseDirective`, `AutosizeDirective`, `ImageInputDirective`, `fullcalendar.directive.ts`, `CountUpDirective`, `AuthService`, `layout.service.ts`, `LayoutService`, `auth.service.ts`, `TypedDirective`, `dropzone.directive.ts`, `ResponsiveUtil`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+- **Why does `LoggerService` connect `LoggerService` to `tiny-slider.directive.spec.ts`, `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `TranslationService`, `SearchDirective`, `AutocompleteDirective`, `tree.directive.ts`, `velora-icon.component.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `flatpickr.directive.ts`, `MenuDirective`, `StepperDirective`, `.error`, `autosize.directive.ts`, `TagifyDirective`, `runSafely`, `logger.service.ts`, `ScrollDirective`, `.error`, `topbar.component.ts`, `directive-host.ts`, `theme-mode-switcher.component.spec.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `FlatpickrDirective`, `ClipboardDirective`, `BaseDirective`, `language.initializer.ts`, `.warn`, `NoUiSliderDirective`, `DraggableDirective`, `tiny-slider.directive.ts`, `.showContextMenu`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `CountUpDirective`, `ToggleDirective`, `tokens/index.ts`, `PasswordMeterDirective`, `layout.service.ts`, `ErrorService`, `utils/index.ts`, `DialerDirective`, `fullcalendar.directive.ts`, `cookie-alert.directive.spec.ts`, `auth.service.ts`, `TypedDirective`, `IfIsBrowserDirective`, `shell-navigation.facade.ts`, `service-worker.initializer.ts`, `AppComponent`, `inputmask.directive.spec.ts`, `AntiAutocompleteDirective`, `classic.component.ts`, `dropzone.directive.ts`?**
+  _High betweenness centrality (0.129) - this node is a cross-community bridge._
+- **Why does `BaseDirective` connect `BaseDirective` to `StickyDirective`, `DropzoneDirective`, `DrawerDirective`, `SearchDirective`, `AutocompleteDirective`, `tree.directive.ts`, `MaxlengthDirective`, `TinySliderDirective`, `CookieAlertDirective`, `flatpickr.directive.ts`, `MenuDirective`, `StepperDirective`, `autosize.directive.ts`, `TagifyDirective`, `runSafely`, `logger.service.ts`, `ScrollDirective`, `.error`, `directive-host.ts`, `FullCalendarDirective`, `SingleOptionDirective`, `TreeDirective`, `FlatpickrDirective`, `ClipboardDirective`, `NoUiSliderDirective`, `DraggableDirective`, `tiny-slider.directive.ts`, `base-directive.spec.ts`, `AutosizeDirective`, `ImageInputDirective`, `ScrollTopDirective`, `CountUpDirective`, `ToggleDirective`, `PasswordMeterDirective`, `DialerDirective`, `fullcalendar.directive.ts`, `TypedDirective`, `IfIsBrowserDirective`, `AntiAutocompleteDirective`, `dropzone.directive.ts`?**
+  _High betweenness centrality (0.124) - this node is a cross-community bridge._
+- **Why does `modules/i18n/index.ts` connect `modules/i18n/index.ts` to `en.ts`, `TranslationService`, `fa.ts`?**
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
 - **Are the 34 inferred relationships involving `LoggerService` (e.g. with `languageDirectionSetup()` and `swCheckForUpdate()`) actually correct?**
   _`LoggerService` has 34 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `root`, `projects/**/*`, `overrides` to the rest of the system?**
-  _909 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `$schema`, `version`, `newProjectRoot` to the rest of the system?**
+  _912 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `PageInfoService` be split into smaller, more focused modules?**
   _Cohesion score 0.12183908045977011 - nodes in this community are weakly interconnected._
 - **Should `StickyDirective` be split into smaller, more focused modules?**
-  _Cohesion score 0.06034801925212884 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06164383561643835 - nodes in this community are weakly interconnected._

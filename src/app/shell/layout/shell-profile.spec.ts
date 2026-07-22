@@ -1,5 +1,5 @@
 import type { AuthUserSnapshot } from '@core/auth';
-import { createDemoAuthFacadeState } from '../../demo/context/demo-context.fixtures';
+import type { AuthFacadeState } from '@core/state/context';
 import { resolveShellProfile } from './shell-profile';
 
 const createLegacyUser = (): AuthUserSnapshot =>
@@ -13,11 +13,44 @@ const createLegacyUser = (): AuthUserSnapshot =>
     isAdmin: true,
   });
 
+const createContextState = (): AuthFacadeState => ({
+  status: 'authenticated',
+  identity: {
+    id: 'identity-1',
+    displayName: 'Alex Morgan',
+    email: 'alex@example.com',
+    status: 'ACTIVE',
+  },
+  organizationContext: {
+    id: 'organization-1',
+    type: 'ORGANIZATION',
+    name: 'Workspace Operations',
+    code: 'WORKSPACE_OPS',
+    resolvedHost: 'app.example.com',
+    status: 'ACTIVE',
+  },
+  organizationMemberships: [
+    {
+      id: 'membership-1',
+      identityId: 'identity-1',
+      organizationId: 'organization-1',
+      roleKey: 'workspace-operator',
+      roleLabel: 'Workspace Operator',
+      status: 'ACTIVE',
+      visibleInDirectory: true,
+    },
+  ],
+  actorMemberships: [],
+  permissionHints: [],
+  uiCapabilities: [],
+  isDemoMode: false,
+});
+
 describe('resolveShellProfile', () => {
   it('uses the legacy auth user when one is available', () => {
     const profile = resolveShellProfile(
       createLegacyUser(),
-      createDemoAuthFacadeState(),
+      createContextState(),
     );
 
     expect(profile).toEqual(
@@ -35,16 +68,16 @@ describe('resolveShellProfile', () => {
   it('falls back to the authenticated context identity when legacy auth is empty', () => {
     const profile = resolveShellProfile(
       undefined,
-      createDemoAuthFacadeState(),
+      createContextState(),
     );
 
     expect(profile).toEqual(
       jasmine.objectContaining({
-        name: 'Alireza Abolfathi',
-        email: 'alireza.abolfathi@velora.demo',
+        name: 'Alex Morgan',
+        email: 'alex@example.com',
         companyName: 'Workspace Operations',
         companyCode: 'WORKSPACE_OPS',
-        avatarText: 'AA',
+        avatarText: 'AM',
         roleLabel: 'Workspace Operator',
       }),
     );
