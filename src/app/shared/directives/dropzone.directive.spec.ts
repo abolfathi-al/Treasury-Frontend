@@ -102,6 +102,7 @@ interface DropzoneDirectiveInternals {
 
 type IsAny<T> = 0 extends 1 & T ? true : false;
 type IsNotAny<T> = IsAny<T> extends true ? false : true;
+type IncludesUndefined<T> = undefined extends T ? true : false;
 type AssertAll<T extends readonly true[]> = T;
 type OutputPayload<T> = T extends { emit(value: infer Value): void }
   ? Value
@@ -115,6 +116,10 @@ type DropzonePublicTypeContracts = AssertAll<
     IsNotAny<NonNullable<ReturnType<DropzoneDirective['dropzoneParams']>>[string]>,
     IsNotAny<OutputPayload<DropzoneDirective['successEvent']>['response']>,
     IsNotAny<OutputPayload<DropzoneDirective['successMultipleEvent']>['response']>,
+    IncludesUndefined<Parameters<NonNullable<DropzoneOptions['error']>>[2]>,
+    IncludesUndefined<Parameters<NonNullable<DropzoneOptions['errormultiple']>>[2]>,
+    IncludesUndefined<OutputPayload<DropzoneDirective['errorEvent']>['xhr']>,
+    IncludesUndefined<OutputPayload<DropzoneDirective['errorMultipleEvent']>['xhr']>,
   ]
 >;
 
@@ -133,8 +138,12 @@ describe('Dropzone directive adapter helpers', () => {
     });
   });
 
-  it('keeps public payload contracts narrowed to unknown', () => {
+  it('keeps public payload contracts precise', () => {
     const contract: DropzonePublicTypeContracts = [
+      true,
+      true,
+      true,
+      true,
       true,
       true,
       true,
@@ -171,6 +180,8 @@ describe('Dropzone directive adapter helpers', () => {
       const directive = fixture.componentInstance.directive();
       const addedFileCallback = jasmine.createSpy('addedfile callback');
       const dropCallback = jasmine.createSpy('drop callback');
+      const errorCallback = jasmine.createSpy('error callback');
+      const errorMultipleCallback = jasmine.createSpy('errormultiple callback');
       const successCallback = jasmine.createSpy('success callback');
       const addedFileOutput = spyOn(
         directive.addedFileEvent,
@@ -180,10 +191,20 @@ describe('Dropzone directive adapter helpers', () => {
         directive.successEvent,
         'emit'
       ).and.callThrough();
+      const errorOutput = spyOn(
+        directive.errorEvent,
+        'emit'
+      ).and.callThrough();
+      const errorMultipleOutput = spyOn(
+        directive.errorMultipleEvent,
+        'emit'
+      ).and.callThrough();
 
       directive.updateOptions({
         addedfile: addedFileCallback,
         drop: dropCallback,
+        error: errorCallback,
+        errormultiple: errorMultipleCallback,
         success: successCallback,
       });
       const internals = directive as unknown as DropzoneDirectiveInternals;
@@ -238,13 +259,21 @@ describe('Dropzone directive adapter helpers', () => {
       } as Dropzone.DropzoneFile;
       const dropEvent = new DragEvent('drop');
       const response = { uploadId: 'upload-1' };
+      const fileError = 'Client validation failed';
+      const multipleError = 'Batch validation failed';
       instance?.emit('addedfile', file);
       instance?.emit('drop', dropEvent);
+      instance?.emit('error', file, fileError);
+      instance?.emit('errormultiple', [file], multipleError);
       instance?.emit('success', file, response);
 
       expect(addedFileCallback).toHaveBeenCalledOnceWith(file);
       expect(addedFileOutput).toHaveBeenCalledOnceWith(file);
       expect(dropCallback).toHaveBeenCalledOnceWith(dropEvent);
+      expect(errorCallback).toHaveBeenCalledOnceWith(file, fileError, undefined);
+      expect(errorMultipleCallback).toHaveBeenCalledOnceWith([file], multipleError, undefined);
+      expect(errorOutput).toHaveBeenCalledOnceWith({ file, errorMessage: fileError, xhr: undefined });
+      expect(errorMultipleOutput).toHaveBeenCalledOnceWith({ files: [file], errorMessage: multipleError, xhr: undefined });
       expect(successCallback).toHaveBeenCalledOnceWith(file);
       expect(successOutput).toHaveBeenCalledOnceWith({ file, response });
 

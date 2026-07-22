@@ -93,8 +93,8 @@ export interface DropzoneOptions {
   addedfile?: (file: Dropzone.DropzoneFile) => void;
   removedfile?: (file: Dropzone.DropzoneFile) => void;
   thumbnail?: (file: Dropzone.DropzoneFile, dataUrl: string) => void;
-  error?: (file: Dropzone.DropzoneFile, errorMessage: string, xhr: XMLHttpRequest) => void;
-  errormultiple?: (files: Dropzone.DropzoneFile[], errorMessage: string, xhr: XMLHttpRequest) => void;
+  error?: (file: Dropzone.DropzoneFile, errorMessage: string, xhr?: XMLHttpRequest) => void;
+  errormultiple?: (files: Dropzone.DropzoneFile[], errorMessage: string, xhr?: XMLHttpRequest) => void;
   processing?: (file: Dropzone.DropzoneFile) => void;
   processingmultiple?: (files: Dropzone.DropzoneFile[]) => void;
   uploadprogress?: (file: Dropzone.DropzoneFile, progress: number, bytesSent: number) => void;
@@ -326,8 +326,8 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
   readonly addedFileEvent = output<Dropzone.DropzoneFile>();
   readonly removedFileEvent = output<Dropzone.DropzoneFile>();
   readonly thumbnailEvent = output<{ file: Dropzone.DropzoneFile; dataUrl: string }>();
-  readonly errorEvent = output<{ file: Dropzone.DropzoneFile; errorMessage: string; xhr: XMLHttpRequest }>();
-  readonly errorMultipleEvent = output<{ files: Dropzone.DropzoneFile[]; errorMessage: string; xhr: XMLHttpRequest }>();
+  readonly errorEvent = output<{ file: Dropzone.DropzoneFile; errorMessage: string; xhr: XMLHttpRequest | undefined }>();
+  readonly errorMultipleEvent = output<{ files: Dropzone.DropzoneFile[]; errorMessage: string; xhr: XMLHttpRequest | undefined }>();
   readonly processingEvent = output<Dropzone.DropzoneFile>();
   readonly processingMultipleEvent = output<Dropzone.DropzoneFile[]>();
   readonly uploadProgressEvent = output<{ file: Dropzone.DropzoneFile; progress: number; bytesSent: number }>();
@@ -537,14 +537,13 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
         errorMessage: string | Error,
         xhr?: XMLHttpRequest
       ) => {
-        const request = xhr as XMLHttpRequest;
         const message = errorMessage instanceof Error
           ? errorMessage.message
           : errorMessage;
-        const formatted = this.formatErrorMessage(message, request);
+        const formatted = this.formatErrorMessage(message, xhr);
         this.hideProgress(file);
-        this.onFileError(file, formatted, request);
-        this.invokeCallback(options.error, [file, formatted, request], 'error callback failed');
+        this.onFileError(file, formatted, xhr);
+        this.invokeCallback(options.error, [file, formatted, xhr], 'error callback failed');
       }
     );
     instance.on(
@@ -554,12 +553,11 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
         errorMessage: string | Error,
         xhr?: XMLHttpRequest
       ) => {
-        const request = xhr as XMLHttpRequest;
         const message = errorMessage instanceof Error
           ? errorMessage.message
           : errorMessage;
-        this.onErrorMultiple(files, message, request);
-        this.invokeCallback(options.errormultiple, [files, message, request], 'errormultiple callback failed');
+        this.onErrorMultiple(files, message, xhr);
+        this.invokeCallback(options.errormultiple, [files, message, xhr], 'errormultiple callback failed');
       }
     );
     instance.on('processing', (file: Dropzone.DropzoneFile) => {
@@ -752,7 +750,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     this.thumbnailEvent.emit({ file, dataUrl });
   }
 
-  private onFileError(file: Dropzone.DropzoneFile, errorMessage: string, xhr: XMLHttpRequest): void {
+  private onFileError(file: Dropzone.DropzoneFile, errorMessage: string, xhr?: XMLHttpRequest): void {
     const currentFiles = this._files();
     if (!currentFiles.includes(file)) {
       this._files.update((files) => [...files, file]);
@@ -768,7 +766,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     }, 100);
   }
 
-  private onErrorMultiple(files: Dropzone.DropzoneFile[], errorMessage: string, xhr: XMLHttpRequest): void {
+  private onErrorMultiple(files: Dropzone.DropzoneFile[], errorMessage: string, xhr?: XMLHttpRequest): void {
     const currentFiles = this._files();
     files.forEach((file) => {
       if (!currentFiles.includes(file)) {
