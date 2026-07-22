@@ -45,7 +45,6 @@ import {
 } from '@core/initializers';
 import { LayoutService } from '@core/services/layout.service';
 import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
-import { demoContextProviders } from '@core/state/context';
 import {
   authInterceptor,
   browserStateInterceptor,
@@ -63,6 +62,7 @@ import {
 } from '@core/interceptors';
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
+import { demoContextProviders } from './demo/context/demo-context.providers';
 import { PROJECT_AUTH_PROVIDER } from './project/auth/project-auth.provider';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';

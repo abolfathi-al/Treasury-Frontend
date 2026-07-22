@@ -1,5 +1,5 @@
 import type { AuthUserSnapshot } from '@core/auth';
-import { createDemoAuthFacadeState } from '@core/state/context';
+import { createDemoAuthFacadeState } from '../../demo/context/demo-context.fixtures';
 import { resolveShellProfile } from './shell-profile';
 
 const createLegacyUser = (): AuthUserSnapshot =>

@@ -51,7 +51,8 @@ As of 2026-07-22:
   SSR builds, and an HTTP 200 SSR smoke check pass.
 - Phase 2 remains in progress. Route, navigation, brand, locale, theme, layout,
   public runtime configuration, and auth adapter wiring are consumer-owned.
-  Demo isolation still requires a separate slice.
+  Demo context is isolated; sample routes, fake data, and placeholder content
+  still require separate slices.
 
 ## Baseline
 

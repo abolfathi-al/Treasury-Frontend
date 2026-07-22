@@ -13,9 +13,9 @@ import { BehaviorSubject, of } from 'rxjs';
 import {
   AuthFacade,
   AuthFacadeState,
-  createDemoAuthFacadeState,
 } from '@core/state/context';
 import { AUTH_SESSION } from '@core/auth';
+import { createDemoAuthFacadeState } from '../../../../../demo/context/demo-context.fixtures';
 import { ShellContextDisplayFacade } from '../../../context/shell-context-display.facade';
 import { NavbarComponent } from './navbar.component';
 

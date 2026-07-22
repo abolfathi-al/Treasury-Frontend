@@ -6,8 +6,6 @@ import {
   ActiveAccessContextFacade,
   ActorContextFacade,
   AuthFacade,
-  CONTEXT_DEMO_MODE_ENABLED,
-  demoContextProviders,
   OrganizationContextFacade,
   UiCapabilityFacade,
 } from '@core/state/context';
@@ -16,6 +14,10 @@ import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
 import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { LayoutService } from '@core/services/layout.service';
 import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
+import {
+  CONTEXT_DEMO_MODE_ENABLED,
+  demoContextProviders,
+} from './demo/context/demo-context.providers';
 import { PROJECT_AUTH_PROVIDER } from './project/auth/project-auth.provider';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
