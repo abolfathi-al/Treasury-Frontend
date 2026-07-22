@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { LayoutComponent } from '@shell/layout/layout.component';
+
 export const PROJECT_ROUTES: Routes = [
   {
     path: 'auth',
@@ -17,8 +19,29 @@ export const PROJECT_ROUTES: Routes = [
     // Facade exists for SSO, organization context, active access context, and
     // actor context. Do not wire this copied guard to legacy auth.
     // canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('../../shell/layout/shell-routing').then((m) => m.Routing),
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('../../demo/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent,
+          ),
+        data: {
+          titleKey: 'workspace.dashboard.title',
+          descriptionKey: 'workspace.dashboard.description',
+        },
+      },
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        redirectTo: 'error/404',
+      },
+    ],
   },
   { path: '**', redirectTo: 'error/404' },
 ];
