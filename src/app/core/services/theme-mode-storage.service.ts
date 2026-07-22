@@ -3,7 +3,7 @@ import { LOCAL_STORAGE } from '@core/tokens';
 
 import {
   isThemeModeValue,
-  THEME_MODE_DEFAULTS,
+  THEME_MODE_CONFIG,
   THEME_MODE_STORAGE_KEYS,
   ThemeModeValue,
 } from './theme-mode.model';
@@ -12,12 +12,13 @@ import {
   providedIn: 'root',
 })
 export class ThemeModeStorageService {
+  private readonly config = inject(THEME_MODE_CONFIG);
   private readonly localStorage = inject<Storage>(LOCAL_STORAGE, {
     optional: true,
   });
 
   readMode(): ThemeModeValue {
-    return this.readModeOrNull(THEME_MODE_STORAGE_KEYS.MODE) ?? THEME_MODE_DEFAULTS.MODE;
+    return this.readModeOrNull(THEME_MODE_STORAGE_KEYS.MODE) ?? this.config.mode;
   }
 
   readModeOrNull(key: string = THEME_MODE_STORAGE_KEYS.MODE): ThemeModeValue | null {

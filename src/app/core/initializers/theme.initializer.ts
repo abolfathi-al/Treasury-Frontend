@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ThemeModeDomService } from '@core/services/theme-mode-dom.service';
 import {
-  THEME_MODE_DEFAULTS,
+  THEME_MODE_CONFIG,
   ThemeModeValue,
 } from '@core/services/theme-mode.model';
 import { ThemeModeStorageService } from '@core/services/theme-mode-storage.service';
@@ -19,10 +19,11 @@ export const themeModeSetup = () => {
 
   const storage = inject(ThemeModeStorageService);
   const dom = inject(ThemeModeDomService);
+  const config = inject(THEME_MODE_CONFIG);
   const storedMode = storage.readModeOrNull();
   const storedMenuMode = storage.readMenuMode();
   const selectedMode =
-    storedMode ?? (storedMenuMode || THEME_MODE_DEFAULTS.INITIALIZER_MODE);
+    storedMode ?? (storedMenuMode || config.initializerMode);
   const resolvedMode = resolveInitializerMode(selectedMode, dom);
 
   dom.setDocumentTheme(resolvedMode);

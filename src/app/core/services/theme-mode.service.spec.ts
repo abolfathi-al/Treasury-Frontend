@@ -3,11 +3,16 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LOCAL_STORAGE, WINDOW } from '@core/tokens';
 
+import { THEME_MODE_CONFIG } from './theme-mode.model';
 import { ThemeModeService } from './theme-mode.service';
 
 const MODE_KEY = 'velora_theme_mode_value';
 const MENU_MODE_KEY = 'velora_theme_mode_menu';
 const THEME_ATTR = 'data-bs-theme';
+const TEST_THEME_MODE = {
+  mode: 'dark',
+  initializerMode: 'light',
+} as const;
 
 class MemoryStorage implements Storage {
   private readonly values = new Map<string, string>();
@@ -52,6 +57,7 @@ describe('ThemeModeService', () => {
       providers: [
         provideZonelessChangeDetection(),
         ThemeModeService,
+        { provide: THEME_MODE_CONFIG, useValue: TEST_THEME_MODE },
         { provide: LOCAL_STORAGE, useValue: storage },
         {
           provide: WINDOW,
@@ -72,6 +78,11 @@ describe('ThemeModeService', () => {
 
   afterEach(() => {
     testHost.remove();
+  });
+
+  it('uses the injected project default without persisted state', () => {
+    expect(service.getMode()).toBe('dark');
+    expect(service.mode.value).toBe('dark');
   });
 
   it('uses persisted menu mode instead of stale active menu DOM state', () => {

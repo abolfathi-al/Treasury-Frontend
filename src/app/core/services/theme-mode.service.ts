@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import {
   isThemeModeValue,
-  THEME_MODE_DEFAULTS,
+  THEME_MODE_CONFIG,
   ThemeModeValue,
 } from './theme-mode.model';
 import { ThemeModeDomService } from './theme-mode-dom.service';
@@ -17,6 +17,7 @@ export type { ThemeModeValue } from './theme-mode.model';
 export class ThemeModeService {
   private readonly storage = inject(ThemeModeStorageService);
   private readonly dom = inject(ThemeModeDomService);
+  private readonly config = inject(THEME_MODE_CONFIG);
 
   private readonly _currentMode = signal<ThemeModeValue>(
     this.resolveMode(this.storage.readMode()),
@@ -56,7 +57,7 @@ export class ThemeModeService {
     }
 
     const menuMode = this.getMenuMode();
-    return menuMode ? this.resolveMode(menuMode) : THEME_MODE_DEFAULTS.MODE;
+    return menuMode ? this.resolveMode(menuMode) : this.config.mode;
   };
 
   getMenuMode = (): ThemeModeValue | '' => this.storage.readMenuMode();
@@ -109,7 +110,7 @@ export class ThemeModeService {
     }
 
     const documentMode = this.dom.getDocumentMode();
-    return documentMode || THEME_MODE_DEFAULTS.MODE;
+    return documentMode || this.config.mode;
   }
 
   private resolveMode(mode: ThemeModeValue): ThemeModeValue {

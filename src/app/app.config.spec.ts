@@ -13,8 +13,10 @@ import {
 } from '@core/state/context';
 import { APP_BRAND } from '@core/config/brand.config';
 import { LayoutService } from '@core/services/layout.service';
+import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
+import { PROJECT_THEME_MODE } from './project/theme/project-theme.config';
 import { getAppProviders, layoutStorageSetup } from './app.config';
 
 interface ClassProviderRecord {
@@ -118,6 +120,12 @@ describe('getAppProviders shell context providers', () => {
       jasmine.objectContaining({
         provide: LOCALE_ID,
         useValue: PROJECT_LOCALE.id,
+      }),
+    );
+    expect(appProviders).toContain(
+      jasmine.objectContaining({
+        provide: THEME_MODE_CONFIG,
+        useValue: PROJECT_THEME_MODE,
       }),
     );
   });

@@ -168,7 +168,6 @@ characterization
 characters
 chars
 chart
-charts
 chat
 che
 check
@@ -381,7 +380,6 @@ dropdowns
 dropzone
 due
 dummy
-duotone
 duration
 dynamic
 edit
@@ -536,7 +534,6 @@ grids
 ground
 group
 guard
-guards
 guide
 hala
 hale
@@ -698,7 +695,6 @@ loaders
 loading
 local
 locale
-locales
 localhost
 localize
 location
@@ -1179,7 +1175,6 @@ smooth
 snake
 snapshot
 socicon
-solid
 sorat
 sort
 sorted
@@ -1222,7 +1217,6 @@ storage
 store
 stored
 str
-strategies
 strategy
 stream
 strength
@@ -1408,7 +1402,6 @@ viewport
 virtual
 visibility
 visible
-vocabs
 wait
 walk
 warmup

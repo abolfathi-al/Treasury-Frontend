@@ -43,6 +43,7 @@ import {
   themeModeSetup,
 } from '@core/initializers';
 import { LayoutService } from '@core/services/layout.service';
+import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
 import { demoContextProviders } from '@core/state/context';
 import {
   authInterceptor,
@@ -65,6 +66,7 @@ import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
 import { PROJECT_ROUTES } from './project/routing/project.routes';
+import { PROJECT_THEME_MODE } from './project/theme/project-theme.config';
 import { AuthService } from './modules/auth/data-access/auth.service';
 import { ErrorService } from './modules/errors/data-access/error.service';
 import { ErrorUtils } from './modules/errors/data-access/error.utils';
@@ -305,6 +307,10 @@ export function getAppProviders(
     {
       provide: PAGE_NAVIGATION_ITEMS,
       useValue: PROJECT_NAVIGATION_ITEMS,
+    },
+    {
+      provide: THEME_MODE_CONFIG,
+      useValue: PROJECT_THEME_MODE,
     },
     {
       provide: ERROR_REPORTER,
