@@ -129,6 +129,8 @@ export class TagifyDirective
   private tagifyCtor: TagifyConstructor | null = null;
   private tagifyLoader: Promise<TagifyConstructor> | null = null;
   private tagifyInstance: any = null;
+  private pendingAnimationFrame: number | null = null;
+  private pendingBootstrapTimer: ReturnType<typeof setTimeout> | null = null;
 
   private readonly onOptionsChange = () => {
     if (this.isBaseInitialized()) this.reinit();
@@ -197,16 +199,11 @@ export class TagifyDirective
 
     this.cssLoader
       .loadCss('tagify.css')
-      .then(() => {
-        if (typeof requestAnimationFrame !== 'undefined') {
-          requestAnimationFrame(() => this.bootstrap());
-        } else {
-          setTimeout(() => this.bootstrap(), 16);
-        }
-      })
+      .then(() => this.scheduleBootstrap())
       .catch((error) => {
+        if (this.isBaseDestroyed()) return;
         this.logger.error('Failed to load tagify CSS, proceeding anyway', 'TagifyDirective', { error });
-        this.bootstrap();
+        void this.bootstrap();
       });
   }
 
@@ -260,7 +257,7 @@ export class TagifyDirective
   recreate(): void {
     this.destroyTagify();
     if (this.tagifyCtor) this.initTagify();
-    else this.bootstrap();
+    else void this.bootstrap();
   }
 
   reset(): void {
@@ -356,28 +353,70 @@ export class TagifyDirective
     setOptionIfChanged(this.optionsManager, 'dropdown', dropdown, this.onOptionsChange);
   }
 
-  private bootstrap(): void {
-    this.loadTagify()
+  private scheduleBootstrap(): void {
+    if (this.isBaseDestroyed()) return;
+    const windowRef = this.host.window;
+    if (windowRef?.requestAnimationFrame) {
+      this.pendingAnimationFrame = windowRef.requestAnimationFrame(() => {
+        this.pendingAnimationFrame = null;
+        void this.bootstrap();
+      });
+      return;
+    }
+
+    this.pendingBootstrapTimer = setTimeout(() => {
+      this.pendingBootstrapTimer = null;
+      if (!this.isBaseDestroyed()) void this.bootstrap();
+    }, 16);
+  }
+
+  private clearPendingBootstrap(): void {
+    if (this.pendingAnimationFrame !== null) {
+      this.host.window?.cancelAnimationFrame(this.pendingAnimationFrame);
+      this.pendingAnimationFrame = null;
+    }
+    if (this.pendingBootstrapTimer !== null) {
+      clearTimeout(this.pendingBootstrapTimer);
+      this.pendingBootstrapTimer = null;
+    }
+  }
+
+  private bootstrap(): Promise<void> {
+    if (this.isBaseDestroyed() || !this.host.isBrowser || this.tagifyInstance) {
+      return Promise.resolve();
+    }
+
+    return this.loadTagify()
       .then(() => {
-        if (this.isBaseDestroyed() || !this.host.isBrowser) return;
+        if (this.isBaseDestroyed() || this.tagifyInstance) return;
         this.initTagify();
       })
-      .catch((error) => this.handleErr('Failed to load Tagify library', error as Error));
+      .catch((error) => {
+        if (!this.isBaseDestroyed()) {
+          this.handleErr('Failed to load Tagify library', error as Error);
+        }
+      });
   }
 
   private loadTagify(): Promise<TagifyConstructor> {
+    if (this.tagifyCtor) return Promise.resolve(this.tagifyCtor);
     if (this.tagifyLoader) return this.tagifyLoader;
 
-    this.tagifyLoader = import('@yaireo/tagify').then((TagifyModule) => {
-      const ctor = (TagifyModule.default || TagifyModule) as TagifyConstructor;
-      this.tagifyCtor = ctor;
-      return ctor;
-    });
-
-    return this.tagifyLoader;
+    const loadPromise = import('@yaireo/tagify')
+      .then((TagifyModule) => {
+        const ctor = (TagifyModule.default || TagifyModule) as TagifyConstructor;
+        if (!this.isBaseDestroyed()) this.tagifyCtor = ctor;
+        return ctor;
+      })
+      .finally(() => {
+        if (this.tagifyLoader === loadPromise) this.tagifyLoader = null;
+      });
+    this.tagifyLoader = loadPromise;
+    return loadPromise;
   }
 
   private initTagify(): void {
+    if (this.isBaseDestroyed() || !this.host.isBrowser || this.tagifyInstance) return;
     this.status.setLoading(true);
     this.status.setError(null);
     this.execOp(() => this.createInstance(), 'Failed to initialize Tagify');
@@ -386,7 +425,7 @@ export class TagifyDirective
   private reinit(): void {
     this.destroyTagify();
     if (this.tagifyCtor) this.initTagify();
-    else this.bootstrap();
+    else void this.bootstrap();
   }
 
   private createInstance(): void {
@@ -440,14 +479,14 @@ export class TagifyDirective
   }
 
   private destroyTagify(): void {
-    if (!this.tagifyInstance) return;
-
-    this.execOp(() => {
-      this.tagifyInstance.destroy();
-      this.tagifyInstance = null;
-      this.status.setActive(false);
-      this.baseCleanup();
-    }, 'Failed to destroy Tagify instance');
+    this.clearPendingBootstrap();
+    const instance = this.tagifyInstance;
+    this.tagifyInstance = null;
+    this.status.setLoading(false);
+    this.baseCleanup();
+    if (instance) {
+      this.execOp(() => instance.destroy(), 'Failed to destroy Tagify instance');
+    }
   }
 
   private updateTagsState(): void {

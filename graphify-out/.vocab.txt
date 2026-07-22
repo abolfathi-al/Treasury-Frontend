@@ -475,6 +475,7 @@ extract
 facade
 facades
 factory
+failures
 fake
 fallback
 fallbacks
@@ -625,6 +626,7 @@ implicit
 import
 imports
 include
+includes
 increase
 incremental
 index
@@ -994,6 +996,7 @@ prepare
 preprocessor
 prerender
 preservation
+preserve
 preset
 press
 prev
@@ -1100,7 +1103,9 @@ resolve
 resolved
 resolver
 resource
+resp
 response
+responses
 responsive
 restore
 result
@@ -1331,6 +1336,7 @@ temporary
 tenant
 term
 terminal
+terminate
 test
 text
 textarea
@@ -1410,6 +1416,7 @@ typings
 unauthorized
 uncheck
 unchecked
+undefined
 unique
 unknown
 unmark
