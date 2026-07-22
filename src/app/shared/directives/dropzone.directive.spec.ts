@@ -25,6 +25,7 @@ class FakeDropzone {
 
   readonly files: Dropzone.DropzoneFile[] = [];
   readonly handlers = new Map<string, FakeDropzoneHandler[]>();
+  readonly removedFiles: Dropzone.DropzoneFile[] = [];
   destroyed = false;
 
   constructor(
@@ -48,6 +49,10 @@ class FakeDropzone {
     this.handlers.get(eventName)?.forEach((handler) => handler(...args));
   }
 
+  removeFile(file: Dropzone.DropzoneFile): void {
+    this.removedFiles.push(file);
+  }
+
   destroy(): void {
     this.destroyed = true;
   }
@@ -65,6 +70,10 @@ class HostComponent {
 interface DropzoneDirectiveInternals {
   DropzoneClass: typeof Dropzone | null;
   createInstance(): void;
+  populatePreview(
+    previewElement: HTMLElement,
+    file: Dropzone.DropzoneFile
+  ): void;
 }
 
 type IsAny<T> = 0 extends 1 & T ? true : false;
@@ -208,6 +217,54 @@ describe('Dropzone directive adapter helpers', () => {
       fixture.destroy();
       jasmine.clock().tick(100);
       expect(instance?.destroyed).toBeTrue();
+    } finally {
+      jasmine.clock().uninstall();
+    }
+  });
+
+  it('cancels delayed preview work and manual remove handlers on destroy', () => {
+    jasmine.clock().install();
+    try {
+      const fixture = TestBed.createComponent(HostComponent);
+      fixture.detectChanges();
+      const directive = fixture.componentInstance.directive();
+      const internals = directive as unknown as DropzoneDirectiveInternals;
+      internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
+      const populatePreview = spyOn(
+        internals,
+        'populatePreview'
+      ).and.callThrough();
+      internals.createInstance();
+
+      const instance = FakeDropzone.lastInstance!;
+      const previewElement = document.createElement('div');
+      previewElement.innerHTML = `
+        <span data-dz-size></span>
+        <span data-dz-name></span>
+        <button type="button" data-dz-remove>Remove</button>
+      `;
+      const removeButton = previewElement.querySelector<HTMLElement>(
+        '[data-dz-remove]'
+      )!;
+      const file = {
+        name: 'statement.csv',
+        size: 128,
+        previewElement,
+      } as unknown as Dropzone.DropzoneFile;
+      instance.files.push(file);
+
+      instance.emit('addedfile', file);
+      expect(populatePreview).toHaveBeenCalledTimes(1);
+      expect(hasDropzoneRemoveHandler(removeButton)).toBeTrue();
+
+      fixture.destroy();
+      removeButton.click();
+      jasmine.clock().tick(100);
+
+      expect(populatePreview).toHaveBeenCalledTimes(1);
+      expect(hasDropzoneRemoveHandler(removeButton)).toBeFalse();
+      expect(instance.removedFiles).toEqual([]);
+      expect(instance.destroyed).toBeTrue();
     } finally {
       jasmine.clock().uninstall();
     }

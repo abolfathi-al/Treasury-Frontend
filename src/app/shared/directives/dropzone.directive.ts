@@ -39,6 +39,10 @@ export const markDropzoneRemoveHandler = (element: HTMLElement): void => {
   (element as DropzoneRemoveHandlerElement)._dropzoneRemoveHandler = true;
 };
 
+const unmarkDropzoneRemoveHandler = (element: HTMLElement): void => {
+  delete (element as DropzoneRemoveHandlerElement)._dropzoneRemoveHandler;
+};
+
 export interface DropzoneOptions {
   url?: string;
   method?: 'POST' | 'PUT' | 'PATCH';
@@ -235,6 +239,9 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
 
   private dropzoneInstance: Dropzone | null = null;
   private DropzoneClass: typeof Dropzone | null = null;
+  private readonly pendingTimers = new Set<ReturnType<typeof setTimeout>>();
+  private pendingAnimationFrame: number | null = null;
+  private readonly removeHandlerCleanups = new Map<HTMLElement, () => void>();
 
   readonly files = computed(() => this._files());
   readonly totalSize = computed(() => this._totalSize());
@@ -397,14 +404,29 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     ]);
 
     this.cssLoader.loadCss('dropzone.css')
-      .then(() => {
-        if (typeof requestAnimationFrame !== 'undefined') {
-          requestAnimationFrame(() => this.loadLibrary());
-        } else {
-          setTimeout(() => this.loadLibrary(), 16);
-        }
-      })
+      .then(() => this.scheduleLibraryLoad())
       .catch(() => this.loadLibrary());
+  }
+
+  private scheduleLibraryLoad(): void {
+    if (this.isBaseDestroyed()) return;
+    const windowRef = this.host.window;
+    if (windowRef?.requestAnimationFrame) {
+      this.pendingAnimationFrame = windowRef.requestAnimationFrame(() => {
+        this.pendingAnimationFrame = null;
+        this.loadLibrary();
+      });
+      return;
+    }
+    this.schedule(() => this.loadLibrary(), 16);
+  }
+
+  private schedule(callback: () => void, delay: number): void {
+    const timer = setTimeout(() => {
+      this.pendingTimers.delete(timer);
+      if (!this.isBaseDestroyed()) callback();
+    }, delay);
+    this.pendingTimers.add(timer);
   }
 
   protected override updateOption<K extends keyof DropzoneOptions>(key: K, value: DropzoneOptions[K]): boolean {
@@ -709,7 +731,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
       this.attachRemoveHandlers(file.previewElement as HTMLElement, file);
     }
 
-    setTimeout(() => {
+    this.schedule(() => {
       if (file.previewElement) {
         this.populatePreview(file.previewElement as HTMLElement, file);
         this.attachRemoveHandlers(file.previewElement as HTMLElement, file);
@@ -752,7 +774,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     this.status.setError(error);
     this.errorEvent.emit({ file, errorMessage, xhr });
 
-    setTimeout(() => {
+    this.schedule(() => {
       this.syncFiles();
       this.ensurePreviewVisible(file);
     }, 100);
@@ -770,7 +792,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     this.status.setError(error);
     this.errorMultipleEvent.emit({ files, errorMessage, xhr });
 
-    setTimeout(() => {
+    this.schedule(() => {
       this.syncFiles();
       files.forEach((file) => this.ensurePreviewVisible(file));
     }, 100);
@@ -831,10 +853,27 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
         }
       };
 
-      removeLink.addEventListener('click', handler);
+      const cleanup = this.host.renderer.listen(removeLink, 'click', handler);
+      this.removeHandlerCleanups.set(removeLink, cleanup);
       markDropzoneRemoveHandler(removeLink);
       this.host.renderer.removeStyle(removeLink, 'display');
     });
+  }
+
+  private clearPendingWork(): void {
+    this.pendingTimers.forEach((timer) => clearTimeout(timer));
+    this.pendingTimers.clear();
+
+    if (this.pendingAnimationFrame !== null) {
+      this.host.window?.cancelAnimationFrame(this.pendingAnimationFrame);
+      this.pendingAnimationFrame = null;
+    }
+
+    this.removeHandlerCleanups.forEach((cleanup, element) => {
+      cleanup();
+      unmarkDropzoneRemoveHandler(element);
+    });
+    this.removeHandlerCleanups.clear();
   }
 
   private findFile(file: Dropzone.DropzoneFile): Dropzone.DropzoneFile | null {
@@ -887,6 +926,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
   }
 
   private cleanup(): void {
+    this.clearPendingWork();
     if (this.dropzoneInstance) {
       this.dropzoneInstance.destroy();
       this.dropzoneInstance = null;
