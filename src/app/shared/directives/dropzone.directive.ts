@@ -166,6 +166,47 @@ const DEFAULT_OPTIONS: DropzoneOptions = {
   dictMaxFilesExceeded: 'You can not upload any more files.',
 } as const;
 
+const DROPZONE_EVENT_CALLBACK_KEYS = [
+  'init',
+  'addedfile',
+  'removedfile',
+  'thumbnail',
+  'error',
+  'errormultiple',
+  'processing',
+  'processingmultiple',
+  'uploadprogress',
+  'maxfilesexceeded',
+  'maxfilesreached',
+  'queuecomplete',
+  'sending',
+  'sendingmultiple',
+  'success',
+  'successmultiple',
+  'complete',
+  'completemultiple',
+  'canceled',
+  'canceledmultiple',
+  'drop',
+  'dragstart',
+  'dragend',
+  'dragenter',
+  'dragover',
+  'dragleave',
+  'paste',
+  'reset',
+] as const satisfies readonly (keyof DropzoneOptions)[];
+
+function omitDropzoneEventCallbacks(
+  options: DropzoneOptions
+): DropzoneOptions {
+  const constructorOptions = { ...options };
+  DROPZONE_EVENT_CALLBACK_KEYS.forEach((key) => {
+    delete constructorOptions[key];
+  });
+  return constructorOptions;
+}
+
 const DEFAULT_PREVIEW_TEMPLATE = `<div class="dz-preview dz-file-preview">
   <div class="dz-image"><img data-dz-thumbnail /></div>
   <div class="dz-details">
@@ -432,128 +473,16 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
       options = { ...options, disablePreviews: false };
     }
 
+    const directive = this;
     const config: DropzoneOptions = {
-      ...options,
+      ...omitDropzoneEventCallbacks(options),
       accept: (file: Dropzone.DropzoneFile, done: (error?: string) => void) => {
         options.accept ? options.accept(file, done) : done();
       },
-      init: () => {
-        this.onInit();
-        this.invokeCallback(options.init, [], 'init callback failed');
-      },
-      addedfile: (file: Dropzone.DropzoneFile) => {
-        this.invokeCallback(options.addedfile, [file], 'addedfile callback failed');
-        this.onAddedFile(file);
-      },
-      removedfile: (file: Dropzone.DropzoneFile) => {
-        this.onRemovedFile(file);
-        this.invokeCallback(options.removedfile, [file], 'removedfile callback failed');
-      },
-      thumbnail: (file: Dropzone.DropzoneFile, dataUrl: string) => {
-        this.onThumbnail(file, dataUrl);
-        this.invokeCallback(options.thumbnail, [file, dataUrl], 'thumbnail callback failed');
-      },
-      error: (file: Dropzone.DropzoneFile, errorMessage: string, xhr: XMLHttpRequest) => {
-        const formatted = this.formatErrorMessage(errorMessage, xhr);
-        this.hideProgress(file);
-        this.onFileError(file, formatted, xhr);
-        this.invokeCallback(options.error, [file, formatted, xhr], 'error callback failed');
-      },
-      errormultiple: (files: Dropzone.DropzoneFile[], errorMessage: string, xhr: XMLHttpRequest) => {
-        this.onErrorMultiple(files, errorMessage, xhr);
-        this.invokeCallback(options.errormultiple, [files, errorMessage, xhr], 'errormultiple callback failed');
-      },
-      processing: (file: Dropzone.DropzoneFile) => {
-        this.processingEvent.emit(file);
-        this.invokeCallback(options.processing, [file], 'processing callback failed');
-      },
-      processingmultiple: (files: Dropzone.DropzoneFile[]) => {
-        this.processingMultipleEvent.emit(files);
-        this.invokeCallback(options.processingmultiple, [files], 'processingmultiple callback failed');
-      },
-      uploadprogress: (file: Dropzone.DropzoneFile, progress: number, bytesSent: number) => {
-        this._uploadProgress.set(progress);
-        this.uploadProgressEvent.emit({ file, progress, bytesSent });
-        this.invokeCallback(options.uploadprogress, [file, progress, bytesSent], 'uploadprogress callback failed');
-      },
-      maxfilesexceeded: (file: Dropzone.DropzoneFile) => {
-        this.maxFilesExceededEvent.emit(file);
-        this.invokeCallback(options.maxfilesexceeded, [file], 'maxfilesexceeded callback failed');
-      },
-      maxfilesreached: (files: Dropzone.DropzoneFile[]) => {
-        this.maxFilesReachedEvent.emit(files);
-        this.invokeCallback(options.maxfilesreached, [files], 'maxfilesreached callback failed');
-      },
-      queuecomplete: () => {
-        this.queueCompleteEvent.emit();
-        this.invokeCallback(options.queuecomplete, [], 'queuecomplete callback failed');
-      },
-      sending: (file: Dropzone.DropzoneFile, xhr: XMLHttpRequest, formData: FormData) => {
-        this.sendingEvent.emit({ file, xhr, formData });
-        this.invokeCallback(options.sending, [file, xhr, formData], 'sending callback failed');
-      },
-      sendingmultiple: (files: Dropzone.DropzoneFile[], xhr: XMLHttpRequest, formData: FormData) => {
-        this.sendingMultipleEvent.emit({ files, xhr, formData });
-        this.invokeCallback(options.sendingmultiple, [files, xhr, formData], 'sendingmultiple callback failed');
-      },
-      success: (file: Dropzone.DropzoneFile) => {
-        this.successEvent.emit({ file, response: null });
-        this.invokeCallback(options.success, [file], 'success callback failed');
-      },
-      successmultiple: (
-        files: Dropzone.DropzoneFile[],
-        response: DropzoneResponse
-      ) => {
-        this.successMultipleEvent.emit({ files, response });
-        this.invokeCallback(options.successmultiple, [files, response], 'successmultiple callback failed');
-      },
-      complete: (file: Dropzone.DropzoneFile) => {
-        this.completeEvent.emit(file);
-        this.invokeCallback(options.complete, [file], 'complete callback failed');
-      },
-      completemultiple: (files: Dropzone.DropzoneFile[]) => {
-        this.completeMultipleEvent.emit(files);
-        this.invokeCallback(options.completemultiple, [files], 'completemultiple callback failed');
-      },
-      canceled: (file: Dropzone.DropzoneFile) => {
-        this.canceledEvent.emit(file);
-        this.invokeCallback(options.canceled, [file], 'canceled callback failed');
-      },
-      canceledmultiple: (files: Dropzone.DropzoneFile[]) => {
-        this.canceledMultipleEvent.emit(files);
-        this.invokeCallback(options.canceledmultiple, [files], 'canceledmultiple callback failed');
-      },
-      drop: (e: DragEvent) => {
-        this.dropEvent.emit(e);
-        this.invokeCallback(options.drop, [e], 'drop callback failed');
-      },
-      dragstart: (e: DragEvent) => {
-        this.dragStartEvent.emit(e);
-        this.invokeCallback(options.dragstart, [e], 'dragstart callback failed');
-      },
-      dragend: (e: DragEvent) => {
-        this.dragEndEvent.emit(e);
-        this.invokeCallback(options.dragend, [e], 'dragend callback failed');
-      },
-      dragenter: (e: DragEvent) => {
-        this.dragEnterEvent.emit(e);
-        this.invokeCallback(options.dragenter, [e], 'dragenter callback failed');
-      },
-      dragover: (e: DragEvent) => {
-        this.dragOverEvent.emit(e);
-        this.invokeCallback(options.dragover, [e], 'dragover callback failed');
-      },
-      dragleave: (e: DragEvent) => {
-        this.dragLeaveEvent.emit(e);
-        this.invokeCallback(options.dragleave, [e], 'dragleave callback failed');
-      },
-      paste: (e: DragEvent) => {
-        this.pasteEvent.emit(toDropzoneClipboardEvent(e));
-        if (options.paste) options.paste(e);
-      },
-      reset: () => {
-        this.onReset();
-        this.invokeCallback(options.reset, [], 'reset callback failed');
+      init(this: Dropzone): void {
+        directive.attachEventCallbacks(this, options);
+        directive.onInit(this);
+        directive.invokeCallback(options.init, [], 'init callback failed');
       },
     };
 
@@ -575,6 +504,157 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     this.status.setLoading(false);
     this.status.setError(null);
     this.markBaseInitialized();
+  }
+
+  private attachEventCallbacks(
+    instance: Dropzone,
+    options: DropzoneOptions
+  ): void {
+    instance.on('addedfile', (file: Dropzone.DropzoneFile) => {
+      this.invokeCallback(options.addedfile, [file], 'addedfile callback failed');
+      this.onAddedFile(file);
+    });
+    instance.on('removedfile', (file: Dropzone.DropzoneFile) => {
+      this.onRemovedFile(file);
+      this.invokeCallback(options.removedfile, [file], 'removedfile callback failed');
+    });
+    instance.on('thumbnail', (file: Dropzone.DropzoneFile, dataUrl: string) => {
+      this.onThumbnail(file, dataUrl);
+      this.invokeCallback(options.thumbnail, [file, dataUrl], 'thumbnail callback failed');
+    });
+    instance.on(
+      'error',
+      (
+        file: Dropzone.DropzoneFile,
+        errorMessage: string | Error,
+        xhr?: XMLHttpRequest
+      ) => {
+        const request = xhr as XMLHttpRequest;
+        const message = errorMessage instanceof Error
+          ? errorMessage.message
+          : errorMessage;
+        const formatted = this.formatErrorMessage(message, request);
+        this.hideProgress(file);
+        this.onFileError(file, formatted, request);
+        this.invokeCallback(options.error, [file, formatted, request], 'error callback failed');
+      }
+    );
+    instance.on(
+      'errormultiple',
+      (
+        files: Dropzone.DropzoneFile[],
+        errorMessage: string | Error,
+        xhr?: XMLHttpRequest
+      ) => {
+        const request = xhr as XMLHttpRequest;
+        const message = errorMessage instanceof Error
+          ? errorMessage.message
+          : errorMessage;
+        this.onErrorMultiple(files, message, request);
+        this.invokeCallback(options.errormultiple, [files, message, request], 'errormultiple callback failed');
+      }
+    );
+    instance.on('processing', (file: Dropzone.DropzoneFile) => {
+      this.processingEvent.emit(file);
+      this.invokeCallback(options.processing, [file], 'processing callback failed');
+    });
+    instance.on('processingmultiple', (files: Dropzone.DropzoneFile[]) => {
+      this.processingMultipleEvent.emit(files);
+      this.invokeCallback(options.processingmultiple, [files], 'processingmultiple callback failed');
+    });
+    instance.on(
+      'uploadprogress',
+      (file: Dropzone.DropzoneFile, progress: number, bytesSent: number) => {
+        this._uploadProgress.set(progress);
+        this.uploadProgressEvent.emit({ file, progress, bytesSent });
+        this.invokeCallback(options.uploadprogress, [file, progress, bytesSent], 'uploadprogress callback failed');
+      }
+    );
+    instance.on('maxfilesexceeded', (file: Dropzone.DropzoneFile) => {
+      this.maxFilesExceededEvent.emit(file);
+      this.invokeCallback(options.maxfilesexceeded, [file], 'maxfilesexceeded callback failed');
+    });
+    instance.on('maxfilesreached', (files: Dropzone.DropzoneFile[]) => {
+      this.maxFilesReachedEvent.emit(files);
+      this.invokeCallback(options.maxfilesreached, [files], 'maxfilesreached callback failed');
+    });
+    instance.on('queuecomplete', () => {
+      this.queueCompleteEvent.emit();
+      this.invokeCallback(options.queuecomplete, [], 'queuecomplete callback failed');
+    });
+    instance.on(
+      'sending',
+      (file: Dropzone.DropzoneFile, xhr: XMLHttpRequest, formData: FormData) => {
+        this.sendingEvent.emit({ file, xhr, formData });
+        this.invokeCallback(options.sending, [file, xhr, formData], 'sending callback failed');
+      }
+    );
+    instance.on(
+      'sendingmultiple',
+      (files: Dropzone.DropzoneFile[], xhr: XMLHttpRequest, formData: FormData) => {
+        this.sendingMultipleEvent.emit({ files, xhr, formData });
+        this.invokeCallback(options.sendingmultiple, [files, xhr, formData], 'sendingmultiple callback failed');
+      }
+    );
+    instance.on('success', (file: Dropzone.DropzoneFile) => {
+      this.successEvent.emit({ file, response: null });
+      this.invokeCallback(options.success, [file], 'success callback failed');
+    });
+    instance.on(
+      'successmultiple',
+      (files: Dropzone.DropzoneFile[], response?: DropzoneResponse) => {
+        this.successMultipleEvent.emit({ files, response });
+        this.invokeCallback(options.successmultiple, [files, response], 'successmultiple callback failed');
+      }
+    );
+    instance.on('complete', (file: Dropzone.DropzoneFile) => {
+      this.completeEvent.emit(file);
+      this.invokeCallback(options.complete, [file], 'complete callback failed');
+    });
+    instance.on('completemultiple', (files: Dropzone.DropzoneFile[]) => {
+      this.completeMultipleEvent.emit(files);
+      this.invokeCallback(options.completemultiple, [files], 'completemultiple callback failed');
+    });
+    instance.on('canceled', (file: Dropzone.DropzoneFile) => {
+      this.canceledEvent.emit(file);
+      this.invokeCallback(options.canceled, [file], 'canceled callback failed');
+    });
+    instance.on('canceledmultiple', (files: Dropzone.DropzoneFile[]) => {
+      this.canceledMultipleEvent.emit(files);
+      this.invokeCallback(options.canceledmultiple, [files], 'canceledmultiple callback failed');
+    });
+    instance.on('drop', (event: DragEvent) => {
+      this.dropEvent.emit(event);
+      this.invokeCallback(options.drop, [event], 'drop callback failed');
+    });
+    instance.on('dragstart', (event: DragEvent) => {
+      this.dragStartEvent.emit(event);
+      this.invokeCallback(options.dragstart, [event], 'dragstart callback failed');
+    });
+    instance.on('dragend', (event: DragEvent) => {
+      this.dragEndEvent.emit(event);
+      this.invokeCallback(options.dragend, [event], 'dragend callback failed');
+    });
+    instance.on('dragenter', (event: DragEvent) => {
+      this.dragEnterEvent.emit(event);
+      this.invokeCallback(options.dragenter, [event], 'dragenter callback failed');
+    });
+    instance.on('dragover', (event: DragEvent) => {
+      this.dragOverEvent.emit(event);
+      this.invokeCallback(options.dragover, [event], 'dragover callback failed');
+    });
+    instance.on('dragleave', (event: DragEvent) => {
+      this.dragLeaveEvent.emit(event);
+      this.invokeCallback(options.dragleave, [event], 'dragleave callback failed');
+    });
+    instance.on('paste', (event: DragEvent) => {
+      this.pasteEvent.emit(toDropzoneClipboardEvent(event));
+      this.invokeCallback(options.paste, [event], 'paste callback failed');
+    });
+    instance.on('reset', () => {
+      this.onReset();
+      this.invokeCallback(options.reset, [], 'reset callback failed');
+    });
   }
 
   private invokeCallback<TArgs extends unknown[]>(
@@ -614,9 +694,9 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     return { isValid: errors.length === 0, errors };
   }
 
-  private onInit(): void {
+  private onInit(instance: Dropzone): void {
     this.initEvent.emit();
-    this.syncFiles();
+    this.syncFiles(instance);
   }
 
   private onAddedFile(file: Dropzone.DropzoneFile): void {
@@ -702,9 +782,9 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     this.resetEvent.emit();
   }
 
-  private syncFiles(): void {
-    if (!this.dropzoneInstance) return;
-    const allFiles = this.dropzoneInstance.files || [];
+  private syncFiles(instance = this.dropzoneInstance): void {
+    if (!instance) return;
+    const allFiles = instance.files || [];
     this._files.set(allFiles);
     this._totalSize.set(allFiles.reduce((sum, file) => sum + file.size, 0));
   }
