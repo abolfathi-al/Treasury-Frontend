@@ -3,16 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  appName: 'Velora Enterprise',
   production: true,
   appVersion: 'velora-enterprise-0.1.2',
   USERDATA_KEY: 'velora_auth',
-  isMockEnabled: false,
   // Demo only. Not an authorization source of truth. Backend must enforce real access.
   contextDemoMode: false,
   apiUrl: '',
-  // apiUrl: '',
-  signalingUrl: '',
   interceptorsPaths: new Map<string, RegExp>([
     ['state', /api/],
     ['auth', /[\W]*/],
