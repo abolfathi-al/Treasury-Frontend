@@ -32,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AUTH_SESSION } from '@core/auth';
+import { APP_BRAND } from '@core/config/brand.config';
 import { ERROR_REPORTER, ErrorReporterPort } from '@core/errors';
 import { LANGUAGE_SERVICE } from '@core/i18n';
 import {
@@ -62,6 +63,7 @@ import {
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
 import { extraLocaleFa } from '@utils';
+import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
 import { PROJECT_ROUTES } from './project/routing/project.routes';
 import { AuthService } from './modules/auth/data-access/auth.service';
@@ -298,6 +300,10 @@ export function getAppProviders(
     {
       provide: AUTH_SESSION,
       useExisting: AuthService,
+    },
+    {
+      provide: APP_BRAND,
+      useValue: PROJECT_BRAND,
     },
     {
       provide: PAGE_NAVIGATION_ITEMS,

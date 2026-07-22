@@ -6,7 +6,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { of, Subject } from 'rxjs';
 
-import { APP_DEFAULT_TITLE, APP_TITLE_SEPARATOR } from '@core/config/brand.config';
+import { DEFAULT_APP_BRAND } from '@core/config/brand.config';
 import { PAGE_NAVIGATION_ITEMS, PageNavigationItem } from '@core/navigation';
 import { PageInfoService } from './page-info.service';
 
@@ -96,11 +96,11 @@ describe('PageInfoService', () => {
     service.init();
 
     expect(service.titleSubject.value).toBe(
-      `Base Data${APP_TITLE_SEPARATOR}${APP_DEFAULT_TITLE}`,
+      `Base Data${DEFAULT_APP_BRAND.titleSeparator}${DEFAULT_APP_BRAND.defaultTitle}`,
     );
     expect(service.descriptionSubject.value).toBe('Manage base reference data');
     expect(title.getTitle()).toBe(
-      `Base Data${APP_TITLE_SEPARATOR}${APP_DEFAULT_TITLE}`,
+      `Base Data${DEFAULT_APP_BRAND.titleSeparator}${DEFAULT_APP_BRAND.defaultTitle}`,
     );
   });
 
@@ -132,7 +132,7 @@ describe('PageInfoService', () => {
     routerEvents.next(new NavigationEnd(1, '/dashboard', '/dashboard'));
 
     expect(service.titleSubject.value).toBe(
-      `Dashboard${APP_TITLE_SEPARATOR}${APP_DEFAULT_TITLE}`,
+      `Dashboard${DEFAULT_APP_BRAND.titleSeparator}${DEFAULT_APP_BRAND.defaultTitle}`,
     );
     expect(service.descriptionSubject.value).toBe('Workspace overview');
     expect(service.breadcrumbsSubject.value).toEqual([]);

@@ -63,6 +63,7 @@ export class SEOService {
   private readonly router = inject(Router);
   private readonly window = inject(WINDOW);
   private readonly document = inject(DOCUMENT);
+  private readonly brand = inject(APP_BRAND);
 
   setPageTitle(title: string): void {
     this.title.setTitle(title);
@@ -228,9 +229,9 @@ export class SEOService {
   }
 
   resetSEO(): void {
-    this.setPageTitle(APP_BRAND.defaultTitle);
-    this.setMetaDescription(APP_BRAND.metaDescription);
-    this.setMetaKeywords(APP_BRAND.metaKeywords);
+    this.setPageTitle(this.brand.defaultTitle);
+    this.setMetaDescription(this.brand.metaDescription);
+    this.setMetaKeywords(this.brand.metaKeywords);
     this.setCanonicalUrl(this.window.location.href);
   }
 

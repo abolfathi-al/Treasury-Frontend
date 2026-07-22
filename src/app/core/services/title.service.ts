@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { APP_DEFAULT_TITLE, APP_TITLE_SEPARATOR } from '@core/config/brand.config';
+import { APP_BRAND } from '@core/config/brand.config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,11 @@ import { APP_DEFAULT_TITLE, APP_TITLE_SEPARATOR } from '@core/config/brand.confi
 export class TitleService {
   private readonly title = inject(Title);
   private readonly translate = inject(TranslateService);
+  private readonly brand = inject(APP_BRAND);
 
-  private readonly _currentTitle = signal<string>(APP_DEFAULT_TITLE);
-  private readonly _defaultTitle = signal<string>(APP_DEFAULT_TITLE);
-  private readonly _titleSeparator = signal<string>(APP_TITLE_SEPARATOR);
+  private readonly _currentTitle = signal<string>(this.brand.defaultTitle);
+  private readonly _defaultTitle = signal<string>(this.brand.defaultTitle);
+  private readonly _titleSeparator = signal<string>(this.brand.titleSeparator);
 
   readonly currentTitle = computed(() => this._currentTitle());
   readonly defaultTitle = computed(() => this._defaultTitle());

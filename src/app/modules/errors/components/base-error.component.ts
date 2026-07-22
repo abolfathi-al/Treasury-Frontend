@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, startWith, zip } from 'rxjs';
 
-import { APP_DEFAULT_TITLE } from '@core/config/brand.config';
+import { APP_BRAND } from '@core/config/brand.config';
 import { WINDOW } from '@core/tokens';
 import { ThemeModeService } from '@core/services';
 import { ErrorService, ErrorUtils } from '../data-access';
@@ -44,6 +44,7 @@ export abstract class BaseErrorComponent implements OnInit, OnDestroy {
   protected readonly errorService = inject(ErrorService);
   protected readonly translate = inject(TranslateService);
   protected readonly title = inject(Title);
+  protected readonly brand = inject(APP_BRAND);
   protected readonly platformId = inject(PLATFORM_ID);
   protected readonly destroyRef = inject(DestroyRef);
 
@@ -124,7 +125,7 @@ export abstract class BaseErrorComponent implements OnInit, OnDestroy {
           this.title.setTitle(translatedTitle || titleKey);
         });
     } else {
-      this.title.setTitle(APP_DEFAULT_TITLE);
+      this.title.setTitle(this.brand.defaultTitle);
     }
   }
 

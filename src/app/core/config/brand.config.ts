@@ -1,12 +1,24 @@
-export const APP_BRAND = {
-  name: 'Velora',
-  defaultTitle: 'Velora',
-  titleSeparator: ' - ',
-  metaDescription: 'Velora enterprise workspace for access, governance, and platform operations.',
-  metaKeywords: 'Velora, enterprise admin, workspace management, access governance, platform operations',
-  canonicalUrl: 'https://velora.app/',
-} as const;
+import { InjectionToken } from '@angular/core';
 
-export const APP_BRAND_NAME = APP_BRAND.name;
-export const APP_DEFAULT_TITLE = APP_BRAND.defaultTitle;
-export const APP_TITLE_SEPARATOR = APP_BRAND.titleSeparator;
+export interface AppBrandConfig {
+  readonly name: string;
+  readonly defaultTitle: string;
+  readonly titleSeparator: string;
+  readonly metaDescription: string;
+  readonly metaKeywords: string;
+  readonly canonicalUrl: string;
+}
+
+export const DEFAULT_APP_BRAND: AppBrandConfig = {
+  name: 'Enterprise Dashboard',
+  defaultTitle: 'Enterprise Dashboard',
+  titleSeparator: ' - ',
+  metaDescription: 'Reusable enterprise dashboard shell.',
+  metaKeywords: 'enterprise dashboard',
+  canonicalUrl: '/',
+};
+
+export const APP_BRAND = new InjectionToken<AppBrandConfig>('APP_BRAND', {
+  providedIn: 'root',
+  factory: () => DEFAULT_APP_BRAND,
+});

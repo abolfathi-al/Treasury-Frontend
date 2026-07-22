@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import { APP_DEFAULT_TITLE, APP_TITLE_SEPARATOR } from '@core/config/brand.config';
+import { APP_BRAND } from '@core/config/brand.config';
 import {
   isPageNavigationItemActive,
   isPageNavigationItemCurrentPage,
@@ -40,12 +40,13 @@ export class PageInfoService {
   private readonly destroyRef = inject(DestroyRef);
   private readonly translate = inject(TranslateService);
   private readonly navigationItems = inject(PAGE_NAVIGATION_ITEMS);
+  private readonly brand = inject(APP_BRAND);
 
   private readonly _title = signal<string>('Dashboard');
   private readonly _description = signal<string>('');
   private readonly _breadcrumbs = signal<Array<PageLink>>([]);
-  private readonly _defaultTitle = signal<string>(APP_DEFAULT_TITLE);
-  private readonly _titleSeparator = signal<string>(APP_TITLE_SEPARATOR);
+  private readonly _defaultTitle = signal<string>(this.brand.defaultTitle);
+  private readonly _titleSeparator = signal<string>(this.brand.titleSeparator);
 
   private isInitialized = false;
 

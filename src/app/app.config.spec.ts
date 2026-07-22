@@ -11,7 +11,9 @@ import {
   OrganizationContextFacade,
   UiCapabilityFacade,
 } from '@core/state/context';
+import { APP_BRAND } from '@core/config/brand.config';
 import { LayoutService } from '@core/services/layout.service';
+import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { getAppProviders, layoutStorageSetup } from './app.config';
 
 interface ClassProviderRecord {
@@ -94,6 +96,22 @@ describe('getAppProviders shell context providers', () => {
             UiCapabilityFacade,
           ]
         : [],
+    );
+  });
+
+  it('provides the consumer-owned brand configuration', () => {
+    const appProviders = getAppProviders({
+      isServer: true,
+      includeBrowserOnlyInitializers: false,
+      includeClientHydration: false,
+      includeServiceWorker: false,
+    });
+
+    expect(appProviders).toContain(
+      jasmine.objectContaining({
+        provide: APP_BRAND,
+        useValue: PROJECT_BRAND,
+      }),
     );
   });
 

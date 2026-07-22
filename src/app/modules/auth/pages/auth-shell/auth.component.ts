@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { APP_DEFAULT_TITLE } from '@core/config/brand.config';
+import { APP_BRAND } from '@core/config/brand.config';
 
 type AuthRouteData = Record<string, unknown>;
 
@@ -68,6 +68,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly title = inject(Title);
+  private readonly brand = inject(APP_BRAND);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -149,7 +150,7 @@ export class AuthComponent implements OnInit, OnDestroy {
           this.title.setTitle(translatedTitle || titleKey);
         });
     } else {
-      this.title.setTitle(APP_DEFAULT_TITLE);
+      this.title.setTitle(this.brand.defaultTitle);
     }
   }
 }

@@ -4,10 +4,8 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { take, switchMap } from 'rxjs/operators';
 
-import { APP_DEFAULT_TITLE, APP_TITLE_SEPARATOR } from '@core/config/brand.config';
+import { APP_BRAND } from '@core/config/brand.config';
 
-const DEFAULT_TITLE = APP_DEFAULT_TITLE;
-const TITLE_SEPARATOR = APP_TITLE_SEPARATOR;
 const ROUTE_DATA_KEYS = {
   TITLE: 'title',
   TITLE_KEY: 'titleKey',
@@ -20,6 +18,7 @@ const ROUTE_DATA_KEYS = {
 export class CustomTitleStrategy {
   private readonly title = inject(Title);
   private readonly translate = inject(TranslateService);
+  private readonly brand = inject(APP_BRAND);
 
   updateTitle(routerState: RouterStateSnapshot): void {
     this.buildTitleFromRoute(routerState.root);
@@ -43,7 +42,7 @@ export class CustomTitleStrategy {
       return;
     }
 
-    this.title.setTitle(DEFAULT_TITLE);
+    this.title.setTitle(this.brand.defaultTitle);
   }
 
   private findDeepestChildRoute(route: ActivatedRouteSnapshot): ActivatedRouteSnapshot {
@@ -76,11 +75,11 @@ export class CustomTitleStrategy {
   }
 
   private buildTitle(pageTitle: string): string {
-    if (!pageTitle || pageTitle === DEFAULT_TITLE) {
-      return DEFAULT_TITLE;
+    if (!pageTitle || pageTitle === this.brand.defaultTitle) {
+      return this.brand.defaultTitle;
     }
 
-    return `${pageTitle}${TITLE_SEPARATOR}${DEFAULT_TITLE}`;
+    return `${pageTitle}${this.brand.titleSeparator}${this.brand.defaultTitle}`;
   }
 
   setTitle(title: string): void {
@@ -98,6 +97,6 @@ export class CustomTitleStrategy {
   }
 
   resetToDefault(): void {
-    this.title.setTitle(DEFAULT_TITLE);
+    this.title.setTitle(this.brand.defaultTitle);
   }
 }
