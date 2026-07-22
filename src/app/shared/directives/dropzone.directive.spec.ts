@@ -92,6 +92,7 @@ class HostComponent {
 interface DropzoneDirectiveInternals {
   DropzoneClass: typeof Dropzone | null;
   createInstance(): void;
+  initDropzone(): void;
   loadLibrary(): Promise<void>;
   populatePreview(
     previewElement: HTMLElement,
@@ -170,14 +171,20 @@ describe('Dropzone directive adapter helpers', () => {
       const directive = fixture.componentInstance.directive();
       const addedFileCallback = jasmine.createSpy('addedfile callback');
       const dropCallback = jasmine.createSpy('drop callback');
+      const successCallback = jasmine.createSpy('success callback');
       const addedFileOutput = spyOn(
         directive.addedFileEvent,
+        'emit'
+      ).and.callThrough();
+      const successOutput = spyOn(
+        directive.successEvent,
         'emit'
       ).and.callThrough();
 
       directive.updateOptions({
         addedfile: addedFileCallback,
         drop: dropCallback,
+        success: successCallback,
       });
       const internals = directive as unknown as DropzoneDirectiveInternals;
       internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
@@ -230,12 +237,16 @@ describe('Dropzone directive adapter helpers', () => {
         size: 128,
       } as Dropzone.DropzoneFile;
       const dropEvent = new DragEvent('drop');
+      const response = { uploadId: 'upload-1' };
       instance?.emit('addedfile', file);
       instance?.emit('drop', dropEvent);
+      instance?.emit('success', file, response);
 
       expect(addedFileCallback).toHaveBeenCalledOnceWith(file);
       expect(addedFileOutput).toHaveBeenCalledOnceWith(file);
       expect(dropCallback).toHaveBeenCalledOnceWith(dropEvent);
+      expect(successCallback).toHaveBeenCalledOnceWith(file);
+      expect(successOutput).toHaveBeenCalledOnceWith({ file, response });
 
       fixture.destroy();
       jasmine.clock().tick(100);
@@ -340,6 +351,21 @@ describe('Dropzone directive adapter helpers', () => {
     } finally {
       jasmine.clock().uninstall();
     }
+  });
+
+  it('ends loading when initialization fails', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as DropzoneDirectiveInternals;
+    internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
+    directive.updateOptions({ url: '' });
+
+    internals.initDropzone();
+
+    expect(directive.isLoading()).toBeFalse();
+    expect(directive.error()?.message).toBe('Dropzone validation failed');
+    fixture.destroy();
   });
 
   it('waits for library loading when recreate runs before bootstrap', async () => {

@@ -380,5 +380,12 @@
   "378": "page-visibility.token.ts",
   "379": "TranslateServiceStub",
   "380": "@angular/compiler-cli",
-  "387": "Q: Make DrawerDirective body and visible state cleanup safe across multiple Master Admin drawer instances"
+  "381": "Q: How should DropzoneDirective recreate safely before or during lazy library loading?",
+  "382": "dashboard.component.ts",
+  "383": "saver.token.ts",
+  "384": "toolbar.component.spec.ts",
+  "385": "TranslateServiceStub",
+  "386": "page-visibility.token.ts",
+  "387": "Q: Make DrawerDirective body and visible state cleanup safe across multiple Master Admin drawer instances",
+  "388": "@angular/animations"
 }

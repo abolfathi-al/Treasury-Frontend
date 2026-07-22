@@ -604,8 +604,8 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
         this.invokeCallback(options.sendingmultiple, [files, xhr, formData], 'sendingmultiple callback failed');
       }
     );
-    instance.on('success', (file: Dropzone.DropzoneFile) => {
-      this.successEvent.emit({ file, response: null });
+    instance.on('success', (file: Dropzone.DropzoneFile, response: DropzoneResponse) => {
+      this.successEvent.emit({ file, response });
       this.invokeCallback(options.success, [file], 'success callback failed');
     });
     instance.on(
@@ -935,6 +935,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
 
   private handleErr(message: string, error: Error): void {
     const dzError: DropzoneError = { code: 'GENERAL_ERROR', message, details: error };
+    this.status.setLoading(false);
     this.status.setError(dzError);
     this.logger.error(message, 'DropzoneDirective', { error });
   }
