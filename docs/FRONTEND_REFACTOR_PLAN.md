@@ -55,6 +55,10 @@ As of 2026-07-22:
   data are isolated under `demo/`; the obsolete fake interceptor and alias are
   removed. ESLint now prevents Master-owned `core`, `shared`, and `shell` code
   from importing consumer-owned `project`, `modules`, or `demo` code.
+- The immediate next campaign is the complete directive reduction and hardening
+  plan in [`DIRECTIVE_REFACTOR_PLAN.md`](DIRECTIVE_REFACTOR_PLAN.md). It takes
+  priority over the remaining phase work. Resume the unfinished Master boundary
+  and configuration slices only after directive phases D0-D6 pass their gates.
 
 ## Baseline
 
@@ -234,11 +238,15 @@ Exit criteria:
 
 Goal: protect code that every generated project will inherit.
 
-- Add characterization tests around `BaseDirective`, `runSafely()`,
-  `LoggerService`, `PermissionService`, `ShellFacade`, layout/theme initialization,
-  and directive-host cleanup before refactoring them.
-- Reuse shared lifecycle, DOM cleanup, option-update, and safe-error helpers where
-  duplicated behavior already exists.
+- Execute the deletion-first directive work in
+  [`DIRECTIVE_REFACTOR_PLAN.md`](DIRECTIVE_REFACTOR_PLAN.md) before other shared
+  hub refactors.
+- Characterize only active consumer behavior around directives, `LoggerService`,
+  `PermissionService`, `ShellFacade`, and layout/theme initialization before
+  changing it.
+- Delete zero-consumer directives and unused API before hardening retained
+  behavior. Keep `BaseDirective` or a helper only when multiple retained
+  implementations still need the same contract and total code decreases.
 - Verify SSR/browser guards, listener cleanup, responsive behavior, focus,
   keyboard navigation, and RTL/LTR.
 - Keep `LoggerService` and other hubs intact unless a concrete responsibility

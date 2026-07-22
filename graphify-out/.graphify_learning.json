@@ -1,40 +1,8 @@
 {
-  "generated_at": "2026-07-22T18:44:55.314998+00:00",
+  "generated_at": "2026-07-22T20:16:01.407814+00:00",
   "nodes": {
-    "docs_frontend_refactor_plan_enterprise_dashboard_master": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
-      "label": "Enterprise Dashboard Master",
-      "last": "2026-07-22T09:33:22.352609+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-22T09:33:22.352609+00:00",
-          "outcome": "useful",
-          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
-        }
-      ],
-      "score": 0.991189393,
-      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
-      "status": "tentative",
-      "uses": 1
-    },
-    "docs_frontend_refactor_plan_master_product_neutrality": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
-      "label": "Master Product Neutrality",
-      "last": "2026-07-22T09:38:31.675717+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-22T09:38:31.675717+00:00",
-          "outcome": "useful",
-          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
-        }
-      ],
-      "score": 0.991271386,
-      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
-      "status": "tentative",
-      "uses": 1
-    },
     "docs_frontend_refactor_plan_project_composition_boundary": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
+      "code_fingerprint": "d684edd1cdd1a0ac23d60fa95b33b4327aa552d80d29528c9d6abc886e116184",
       "label": "Project Composition Boundary",
       "last": "2026-07-22T18:44:39.828674+00:00",
       "neg": 1,
@@ -65,14 +33,14 @@
           "q": "continie"
         }
       ],
-      "score": 14.93000258,
+      "score": 14.908194874,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "contested",
       "uses": 16,
       "verdict": "useful"
     },
     "docs_frontend_refactor_plan_reusable_dashboard_master_refactor_plan": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
+      "code_fingerprint": "d684edd1cdd1a0ac23d60fa95b33b4327aa552d80d29528c9d6abc886e116184",
       "label": "Reusable Dashboard Master Refactor Plan",
       "last": "2026-07-22T13:36:54.437558+00:00",
       "provenance": [
@@ -87,44 +55,7 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 1.986341461,
-      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
-      "status": "preferred",
-      "uses": 2
-    },
-    "docs_frontend_refactor_plan_treasury_first_consumer": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
-      "label": "Treasury as First Master Consumer",
-      "last": "2026-07-22T09:33:22.352609+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-22T09:33:22.352609+00:00",
-          "outcome": "useful",
-          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
-        }
-      ],
-      "score": 0.991189393,
-      "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
-      "status": "tentative",
-      "uses": 1
-    },
-    "docs_frontend_refactor_plan_versioned_master_release": {
-      "code_fingerprint": "8e86260a77cc74f3857821da1db0f7eba062bc4d4581e8d556b0cc3e08d3ea10",
-      "label": "Versioned Master Release",
-      "last": "2026-07-22T09:38:31.675717+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-22T09:38:31.675717+00:00",
-          "outcome": "useful",
-          "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
-        },
-        {
-          "date": "2026-07-22T09:33:22.352609+00:00",
-          "outcome": "useful",
-          "q": "plan roo jori bechin ke beshe in frontend roo baraye projehaye ayande be sorat master estefade konam, chon dashboard hale hazer ghaleb tamam front dashboard haye man hast"
-        }
-      ],
-      "score": 1.982460778,
+      "score": 1.983440085,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -145,7 +76,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.981682335,
+      "score": 1.978787764,
       "source_file": "docs/ui/ui-architecture.md",
       "status": "preferred",
       "uses": 2
@@ -166,7 +97,7 @@
           "q": "continue refactoring"
         }
       ],
-      "score": 1.999147638,
+      "score": 1.996227557,
       "source_file": ".eslintrc.json",
       "status": "preferred",
       "uses": 2
@@ -202,7 +133,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 6.965733105,
+      "score": 6.955558514,
       "source_file": "src/app/app.config.ts",
       "status": "preferred",
       "uses": 7
@@ -218,7 +149,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.996061764,
+      "score": 0.994606854,
       "source_file": "src/app/core/auth/auth-session.port.ts",
       "status": "tentative",
       "uses": 1
@@ -234,7 +165,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.993683845,
+      "score": 0.992232407,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -250,7 +181,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.993908919,
+      "score": 0.992457152,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -266,7 +197,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.994806941,
+      "score": 0.993353863,
       "source_file": "src/app/core/config/config.ts",
       "status": "tentative",
       "uses": 1
@@ -282,8 +213,24 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.995651376,
+      "score": 0.994197064,
       "source_file": "src/app/core/config/runtime.config.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_core_initializers_index": {
+      "code_fingerprint": "37ad6aa91dd975dadd342e97b2934acf8cfb14b0c71ad275ed0b16f404468033",
+      "label": "initializers/index.ts",
+      "last": "2026-07-22T19:13:21.668793+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        }
+      ],
+      "score": 0.998995084,
+      "source_file": "src/app/core/initializers/index.ts",
       "status": "tentative",
       "uses": 1
     },
@@ -304,7 +251,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": -0.000106567,
+      "score": -0.000106411,
       "source_file": "src/app/core/services/keyboard-event.service.ts",
       "status": "contested",
       "uses": 1,
@@ -337,7 +284,7 @@
           "q": "continie"
         }
       ],
-      "score": 1.99035175,
+      "score": 1.987444516,
       "source_file": "src/app/core/services/layout.service.ts",
       "status": "contested",
       "uses": 3,
@@ -346,9 +293,14 @@
     "src_app_core_services_logger_service_loggerservice": {
       "code_fingerprint": "ddfc08b2332839e6c12b119a2e09ee31d7b6975d7a9f0c6ead63b269effc11ab",
       "label": "LoggerService",
-      "last": "2026-07-22T18:16:27.674560+00:00",
+      "last": "2026-07-22T19:13:21.668793+00:00",
       "neg": 1,
       "provenance": [
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        },
         {
           "date": "2026-07-22T18:16:27.674560+00:00",
           "outcome": "corrected",
@@ -370,10 +322,10 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.981575768,
+      "score": 2.977676437,
       "source_file": "src/app/core/services/logger.service.ts",
       "status": "contested",
-      "uses": 3,
+      "uses": 4,
       "verdict": "useful"
     },
     "src_app_core_services_theme_mode_model_theme_mode_config": {
@@ -387,7 +339,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.994551397,
+      "score": 0.993098692,
       "source_file": "src/app/core/services/theme-mode.model.ts",
       "status": "tentative",
       "uses": 1
@@ -403,7 +355,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.994551397,
+      "score": 0.993098692,
       "source_file": "src/app/core/services/theme-mode.service.ts",
       "status": "tentative",
       "uses": 1
@@ -419,8 +371,24 @@
           "q": "continue"
         }
       ],
-      "score": 0.996235369,
+      "score": 0.994780204,
       "source_file": "src/app/core/state/context/context.models.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_core_tokens_index": {
+      "code_fingerprint": "23972129b68c1d2e7163b5f36d3d9d212e39e1138fc2516ec5a5a5d9eae8b780",
+      "label": "tokens/index.ts",
+      "last": "2026-07-22T19:13:21.668793+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        }
+      ],
+      "score": 0.998995084,
+      "source_file": "src/app/core/tokens/index.ts",
       "status": "tentative",
       "uses": 1
     },
@@ -435,7 +403,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.995261899,
+      "score": 0.993808157,
       "source_file": "src/app/core/tokens/local-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -451,7 +419,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.995261899,
+      "score": 0.993808157,
       "source_file": "src/app/core/tokens/location.token.ts",
       "status": "tentative",
       "uses": 1
@@ -467,7 +435,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.995261899,
+      "score": 0.993808157,
       "source_file": "src/app/core/tokens/session-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -489,7 +457,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": -0.000106567,
+      "score": -0.000106411,
       "source_file": "src/app/core/utils/run-safely.ts",
       "status": "contested",
       "uses": 1,
@@ -506,7 +474,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.998992356,
+      "score": 0.997533164,
       "source_file": "src/app/demo/api/in-memory-db/in-memory-db.service.ts",
       "status": "tentative",
       "uses": 1
@@ -527,7 +495,7 @@
           "q": "continue"
         }
       ],
-      "score": 1.995414784,
+      "score": 1.992500155,
       "source_file": "src/app/demo/api/mock-api.interceptor.ts",
       "status": "preferred",
       "uses": 2
@@ -543,7 +511,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996235369,
+      "score": 0.994780204,
       "source_file": "src/app/demo/context/demo-context.fixtures.ts",
       "status": "tentative",
       "uses": 1
@@ -559,7 +527,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996235369,
+      "score": 0.994780204,
       "source_file": "src/app/demo/context/demo-context.providers.ts",
       "status": "tentative",
       "uses": 1
@@ -575,7 +543,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996235369,
+      "score": 0.994780204,
       "source_file": "src/app/demo/context/demo-context.store.ts",
       "status": "tentative",
       "uses": 1
@@ -591,7 +559,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996422429,
+      "score": 0.994966991,
       "source_file": "src/app/demo/dashboard/dashboard.component.ts",
       "status": "tentative",
       "uses": 1
@@ -617,7 +585,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 2.986975039,
+      "score": 2.982612075,
       "source_file": "src/app/modules/auth/data-access/auth.service.ts",
       "status": "preferred",
       "uses": 3
@@ -638,7 +606,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.981682335,
+      "score": 1.978787764,
       "source_file": "src/app/modules/auth/data-access/permission.service.ts",
       "status": "preferred",
       "uses": 2
@@ -654,7 +622,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.996061764,
+      "score": 0.994606854,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -670,7 +638,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.996061764,
+      "score": 0.994606854,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -686,7 +654,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.993908919,
+      "score": 0.992457152,
       "source_file": "src/app/project/brand/project-brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -702,7 +670,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.99427679,
+      "score": 0.992824487,
       "source_file": "src/app/project/locale/project-locale.config.ts",
       "status": "tentative",
       "uses": 1
@@ -718,7 +686,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 0.992574062,
+      "score": 0.991124246,
       "source_file": "src/app/project/navigation/project-navigation.config.ts",
       "status": "tentative",
       "uses": 1
@@ -734,7 +702,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996422429,
+      "score": 0.994966991,
       "source_file": "src/app/project/routing/project.routes.ts",
       "status": "tentative",
       "uses": 1
@@ -750,7 +718,7 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.995651376,
+      "score": 0.994197064,
       "source_file": "src/app/project/runtime/project-runtime.config.ts",
       "status": "tentative",
       "uses": 1
@@ -766,16 +734,70 @@
           "q": "continue"
         }
       ],
-      "score": 0.994551397,
+      "score": 0.993098692,
       "source_file": "src/app/project/theme/project-theme.config.ts",
       "status": "tentative",
       "uses": 1
     },
+    "src_app_shared_directives_drawer_directive_drawerdirective": {
+      "code_fingerprint": "6b45347610918ba34c3807b5512e8de491507a6892413685215261c8bb553155",
+      "label": "DrawerDirective",
+      "last": "2026-07-22T19:54:46.167761+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-22T19:54:46.167761+00:00",
+          "outcome": "useful",
+          "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
+        },
+        {
+          "date": "2026-07-22T18:16:27.674560+00:00",
+          "outcome": "corrected",
+          "q": "ok, continue"
+        }
+      ],
+      "score": 0.001575582,
+      "source_file": "src/app/shared/directives/drawer.directive.ts",
+      "status": "contested",
+      "uses": 1,
+      "verdict": "useful"
+    },
+    "src_app_shared_directives_menu_directive_menudirective": {
+      "code_fingerprint": "296bcf34ab9372aafff491b65bfe4186816f9ce0f7a5941d46643ad7ea5e3097",
+      "label": "MenuDirective",
+      "last": "2026-07-22T19:54:46.167761+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:54:46.167761+00:00",
+          "outcome": "useful",
+          "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
+        },
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        }
+      ],
+      "score": 1.99865412,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "preferred",
+      "uses": 2
+    },
     "src_app_shared_directives_shared_base_directive_basedirective": {
       "code_fingerprint": "3335d64b4ca033e3a72922d5084d5cd686898a4c518097310ecc2e98ccb960fb",
       "label": "BaseDirective",
-      "last": "2026-07-22T09:18:18.447991+00:00",
+      "last": "2026-07-22T19:54:46.167761+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T19:54:46.167761+00:00",
+          "outcome": "useful",
+          "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
+        },
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        },
         {
           "date": "2026-07-22T09:18:18.447991+00:00",
           "outcome": "useful",
@@ -787,8 +809,45 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.981682335,
+      "score": 3.977441884,
       "source_file": "src/app/shared/directives/shared/base-directive.ts",
+      "status": "preferred",
+      "uses": 4
+    },
+    "src_app_shared_directives_toggle_directive_toggledirective": {
+      "code_fingerprint": "ada6237bec2238fea920ab89b43a873eb5c549f3861502bd91e6002ee4430523",
+      "label": "ToggleDirective",
+      "last": "2026-07-22T19:54:46.167761+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:54:46.167761+00:00",
+          "outcome": "useful",
+          "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
+        }
+      ],
+      "score": 0.999659036,
+      "source_file": "src/app/shared/directives/toggle.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_tree_directive_treedirective": {
+      "code_fingerprint": "352cdd062fdf8d521d6aa3ffd820882caa62b2896f1969d5c9676e791579bb77",
+      "label": "TreeDirective",
+      "last": "2026-07-22T19:54:46.167761+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:54:46.167761+00:00",
+          "outcome": "useful",
+          "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
+        },
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        }
+      ],
+      "score": 1.99865412,
+      "source_file": "src/app/shared/directives/tree.directive.ts",
       "status": "preferred",
       "uses": 2
     },
@@ -803,7 +862,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.99427679,
+      "score": 0.992824487,
       "source_file": "src/app/shared/pipes/extend-date.pipe.ts",
       "status": "tentative",
       "uses": 1
@@ -819,7 +878,7 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.993221814,
+      "score": 0.991771051,
       "source_file": "src/app/shell/layout/components/footer/footer.component.ts",
       "status": "tentative",
       "uses": 1
@@ -835,7 +894,7 @@
           "q": "continue refactoring"
         }
       ],
-      "score": 0.99915178,
+      "score": 0.997692355,
       "source_file": "src/app/shell/layout/components/header/navbar/navbar.component.ts",
       "status": "tentative",
       "uses": 1
@@ -851,7 +910,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.996422429,
+      "score": 0.994966991,
       "source_file": "src/app/shell/layout/layout.component.ts",
       "status": "tentative",
       "uses": 1
@@ -872,7 +931,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 1.985795876,
+      "score": 1.982895297,
       "source_file": "src/app/shell/layout/navigation/shell-navigation.facade.ts",
       "status": "preferred",
       "uses": 2
@@ -888,8 +947,24 @@
           "q": "continie"
         }
       ],
-      "score": 0.994806941,
+      "score": 0.993353863,
       "source_file": "src/app/shell/layout/shell.facade.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_utils_core_util_coreutil": {
+      "code_fingerprint": "3a12c90515757e73ae46fc2ed9f18482a50ce9933358c427fb5f727207851451",
+      "label": "CoreUtil",
+      "last": "2026-07-22T19:13:21.668793+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T19:13:21.668793+00:00",
+          "outcome": "useful",
+          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
+        }
+      ],
+      "score": 0.998995084,
+      "source_file": "src/app/utils/core.util.ts",
       "status": "tentative",
       "uses": 1
     },
@@ -904,7 +979,7 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.993221814,
+      "score": 0.991771051,
       "source_file": "src/server.ts",
       "status": "tentative",
       "uses": 1
@@ -920,7 +995,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.999995859,
+      "score": 0.998535202,
       "source_file": "tsconfig.json",
       "status": "tentative",
       "uses": 1
@@ -936,7 +1011,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.999995859,
+      "score": 0.998535202,
       "source_file": "tsconfig.json",
       "status": "tentative",
       "uses": 1

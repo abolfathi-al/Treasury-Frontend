@@ -22,7 +22,6 @@ add
 added
 address
 admin
-adoption
 advanced
 after
 agent
@@ -51,12 +50,10 @@ apexcharts
 api
 app
 application
-applied
 apply
 architect
 architecture
 area
-areas
 args
 aria
 array
@@ -74,10 +71,8 @@ auth
 authenticated
 authentication
 authority
-authorization
 auto
 autocomplete
-automated
 autoprefixer
 autosize
 available
@@ -154,6 +149,7 @@ canonical
 capabilities
 capability
 card
+cards
 cascade
 cases
 casing
@@ -164,7 +160,6 @@ changed
 changelog
 changes
 char
-characterization
 characters
 chars
 chart
@@ -188,7 +183,6 @@ class
 classes
 classic
 claude
-clean
 cleanup
 clear
 clearer
@@ -220,7 +214,6 @@ comparer
 compile
 compiler
 complete
-completed
 completion
 component
 components
@@ -256,7 +249,6 @@ contract
 contracts
 control
 controls
-conventions
 convert
 cookie
 coordinates
@@ -267,6 +259,7 @@ countdown
 counter
 countup
 coverage
+crawler
 create
 critical
 crud
@@ -277,7 +270,6 @@ currency
 current
 custom
 customization
-customize
 cut
 dark
 darken
@@ -315,11 +307,12 @@ delays
 delegate
 delegated
 delete
+deletion
+delivery
 demo
 deny
 dependencies
 dependency
-deprecated
 deprecation
 descendant
 description
@@ -336,7 +329,6 @@ development
 device
 devices
 devkit
-diagnostics
 dialer
 diff
 differences
@@ -374,7 +366,6 @@ draggable
 draw
 drawer
 drawers
-driven
 drop
 dropdown
 dropdowns
@@ -401,6 +392,7 @@ enable
 enabled
 encoding
 end
+endpoint
 enforce
 engage
 engines
@@ -409,6 +401,7 @@ ensure
 enter
 enterprise
 entry
+entrypoint
 env
 environment
 environments
@@ -444,7 +437,6 @@ extensions
 external
 extra
 extract
-extraction
 facade
 factory
 fake
@@ -467,14 +459,12 @@ filtering
 filters
 finalize
 find
-finding
 finish
 first
 fiscal
 fit
 fix
 fixed
-fixes
 fixtures
 flag
 flatpickr
@@ -484,8 +474,6 @@ flow
 focus
 focusable
 folder
-folders
-follow
 footer
 for
 forbidden
@@ -524,9 +512,10 @@ generic
 generics
 get
 getter
-getting
 ghaleb
 global
+glyph
+google
 goto
 grant
 graph
@@ -546,6 +535,7 @@ handler
 handlers
 handling
 hardcoded
+hardening
 has
 hashed
 hashing
@@ -560,7 +550,6 @@ helpers
 hidden
 hide
 hierarchy
-high
 highest
 highlight
 hint
@@ -589,7 +578,6 @@ impl
 implementation
 implicit
 import
-important
 imports
 include
 increase
@@ -621,9 +609,9 @@ inst
 instance
 instances
 instant
+instruction
 int
 integer
-integration
 interaction
 intercept
 interceptor
@@ -668,6 +656,7 @@ language
 languages
 last
 launcher
+layer
 layout
 left
 legacy
@@ -712,7 +701,6 @@ logo
 logos
 logout
 logs
-low
 ltr
 main
 maintain
@@ -722,7 +710,6 @@ manage
 management
 manager
 manifest
-manual
 map
 mapper
 mapping
@@ -740,7 +727,6 @@ max
 maxlength
 mcp
 media
-medium
 meets
 mega
 membership
@@ -759,7 +745,6 @@ meter
 method
 methodology
 metric
-metrics
 middleware
 migration
 mikhay
@@ -787,6 +772,7 @@ modular
 module
 modules
 mojod
+moon
 more
 mouse
 move
@@ -797,17 +783,14 @@ named
 names
 namespace
 namespaces
-naming
 native
 navbar
 navigate
 navigation
 navigator
 needed
-needing
 nested
 network
-neutrality
 new
 next
 ngb
@@ -851,11 +834,9 @@ optimizer
 option
 options
 opts
-order
 organization
 origin
 original
-other
 out
 outcome
 outlet
@@ -865,7 +846,6 @@ outside
 over
 overlay
 overlays
-override
 overrides
 owned
 ownership
@@ -918,7 +898,6 @@ play
 plugin
 plural
 pointer
-points
 policy
 pollution
 polyfill
@@ -934,7 +913,6 @@ positioning
 positions
 postbuild
 postcss
-practices
 pre
 predicate
 preference
@@ -946,7 +924,6 @@ premature
 prepare
 preprocessor
 prerender
-prerequisites
 preset
 press
 prev
@@ -955,6 +932,7 @@ previous
 pricing
 primary
 primitive
+primitives
 print
 priority
 prism
@@ -996,7 +974,6 @@ rationale
 raw
 reactive
 read
-readme
 ready
 reapply
 reason
@@ -1011,7 +988,6 @@ redirect
 reenable
 ref
 refactor
-refactored
 refactoring
 references
 refresh
@@ -1025,7 +1001,6 @@ reinit
 reinitialize
 rejected
 relative
-release
 remaining
 remote
 removal
@@ -1036,6 +1011,7 @@ render
 renderer
 rendering
 replace
+replacement
 replacements
 replay
 report
@@ -1054,7 +1030,6 @@ resolve
 resolved
 resolver
 resource
-resources
 response
 responsive
 restore
@@ -1070,7 +1045,6 @@ robots
 role
 roles
 roo
-room
 root
 round
 route
@@ -1114,7 +1088,6 @@ scripts
 scroll
 scrolling
 scss
-seams
 search
 searched
 searches
@@ -1122,7 +1095,6 @@ searching
 secondary
 seconds
 section
-sections
 security
 seed
 segment
@@ -1166,6 +1138,7 @@ signals
 simulator
 single
 singleton
+site
 sitemap
 size
 sizes
@@ -1190,6 +1163,7 @@ speech
 speed
 spinner
 splash
+split
 spy
 src
 sso
@@ -1198,12 +1172,9 @@ stack
 stacked
 standalone
 standard
-standardization
 start
-started
 startup
 state
-statements
 states
 static
 statistics
@@ -1212,10 +1183,8 @@ status
 stdio
 step
 stepper
-steps
 stick
 sticky
-still
 stop
 storage
 store
@@ -1275,7 +1244,6 @@ tags
 tamam
 target
 targets
-tasks
 team
 template
 templates
@@ -1293,7 +1261,6 @@ theme
 themes
 then
 this
-threshold
 thresholds
 throttle
 throttled
@@ -1372,7 +1339,6 @@ untouched
 update
 updated
 updates
-upgrades
 upload
 uploading
 url
@@ -1393,14 +1359,10 @@ validators
 value
 values
 variable
-variables
-variation
 velora
 vendor
-vendors
 verification
 version
-versioned
 versus
 view
 viewport
@@ -1430,6 +1392,7 @@ without
 wizard
 wizards
 worker
+workflow
 workspace
 wrap
 wrapper
@@ -1437,6 +1400,5 @@ write
 xml
 yaireo
 year
-your
 zone
 zoom
