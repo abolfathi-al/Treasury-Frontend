@@ -63,13 +63,13 @@ import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
 import { extraLocaleFa } from '@utils';
 import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigation.config';
+import { PROJECT_ROUTES } from './project/routing/project.routes';
 import { AuthService } from './modules/auth/data-access/auth.service';
 import { ErrorService } from './modules/errors/data-access/error.service';
 import { ErrorUtils } from './modules/errors/data-access/error.utils';
 import { ErrorCode as FeatureErrorCode } from './modules/errors/models/error.types';
 import { TranslationService } from './modules/i18n/translation.service';
 import { environment } from '../environments/environment';
-import { AppRouting } from './app-routing';
 
 const APP_CONFIG_CONSTANTS = {
   DEFAULT_LOCALE: 'fa',
@@ -216,7 +216,7 @@ function buildInitializers(
 
 function buildRouterProviders(): Provider | EnvironmentProviders {
   return provideRouter(
-    AppRouting,
+    PROJECT_ROUTES,
     withRouterConfig({
       urlUpdateStrategy: APP_CONFIG_CONSTANTS.ROUTER_CONFIG.URL_UPDATE_STRATEGY,
       onSameUrlNavigation:
