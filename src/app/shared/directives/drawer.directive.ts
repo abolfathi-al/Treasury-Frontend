@@ -2,10 +2,12 @@ import {
   Directive,
   OnInit,
   computed,
+  effect,
   inject,
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -163,8 +165,27 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
       { input: this.drawerClose, key: 'close' as const },
       { input: this.drawerEscape, key: 'escape' as const },
       { input: this.drawerPermanent, key: 'permanent' as const },
+      { input: this.drawerActivate, key: 'activate' as const },
     ];
     this.bindInputs(bindings);
+
+    effect(() => {
+      const width = this.drawerWidth();
+      untracked(() => {
+        if (width === undefined) return;
+        this._rawWidthConfig = width;
+        this.updateOption('width', this.resolveWidthFromRaw(width));
+      });
+    });
+
+    effect(() => {
+      const shown = this.drawerShownInput();
+      untracked(() => {
+        if (!this.isBaseInitialized() || this.isBaseDestroyed()) return;
+        if (shown) this.show();
+        else this.hide();
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -195,10 +216,12 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
 
       this.initializeDrawer();
       this.markBaseInitialized();
+      if (this.drawerShownInput()) this.show();
     }, 'Initialization failed');
   }
 
   toggle(source: 'manual' | 'toggle' | 'overlay' | 'close' = 'manual'): void {
+    if (this.isBaseDestroyed()) return;
     this.executeSafely(() => {
       this._previousIsShown.set(this._isShown());
       const newState = !this._isShown();
@@ -208,6 +231,7 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
   }
 
   show(source: 'manual' | 'toggle' | 'overlay' | 'close' = 'manual'): void {
+    if (this.isBaseDestroyed()) return;
     this.executeSafely(() => {
       if (this._isShown()) return;
       this._previousIsShown.set(this._isShown());
@@ -217,6 +241,7 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
   }
 
   hide(source: 'manual' | 'toggle' | 'overlay' | 'close' = 'manual'): void {
+    if (this.isBaseDestroyed()) return;
     this.executeSafely(() => {
       if (!this._isShown()) return;
       this._previousIsShown.set(this._isShown());
@@ -363,6 +388,7 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
 
     this._isActive = isActive;
     this.applyActivationClasses();
+    this.updateElementWidthFromConfig();
 
     if (!isActive && this._isShown()) {
       this.hide('manual');
@@ -385,7 +411,7 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
     this.setupToggleHandlers(options);
     this.setupCloseHandlers(options);
     this.setupShowHandlers();
-    this.setupEscapeHandler(options);
+    this.setupEscapeHandler();
   }
 
   private setupToggleHandlers(options: DrawerOptions): void {
@@ -416,12 +442,14 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
     });
   }
 
-  private setupEscapeHandler(options: DrawerOptions): void {
-    if (!options.escape) return;
-
+  private setupEscapeHandler(): void {
     this.addBaseDomListener(this.host.document, 'keydown', (event: Event) => {
       const keyboardEvent = event as KeyboardEvent;
-      if (keyboardEvent.key === 'Escape' && this._isShown()) {
+      if (
+        this.optionsManager.snapshot().escape &&
+        keyboardEvent.key === 'Escape' &&
+        this._isShown()
+      ) {
         this.hide('manual');
       }
     });
@@ -544,20 +572,19 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
     }, 'Set body attrs on show failed');
   }
 
-  private clearBodyAttrsOnHide(): void {
+  private clearBodyAttrsOnHide(name = this.optionsManager.snapshot().name): void {
     if (!this.host.isBrowser) return;
 
     this.executeSafely(() => {
-      const options = this.optionsManager.snapshot();
       const openDrawers = Array.from(DrawerStore.getAllInstances().values()).filter(
         (drawer) => drawer.isShown()
       );
       const keepsNamedAttribute = openDrawers.some(
-        (drawer) => drawer.optionsManager.snapshot().name === options.name
+        (drawer) => drawer.optionsManager.snapshot().name === name
       );
 
-      if (options.name && !keepsNamedAttribute) {
-        this.host.renderer.removeAttribute(this.host.document.body, `data-velora-drawer-${options.name}`);
+      if (name && !keepsNamedAttribute) {
+        this.host.renderer.removeAttribute(this.host.document.body, `data-velora-drawer-${name}`);
       }
       if (openDrawers.length === 0) {
         this.host.renderer.removeAttribute(this.host.document.body, 'data-velora-drawer');
@@ -586,10 +613,9 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
     this.host.renderer.addClass(this.hostElement, `${options.baseClass}-${options.direction}`);
   }
 
-  private clearBaseClasses(): void {
+  private clearBaseClasses(options = this.optionsManager.snapshot()): void {
     if (!this.host.isBrowser) return;
 
-    const options = this.optionsManager.snapshot();
     this.host.renderer.removeClass(this.hostElement, `${options.baseClass}-on`);
     this.host.renderer.removeClass(this.hostElement, options.baseClass);
     this.host.renderer.removeClass(this.hostElement, `${options.baseClass}-start`);
@@ -647,7 +673,61 @@ export class DrawerDirective extends BaseDirective<DrawerOptions, string> implem
   }
 
   protected override updateOption<K extends keyof DrawerOptions>(key: K, value: DrawerOptions[K]): boolean {
-    return this.optionsManager.setOption(key, value);
+    const previous = this.optionsManager.snapshot();
+    const changed = this.optionsManager.setOption(key, value);
+    if (changed && this.isBaseInitialized() && !this.isBaseDestroyed()) {
+      this.applyOptionChange(key, previous);
+    }
+    return changed;
+  }
+
+  private applyOptionChange(key: keyof DrawerOptions, previous: DrawerOptions): void {
+    const options = this.optionsManager.snapshot();
+
+    switch (key) {
+      case 'activate':
+        this.checkActivation();
+        break;
+      case 'width':
+        this.updateElementWidthFromConfig();
+        break;
+      case 'overlay':
+        if (this._isShown()) {
+          if (options.overlay) this.createOverlay();
+          else this.removeOverlay();
+        }
+        break;
+      case 'overlayClass':
+        if (this.overlayElement) {
+          this.host.renderer.removeClass(this.overlayElement, previous.overlayClass);
+          this.host.renderer.addClass(this.overlayElement, options.overlayClass);
+        }
+        break;
+      case 'baseClass':
+      case 'direction':
+        this.clearBaseClasses(previous);
+        this.applyActivationClasses();
+        if (this._isShown()) {
+          this.host.renderer.addClass(this.hostElement, `${options.baseClass}-on`);
+        }
+        break;
+      case 'name':
+        if (this._isShown()) {
+          this.clearBodyAttrsOnHide(previous.name);
+          this.setBodyAttrsOnShow();
+        }
+        break;
+      case 'toggle':
+        this.detachDelegatedClick(this.toggleEventId);
+        this.toggleEventId = null;
+        this.setupToggleHandlers(options);
+        break;
+      case 'close':
+        this.detachDelegatedClick(this.closeEventId);
+        this.closeEventId = null;
+        this.setupCloseHandlers(options);
+        break;
+    }
   }
 
   private get hostElement(): HTMLElement {

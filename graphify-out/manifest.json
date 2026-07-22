@@ -1290,13 +1290,13 @@
     "semantic_hash": "1f1af252f896e696b96dc3c185b0a068"
   },
   "src/app/shared/directives/drawer.directive.spec.ts": {
-    "mtime": 1784756720.439425,
-    "ast_hash": "0248110d1118e3990d5482deccc0824f",
+    "mtime": 1784757133.8944876,
+    "ast_hash": "231e74139eb45cd4063128b9c116c60e",
     "semantic_hash": ""
   },
   "src/app/shared/directives/drawer.directive.ts": {
-    "mtime": 1784756720.4376025,
-    "ast_hash": "d47dca09f407e51f805b8e8c308bdcf5",
+    "mtime": 1784757191.9693801,
+    "ast_hash": "fd0aecf06fff309312f0d458bd5f7507",
     "semantic_hash": ""
   },
   "src/app/shared/directives/dropzone.directive.spec.ts": {
@@ -10247,6 +10247,11 @@
   "graphify-out/memory/query_20260722_214156_prevent_stale_menudirective_asynchronous_completio.md": {
     "mtime": 1784756516.7741208,
     "ast_hash": "697190907bd0013954d8ad13f0138edc",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_214714_make_drawerdirective_body_and_visible_state_cleanu.md": {
+    "mtime": 1784756834.7497602,
+    "ast_hash": "f3309d98f96b76d866be34fc26907154",
     "semantic_hash": ""
   }
 }

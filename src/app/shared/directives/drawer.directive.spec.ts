@@ -1,6 +1,7 @@
 import {
   Component,
   provideZonelessChangeDetection,
+  signal,
   viewChild,
   viewChildren,
 } from '@angular/core';
@@ -45,6 +46,60 @@ class MultiDrawerHostComponent {
   readonly directives = viewChildren(DrawerDirective);
 }
 
+@Component({
+  imports: [DrawerDirective],
+  standalone: true,
+  template: `
+    <aside
+      id="reactive-drawer"
+      vlVeloraDrawer
+      [drawerShown]="shown()"
+      [drawerOverlay]="overlay()"
+      [drawerOverlayClass]="overlayClass()"
+      [drawerDirection]="direction()"
+      [drawerWidth]="width()"
+      [drawerName]="name()"
+      [drawerBaseClass]="baseClass()"
+      [drawerActivate]="activate()"
+      [drawerEscape]="escape()"
+    ></aside>
+  `,
+})
+class ReactiveDrawerHostComponent {
+  readonly directive = viewChild.required(DrawerDirective);
+  readonly shown = signal(false);
+  readonly overlay = signal(true);
+  readonly overlayClass = signal('drawer-overlay');
+  readonly direction = signal<'start' | 'end'>('end');
+  readonly width = signal<string | { [key: string]: string }>('300px');
+  readonly name = signal('primary');
+  readonly baseClass = signal('drawer');
+  readonly activate = signal<boolean | { [key: string]: boolean }>(true);
+  readonly escape = signal(true);
+}
+
+@Component({
+  imports: [DrawerDirective],
+  standalone: true,
+  template: `
+    <button class="toggle-one" type="button"><span>First toggle</span></button>
+    <button class="toggle-two" type="button"><span>Second toggle</span></button>
+    <button class="close-one" type="button">First close</button>
+    <button class="close-two" type="button">Second close</button>
+    <aside
+      id="selector-drawer"
+      vlVeloraDrawer
+      [drawerToggleSelector]="toggleSelector()"
+      [drawerClose]="closeSelector()"
+    ></aside>
+  `,
+})
+class SelectorDrawerHostComponent {
+  readonly directive = viewChild.required(DrawerDirective);
+  readonly toggleSelector = signal('.toggle-one');
+  readonly closeSelector = signal('.close-one');
+}
+
 describe('DrawerDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,6 +110,8 @@ describe('DrawerDirective', () => {
   afterEach(() => {
     document.body.removeAttribute('data-velora-drawer');
     document.body.removeAttribute('data-velora-drawer-shared');
+    document.body.removeAttribute('data-velora-drawer-primary');
+    document.body.removeAttribute('data-velora-drawer-secondary');
   });
 
   function setup(): {
@@ -176,5 +233,106 @@ describe('DrawerDirective', () => {
     expect(document.body.hasAttribute('data-velora-drawer')).toBeFalse();
     expect(document.body.querySelector('.drawer-overlay')).toBeNull();
     tick(10);
+  }));
+
+  it('applies reactive state, layout, and presentation inputs', fakeAsync(() => {
+    const fixture = TestBed.createComponent(ReactiveDrawerHostComponent);
+    fixture.detectChanges();
+    tick(0);
+    const component = fixture.componentInstance;
+    const directive = component.directive();
+    const aside = fixture.nativeElement.querySelector('aside') as HTMLElement;
+
+    component.shown.set(true);
+    fixture.detectChanges();
+    expect(directive.isShown()).toBeTrue();
+    expect(aside.style.width).toBe('300px');
+    expect(document.body.getAttribute('data-velora-drawer-primary')).toBe('on');
+
+    component.overlayClass.set('floating-overlay');
+    component.baseClass.set('sheet');
+    component.direction.set('start');
+    component.width.set('420px');
+    component.name.set('secondary');
+    fixture.detectChanges();
+
+    const overlay = document.body.querySelector('.floating-overlay');
+    expect(overlay).not.toBeNull();
+    expect(aside.classList.contains('drawer')).toBeFalse();
+    expect(aside.classList.contains('sheet')).toBeTrue();
+    expect(aside.classList.contains('sheet-start')).toBeTrue();
+    expect(aside.classList.contains('sheet-on')).toBeTrue();
+    expect(aside.style.width).toBe('420px');
+    expect(document.body.hasAttribute('data-velora-drawer-primary')).toBeFalse();
+    expect(document.body.getAttribute('data-velora-drawer-secondary')).toBe('on');
+
+    component.overlay.set(false);
+    fixture.detectChanges();
+    expect(document.body.querySelector('.floating-overlay')).toBeNull();
+
+    component.activate.set(false);
+    fixture.detectChanges();
+    expect(directive.isShown()).toBeFalse();
+    expect(aside.classList.contains('sheet')).toBeFalse();
+    expect(aside.style.width).toBe('');
+    tick(10);
+    fixture.destroy();
+  }));
+
+  it('rebinds reactive toggle and close selectors without duplicate handlers', fakeAsync(() => {
+    const fixture = TestBed.createComponent(SelectorDrawerHostComponent);
+    fixture.detectChanges();
+    tick(0);
+    const component = fixture.componentInstance;
+    const directive = component.directive();
+    const host = fixture.nativeElement as HTMLElement;
+    const firstToggle = host.querySelector<HTMLButtonElement>('.toggle-one')!;
+    const secondToggle = host.querySelector<HTMLButtonElement>('.toggle-two')!;
+    const firstClose = host.querySelector<HTMLButtonElement>('.close-one')!;
+    const secondClose = host.querySelector<HTMLButtonElement>('.close-two')!;
+
+    firstToggle.querySelector('span')!.click();
+    expect(directive.isShown()).toBeTrue();
+    firstClose.click();
+    expect(directive.isShown()).toBeFalse();
+
+    component.toggleSelector.set('.toggle-two');
+    component.closeSelector.set('.close-two');
+    fixture.detectChanges();
+
+    firstToggle.click();
+    expect(directive.isShown()).toBeFalse();
+    secondToggle.click();
+    expect(directive.isShown()).toBeTrue();
+    firstClose.click();
+    expect(directive.isShown()).toBeTrue();
+    secondClose.click();
+    expect(directive.isShown()).toBeFalse();
+    tick(10);
+    fixture.destroy();
+  }));
+
+  it('reacts to drawerShown and drawerEscape input changes', fakeAsync(() => {
+    const fixture = TestBed.createComponent(ReactiveDrawerHostComponent);
+    fixture.detectChanges();
+    tick(0);
+    const component = fixture.componentInstance;
+    const directive = component.directive();
+
+    component.shown.set(true);
+    component.escape.set(false);
+    fixture.detectChanges();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(directive.isShown()).toBeTrue();
+
+    component.escape.set(true);
+    fixture.detectChanges();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(directive.isShown()).toBeFalse();
+
+    component.shown.set(false);
+    fixture.detectChanges();
+    tick(10);
+    fixture.destroy();
   }));
 });

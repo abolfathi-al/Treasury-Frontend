@@ -378,5 +378,16 @@
   "376": "saver.token.ts",
   "377": "@angular/compiler-cli",
   "378": "page-visibility.token.ts",
-  "379": "@angular/compiler"
+  "379": "@angular/compiler",
+  "380": "ThemeModeValue",
+  "381": ".destroyPopperInst",
+  "382": "MemoryStorage",
+  "383": "autosize.directive.ts",
+  "384": "theme-mode-switcher.component.spec.ts",
+  "385": ".onAddedFile",
+  "386": ".addEventListener",
+  "387": "Q: Make DrawerDirective body and visible state cleanup safe across multiple Master Admin drawer instances",
+  "388": "paragraph-skeleton.component.ts",
+  "389": "@angular/animations",
+  "390": "@angular/cli"
 }
