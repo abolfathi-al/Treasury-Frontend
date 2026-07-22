@@ -197,6 +197,7 @@ export class TreeDirective
 
   constructor() {
     super(inject(LoggerService), 'TreeDirective', {});
+    this.initBaseDomListeners(this.host.renderer, this.host.isBrowser);
     this.host.destroyRef.onDestroy(() => this.cleanup());
     this.initInputEffects();
   }
@@ -313,7 +314,7 @@ export class TreeDirective
   private treeInstance: TreeInstance | null = null;
   private currentTreeData: TreeNode[] = [];
   private contextMenu: HTMLElement | null = null;
-  private touchEventCleanups: Array<() => void> = [];
+  private contextMenuListenerTimer: number | null = null;
   private dragPlaceholder: HTMLElement | null = null;
 
   // Drag & Drop state
@@ -846,7 +847,7 @@ export class TreeDirective
   private setupEventListeners(): void {
     if (!this.treeInstance) return;
 
-    this.host.renderer.listen(
+    this.addBaseDomListener(
       this.treeInstance.container,
       'click',
       (event: Event) => {
@@ -898,7 +899,7 @@ export class TreeDirective
     );
 
     // Handle double-click for inline editing
-    this.host.renderer.listen(
+    this.addBaseDomListener(
       this.treeInstance.container,
       'dblclick',
       (event: Event) => {
@@ -919,82 +920,70 @@ export class TreeDirective
     );
 
     // Handle context menu
-    this.host.renderer.listen(
+    this.addBaseDomListener(
       this.treeInstance.container,
       'contextmenu',
-      (event: MouseEvent) => {
+      (event: Event) => {
         event.preventDefault();
         const target = event.target as HTMLElement;
         const nodeId = target
           .closest('[data-node-id]')
           ?.getAttribute('data-node-id');
         if (nodeId) {
-          this.handleContextMenu(nodeId, event.clientX, event.clientY);
+          const mouseEvent = event as MouseEvent;
+          this.handleContextMenu(
+            nodeId,
+            mouseEvent.clientX,
+            mouseEvent.clientY
+          );
         }
       }
     );
 
     // Handle keyboard navigation
-    this.host.renderer.listen(
+    this.addBaseDomListener(
       this.treeInstance.container,
       'keydown',
-      (event: KeyboardEvent) => {
-        this.handleKeyboardNavigation(event);
+      (event: Event) => {
+        this.handleKeyboardNavigation(event as KeyboardEvent);
       }
     );
 
     // Handle drag and drop events
-    this.host.renderer.listen(
+    this.addBaseDomListener(
       this.treeInstance.container,
       'mousedown',
-      (event: MouseEvent) => {
-        this.handleMouseDown(event);
+      (event: Event) => {
+        this.handleMouseDown(event as MouseEvent);
       }
     );
 
-    this.host.renderer.listen(this.host.document, 'mousemove', (event: MouseEvent) => {
-      this.handleDragMove(event);
+    this.addBaseDomListener(this.host.document, 'mousemove', (event: Event) => {
+      this.handleDragMove(event as MouseEvent);
     });
 
-    this.host.renderer.listen(this.host.document, 'mouseup', (event: MouseEvent) => {
-      this.handleDragEnd(event);
+    this.addBaseDomListener(this.host.document, 'mouseup', (event: Event) => {
+      this.handleDragEnd(event as MouseEvent);
     });
 
-    const touchStartHandler = (event: TouchEvent) => {
-      this.handleTouchStart(event);
-    };
-    const touchMoveHandler = (event: TouchEvent) => {
-      this.handleTouchMove(event);
-    };
-    const touchEndHandler = (event: TouchEvent) => {
-      this.handleTouchEnd(event);
-    };
-
-    this.treeInstance.container.addEventListener(
+    this.addBaseDomListener(
+      this.treeInstance.container,
       'touchstart',
-      touchStartHandler,
+      (event: Event) => this.handleTouchStart(event as TouchEvent),
       { passive: false }
     );
-    this.touchEventCleanups.push(() => {
-      this.treeInstance!.container.removeEventListener(
-        'touchstart',
-        touchStartHandler
-      );
-    });
-
-    this.host.document.addEventListener('touchmove', touchMoveHandler, {
-      passive: false,
-    });
-    this.touchEventCleanups.push(() => {
-      this.host.document.removeEventListener('touchmove', touchMoveHandler);
-    });
-
-    this.host.document.addEventListener('touchend', touchEndHandler, {
-      passive: true,
-    });
-    this.touchEventCleanups.push(() => {
-      this.host.document.removeEventListener('touchend', touchEndHandler);
-    });
+    this.addBaseDomListener(
+      this.host.document,
+      'touchmove',
+      (event: Event) => this.handleTouchMove(event as TouchEvent),
+      { passive: false }
+    );
+    this.addBaseDomListener(
+      this.host.document,
+      'touchend',
+      (event: Event) => this.handleTouchEnd(event as TouchEvent),
+      { passive: true }
+    );
   }
 
   private handleNodeToggle(nodeId: string): void {
@@ -1202,12 +1191,13 @@ export class TreeDirective
   private showContextMenu(node: TreeNode, x: number, y: number): void {
     this.hideContextMenu();
 
-    this.contextMenu = this.host.renderer.createElement('div');
-    this.host.renderer.addClass(this.contextMenu, 'jstree-context-menu');
-    this.host.renderer.setStyle(this.contextMenu, 'position', 'fixed');
-    this.host.renderer.setStyle(this.contextMenu, 'left', `${x}px`);
-    this.host.renderer.setStyle(this.contextMenu, 'top', `${y}px`);
-    this.host.renderer.setStyle(this.contextMenu, 'z-index', '10000');
+    const contextMenu = this.host.renderer.createElement('div') as HTMLElement;
+    this.contextMenu = contextMenu;
+    this.host.renderer.addClass(contextMenu, 'jstree-context-menu');
+    this.host.renderer.setStyle(contextMenu, 'position', 'fixed');
+    this.host.renderer.setStyle(contextMenu, 'left', `${x}px`);
+    this.host.renderer.setStyle(contextMenu, 'top', `${y}px`);
+    this.host.renderer.setStyle(contextMenu, 'z-index', '10000');
 
     // Add menu items
     this.addContextMenuItem('Rename', () => this.startInlineEdit(node.id!));
@@ -1215,7 +1205,7 @@ export class TreeDirective
     this.addContextMenuSeparator();
     this.addContextMenuItem('Delete', () => this.deleteNode(node.id!));
 
-    this.host.renderer.appendChild(this.host.document.body, this.contextMenu);
+    this.host.renderer.appendChild(this.host.document.body, contextMenu);
 
     // Add click outside handler to close context menu
     const handleClickOutside = (event: MouseEvent) => {
@@ -1228,17 +1218,23 @@ export class TreeDirective
     };
 
     // Add the click outside listener
-    setTimeout(() => {
-      this.host.document.addEventListener('click', handleClickOutside);
-    }, 0);
+    this.contextMenuListenerTimer =
+      this.host.window?.setTimeout(() => {
+        this.contextMenuListenerTimer = null;
+        if (this.contextMenu === contextMenu) {
+          this.host.document.addEventListener('click', handleClickOutside);
+        }
+      }, 0) ?? null;
 
-    // Store the handler for cleanup
-    if (this.contextMenu) {
-      setContextMenuClickOutsideHandler(this.contextMenu, handleClickOutside);
-    }
+    setContextMenuClickOutsideHandler(contextMenu, handleClickOutside);
   }
 
   private hideContextMenu(): void {
+    if (this.contextMenuListenerTimer !== null) {
+      this.host.window?.clearTimeout(this.contextMenuListenerTimer);
+      this.contextMenuListenerTimer = null;
+    }
+
     if (this.contextMenu) {
       // Clean up click outside handler
       const clickOutsideHandler = getContextMenuClickOutsideHandler(
@@ -2658,8 +2654,6 @@ export class TreeDirective
   }
 
   destroyTree(): void {
-    this.touchEventCleanups.forEach((cleanup) => cleanup());
-    this.touchEventCleanups = [];
     this.removeDragPlaceholder();
 
     if (this.treeInstance) {
