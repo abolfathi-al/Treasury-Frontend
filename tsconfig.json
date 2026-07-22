@@ -8,7 +8,6 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "moduleResolution": "bundler",
     "paths": {
-      "@fake/*": ["src/app/_fake/*"],
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
       "@shell/*": ["src/app/shell/*"],

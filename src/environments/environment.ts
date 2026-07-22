@@ -10,7 +10,6 @@ export const environment = {
     ['state', /api/],
     ['auth', /[\W]*/],
     ['cache', /cache/],
-    ['fake', /fake/],
     ['error', /error/],
     ['profiler', /profiler|users/],
     ['notify', /notify/],

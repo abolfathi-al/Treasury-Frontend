@@ -54,7 +54,6 @@ import {
   headerInterceptor,
   httpsInterceptor,
   loaderInterceptor,
-  mockApiInterceptor,
   notifyInterceptor,
   profilerInterceptor,
   serverStateInterceptor,
@@ -62,6 +61,7 @@ import {
 } from '@core/interceptors';
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
+import { mockApiInterceptor } from './demo/api/mock-api.interceptor';
 import { demoContextProviders } from './demo/context/demo-context.providers';
 import { PROJECT_AUTH_PROVIDER } from './project/auth/project-auth.provider';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
