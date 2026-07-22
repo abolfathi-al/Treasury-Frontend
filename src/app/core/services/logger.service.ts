@@ -1,6 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { LOCAL_STORAGE, LOCATION, NAVIGATOR, WINDOW } from '../tokens';
-import { runSafely } from '@shared/directives/shared/directive-helpers';
+import { runSafely } from '@core/utils/run-safely';
 
 export enum LogLevel {
   DEBUG = 0,

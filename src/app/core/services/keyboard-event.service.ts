@@ -1,6 +1,5 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 import { GlobalEventsService } from './events.service';
-import { DrawerDirective } from '@shared/directives/drawer.directive';
 import { ModalRef } from '@models/common';
 import { NgbModal, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { FocusManagementService } from './focus-management.service';
@@ -120,7 +119,6 @@ export class KeyboardEventService {
     }
 
     if (this.hasOpenDrawer) {
-      DrawerDirective.hideAll();
       return;
     }
 

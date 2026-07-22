@@ -5,6 +5,9 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { runSafely } from '@core/utils/run-safely';
+
+export { runSafely };
 
 export interface DirectiveStateSnapshot<TError> {
   isActive: boolean;
@@ -325,39 +328,6 @@ export function setOptionsIfChanged<T extends object>(
     onChanged?.(manager.snapshot());
   }
   return changed;
-}
-
-export function runSafely<T>(
-  fn: () => T,
-  onError: (error: Error) => void
-): T | undefined {
-  try {
-    return fn();
-  } catch (error) {
-    onError(normalizeThrownError(error));
-    return undefined;
-  }
-}
-
-function normalizeThrownError(error: unknown): Error {
-  if (error instanceof Error) {
-    return error;
-  }
-
-  if (typeof error === 'string') {
-    return new Error(error);
-  }
-
-  if (
-    error &&
-    typeof error === 'object' &&
-    'message' in error &&
-    typeof error.message === 'string'
-  ) {
-    return new Error(error.message);
-  }
-
-  return new Error(String(error));
 }
 
 export interface LoggerAdapter {

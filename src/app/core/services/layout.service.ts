@@ -13,8 +13,8 @@ import { LightHeaderConfig } from '@core/config/light-header.config';
 import { LightSidebarConfig } from '@core/config/light-sidebar.config';
 import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { LOCAL_STORAGE, LOCATION } from '@core/tokens';
+import { runSafely } from '@core/utils/run-safely';
 import { CoreUtil } from '@utils/core.util';
-import { runSafely } from '@shared/directives/shared/directive-helpers';
 import { BehaviorSubject } from 'rxjs';
 import { LoggerService } from './logger.service';
 
