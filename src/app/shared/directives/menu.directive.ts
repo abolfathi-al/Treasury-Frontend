@@ -814,6 +814,7 @@ export class MenuDirective
     if (this.isValidEl(sub)) {
       const speed = DomUtil.parseNumber(this.getItemOpt(item, 'slideSpeed') || '') || opts.slideSpeed || 250;
       DomUtil.slideDown(sub, speed).then(() => {
+        if (this.isBaseDestroyed()) return;
         this.removeClass(item, 'showing');
         this.addClass(item, CSS.SHOW);
         this.addClass(sub, CSS.SHOW);
@@ -834,6 +835,7 @@ export class MenuDirective
       const opts = this.optionsManager.snapshot();
       const speed = DomUtil.parseNumber(this.getItemOpt(item, 'slideSpeed') || '') || opts.slideSpeed || 250;
       DomUtil.slideUp(sub, speed).then(() => {
+        if (this.isBaseDestroyed()) return;
         this.removeClass(item, 'hiding');
         this.removeClass(item, CSS.SHOW);
         this.removeClass(sub, CSS.SHOW);
@@ -993,6 +995,8 @@ export class MenuDirective
 
     if (ref) {
       this.withPopper((factory) => {
+        if (!this.hasClass(item, CSS.SHOW) || !this.hasClass(sub, CSS.SHOW)) return;
+        this.destroyDropdownPopper(item);
         const popper = factory(ref as Element, sub, this.getDropdownPopperConfig(item));
         DataUtil.set(item, 'popper', popper);
       });
@@ -1046,6 +1050,8 @@ export class MenuDirective
     };
 
     this.withPopper((factory) => {
+      if (!this.hasClass(this.host.elementRef.nativeElement, CSS.SHOW)) return;
+      this.destroyStandaloneMenuPopper();
       const popper = factory(trigger, this.host.elementRef.nativeElement, config as Parameters<typeof factory>[2]);
       DataUtil.set(this.host.elementRef.nativeElement, 'popper', popper);
     });

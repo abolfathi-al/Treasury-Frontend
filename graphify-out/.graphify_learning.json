@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T21:36:49.296959+00:00",
+  "generated_at": "2026-07-22T21:42:09.402345+00:00",
   "nodes": {
     "docs_directive_contract_baseline_directive_contract_baseline": {
       "code_fingerprint": "41b5d45f37136a205fa58ae5669f264c25a6e87326bc23169f5b89b2507cf92e",
@@ -17,7 +17,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 1.998549292,
+      "score": 1.99837822,
       "source_file": "docs/DIRECTIVE_CONTRACT_BASELINE.md",
       "status": "preferred",
       "uses": 2
@@ -38,7 +38,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 1.998549292,
+      "score": 1.99837822,
       "source_file": "docs/DIRECTIVE_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -75,7 +75,7 @@
           "q": "continie"
         }
       ],
-      "score": 14.888880229,
+      "score": 14.887605767,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "contested",
       "uses": 16,
@@ -97,7 +97,7 @@
           "q": "aval be farsi sarih tozih bede to in refactor che karhayi mikhay anjam bedi"
         }
       ],
-      "score": 1.980870395,
+      "score": 1.980700836,
       "source_file": "docs/FRONTEND_REFACTOR_PLAN.md",
       "status": "preferred",
       "uses": 2
@@ -113,7 +113,7 @@
           "q": "Lock all 31 selectors, exports, and aliases in a compatibility catalog/test"
         }
       ],
-      "score": 0.999699692,
+      "score": 0.999614119,
       "source_file": "docs/ui/directives.md",
       "status": "tentative",
       "uses": 1
@@ -129,7 +129,7 @@
           "q": "Lock all 31 selectors, exports, and aliases in a compatibility catalog/test"
         }
       ],
-      "score": 0.999699692,
+      "score": 0.999614119,
       "source_file": "docs/ui/directives.md",
       "status": "tentative",
       "uses": 1
@@ -150,7 +150,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.976224102,
+      "score": 1.97605494,
       "source_file": "docs/ui/ui-architecture.md",
       "status": "preferred",
       "uses": 2
@@ -171,7 +171,7 @@
           "q": "continue refactoring"
         }
       ],
-      "score": 1.9936413,
+      "score": 1.993470648,
       "source_file": ".eslintrc.json",
       "status": "preferred",
       "uses": 2
@@ -207,7 +207,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 6.946547085,
+      "score": 6.945952473,
       "source_file": "src/app/app.config.ts",
       "status": "preferred",
       "uses": 7
@@ -223,7 +223,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.993318269,
+      "score": 0.993233242,
       "source_file": "src/app/core/auth/auth-session.port.ts",
       "status": "tentative",
       "uses": 1
@@ -239,7 +239,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.990946898,
+      "score": 0.990862075,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -255,7 +255,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.991171352,
+      "score": 0.99108651,
       "source_file": "src/app/core/config/brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -271,7 +271,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.992066901,
+      "score": 0.991981982,
       "source_file": "src/app/core/config/config.ts",
       "status": "tentative",
       "uses": 1
@@ -287,7 +287,7 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.99290901,
+      "score": 0.992824019,
       "source_file": "src/app/core/config/runtime.config.ts",
       "status": "tentative",
       "uses": 1
@@ -309,7 +309,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": -0.000106273,
+      "score": -0.000106264,
       "source_file": "src/app/core/services/keyboard-event.service.ts",
       "status": "contested",
       "uses": 1,
@@ -342,7 +342,7 @@
           "q": "continie"
         }
       ],
-      "score": 1.984869638,
+      "score": 1.984699736,
       "source_file": "src/app/core/services/layout.service.ts",
       "status": "contested",
       "uses": 3,
@@ -380,7 +380,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 2.973818642,
+      "score": 2.973564088,
       "source_file": "src/app/core/services/logger.service.ts",
       "status": "contested",
       "uses": 4,
@@ -397,7 +397,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.991812061,
+      "score": 0.991727164,
       "source_file": "src/app/core/services/theme-mode.model.ts",
       "status": "tentative",
       "uses": 1
@@ -413,7 +413,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.991812061,
+      "score": 0.991727164,
       "source_file": "src/app/core/services/theme-mode.service.ts",
       "status": "tentative",
       "uses": 1
@@ -429,7 +429,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993491395,
+      "score": 0.993406354,
       "source_file": "src/app/core/state/context/context.models.ts",
       "status": "tentative",
       "uses": 1
@@ -445,7 +445,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.992520606,
+      "score": 0.992435648,
       "source_file": "src/app/core/tokens/local-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -461,7 +461,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.992520606,
+      "score": 0.992435648,
       "source_file": "src/app/core/tokens/location.token.ts",
       "status": "tentative",
       "uses": 1
@@ -477,7 +477,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 0.992520606,
+      "score": 0.992435648,
       "source_file": "src/app/core/tokens/session-storage.token.ts",
       "status": "tentative",
       "uses": 1
@@ -499,7 +499,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": -0.000106273,
+      "score": -0.000106264,
       "source_file": "src/app/core/utils/run-safely.ts",
       "status": "contested",
       "uses": 1,
@@ -516,7 +516,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.996240788,
+      "score": 0.996155512,
       "source_file": "src/app/demo/api/in-memory-db/in-memory-db.service.ts",
       "status": "tentative",
       "uses": 1
@@ -537,7 +537,7 @@
           "q": "continue"
         }
       ],
-      "score": 1.989918727,
+      "score": 1.989748394,
       "source_file": "src/app/demo/api/mock-api.interceptor.ts",
       "status": "preferred",
       "uses": 2
@@ -553,7 +553,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993491395,
+      "score": 0.993406354,
       "source_file": "src/app/demo/context/demo-context.fixtures.ts",
       "status": "tentative",
       "uses": 1
@@ -569,7 +569,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993491395,
+      "score": 0.993406354,
       "source_file": "src/app/demo/context/demo-context.providers.ts",
       "status": "tentative",
       "uses": 1
@@ -585,7 +585,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993491395,
+      "score": 0.993406354,
       "source_file": "src/app/demo/context/demo-context.store.ts",
       "status": "tentative",
       "uses": 1
@@ -601,7 +601,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993677939,
+      "score": 0.993592882,
       "source_file": "src/app/demo/dashboard/dashboard.component.ts",
       "status": "tentative",
       "uses": 1
@@ -627,7 +627,7 @@
           "q": "continue and after end task suggest new task"
         }
       ],
-      "score": 2.978747885,
+      "score": 2.97849291,
       "source_file": "src/app/modules/auth/data-access/auth.service.ts",
       "status": "preferred",
       "uses": 3
@@ -648,7 +648,7 @@
           "q": "AGENTS.md, CLAUDE.md ham baraye frontend besaz va config kon"
         }
       ],
-      "score": 1.976224102,
+      "score": 1.97605494,
       "source_file": "src/app/modules/auth/data-access/permission.service.ts",
       "status": "preferred",
       "uses": 2
@@ -664,7 +664,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.993318269,
+      "score": 0.993233242,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -680,7 +680,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.993318269,
+      "score": 0.993233242,
       "source_file": "src/app/project/auth/project-auth.provider.ts",
       "status": "tentative",
       "uses": 1
@@ -696,7 +696,7 @@
           "q": "ok, continue refactoring"
         }
       ],
-      "score": 0.991171352,
+      "score": 0.99108651,
       "source_file": "src/app/project/brand/project-brand.config.ts",
       "status": "tentative",
       "uses": 1
@@ -712,7 +712,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.991538211,
+      "score": 0.991453337,
       "source_file": "src/app/project/locale/project-locale.config.ts",
       "status": "tentative",
       "uses": 1
@@ -728,7 +728,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 0.989840173,
+      "score": 0.989755444,
       "source_file": "src/app/project/navigation/project-navigation.config.ts",
       "status": "tentative",
       "uses": 1
@@ -744,7 +744,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993677939,
+      "score": 0.993592882,
       "source_file": "src/app/project/routing/project.routes.ts",
       "status": "tentative",
       "uses": 1
@@ -760,7 +760,7 @@
           "q": "ok. continue"
         }
       ],
-      "score": 0.99290901,
+      "score": 0.992824019,
       "source_file": "src/app/project/runtime/project-runtime.config.ts",
       "status": "tentative",
       "uses": 1
@@ -776,7 +776,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.991812061,
+      "score": 0.991727164,
       "source_file": "src/app/project/theme/project-theme.config.ts",
       "status": "tentative",
       "uses": 1
@@ -792,7 +792,7 @@
           "q": "Lock all 31 selectors, exports, and aliases in a compatibility catalog/test"
         }
       ],
-      "score": 0.999699692,
+      "score": 0.999614119,
       "source_file": "src/app/shared/directives/directive-catalog.spec.ts",
       "status": "tentative",
       "uses": 1
@@ -814,7 +814,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.001573541,
+      "score": 0.001573406,
       "source_file": "src/app/shared/directives/drawer.directive.ts",
       "status": "contested",
       "uses": 1,
@@ -831,16 +831,21 @@
           "q": "Lock all 31 selectors, exports, and aliases in a compatibility catalog/test"
         }
       ],
-      "score": 0.999699692,
+      "score": 0.999614119,
       "source_file": "src/app/shared/directives/if-is-browser.directive.ts",
       "status": "tentative",
       "uses": 1
     },
     "src_app_shared_directives_menu_directive_menudirective": {
-      "code_fingerprint": "dd069b8d2026ccbd8c8d55b393b2d4cb840a5da074e1bb2a9f81f0fe8d9836fc",
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
       "label": "MenuDirective",
-      "last": "2026-07-22T21:36:40.403184+00:00",
+      "last": "2026-07-22T21:41:56.773773+00:00",
       "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        },
         {
           "date": "2026-07-22T21:36:40.403184+00:00",
           "outcome": "useful",
@@ -860,20 +865,15 @@
           "date": "2026-07-22T19:54:46.167761+00:00",
           "outcome": "useful",
           "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
-        },
-        {
-          "date": "2026-07-22T19:13:21.668793+00:00",
-          "outcome": "useful",
-          "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
         }
       ],
-      "score": 4.995033805,
+      "score": 5.994602862,
       "source_file": "src/app/shared/directives/menu.directive.ts",
       "status": "preferred",
-      "uses": 5
+      "uses": 6
     },
     "src_app_shared_directives_menu_directive_menudirective_handlemouseout": {
-      "code_fingerprint": "dd069b8d2026ccbd8c8d55b393b2d4cb840a5da074e1bb2a9f81f0fe8d9836fc",
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
       "label": ".handleMouseOut()",
       "last": "2026-07-22T21:31:32.745948+00:00",
       "provenance": [
@@ -883,13 +883,61 @@
           "q": "Refactor MenuDirective delayed work and registry cleanup without changing its Master Admin public facade"
         }
       ],
-      "score": 0.999915352,
+      "score": 0.999829761,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_menu_directive_menudirective_hideaccordion": {
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
+      "label": ".hideAccordion()",
+      "last": "2026-07-22T21:41:56.773773+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        }
+      ],
+      "score": 0.999996623,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_menu_directive_menudirective_initdropdownpopper": {
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
+      "label": ".initDropdownPopper()",
+      "last": "2026-07-22T21:41:56.773773+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        }
+      ],
+      "score": 0.999996623,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_menu_directive_menudirective_initstandalonemenupopper": {
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
+      "label": ".initStandaloneMenuPopper()",
+      "last": "2026-07-22T21:41:56.773773+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        }
+      ],
+      "score": 0.999996623,
       "source_file": "src/app/shared/directives/menu.directive.ts",
       "status": "tentative",
       "uses": 1
     },
     "src_app_shared_directives_menu_directive_menudirective_one": {
-      "code_fingerprint": "dd069b8d2026ccbd8c8d55b393b2d4cb840a5da074e1bb2a9f81f0fe8d9836fc",
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
       "label": ".one()",
       "last": "2026-07-22T21:36:40.403184+00:00",
       "provenance": [
@@ -899,13 +947,29 @@
           "q": "Make MenuDirective custom event subscriptions safe for multiple handlers without changing its Master Admin public API"
         }
       ],
-      "score": 0.999997622,
+      "score": 0.999912024,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_menu_directive_menudirective_showaccordion": {
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
+      "label": ".showAccordion()",
+      "last": "2026-07-22T21:41:56.773773+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        }
+      ],
+      "score": 0.999996623,
       "source_file": "src/app/shared/directives/menu.directive.ts",
       "status": "tentative",
       "uses": 1
     },
     "src_app_shared_directives_menu_directive_menudirective_trackeventhandler": {
-      "code_fingerprint": "dd069b8d2026ccbd8c8d55b393b2d4cb840a5da074e1bb2a9f81f0fe8d9836fc",
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
       "label": ".trackEventHandler()",
       "last": "2026-07-22T21:36:40.403184+00:00",
       "provenance": [
@@ -915,13 +979,13 @@
           "q": "Make MenuDirective custom event subscriptions safe for multiple handlers without changing its Master Admin public API"
         }
       ],
-      "score": 0.999997622,
+      "score": 0.999912024,
       "source_file": "src/app/shared/directives/menu.directive.ts",
       "status": "tentative",
       "uses": 1
     },
     "src_app_shared_directives_menu_directive_menudirective_untrackeventhandler": {
-      "code_fingerprint": "dd069b8d2026ccbd8c8d55b393b2d4cb840a5da074e1bb2a9f81f0fe8d9836fc",
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
       "label": ".untrackEventHandler()",
       "last": "2026-07-22T21:36:40.403184+00:00",
       "provenance": [
@@ -931,7 +995,23 @@
           "q": "Make MenuDirective custom event subscriptions safe for multiple handlers without changing its Master Admin public API"
         }
       ],
-      "score": 0.999997622,
+      "score": 0.999912024,
+      "source_file": "src/app/shared/directives/menu.directive.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_shared_directives_menu_directive_menudirective_withpopper": {
+      "code_fingerprint": "86609ac323322a18a228c01c96ad283f756ae06493f94db51482a48572478187",
+      "label": ".withPopper()",
+      "last": "2026-07-22T21:41:56.773773+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-22T21:41:56.773773+00:00",
+          "outcome": "useful",
+          "q": "Prevent stale MenuDirective asynchronous completions without changing its Master Admin facade"
+        }
+      ],
+      "score": 0.999996623,
       "source_file": "src/app/shared/directives/menu.directive.ts",
       "status": "tentative",
       "uses": 1
@@ -967,7 +1047,7 @@
           "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
         }
       ],
-      "score": 6.971502122,
+      "score": 6.970905374,
       "source_file": "src/app/shared/directives/shared/base-directive.ts",
       "status": "preferred",
       "uses": 7
@@ -983,7 +1063,7 @@
           "q": "revert kon taghirate roo directive roo, chera dari pack mikoni, goftam refactor va optimaize kone na inke packeshon koni, chon in frontend dashborad gharare to projehaye digam estefade beshe va hamin alan ham ye master admin hast"
         }
       ],
-      "score": 0.99949318,
+      "score": 0.999407625,
       "source_file": "src/app/shared/directives/shared/directive-helpers.ts",
       "status": "tentative",
       "uses": 1
@@ -999,7 +1079,7 @@
           "q": "ok, continue"
         }
       ],
-      "score": 0.999056112,
+      "score": 0.998970595,
       "source_file": "src/app/shared/directives/stepper.directive.ts",
       "status": "tentative",
       "uses": 1
@@ -1015,7 +1095,7 @@
           "q": "alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon"
         }
       ],
-      "score": 0.998363906,
+      "score": 0.998278447,
       "source_file": "src/app/shared/directives/toggle.directive.ts",
       "status": "tentative",
       "uses": 1
@@ -1041,7 +1121,7 @@
           "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
         }
       ],
-      "score": 2.995869488,
+      "score": 2.995613047,
       "source_file": "src/app/shared/directives/tree.directive.ts",
       "status": "preferred",
       "uses": 3
@@ -1057,7 +1137,7 @@
           "q": "Refactor TreeDirective lifecycle listeners without changing its Master Admin public facade"
         }
       ],
-      "score": 0.99980477,
+      "score": 0.999719188,
       "source_file": "src/app/shared/directives/tree.directive.ts",
       "status": "tentative",
       "uses": 1
@@ -1073,7 +1153,7 @@
           "q": "Refactor TreeDirective lifecycle listeners without changing its Master Admin public facade"
         }
       ],
-      "score": 0.99980477,
+      "score": 0.999719188,
       "source_file": "src/app/shared/directives/tree.directive.ts",
       "status": "tentative",
       "uses": 1
@@ -1089,7 +1169,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.991538211,
+      "score": 0.991453337,
       "source_file": "src/app/shared/pipes/extend-date.pipe.ts",
       "status": "tentative",
       "uses": 1
@@ -1105,7 +1185,7 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.99048614,
+      "score": 0.990401356,
       "source_file": "src/app/shell/layout/components/footer/footer.component.ts",
       "status": "tentative",
       "uses": 1
@@ -1121,7 +1201,7 @@
           "q": "continue refactoring"
         }
       ],
-      "score": 0.996399773,
+      "score": 0.996314483,
       "source_file": "src/app/shell/layout/components/header/navbar/navbar.component.ts",
       "status": "tentative",
       "uses": 1
@@ -1137,7 +1217,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.993677939,
+      "score": 0.993592882,
       "source_file": "src/app/shell/layout/layout.component.ts",
       "status": "tentative",
       "uses": 1
@@ -1158,7 +1238,7 @@
           "q": "Start the reusable frontend Master refactor and use subagents if needed"
         }
       ],
-      "score": 1.980326312,
+      "score": 1.9801568,
       "source_file": "src/app/shell/layout/navigation/shell-navigation.facade.ts",
       "status": "preferred",
       "uses": 2
@@ -1174,7 +1254,7 @@
           "q": "continie"
         }
       ],
-      "score": 0.992066901,
+      "score": 0.991981982,
       "source_file": "src/app/shell/layout/shell.facade.ts",
       "status": "tentative",
       "uses": 1
@@ -1190,7 +1270,7 @@
           "q": "alan directive haroo bebin chaghadr pichide va bozorge, va hamchenin intitializer va token va..."
         }
       ],
-      "score": 0.997700813,
+      "score": 0.997615412,
       "source_file": "src/app/utils/core.util.ts",
       "status": "tentative",
       "uses": 1
@@ -1206,7 +1286,7 @@
           "q": "commot then continue"
         }
       ],
-      "score": 0.99048614,
+      "score": 0.990401356,
       "source_file": "src/server.ts",
       "status": "tentative",
       "uses": 1
@@ -1222,7 +1302,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997241527,
+      "score": 0.997156165,
       "source_file": "tsconfig.json",
       "status": "tentative",
       "uses": 1
@@ -1238,7 +1318,7 @@
           "q": "continue"
         }
       ],
-      "score": 0.997241527,
+      "score": 0.997156165,
       "source_file": "tsconfig.json",
       "status": "tentative",
       "uses": 1

@@ -214,7 +214,6 @@
   "212": "IfIsBrowserDirective",
   "213": ".hideAllAccordions",
   "214": "scroll.directive.spec.ts",
-  "215": ".startInlineEdit",
   "216": "settings.model.ts",
   "217": "Outline IcoMoon Glyph Catalog",
   "218": ".eslintrc.json",
@@ -244,7 +243,6 @@
   "242": "Q: alan ye plan ghavi bechin aval hameye directive haroo refactor va robust kon",
   "243": "Q: ok, continue",
   "244": "Q: revert kon taghirate roo directive roo, chera dari pack mikoni, goftam refactor va optimaize kone na inke packeshon koni, chon in frontend dashborad gharare to projehaye digam estefade beshe va hamin alan ham ye master admin hast",
-  "245": "app.type.ts",
   "246": "Notification Logs",
   "247": "Quick Links",
   "248": "build",
@@ -262,8 +260,6 @@
   "260": "Gauge Chart",
   "261": "Progress Breakdown",
   "262": "Waterfall Chart",
-  "263": "D3ForceGraphDirective",
-  "264": "PasswordFormControl",
   "265": "Invalid Feedback",
   "266": "paragraph-skeleton.component.ts",
   "267": "Button with Indicator",
@@ -373,6 +369,5 @@
   "373": "Google Site Verification",
   "374": "polyfills.ts",
   "375": "@angular/animations",
-  "376": "@angular/cli",
   "377": "@angular/compiler-cli"
 }

@@ -6,6 +6,7 @@ import {
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataUtil } from '@utils/data.util';
+import { DomUtil } from '@utils/dom.util';
 import { MenuDirective } from './menu.directive';
 
 @Component({
@@ -35,6 +36,28 @@ class HostComponent {
 class HoverHostComponent {
   readonly directive = viewChild.required(MenuDirective);
 }
+
+@Component({
+  imports: [MenuDirective],
+  standalone: true,
+  template: `
+    <div class="menu" vlVeloraMenu>
+      <div class="menu-item" data-velora-menu-trigger="click">
+        <button type="button" class="menu-link">Accordion item</button>
+        <div class="menu-sub menu-sub-accordion">Submenu</div>
+      </div>
+    </div>
+  `,
+})
+class AccordionHostComponent {
+  readonly directive = viewChild.required(MenuDirective);
+}
+
+type TestPopperFactory = (
+  reference: Element,
+  popper: HTMLElement,
+  options?: unknown
+) => { destroy(): void; update(): void; setOptions(options: unknown): void };
 
 describe('MenuDirective', () => {
   beforeEach(() => {
@@ -181,5 +204,95 @@ describe('MenuDirective', () => {
 
     expect(first).not.toHaveBeenCalled();
     expect(second).not.toHaveBeenCalled();
+  });
+
+  it('does not create a lazy Popper instance after the standalone menu closes', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as {
+      loadPopper(): Promise<TestPopperFactory | null>;
+    };
+    let resolveLoader!: (factory: TestPopperFactory) => void;
+    const loader = new Promise<TestPopperFactory>((resolve) => {
+      resolveLoader = resolve;
+    });
+    const factory = jasmine.createSpy('factory').and.returnValue({
+      destroy: jasmine.createSpy('destroy'),
+      update: jasmine.createSpy('update'),
+      setOptions: jasmine.createSpy('setOptions'),
+    });
+    spyOn(internals, 'loadPopper').and.returnValue(loader);
+
+    const host = fixture.nativeElement as HTMLElement;
+    host.querySelector<HTMLButtonElement>('[data-velora-menu-trigger]')!.click();
+    document.body.click();
+    resolveLoader(factory);
+    await loader;
+    await Promise.resolve();
+
+    expect(factory).not.toHaveBeenCalled();
+    fixture.destroy();
+  });
+
+  it('does not create a lazy Popper instance after a dropdown closes', async () => {
+    const fixture = TestBed.createComponent(HoverHostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as {
+      loadPopper(): Promise<TestPopperFactory | null>;
+      showDropdown(item: HTMLElement): void;
+      hideDropdown(item: HTMLElement): void;
+    };
+    let resolveLoader!: (factory: TestPopperFactory) => void;
+    const loader = new Promise<TestPopperFactory>((resolve) => {
+      resolveLoader = resolve;
+    });
+    const factory = jasmine.createSpy('factory').and.returnValue({
+      destroy: jasmine.createSpy('destroy'),
+      update: jasmine.createSpy('update'),
+      setOptions: jasmine.createSpy('setOptions'),
+    });
+    spyOn(internals, 'loadPopper').and.returnValue(loader);
+    const item = fixture.nativeElement.querySelector('.menu-item') as HTMLElement;
+
+    internals.showDropdown(item);
+    internals.hideDropdown(item);
+    resolveLoader(factory);
+    await loader;
+    await Promise.resolve();
+
+    expect(factory).not.toHaveBeenCalled();
+    fixture.destroy();
+  });
+
+  it('does not complete an accordion animation after destroy', async () => {
+    const fixture = TestBed.createComponent(AccordionHostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as {
+      showAccordion(item: HTMLElement): void;
+    };
+    let resolveAnimation!: () => void;
+    const animation = new Promise<void>((resolve) => {
+      resolveAnimation = resolve;
+    });
+    spyOn(DomUtil, 'slideDown').and.returnValue(animation);
+    const shown = spyOn(directive.menuAccordionShown, 'emit').and.callThrough();
+    const item = fixture.nativeElement.querySelector('.menu-item') as HTMLElement;
+
+    internals.showAccordion(item);
+    fixture.destroy();
+    resolveAnimation();
+    await animation;
+    await Promise.resolve();
+
+    expect(shown).not.toHaveBeenCalled();
   });
 });

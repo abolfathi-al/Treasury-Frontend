@@ -1350,8 +1350,8 @@
     "semantic_hash": "846bf4fa816adbce9d4454759a7f36fa"
   },
   "src/app/shared/directives/menu.directive.ts": {
-    "mtime": 1784756062.2395496,
-    "ast_hash": "6a44636c74e9120d30c0bcbd53ebad50",
+    "mtime": 1784756317.9708521,
+    "ast_hash": "da87692f43446b4c55d0558d0592abc2",
     "semantic_hash": ""
   },
   "src/app/shared/directives/no-ui-slider.directive.ts": {
@@ -2695,8 +2695,8 @@
     "semantic_hash": ""
   },
   "src/app/shared/directives/menu.directive.spec.ts": {
-    "mtime": 1784756062.24095,
-    "ast_hash": "b1efe12f42600a3172daee419e585b50",
+    "mtime": 1784756389.689786,
+    "ast_hash": "6ddc2891a8b0e884b03a4f2db3e4a335",
     "semantic_hash": ""
   },
   "src/app/shared/directives/stepper.directive.spec.ts": {
@@ -10237,6 +10237,11 @@
   "graphify-out/memory/query_20260722_213132_refactor_menudirective_delayed_work_and_registry_c.md": {
     "mtime": 1784755892.7462683,
     "ast_hash": "6e043ff3f3be88e1e53ec6ab285a5f1b",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_213640_make_menudirective_custom_event_subscriptions_safe.md": {
+    "mtime": 1784756200.4035504,
+    "ast_hash": "2e700909ab7b8a7c5d7e2649b2570d3b",
     "semantic_hash": ""
   }
 }
