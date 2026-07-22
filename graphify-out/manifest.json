@@ -1450,8 +1450,8 @@
     "semantic_hash": "70474cb4dbc562f2c4a32a5451136937"
   },
   "src/app/shared/directives/tagify.directive.ts": {
-    "mtime": 1784762895.6517305,
-    "ast_hash": "478942b84b9b1bb4e9b31a06294de94b",
+    "mtime": 1784763494.6323392,
+    "ast_hash": "bbff6cb5fc876759db15fb2ac32486d1",
     "semantic_hash": ""
   },
   "src/app/shared/directives/tiny-slider.directive.spec.ts": {
@@ -10285,8 +10285,8 @@
     "semantic_hash": ""
   },
   "src/app/shared/directives/tagify.directive.spec.ts": {
-    "mtime": 1784762845.4341717,
-    "ast_hash": "77da7a0a9058349d6416ab9bc817cdc2",
+    "mtime": 1784763494.6337736,
+    "ast_hash": "7cdab8496885f569c9c88cdcc76fb2e8",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20260722_225117_how_should_dropzonedirective_represent_upload_erro.md": {
@@ -10302,6 +10302,11 @@
   "graphify-out/memory/query_20260722_231837_how_should_tagifydirective_preserve_configured_cal.md": {
     "mtime": 1784762317.3958902,
     "ast_hash": "2c52357b01fc3b9dd5e80e13e4b5f55e",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_232956_how_should_tagifydirective_react_to_signal_input_c.md": {
+    "mtime": 1784762996.7137876,
+    "ast_hash": "d1b01dc305af80485ecea49250067818",
     "semantic_hash": ""
   }
 }

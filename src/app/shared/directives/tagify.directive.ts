@@ -129,9 +129,21 @@ export class TagifyDirective
   private tagifyInstance: any = null;
   private pendingAnimationFrame: number | null = null;
   private pendingBootstrapTimer: ReturnType<typeof setTimeout> | null = null;
+  private inputReinitQueued = false;
 
   private readonly onOptionsChange = () => {
     if (this.isBaseInitialized()) this.reinit();
+  };
+
+  private readonly onInputOptionsChange = () => {
+    if (!this.isBaseInitialized() || this.inputReinitQueued) return;
+    this.inputReinitQueued = true;
+
+    queueMicrotask(() => {
+      if (!this.inputReinitQueued) return;
+      this.inputReinitQueued = false;
+      if (!this.isBaseDestroyed() && this.isBaseInitialized()) this.reinit();
+    });
   };
 
   readonly tags = computed(() => this._tags());
@@ -272,7 +284,7 @@ export class TagifyDirective
 
   protected override updateOption<K extends keyof TagifyOptions>(key: K, value: TagifyOptions[K]): boolean {
     if (value === undefined) return false;
-    return setOptionIfChanged(this.optionsManager, key, value, this.onOptionsChange);
+    return setOptionIfChanged(this.optionsManager, key, value, this.onInputOptionsChange);
   }
 
   private initEffects(): void {
@@ -340,7 +352,7 @@ export class TagifyDirective
   ): void {
     const current = this.optionsManager.snapshot();
     const dropdown = { ...(current.dropdown ?? {}), [key]: value };
-    setOptionIfChanged(this.optionsManager, 'dropdown', dropdown, this.onOptionsChange);
+    setOptionIfChanged(this.optionsManager, 'dropdown', dropdown, this.onInputOptionsChange);
   }
 
   private scheduleBootstrap(): void {
@@ -479,6 +491,7 @@ export class TagifyDirective
   }
 
   private destroyTagify(): void {
+    this.inputReinitQueued = false;
     this.clearPendingBootstrap();
     const instance = this.tagifyInstance;
     this.tagifyInstance = null;

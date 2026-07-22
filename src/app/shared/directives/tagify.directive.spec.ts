@@ -51,10 +51,17 @@ class FakeTagify {
 @Component({
   imports: [TagifyDirective],
   standalone: true,
-  template: '<input vlVeloraTagify [tagifyMaxTags]="maxTags()" />',
+  template: `
+    <input
+      vlVeloraTagify
+      [tagifyMaxTags]="maxTags()"
+      [tagifyDuplicates]="duplicates()"
+    />
+  `,
 })
 class HostComponent {
   readonly maxTags = signal(1);
+  readonly duplicates = signal(false);
   readonly directive = viewChild.required(TagifyDirective);
 }
 
@@ -180,10 +187,33 @@ describe('Tagify directive lifecycle', () => {
 
     fixture.componentInstance.maxTags.set(2);
     fixture.detectChanges();
+    await Promise.resolve();
 
     expect(FakeTagify.instances.length).toBe(2);
     expect(FakeTagify.instances[0].destroyed).toBeTrue();
     expect(FakeTagify.instances[1].settings.maxTags).toBe(2);
+
+    fixture.destroy();
+  });
+
+  it('batches simultaneous signal input changes into one reinitialization', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as TagifyDirectiveInternals;
+    internals.tagifyCtor = FakeTagify as unknown as typeof Tagify;
+    await internals.bootstrap();
+
+    fixture.componentInstance.maxTags.set(2);
+    fixture.componentInstance.duplicates.set(true);
+    fixture.detectChanges();
+    await Promise.resolve();
+
+    expect(FakeTagify.instances.length).toBe(2);
+    expect(FakeTagify.instances[0].destroyed).toBeTrue();
+    expect(FakeTagify.instances[1].settings).toEqual(
+      jasmine.objectContaining({ maxTags: 2, duplicates: true })
+    );
 
     fixture.destroy();
   });

@@ -147,6 +147,7 @@ buttons
 cache
 cached
 caches
+cal
 calc
 calculate
 calendar
@@ -252,6 +253,7 @@ configs
 configuration
 configurations
 configure
+configured
 confirm
 confirmation
 connectors
@@ -423,6 +425,7 @@ elevated
 email
 emit
 emitter
+emitting
 emoji
 empty
 enable
@@ -1482,6 +1485,7 @@ webmanifest
 webpack
 week
 wheel
+while
 width
 window
 wise
