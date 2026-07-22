@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
+  APP_DEFAULT_LAYOUT_TYPE,
   CSSClassesType,
   HTMLAttributesType,
   ILayout,
@@ -28,8 +29,6 @@ const LAYOUT_CONFIGS: Record<LayoutType, ILayout> = {
   'dark-header': DarkHeaderConfig,
   'light-header': LightHeaderConfig,
 };
-
-const DEFAULT_LAYOUT_TYPE: LayoutType = 'dark-sidebar';
 
 function createEmptyHTMLAttributes(): HTMLAttributesType {
   return {
@@ -70,6 +69,8 @@ export {
   providedIn: 'root',
 })
 export class LayoutService {
+  readonly defaultLayoutType = inject(APP_DEFAULT_LAYOUT_TYPE);
+
   private readonly localStorage = inject<Storage>(LOCAL_STORAGE, {
     optional: true,
   });
@@ -110,7 +111,7 @@ export class LayoutService {
       return config;
     } catch {
       queueMicrotask(() => (this.isInitializing = false));
-      return LAYOUT_CONFIGS[DEFAULT_LAYOUT_TYPE];
+      return LAYOUT_CONFIGS[this.defaultLayoutType];
     }
   }
 
@@ -216,15 +217,15 @@ export class LayoutService {
       return stored as LayoutType;
     }
     if (!this.isInitializing) {
-      this.setBaseLayoutType(DEFAULT_LAYOUT_TYPE);
+      this.setBaseLayoutType(this.defaultLayoutType);
     }
-    return DEFAULT_LAYOUT_TYPE;
+    return this.defaultLayoutType;
   }
 
   getLayoutByType(layoutType: LayoutType | undefined): ILayout {
     return (
-      LAYOUT_CONFIGS[layoutType ?? DEFAULT_LAYOUT_TYPE] ??
-      LAYOUT_CONFIGS[DEFAULT_LAYOUT_TYPE]
+      LAYOUT_CONFIGS[layoutType ?? this.defaultLayoutType] ??
+      LAYOUT_CONFIGS[this.defaultLayoutType]
     );
   }
 

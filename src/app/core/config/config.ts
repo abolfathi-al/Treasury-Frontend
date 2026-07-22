@@ -1,8 +1,18 @@
+import { InjectionToken } from '@angular/core';
+
 export type LayoutType =
   | 'dark-sidebar'
   | 'light-sidebar'
   | 'dark-header'
   | 'light-header';
+
+export const APP_DEFAULT_LAYOUT_TYPE = new InjectionToken<LayoutType>(
+  'APP_DEFAULT_LAYOUT_TYPE',
+  {
+    providedIn: 'root',
+    factory: () => 'dark-sidebar',
+  },
+);
 
 export type CSSClassesType = {
   [key: string]: string[];

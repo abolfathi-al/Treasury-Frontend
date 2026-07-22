@@ -129,6 +129,7 @@ const managementItem: ShellNavigationViewItem = {
 };
 
 class LayoutServiceStub {
+  readonly defaultLayoutType: LayoutType = 'light-header';
   readonly layoutConfigSubject = new BehaviorSubject<ILayout>(layoutConfig);
   readonly currentLayoutTypeSubject = new BehaviorSubject<LayoutType | null>(
     'dark-sidebar',
@@ -226,6 +227,12 @@ describe('ShellFacade', () => {
     expect(facade.mobileSidebarOpen()).toBeFalse();
     expect(facade.sidebarCollapsed()).toBeFalse();
     expect(facade.activeNavigationItem()?.id).toBe('dashboard');
+  });
+
+  it('uses the configured default while no current layout is available', () => {
+    layout.currentLayoutTypeSubject.next(null);
+
+    expect(facade.currentLayoutType()).toBe('light-header');
   });
 
   it('centralizes sidebar collapse state updates', () => {

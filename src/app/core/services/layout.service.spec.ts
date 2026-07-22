@@ -2,6 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
+import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
 import { LOCAL_STORAGE } from '@core/tokens';
 import { environment } from '@environments/environment';
 import { LoggerService } from './logger.service';
@@ -73,6 +74,19 @@ describe('LayoutService', () => {
     const storedConfig = storage.getItem(defaultLayoutConfigKey);
     expect(storedConfig).toBeTruthy();
     expect(JSON.parse(storedConfig ?? '{}').app.toolbar.layout).toBe('classic');
+  });
+
+  it('uses an alternate project default on a clean start', () => {
+    TestBed.overrideProvider(APP_DEFAULT_LAYOUT_TYPE, {
+      useValue: 'light-header',
+    });
+
+    TestBed.inject(LayoutService);
+
+    expect(storage.getItem(baseLayoutTypeKey)).toBe('light-header');
+    expect(
+      storage.getItem(`light-header-${environment.appVersion}-layoutConfig`)
+    ).toBeTruthy();
   });
 
   it('does not overwrite an existing user layout config during startup', () => {

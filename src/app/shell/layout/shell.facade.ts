@@ -19,7 +19,6 @@ import {
 } from './navigation/shell-navigation.model';
 import { ShellNavigationFacade } from './navigation/shell-navigation.facade';
 
-const DEFAULT_LAYOUT_TYPE = 'dark-sidebar' satisfies LayoutType;
 const DEFAULT_TOOLBAR_LAYOUT = 'classic' satisfies ToolbarLayout;
 
 const CONTAINER_CLASSES = {
@@ -86,7 +85,7 @@ export class ShellFacade {
 
   readonly layoutConfig = computed(() => this.layoutConfigSignal());
   readonly currentLayoutType = computed(
-    () => this.currentLayoutTypeSignal() ?? DEFAULT_LAYOUT_TYPE,
+    () => this.currentLayoutTypeSignal() ?? this.layout.defaultLayoutType,
   );
   readonly isInitialized = computed(() => Boolean(this.layoutConfig()));
   readonly error = computed(() => this._error());
