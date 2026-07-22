@@ -5,10 +5,12 @@ Date: 2026-07-22
 Status: `D0 COMPLETE`
 
 This is the pre-refactor behavior baseline for
-`docs/DIRECTIVE_REFACTOR_PLAN.md`. It records only production behavior with a
-current owner. Source templates are authoritative; selector substring matches,
-barrel imports, generated Graphify output, and unused public members are not
-contracts.
+`docs/DIRECTIVE_REFACTOR_PLAN.md`. It records current production consumers,
+catalog-only capabilities, focused characterization coverage, and build size.
+Until M1 records the complete compatibility catalog, each directive's source,
+barrel export, selector, `exportAs`, public inputs, outputs, methods, required
+package, and plugin CSS remain part of the supported Master surface. Generated
+Graphify output and selector substring matches are navigation evidence only.
 
 ## Inventory
 
@@ -16,19 +18,19 @@ contracts.
 | --- | ---: |
 | Production directives | 31 |
 | Directives with selector consumers | 18 |
-| Directives without selector consumers | 13 |
+| Catalog-only directives in the current application | 13 |
 | Production directive code | 19,831 lines |
-| Zero-consumer directive code | 9,388 lines |
+| Catalog-only directive code | 9,388 lines |
 
-The zero-consumer set is `TreeDirective`, `DropzoneDirective`,
+The current catalog-only set is `TreeDirective`, `DropzoneDirective`,
 `TinySliderDirective`, `CookieAlertDirective`, `AutocompleteDirective`,
 `FullCalendarDirective`, `NoUiSliderDirective`, `DraggableDirective`,
 `CountUpDirective`, `ClipboardDirective`, `TypedDirective`,
-`ImageInputDirective`, and `IfIsBrowserDirective`.
+`ImageInputDirective`, and `IfIsBrowserDirective`. All remain supported Master
+Admin capabilities.
 
-`AutocompleteDirective` is imported by `standard-control-imports.ts`, but no
-production template instantiates its selector. An import-only path does not
-promote it into the active contract.
+No production template currently instantiates `AutocompleteDirective`.
+Consumer count does not change its supported public Master contract.
 
 ## Active selector-to-owner map
 
@@ -78,8 +80,8 @@ The active contract is protected by the following focused checks:
   reactive values, disabled state, validators, select rendering, and the
   textarea-only maxlength boundary.
 - The production build compiles the active Sticky and Swapper bindings. Their
-  responsive, focus, RTL/LTR, and browser behaviors remain explicit D3/D4
-  browser gates; D0 does not promote their unused public APIs.
+  responsive, focus, RTL/LTR, and browser behaviors remain explicit M5 browser
+  gates; their other public APIs remain supported catalog capabilities.
 
 ## Known mismatch to remove
 
@@ -89,8 +91,10 @@ and `stepperPrevious`. No code dispatches the two `velora*` DOM events, so the
 template handlers do not run. `handleNextStep` is a no-op and wiring
 `handlePrevStep` would duplicate the directive's own previous transition.
 
-D3 must remove these dead bindings and handlers while moving the state machine
-beside login. They are not part of the preserved Master contract.
+M5 must reconcile the mismatch through one compatible event path and protect
+it with a migration test. The fix may remove only unreachable consumer wiring;
+it must preserve the directive's selector, export alias, outputs, imperative
+API, and reusable state-machine behavior.
 
 ## Production-size baseline
 
@@ -107,14 +111,14 @@ beside login. They are not part of the preserved Master contract.
 
 Pre-purge plugin CSS reported by Angular:
 
-| Bundle | Raw size | D1 disposition |
+| Bundle | Raw size | Master contract |
 | --- | ---: | --- |
-| `dropzone.css` | 4.65 kB | Remove. |
-| `nouislider.css` | 3.72 kB | Remove. |
-| `tiny-slider.css` | 1.63 kB | Remove. |
-| `flatpickr.css` | 13.15 kB | Retain through D2, then remeasure. |
-| `tagify.css` | 11.99 kB | Retain through D2, then remeasure. |
+| `dropzone.css` | 4.65 kB | Retain for `DropzoneDirective`; optimize loading. |
+| `nouislider.css` | 3.72 kB | Retain for `NoUiSliderDirective`; optimize loading. |
+| `tiny-slider.css` | 1.63 kB | Retain for `TinySliderDirective`; optimize loading. |
+| `flatpickr.css` | 13.15 kB | Retain for `FlatpickrDirective`; remeasure after refactor. |
+| `tagify.css` | 11.99 kB | Retain for `TagifyDirective`; remeasure after refactor. |
 
-D1 must compare its production build against this baseline. A successful D1
-removes the first three CSS bundles and all JavaScript reachable only through
-the 13 zero-consumer directives without regressing the active checks above.
+Each relevant adapter slice must compare its production build against this
+baseline. Optimization may defer inactive vendor loading, but it must not
+remove the package, CSS, selector, API, or documented Master capability.

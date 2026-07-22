@@ -1,326 +1,260 @@
 # Directive Refactor and Hardening Plan
 
-Status: `IN PROGRESS` (`D0 COMPLETE`; D1 is next)
+Status: `IN PROGRESS` (`M0 COMPLETE`; M1 is next)
 
 Parent plan: `docs/FRONTEND_REFACTOR_PLAN.md`, Phase 4.
 
-Execution priority: immediate. Complete D0-D6 before resuming unfinished work
-in the parent plan.
-
 ## Outcome
 
-Reduce the inherited directive layer to the smallest reusable surface that the
-Dashboard Master currently needs, while preserving the behavior of every active
-consumer.
+Turn the complete directive catalog into a robust, reusable Master Admin
+capability layer. Every current directive remains available for future
+projects, including directives that the current demo application does not
+instantiate.
 
-The unit of preservation is user-visible behavior, not the existing directive
-class. Each current directive must end in exactly one state:
+Refactoring changes implementation quality, not product capability. It must
+improve lifecycle safety, type precision, SSR/hydration behavior,
+accessibility, performance, failure handling, and maintainability while
+preserving the public facade.
 
-1. deleted because it has no production consumer;
-2. replaced by native HTML, CSS, Angular, or an already-installed dependency;
-3. moved beside its only component or feature owner as a private implementation
-   detail; or
-4. retained as a small shared directive because multiple current consumers need
-   the same low-level DOM behavior.
+## Non-negotiable Master contract
 
-No directive remains public merely because a future project might need it.
+- Keep all 31 shared directive classes and selectors.
+- Keep barrel exports, package dependencies, plugin CSS, and patches required
+  to instantiate those directives.
+- Preserve existing inputs, outputs, `exportAs` names, imperative methods, data
+  attributes, and documented examples.
+- Treat both active and catalog-only directives as supported Master
+  capabilities. Zero consumers in this repository is an audit fact, not a
+  deletion signal.
+- Do not require a current application page to justify a reusable dashboard
+  capability.
+- Do not rename or remove a public member without a separately approved,
+  versioned deprecation and migration path.
+- Add no replacement framework around the directives. Reuse the existing
+  Angular, browser, and shared directive infrastructure when it is sound.
 
 ## Baseline
 
-The 2026-07-22 source audit records:
+The 2026-07-22 audit records:
 
 | Measure | Baseline |
 | --- | ---: |
-| Production directives | 31 |
+| Shared directives | 31 |
 | Production directive code | 19,831 lines |
 | Angular signal inputs | 529 |
 | Angular signal outputs | 242 |
-| Signal API members with no external production reference | at least 624 |
-| Directives with no production consumer | 13 |
-| Code in zero-consumer directives | 9,388 lines |
-| `TreeDirective` | 2,823 lines, 114 methods, 291 branch points, zero consumers |
-| `MenuDirective` | 1,559 lines, 108 methods, 241 branch points, six consumer files |
+| Directives instantiated by the current application | 18 |
+| Catalog-only directives in the current application | 13 |
+| `TreeDirective` | 2,823 lines, 114 methods, 291 branch points |
+| `MenuDirective` | 1,559 lines, 108 methods, 241 branch points |
 
-Graphify identifies `BaseDirective`, `MenuDirective`, `TreeDirective`,
-`LoggerService`, `CoreUtil`, and the directive helper layer as the principal
-cross-cutting nodes. Graph evidence guides navigation; source bytes and active
-consumer templates decide behavior.
+These numbers identify refactor risk and test priority. They do not authorize
+capability removal.
 
-## Constraints
+The active selector/owner map, known Stepper mismatch, characterization
+coverage, and production-size baseline are recorded in
+`docs/DIRECTIVE_CONTRACT_BASELINE.md`.
 
-- Preserve current active selectors until their consumers migrate in the same
-  change set. Do not perform a blanket selector-prefix rename.
-- Add no package, directive framework, compatibility registry, generic plugin
-  system, or speculative configuration surface.
-- Do not retain unused inputs, outputs, imperative methods, DOM events, styles,
-  or dependencies as a future Master contract.
-- Prefer native HTML and CSS, then Angular and installed dependencies, before
-  custom code.
-- Preserve SSR/hydration safety, RTL/LTR behavior, accessibility, focus,
-  keyboard paths, form state, and responsive behavior.
-- UI validation and permission behavior remain presentation concerns; backend
-  validation and authorization stay authoritative.
+## Required implementation contract
 
-## Directive disposition
+### Compatibility
 
-### Delete: zero production consumers
-
-Remove the directive, its specs, barrel export, package references, allowed
-CommonJS entries, plugin styles, patches, and documentation together.
-
-| Directive | Current lines | Dependency consequence |
-| --- | ---: | --- |
-| `TreeDirective` | 2,823 | Remove its unconsumed tree implementation and styles. |
-| `DropzoneDirective` | 946 | Remove `dropzone` and `@types/dropzone`. |
-| `TinySliderDirective` | 882 | Remove `tiny-slider`, its patch, and `patch-package` if no patch remains. |
-| `CookieAlertDirective` | 695 | Remove the unconsumed custom behavior. |
-| `AutocompleteDirective` | 650 | Remove `awesomplete` and its type/style surface. |
-| `FullCalendarDirective` | 636 | Remove the six `@fullcalendar/*` packages and styles. |
-| `NoUiSliderDirective` | 624 | Remove `nouislider` and styles. |
-| `DraggableDirective` | 519 | Remove the unconsumed custom behavior. |
-| `CountUpDirective` | 422 | Remove `countup.js`. |
-| `ClipboardDirective` | 418 | Remove `clipboard`. |
-| `TypedDirective` | 396 | Remove `typed.js`. |
-| `ImageInputDirective` | 333 | Remove the unconsumed custom behavior. |
-| `IfIsBrowserDirective` | 44 | Remove it; current browser guards do not consume it. |
-
-### Internalize: reusable controls own the behavior
-
-These behaviors are used only through standard form controls. Keep only the
-contract required by those controls and stop exporting a general-purpose vendor
-API from the directive barrel.
-
-| Current directive | Current consumers | Target |
-| --- | ---: | --- |
-| `AntiAutocompleteDirective` | 1 | Use native autocomplete attributes or private password-control behavior. |
-| `AutosizeDirective` | 1 | Prefer native CSS; otherwise keep the smallest private textarea adapter. |
-| `DialerDirective` | 1 | Move behavior into `DialerControlComponent`. |
-| `FlatpickrDirective` | 2 | Keep one internal date adapter with only time/date-format options currently used. |
-| `InputmaskDirective` | 4 | Keep one narrow internal mask adapter driven by a single typed options input. |
-| `MaxlengthDirective` | 1 | Replace with native `maxlength` and a small accessible textarea counter. |
-| `PasswordMeterDirective` | 1 | Move the score and visibility behavior into the password control. |
-| `SingleOptionDirective` | 2 | Configure the two `ng-select` controls directly unless shared code is shorter. |
-| `TagifyDirective` | 1 | Move the required Tagify adapter into the tags control; retain only its eight used options and three used events. |
-
-### Localize or replace: single-owner application behavior
-
-| Current directive | Owner | Target |
-| --- | --- | --- |
-| `SearchDirective` | Navbar search | Move state and events into the existing search component. |
-| `StepperDirective` | Login | Keep the state machine module-local; remove duplicate Angular-output and custom-DOM-event channels. |
-| `StickyDirective` | Shell layout | Prefer `position: sticky`; keep JavaScript only for behavior CSS cannot express. |
-| `ScrollDirective` | Sidebar menu | Prefer native overflow and CSS sizing; preserve scroll state only if the active consumer proves it. |
-| `ScrollTopDirective` | Shell layout | Use a small shell-owned button with native smooth scrolling. |
-| `SwapperDirective` | Header | Prefer responsive CSS ordering; any DOM move must preserve focus and reading order. |
-
-### Retain and rewrite: shared shell primitives
-
-Only these directives currently have enough distinct consumers to justify a
-shared public behavior.
-
-| Directive | Current consumers | Required contract |
-| --- | ---: | --- |
-| `MenuDirective` | 6 | Accessible dropdown/accordion behavior, outside click, Escape, focus return, RTL placement, and responsive sidebar handling. Use ng-bootstrap where it covers the behavior; custom code handles only the remaining sidebar case. |
-| `DrawerDirective` | 3 | Open/close state, overlay, focus trap/return, Escape, scroll lock, and responsive width. Prefer existing ng-bootstrap offcanvas behavior. |
-| `ToggleDirective` | 2 | Target state, `aria-expanded`/`aria-controls`, keyboard activation, and one change event. |
-
-## Required directive contract
-
-Every retained or internal directive must satisfy all applicable rules:
-
-### API
-
-- Every public input, output, and imperative method has a current production
-  consumer or a documented Master contract.
-- A vendor wrapper accepts one typed options object unless a small explicit
-  input is required for Angular forms or accessibility.
-- One event has one channel. Do not emit both an Angular output and a custom DOM
-  event for the same transition.
-- Public callbacks use precise types. No `Function`, `any`, or duplicated event
-  aliases.
+- Existing Angular templates compile without consumer migrations.
+- Public inputs keep their aliases, accepted value shapes, defaults, and
+  responsive semantics.
+- Public outputs keep their payload types and emission order.
+- Existing imperative methods and static lookup APIs remain callable.
+- Existing plugin styles and dynamic imports remain available.
 
 ### Lifecycle
 
 - Initialization is idempotent.
-- Input changes either update the live instance safely or perform one explicit
+- Input changes update the live instance or perform one explicit
   destroy-and-recreate cycle.
 - Destroy removes every listener, timer, observer, overlay, Popper instance,
   dynamically created element, global class, and third-party instance.
-- A lazy import that resolves after destruction cannot recreate the behavior.
+- A lazy import that resolves after destruction cannot recreate behavior.
 - Repeated route entry and exit leaves no global state behind.
 
 ### Browser and SSR
 
 - Module evaluation and construction do not touch browser globals.
-- Browser-only work runs behind the existing platform tokens or render hooks.
-- Server rendering returns stable markup without fake browser polyfills.
-- Hydration does not initialize the same third-party instance twice.
+- Browser-only work uses the existing platform tokens and directive host.
+- Server rendering returns stable markup.
+- Hydration does not initialize a third-party instance twice.
 
 ### Accessibility
 
-- Interactive hosts are keyboard reachable and expose correct roles, names,
-  state attributes, and relationships.
-- Escape closes transient UI and returns focus to its trigger.
-- Enter, Space, and arrow-key behavior follows the relevant control pattern.
-- Focus is not lost after responsive DOM changes.
+- Interactive hosts expose the correct role, name, state, and relationship
+  attributes.
+- Keyboard operation matches the relevant control pattern.
+- Escape closes transient UI and returns focus when applicable.
+- Responsive DOM changes preserve focus and reading order.
 - Reduced-motion preferences disable nonessential animation.
 
-### Forms
+### Types and failure behavior
 
-- Form value, touched, dirty, disabled, readonly, and validation states remain
-  synchronized.
-- A mask or tag adapter does not emit duplicate changes.
-- Display formatting does not silently change the value persisted by the form.
-- Client validation remains advisory and never claims backend enforcement.
-
-### Failure behavior
-
+- No public callback uses `Function` or `any` when a precise type is possible.
+- Third-party imports are wrapped by narrow internal types without shrinking
+  their public directive facade.
 - Missing optional markup disables only the affected behavior.
-- Dynamic import failure leaves usable native UI and reports one actionable
+- Dynamic import failure keeps usable native markup and reports one actionable
   error.
-- Cleanup is safe after partial initialization.
-- No catch-and-ignore layer hides a broken required interaction.
+- Cleanup remains safe after partial initialization.
 
-## Execution phases
+### Performance
 
-### D0 - Freeze active behavior
+- Global listeners are shared or scoped and are removed when no longer needed.
+- Repeated DOM queries are cached only when invalidation is explicit.
+- Scroll, resize, drag, and input hot paths avoid layout thrashing and duplicate
+  work.
+- A directive does not initialize or import its vendor library before
+  activation.
 
-Completed on 2026-07-22. The selector/owner contract, characterization
-coverage, known Stepper mismatch, and production-size baseline are recorded in
-`docs/DIRECTIVE_CONTRACT_BASELINE.md`.
+## Refactor order
 
-1. Record the active selector-to-consumer map.
-2. Add characterization checks only for behavior those consumers use.
-3. Capture shell flows for menu, drawer, toggle, sticky/scroll, search, and
-   scroll-to-top.
-4. Capture form flows for masked, date, datetime, tags, password, textarea,
-   dialer, and select controls.
-5. Record production bundle and plugin CSS sizes.
+### M0 - Freeze behavior and production baseline
 
-Exit gate: the active behavior and current owners are explicit; no unused API is
-promoted into the contract.
+Completed on 2026-07-22.
 
-### D1 - Delete dead directives and dependencies
+- Recorded the current owner map without treating catalog-only directives as
+  dead code.
+- Added focused Menu and Stepper characterization tests.
+- Captured package/CSS and production build sizes.
+- Verified typecheck, lint, 223 tests, and production build.
 
-1. Remove all 13 zero-consumer directives and their tests/exports.
-2. Remove the corresponding 16 direct and development packages.
-3. Remove obsolete allowed-CommonJS entries, Sass imports, CSS bundles, and the
-   Tiny Slider patch.
-4. Remove `@types/bootstrap-maxlength` when native maxlength replaces the custom
-   implementation.
-5. Verify that no production selector, import, asset, or documentation reference
-   remains.
+Exit gate: complete.
 
-Exit gate: at least 9,388 production TypeScript lines are gone, no removed plugin
-ships CSS or JavaScript, and all current flows still build.
+### M1 - Lock the Master compatibility catalog
 
-### D2 - Internalize form-control behavior
+1. Reconcile `docs/ui/directives.md` with all 31 directive source files.
+2. Record selector, `exportAs`, inputs, outputs, imperative API, vendor package,
+   CSS bundle, browser globals, and cleanup obligations for every directive.
+3. Add a small static contract test that fails when a directive disappears
+   from the barrel or loses its selector/export alias unintentionally.
+4. Classify tests as active-consumer, catalog-capability, lifecycle, SSR, and
+   accessibility coverage.
 
-Work from the smallest behavior to the highest-risk vendor adapter:
+Exit gate: every directive has an explicit compatibility contract and an owner
+for its verification, whether or not the demo currently instantiates it.
 
-1. anti-autocomplete and single-option;
-2. native maxlength and textarea autosize;
-3. dialer and password meter;
-4. Flatpickr;
-5. Inputmask;
-6. Tagify.
+### M2 - Harden shared directive infrastructure
 
-For each slice, migrate its current consumer, delete unused API immediately, add
-one focused lifecycle/form check, and remove the public barrel export when no
-external consumer remains.
+Refactor `BaseDirective`, `directive-host`, `directive-helpers`, and the emitter
+before changing large adapters.
 
-Exit gate: each form adapter is private to the reusable control layer, has no
-unused public member, and passes value/disabled/readonly/cleanup checks.
+1. Trace all callers before modifying shared behavior.
+2. Consolidate duplicate listener, timer, destroy, option-update, and safe-run
+   behavior only where the existing implementation is truly identical.
+3. Make destroy state and late async completion behavior deterministic.
+4. Remove unsafe casts and broad callback types without changing public APIs.
+5. Keep helpers only when at least two directives use them and total code is
+   smaller.
 
-### D3 - Replace single-owner shell behavior
+Exit gate: shared lifecycle primitives have focused tests and every directive
+still typechecks without public contract changes.
 
-1. Replace sticky, scroll, scroll-top, and swapper behavior with CSS/native APIs
-   where possible.
-2. Move search behavior into the navbar search component.
-3. Move stepper behavior beside login and expose one typed state transition
-   channel.
-4. Delete the former shared directive after its owner passes characterization
-   and browser checks.
+### M3 - Refactor high-complexity adapters
 
-Exit gate: these behaviors no longer enlarge the shared Master API and preserve
-keyboard, focus, responsive, RTL/LTR, and route-reentry behavior.
+Work one directive per commit in this order:
 
-### D4 - Rewrite retained shell primitives
+1. `TreeDirective`;
+2. `MenuDirective`;
+3. `DropzoneDirective`;
+4. `TinySliderDirective`;
+5. `FullCalendarDirective`;
+6. `NoUiSliderDirective`;
+7. `AutocompleteDirective`.
 
-1. Refactor `ToggleDirective` to the minimal target-state contract.
-2. Replace covered `DrawerDirective` behavior with ng-bootstrap offcanvas and
-   keep custom code only for proven gaps.
-3. Split the current menu behavior by responsibility at its consumer boundary:
-   ng-bootstrap dropdowns for header/action menus and one small sidebar
-   accordion implementation.
-4. Preserve current selectors during migration, then remove obsolete option and
-   event aliases in the declared breaking Master release.
+For each adapter:
 
-Exit gate: menu, drawer, and toggle have no global singleton registry, restore
-focus correctly, support keyboard operation, clean up completely, and pass
-desktop/mobile plus RTL/LTR browser checks.
+- preserve the full public facade;
+- separate option normalization, DOM state, vendor lifecycle, and event
+  forwarding only when the split reduces total complexity;
+- remove duplicate branches and repeated queries;
+- make lazy-load cancellation and cleanup explicit;
+- add focused initialization, update, destroy, and failure checks;
+- retain its package, CSS, selector, and documentation.
 
-### D5 - Collapse directive infrastructure
+Exit gate: each adapter is independently testable, cleans up completely, and
+has lower measured complexity without losing capability.
 
-Do this after consumer migrations reveal what is still shared:
+### M4 - Refactor form and input directives
 
-1. Remove unused `BaseDirective` state, options, safe-executor, and listener
-   layers.
-2. Delete `BaseDirective` entirely if direct Angular lifecycle code is shorter
-   across the three retained primitives.
-3. Keep a helper only when at least two retained implementations need identical
-   behavior and the helper reduces total code.
-4. Prune `CoreUtil`, `DomUtil`, `ResponsiveUtil`, `DataUtil`, `EventUtil`, and
-   Logger calls that existed only for removed directives.
+Refactor without internalizing or deleting their reusable facade:
 
-Exit gate: there is no directive mini-framework and no helper retained for a
-single implementation.
+1. `AntiAutocompleteDirective`, `AutosizeDirective`, and
+   `SingleOptionDirective`;
+2. `DialerDirective`, `MaxlengthDirective`, and `PasswordMeterDirective`;
+3. `FlatpickrDirective`, `InputmaskDirective`, and `TagifyDirective`;
+4. `ClipboardDirective`, `ImageInputDirective`, and `TypedDirective`.
 
-### D6 - Final verification and documentation
+Verify Angular form value, touched, dirty, disabled, readonly, validation,
+duplicate emission, vendor cleanup, and server-render behavior.
+
+Exit gate: each directive remains reusable outside the current standard form
+controls and has a precise, stable Master contract.
+
+### M5 - Refactor shell behavior directives
+
+Refactor `DrawerDirective`, `ToggleDirective`, `SearchDirective`,
+`StepperDirective`, `StickyDirective`, `ScrollDirective`,
+`ScrollTopDirective`, and `SwapperDirective` while keeping their shared public
+selectors and APIs.
+
+Prefer CSS or native browser behavior inside the implementation where it is
+equivalent, but do not remove the directive facade. Fix the known login Stepper
+event mismatch through one compatible event path and a migration test.
+
+Exit gate: desktop/mobile, RTL/LTR, keyboard, focus, Escape, responsive, and
+route-reentry flows remain stable.
+
+### M6 - Refactor remaining catalog capabilities
+
+Refactor `CookieAlertDirective`, `CountUpDirective`, `DraggableDirective`, and
+`IfIsBrowserDirective` with the same compatibility and lifecycle gates.
+
+Exit gate: all 31 directives have completed a reviewed refactor slice.
+
+### M7 - Master verification and documentation
 
 1. Run `pnpm typecheck`.
 2. Run `pnpm lint`.
 3. Run `pnpm test:ci`.
 4. Run `pnpm build` and `pnpm build:prod`.
-5. Run SSR and hydration smoke checks.
-6. Run browser checks for desktop/mobile, light/dark, RTL/LTR, keyboard, focus,
-   reduced motion, and route re-entry.
-7. Update `docs/ui/directives.md` to describe only the surviving public API.
-8. Refresh Graphify after each code slice and perform the required semantic
-   refresh after documentation changes.
+5. Run SSR smoke and browser accessibility/responsive checks.
+6. Compare bundle, CSS, initialization, and route-reentry results with M0.
+7. Refresh Graphify and the directive documentation.
 
-Exit gate: the complete verification matrix is green and a clean Master consumer
-uses the active controls without editing Master-owned directive internals.
+Exit gate: the Master Admin retains all 31 directive capabilities, has no
+unapproved breaking change, and passes the complete verification matrix.
 
-## Commit and continuation policy
+## Slice workflow
 
-Use meaningful vertical commits, not one commit per tiny method:
+Every implementation slice follows the same small loop:
 
-1. dead directive and dependency deletion;
-2. form-control internalization;
-3. native/single-owner shell migration;
-4. retained menu/drawer/toggle rewrite;
-5. directive infrastructure deletion;
-6. final documentation and Graphify refresh.
+1. query Graphify and read the source plus all callers;
+2. state the public contract being preserved;
+3. add or tighten the smallest relevant characterization check;
+4. refactor one lifecycle or complexity concern;
+5. run the focused check, typecheck, and lint;
+6. run the full suite/build when shared infrastructure or vendor loading
+   changes;
+7. update Graphify and commit the green slice.
 
-After a green commit, continue automatically to the next slice. Stop only for a
-real regression, an ambiguous active behavior that changes the user contract, or
-a dependency limitation that cannot be resolved within the existing stack.
+Do not combine unrelated directives in one implementation commit.
 
-## Completion metrics
+## Completion criteria
 
-- 13 zero-consumer directives and their assets are absent.
-- At least 9,388 production directive lines are deleted in D1.
-- Up to 17 packages become removable across dead-plugin and native-maxlength
-  work.
-- The shared public directive surface contains only behavior with multiple
-  current consumers.
-- No public directive member lacks a production consumer or documented Master
-  contract.
-- No listener, timer, observer, overlay, or third-party instance survives
-  destruction.
-- Current form and shell flows pass SSR, browser, accessibility, RTL/LTR,
-  responsive, test, lint, typecheck, and production-build gates.
-
-The target is not a cleaner version of 31 directives. The target is the smallest
-robust behavior set that future Dashboard Master consumers actually inherit.
+- All 31 directives, selectors, barrel exports, and required dependencies
+  remain present.
+- All documented public inputs, outputs, aliases, and methods remain compatible
+  unless a separate versioned deprecation was approved.
+- Every directive has initialization, update, destroy, and error-path evidence
+  appropriate to its complexity.
+- Browser-only libraries are SSR/hydration safe.
+- Keyboard, focus, reduced-motion, and responsive behavior are verified where
+  applicable.
+- Complexity and duplication decrease without introducing another framework.
+- Typecheck, lint, full tests, production build, SSR smoke, Graphify, and
+  documentation are green.
