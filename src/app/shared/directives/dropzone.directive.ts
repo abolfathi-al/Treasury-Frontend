@@ -239,6 +239,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
 
   private dropzoneInstance: Dropzone | null = null;
   private DropzoneClass: typeof Dropzone | null = null;
+  private libraryLoadPromise: Promise<void> | null = null;
   private readonly pendingTimers = new Set<ReturnType<typeof setTimeout>>();
   private pendingAnimationFrame: number | null = null;
   private readonly removeHandlerCleanups = new Map<HTMLElement, () => void>();
@@ -403,10 +404,15 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
     return setOptionIfChanged(this.optionsManager, key, value, () => this.onOptionsUpdated());
   }
 
-  private loadLibrary(): void {
-    if (this.isBaseDestroyed()) return;
+  private loadLibrary(): Promise<void> {
+    if (this.isBaseDestroyed()) return Promise.resolve();
+    if (this.DropzoneClass) {
+      if (!this.isBaseInitialized()) this.initDropzone();
+      return Promise.resolve();
+    }
+    if (this.libraryLoadPromise) return this.libraryLoadPromise;
 
-    import('dropzone')
+    const loadPromise: Promise<void> = import('dropzone')
       .then((DropzoneModule) => {
         if (this.isBaseDestroyed()) return;
         this.DropzoneClass = DropzoneModule.default || DropzoneModule;
@@ -415,7 +421,18 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
         }
         this.initDropzone();
       })
-      .catch((error) => this.handleErr('Failed to load Dropzone library', error as Error));
+      .catch((error) => {
+        if (!this.isBaseDestroyed()) {
+          this.handleErr('Failed to load Dropzone library', error as Error);
+        }
+      })
+      .finally(() => {
+        if (this.libraryLoadPromise === loadPromise) {
+          this.libraryLoadPromise = null;
+        }
+      });
+    this.libraryLoadPromise = loadPromise;
+    return loadPromise;
   }
 
   private initDropzone(): void {
@@ -1024,9 +1041,9 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
   }
 
   async recreate(): Promise<void> {
-    if (!this.host.isBrowser) return;
+    if (!this.host.isBrowser || this.isBaseDestroyed()) return;
     this.cleanup();
-    await this.initDropzone();
+    await this.loadLibrary();
   }
 
   isDropzoneActive(): boolean {

@@ -92,6 +92,7 @@ class HostComponent {
 interface DropzoneDirectiveInternals {
   DropzoneClass: typeof Dropzone | null;
   createInstance(): void;
+  loadLibrary(): Promise<void>;
   populatePreview(
     previewElement: HTMLElement,
     file: Dropzone.DropzoneFile
@@ -339,5 +340,51 @@ describe('Dropzone directive adapter helpers', () => {
     } finally {
       jasmine.clock().uninstall();
     }
+  });
+
+  it('waits for library loading when recreate runs before bootstrap', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as DropzoneDirectiveInternals;
+    let resolveLoad!: () => void;
+    const pendingLoad = new Promise<void>((resolve) => {
+      resolveLoad = resolve;
+    });
+    const loadLibrary = spyOn(internals, 'loadLibrary').and.returnValue(
+      pendingLoad
+    );
+    let settled = false;
+
+    const recreation = directive.recreate().then(() => {
+      settled = true;
+    });
+    await Promise.resolve();
+
+    expect(loadLibrary).toHaveBeenCalledTimes(1);
+    expect(settled).toBeFalse();
+
+    resolveLoad();
+    await recreation;
+
+    expect(settled).toBeTrue();
+    fixture.destroy();
+  });
+
+  it('recreates the instance before resolving when the library is cached', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as DropzoneDirectiveInternals;
+    internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
+    internals.createInstance();
+    const firstInstance = FakeDropzone.lastInstance!;
+
+    await directive.recreate();
+
+    expect(firstInstance.destroyed).toBeTrue();
+    expect(FakeDropzone.lastInstance).not.toBe(firstInstance);
+    expect(directive.isDropzoneActive()).toBeTrue();
+    fixture.destroy();
   });
 });

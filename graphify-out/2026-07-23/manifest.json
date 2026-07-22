@@ -1300,13 +1300,13 @@
     "semantic_hash": ""
   },
   "src/app/shared/directives/dropzone.directive.spec.ts": {
-    "mtime": 1784758079.5114408,
-    "ast_hash": "6af9f338be04ccf4c3f9f466634e1776",
+    "mtime": 1784758381.5813115,
+    "ast_hash": "bb0b75ca72c0311ea885ca28c0d87225",
     "semantic_hash": ""
   },
   "src/app/shared/directives/dropzone.directive.ts": {
-    "mtime": 1784758040.3420167,
-    "ast_hash": "296a1c44ad214bab50bc4ca785fa4b13",
+    "mtime": 1784758414.698603,
+    "ast_hash": "eaace2b2e7a2d39a95d1bfcbaf7f9bbe",
     "semantic_hash": ""
   },
   "src/app/shared/directives/flatpickr.directive.ts": {
@@ -10262,6 +10262,11 @@
   "graphify-out/memory/query_20260722_220503_how_should_dropzonedirective_compose_application_c.md": {
     "mtime": 1784757903.4068165,
     "ast_hash": "d504fd9b644da4fd7ee8090123b41192",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_220929_how_should_dropzonedirective_prevent_stale_delayed.md": {
+    "mtime": 1784758169.3059108,
+    "ast_hash": "251a8554ed108157f12ada35e7d41c6e",
     "semantic_hash": ""
   }
 }
