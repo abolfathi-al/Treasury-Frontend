@@ -164,7 +164,7 @@ export class MenuDirective
   private subEl: HTMLElement | null = null;
   private triggerElement: HTMLElement | null = null;
   private hoverTimeouts = new Map<HTMLElement, number>();
-  private eventHandlers = new Map<string, string>();
+  private eventHandlers = new Map<string, Set<string>>();
   private initializationTimeout: number | null = null;
   private animationTimeout: number | null = null;
   private popperFactory: PopperFactory | null = null;
@@ -343,28 +343,48 @@ export class MenuDirective
   on(event: string, handler: Function): void {
     if (!this.host.isBrowser) return;
     const id = EventUtil.addEventListener(this.host.elementRef.nativeElement, event, handler);
-    this.eventHandlers.set(event, id);
+    this.trackEventHandler(event, id);
   }
 
   one(event: string, handler: Function): void {
     if (!this.host.isBrowser) return;
+    let id = '';
     const onceHandler = (e: Event) => {
-      handler(e);
-      const id = this.eventHandlers.get(event);
-      if (id) {
+      try {
+        handler(e);
+      } finally {
         EventUtil.removeEventListener(this.host.elementRef.nativeElement, event, id);
-        this.eventHandlers.delete(event);
+        this.untrackEventHandler(event, id);
       }
     };
-    const id = EventUtil.addEventListener(this.host.elementRef.nativeElement, event, onceHandler);
-    this.eventHandlers.set(event, id);
+    id = EventUtil.addEventListener(this.host.elementRef.nativeElement, event, onceHandler);
+    this.trackEventHandler(event, id);
   }
 
   off(event: string): void {
     if (!this.host.isBrowser) return;
-    const id = this.eventHandlers.get(event);
-    if (id) {
-      EventUtil.removeEventListener(this.host.elementRef.nativeElement, event, id);
+    const ids = this.eventHandlers.get(event);
+    if (ids) {
+      ids.forEach((id) => {
+        EventUtil.removeEventListener(this.host.elementRef.nativeElement, event, id);
+      });
+      this.eventHandlers.delete(event);
+    }
+  }
+
+  private trackEventHandler(event: string, id: string): void {
+    if (!id) return;
+    const ids = this.eventHandlers.get(event) ?? new Set<string>();
+    ids.add(id);
+    this.eventHandlers.set(event, ids);
+  }
+
+  private untrackEventHandler(event: string, id: string): void {
+    const ids = this.eventHandlers.get(event);
+    if (!ids) return;
+
+    ids.delete(id);
+    if (ids.size === 0) {
       this.eventHandlers.delete(event);
     }
   }
@@ -1370,8 +1390,10 @@ export class MenuDirective
         this.animationTimeout = null;
       }
 
-      this.eventHandlers.forEach((id, name) => {
-        EventUtil.removeEventListener(this.host.elementRef.nativeElement, name, id);
+      this.eventHandlers.forEach((ids, name) => {
+        ids.forEach((id) => {
+          EventUtil.removeEventListener(this.host.elementRef.nativeElement, name, id);
+        });
       });
       this.eventHandlers.clear();
 

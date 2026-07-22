@@ -1350,9 +1350,9 @@
     "semantic_hash": "846bf4fa816adbce9d4454759a7f36fa"
   },
   "src/app/shared/directives/menu.directive.ts": {
-    "mtime": 1781543203.0,
-    "ast_hash": "173886ba8cf54765d3b03fba7ec76344",
-    "semantic_hash": "173886ba8cf54765d3b03fba7ec76344"
+    "mtime": 1784755710.5984907,
+    "ast_hash": "fb5e2e24e27dcd3e42c66d1100a1cc5b",
+    "semantic_hash": ""
   },
   "src/app/shared/directives/no-ui-slider.directive.ts": {
     "mtime": 1781543203.0,
@@ -2695,8 +2695,8 @@
     "semantic_hash": ""
   },
   "src/app/shared/directives/menu.directive.spec.ts": {
-    "mtime": 1784752010.631037,
-    "ast_hash": "90835dceec69c1d1775406c122756c26",
+    "mtime": 1784755710.600303,
+    "ast_hash": "a172ca9f591b72a1f382c733547b35c7",
     "semantic_hash": ""
   },
   "src/app/shared/directives/stepper.directive.spec.ts": {
@@ -10227,6 +10227,11 @@
   "graphify-out/memory/query_20260722_211806_lock_all_31_selectors__exports__and_aliases_in_a_c.md": {
     "mtime": 1784755086.1353695,
     "ast_hash": "cd046e7b9695dabd63afc3eefcd64900",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260722_212439_refactor_treedirective_lifecycle_listeners_without.md": {
+    "mtime": 1784755479.1689417,
+    "ast_hash": "4f03300ee11fa3e02456d84c96591349",
     "semantic_hash": ""
   }
 }

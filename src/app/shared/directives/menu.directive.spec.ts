@@ -122,4 +122,64 @@ describe('MenuDirective', () => {
     expect(DataUtil.get(item, 'hover')).toBeUndefined();
     expect(DataUtil.get(item, 'timeout')).toBeUndefined();
   });
+
+  it('removes every handler registered for the same event', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const first = jasmine.createSpy('first');
+    const second = jasmine.createSpy('second');
+
+    directive.on('menu:test', first);
+    directive.on('menu:test', second);
+    directive.off('menu:test');
+    fixture.nativeElement
+      .querySelector('[vlVeloraMenu]')
+      .dispatchEvent(new CustomEvent('menu:test'));
+
+    expect(first).not.toHaveBeenCalled();
+    expect(second).not.toHaveBeenCalled();
+    fixture.destroy();
+  });
+
+  it('keeps multiple one-time handlers independent and cleans them after firing', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const first = jasmine.createSpy('first');
+    const second = jasmine.createSpy('second');
+    const menu = fixture.nativeElement.querySelector('[vlVeloraMenu]');
+
+    directive.one('menu:once', first);
+    directive.one('menu:once', second);
+    menu.dispatchEvent(new CustomEvent('menu:once'));
+    menu.dispatchEvent(new CustomEvent('menu:once'));
+
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledTimes(1);
+    fixture.destroy();
+  });
+
+  it('removes every custom handler on destroy', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    jasmine.clock().tick(0);
+
+    const directive = fixture.componentInstance.directive();
+    const first = jasmine.createSpy('first');
+    const second = jasmine.createSpy('second');
+    const menu = fixture.nativeElement.querySelector('[vlVeloraMenu]');
+
+    directive.on('menu:destroy', first);
+    directive.on('menu:destroy', second);
+    fixture.destroy();
+    menu.dispatchEvent(new CustomEvent('menu:destroy'));
+
+    expect(first).not.toHaveBeenCalled();
+    expect(second).not.toHaveBeenCalled();
+  });
 });
