@@ -163,8 +163,9 @@ export class MenuDirective
   private triggerEl: HTMLElement | null = null;
   private subEl: HTMLElement | null = null;
   private triggerElement: HTMLElement | null = null;
-  private hoverTimeouts = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
+  private hoverTimeouts = new Map<HTMLElement, number>();
   private eventHandlers = new Map<string, string>();
+  private initializationTimeout: number | null = null;
   private animationTimeout: number | null = null;
   private popperFactory: PopperFactory | null = null;
   private popperLoader: Promise<PopperFactory | null> | null = null;
@@ -434,11 +435,15 @@ export class MenuDirective
   }
 
   private initWithDelay(): void {
-    setTimeout(() => {
-      this.initElements();
-      this.setupEventListeners();
-      DataUtil.set(this.host.elementRef.nativeElement, 'menuDirective', this);
-    }, 0);
+    this.initializationTimeout =
+      this.host.window?.setTimeout(() => {
+        this.initializationTimeout = null;
+        if (this.isBaseDestroyed()) return;
+
+        this.initElements();
+        this.setupEventListeners();
+        DataUtil.set(this.host.elementRef.nativeElement, 'menuDirective', this);
+      }, 0) ?? null;
   }
 
   private initElements(): void {
@@ -580,8 +585,13 @@ export class MenuDirective
     if (!item || this.getItemTriggerValue(item) !== 'hover') return;
 
     if (DataUtil.get(item, 'hover') === '1') {
-      const timeout = DataUtil.get(item, 'timeout');
-      if (timeout) clearTimeout(timeout as number);
+      const timeout =
+        this.hoverTimeouts.get(item) ??
+        DataUtil.get<number>(item, 'timeout');
+      if (timeout !== undefined) {
+        this.host.window?.clearTimeout(timeout);
+        this.hoverTimeouts.delete(item);
+      }
       DataUtil.remove(item, 'hover');
       DataUtil.remove(item, 'timeout');
     }
@@ -593,10 +603,21 @@ export class MenuDirective
     const item = this.getItemElement(element);
     if (!item || this.getItemTriggerValue(item) !== 'hover') return;
 
-    const timeout = setTimeout(() => {
-      if (DataUtil.get(item, 'hover') === '1') this.hideInternal(item);
-    }, this.optionsManager.snapshot().hoverTimeout || 250);
+    const previousTimeout = this.hoverTimeouts.get(item);
+    if (previousTimeout !== undefined) {
+      this.host.window?.clearTimeout(previousTimeout);
+    }
 
+    const timeout = this.host.window?.setTimeout(() => {
+      this.hoverTimeouts.delete(item);
+      const shouldHide = DataUtil.get(item, 'hover') === '1';
+      DataUtil.remove(item, 'hover');
+      DataUtil.remove(item, 'timeout');
+      if (shouldHide) this.hideInternal(item);
+    }, this.optionsManager.snapshot().hoverTimeout || 250);
+    if (timeout === undefined) return;
+
+    this.hoverTimeouts.set(item, timeout);
     DataUtil.set(item, 'hover', '1');
     DataUtil.set(item, 'timeout', timeout);
   }
@@ -861,7 +882,12 @@ export class MenuDirective
     this.initStandaloneMenuPopper();
 
     if (this.host.window) {
-      this.host.window.setTimeout(() => {
+      if (this.animationTimeout !== null) {
+        this.host.window.clearTimeout(this.animationTimeout);
+      }
+      this.animationTimeout = this.host.window.setTimeout(() => {
+        this.animationTimeout = null;
+        if (this.isBaseDestroyed() || !this.isOpenInternal()) return;
         this.host.renderer.setStyle(this.host.elementRef.nativeElement, 'opacity', '1');
         this.host.renderer.setStyle(this.host.elementRef.nativeElement, 'visibility', 'visible');
       }, 50);
@@ -874,6 +900,11 @@ export class MenuDirective
   private hideStandaloneMenu(): void {
     if (!this.host.isBrowser) return;
     if (this.dispatch('ds.menu.hide') === false) return;
+
+    if (this.animationTimeout !== null) {
+      this.host.window?.clearTimeout(this.animationTimeout);
+      this.animationTimeout = null;
+    }
 
     this.host.renderer.setStyle(this.host.elementRef.nativeElement, 'opacity', '0');
     this.host.renderer.setStyle(this.host.elementRef.nativeElement, 'visibility', 'hidden');
@@ -1329,8 +1360,13 @@ export class MenuDirective
   private cleanup(): void {
     this.executeSafely(() => {
       this.clearBaseDomListeners();
-      if (this.animationTimeout) {
-        clearTimeout(this.animationTimeout);
+
+      if (this.initializationTimeout !== null) {
+        this.host.window?.clearTimeout(this.initializationTimeout);
+        this.initializationTimeout = null;
+      }
+      if (this.animationTimeout !== null) {
+        this.host.window?.clearTimeout(this.animationTimeout);
         this.animationTimeout = null;
       }
 
@@ -1339,10 +1375,25 @@ export class MenuDirective
       });
       this.eventHandlers.clear();
 
-      this.hoverTimeouts.forEach((t) => clearTimeout(t));
+      this.hoverTimeouts.forEach((timeout, item) => {
+        this.host.window?.clearTimeout(timeout);
+        DataUtil.remove(item, 'hover');
+        DataUtil.remove(item, 'timeout');
+      });
       this.hoverTimeouts.clear();
 
       this.destroyStandaloneMenuPopper();
+      const hostElement = this.host.elementRef.nativeElement;
+      if (DataUtil.get(hostElement, 'menuDirective') === this) {
+        DataUtil.remove(hostElement, 'menuDirective');
+      }
+      if (
+        this.triggerElement &&
+        DataUtil.get(this.triggerElement, 'menuDirective') === this
+      ) {
+        DataUtil.remove(this.triggerElement, 'menuDirective');
+      }
+      this.triggerElement = null;
       this.baseCleanup();
     }, 'Cleanup failed');
   }
