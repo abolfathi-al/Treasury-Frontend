@@ -30,7 +30,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
 
-import { AUTH_SESSION } from '@core/auth';
 import { APP_BRAND } from '@core/config/brand.config';
 import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
 import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
@@ -64,6 +63,7 @@ import {
 } from '@core/interceptors';
 import { PAGE_NAVIGATION_ITEMS } from '@core/navigation';
 import { CustomTitleStrategy } from '@core/strategies';
+import { PROJECT_AUTH_PROVIDER } from './project/auth/project-auth.provider';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_DEFAULT_LAYOUT_TYPE } from './project/layout/project-layout.config';
@@ -71,7 +71,6 @@ import { PROJECT_NAVIGATION_ITEMS } from './project/navigation/project-navigatio
 import { PROJECT_ROUTES } from './project/routing/project.routes';
 import { PROJECT_RUNTIME_CONFIG } from './project/runtime/project-runtime.config';
 import { PROJECT_THEME_MODE } from './project/theme/project-theme.config';
-import { AuthService } from './modules/auth/data-access/auth.service';
 import { ErrorService } from './modules/errors/data-access/error.service';
 import { ErrorUtils } from './modules/errors/data-access/error.utils';
 import { ErrorCode as FeatureErrorCode } from './modules/errors/models/error.types';
@@ -300,10 +299,7 @@ export function getAppProviders(
       : []),
     ...buildModuleProviders(),
     ...demoContextProviders,
-    {
-      provide: AUTH_SESSION,
-      useExisting: AuthService,
-    },
+    PROJECT_AUTH_PROVIDER,
     {
       provide: APP_BRAND,
       useValue: PROJECT_BRAND,

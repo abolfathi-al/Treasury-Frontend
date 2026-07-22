@@ -16,6 +16,7 @@ import { APP_DEFAULT_LAYOUT_TYPE } from '@core/config/config';
 import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import { LayoutService } from '@core/services/layout.service';
 import { THEME_MODE_CONFIG } from '@core/services/theme-mode.model';
+import { PROJECT_AUTH_PROVIDER } from './project/auth/project-auth.provider';
 import { PROJECT_BRAND } from './project/brand/project-brand.config';
 import { PROJECT_LOCALE } from './project/locale/project-locale.config';
 import { PROJECT_DEFAULT_LAYOUT_TYPE } from './project/layout/project-layout.config';
@@ -114,6 +115,7 @@ describe('getAppProviders shell context providers', () => {
       includeServiceWorker: false,
     });
 
+    expect(appProviders).toContain(PROJECT_AUTH_PROVIDER);
     expect(appProviders).toContain(
       jasmine.objectContaining({
         provide: APP_BRAND,

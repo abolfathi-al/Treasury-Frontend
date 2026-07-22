@@ -50,8 +50,8 @@ As of 2026-07-22:
 - Frozen install, typecheck, lint, all 221 tests, i18n validation, production and
   SSR builds, and an HTTP 200 SSR smoke check pass.
 - Phase 2 remains in progress. Route, navigation, brand, locale, theme, layout,
-  and public runtime configuration are consumer-owned. Auth adapter wiring and
-  demo isolation still require separate slices.
+  public runtime configuration, and auth adapter wiring are consumer-owned.
+  Demo isolation still requires a separate slice.
 
 ## Baseline
 
