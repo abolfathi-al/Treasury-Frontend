@@ -432,6 +432,7 @@ export class TagifyDirective
     const element = this.host.elementRef.nativeElement as HTMLInputElement | HTMLTextAreaElement;
     const options = this.optionsManager.snapshot();
     const validation = this.validate();
+    this.validationChange.emit(validation);
 
     if (!validation.isValid) {
       const message = validation.errors.join(', ') || 'Invalid Tagify configuration';
@@ -451,31 +452,40 @@ export class TagifyDirective
       return;
     }
 
+    const callbacks = options.callbacks ?? {};
     const tagifyConfig: any = {
       ...options,
       callbacks: {
-        add: (e: CustomEvent) => this.handleAdd(e),
-        remove: (e: CustomEvent) => this.handleRemove(e),
-        input: (e: CustomEvent) => this.handleInput(e),
-        edit: (e: CustomEvent) => this.handleEdit(e),
-        invalid: (e: CustomEvent) => this.handleInvalid(e),
-        click: (e: CustomEvent) => this.handleClick(e),
-        focus: (e: CustomEvent) => this.handleFocus(e),
-        blur: (e: CustomEvent) => this.handleBlur(e),
-        keydown: (e: CustomEvent) => this.handleKeydown(e),
-        'dropdown:show': (e: CustomEvent) => this.handleDropdownShow(e),
-        'dropdown:hide': (e: CustomEvent) => this.handleDropdownHide(e),
-        'dropdown:select': (e: CustomEvent) => this.handleDropdownSelect(e),
-        ...options.callbacks,
+        ...callbacks,
+        ...(callbacks.edit && { 'edit:updated': callbacks.edit }),
+        ...(callbacks.dropdown?.show && { 'dropdown:show': callbacks.dropdown.show }),
+        ...(callbacks.dropdown?.hide && { 'dropdown:hide': callbacks.dropdown.hide }),
+        ...(callbacks.dropdown?.select && { 'dropdown:select': callbacks.dropdown.select }),
       },
     };
 
     this.tagifyInstance = new ctor(element, tagifyConfig);
+    this.attachEventCallbacks(this.tagifyInstance);
     this.status.setActive(true);
     this.status.setLoading(false);
     this.markBaseInitialized();
 
     this.updateTagsState();
+  }
+
+  private attachEventCallbacks(instance: any): void {
+    instance.on('add', (event: CustomEvent) => this.handleAdd(event));
+    instance.on('remove', (event: CustomEvent) => this.handleRemove(event));
+    instance.on('input', (event: CustomEvent) => this.handleInput(event));
+    instance.on('edit:updated', (event: CustomEvent) => this.handleEdit(event));
+    instance.on('invalid', (event: CustomEvent) => this.handleInvalid(event));
+    instance.on('click', (event: CustomEvent) => this.handleClick(event));
+    instance.on('focus', (event: CustomEvent) => this.handleFocus(event));
+    instance.on('blur', (event: CustomEvent) => this.handleBlur(event));
+    instance.on('keydown', (event: CustomEvent) => this.handleKeydown(event));
+    instance.on('dropdown:show', (event: CustomEvent) => this.handleDropdownShow(event));
+    instance.on('dropdown:hide', (event: CustomEvent) => this.handleDropdownHide(event));
+    instance.on('dropdown:select', (event: CustomEvent) => this.handleDropdownSelect(event));
   }
 
   private destroyTagify(): void {

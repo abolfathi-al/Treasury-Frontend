@@ -17,13 +17,29 @@ class FakeTagify {
 
   readonly value = [];
   readonly DOM: { originalInput: HTMLInputElement };
-  readonly settings: TagifyOptions = {};
+  readonly settings: TagifyOptions;
   readonly dropdown = { show: () => undefined };
+  private readonly handlers = new Map<string, Array<(event: CustomEvent) => void>>();
   destroyed = false;
 
-  constructor(element: HTMLInputElement) {
+  constructor(element: HTMLInputElement, settings: TagifyOptions = {}) {
     this.DOM = { originalInput: element };
+    this.settings = settings;
+    Object.entries(settings.callbacks ?? {}).forEach(([eventName, callback]) => {
+      if (typeof callback === 'function') this.on(eventName, callback);
+    });
     FakeTagify.instances.push(this);
+  }
+
+  on(eventName: string, callback: (event: CustomEvent) => void): this {
+    const handlers = this.handlers.get(eventName) ?? [];
+    handlers.push(callback);
+    this.handlers.set(eventName, handlers);
+    return this;
+  }
+
+  emit(eventName: string, event: CustomEvent): void {
+    this.handlers.get(eventName)?.forEach((callback) => callback(event));
   }
 
   destroy(): void {
@@ -108,5 +124,47 @@ describe('Tagify directive lifecycle', () => {
     expect(windowRef.requestAnimationFrame).toHaveBeenCalledTimes(1);
     fixture.destroy();
     expect(windowRef.cancelAnimationFrame).toHaveBeenCalledOnceWith(17);
+  });
+
+  it('keeps configured callbacks alongside directive outputs', async () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const internals = directive as unknown as TagifyDirectiveInternals;
+    const addCallback = jasmine.createSpy('addCallback');
+    const editCallback = jasmine.createSpy('editCallback');
+    const dropdownShowCallback = jasmine.createSpy('dropdownShowCallback');
+    const addOutput = spyOn(directive.addEvent, 'emit');
+    const editOutput = spyOn(directive.editEvent, 'emit');
+    const dropdownShowOutput = spyOn(directive.dropdownShowEvent, 'emit');
+    const validationOutput = spyOn(directive.validationChange, 'emit');
+    directive.updateOptions({
+      callbacks: {
+        add: addCallback,
+        edit: editCallback,
+        dropdown: { show: dropdownShowCallback },
+      },
+    });
+    internals.tagifyCtor = FakeTagify as unknown as typeof Tagify;
+
+    await internals.bootstrap();
+
+    const instance = FakeTagify.instances[0];
+    const addEvent = new CustomEvent('add');
+    const editEvent = new CustomEvent('edit:updated');
+    const dropdownShowEvent = new CustomEvent('dropdown:show');
+    instance.emit('add', addEvent);
+    instance.emit('edit:updated', editEvent);
+    instance.emit('dropdown:show', dropdownShowEvent);
+
+    expect(addCallback).toHaveBeenCalledOnceWith(addEvent);
+    expect(addOutput).toHaveBeenCalledOnceWith(addEvent);
+    expect(editCallback).toHaveBeenCalledOnceWith(editEvent);
+    expect(editOutput).toHaveBeenCalledOnceWith(editEvent);
+    expect(dropdownShowCallback).toHaveBeenCalledOnceWith(dropdownShowEvent);
+    expect(dropdownShowOutput).toHaveBeenCalledOnceWith(dropdownShowEvent);
+    expect(validationOutput).toHaveBeenCalledOnceWith({ isValid: true, errors: [] });
+
+    fixture.destroy();
   });
 });

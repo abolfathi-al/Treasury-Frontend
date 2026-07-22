@@ -441,6 +441,7 @@ environment
 environments
 equal
 err
+erro
 error
 errors
 escape
@@ -584,6 +585,7 @@ has
 hashed
 hashing
 hast
+have
 haye
 hazer
 header
@@ -1091,6 +1093,7 @@ report
 reporter
 reports
 repository
+represent
 request
 requests
 required
@@ -1342,6 +1345,7 @@ text
 textarea
 texts
 textual
+that
 the
 theme
 themes
