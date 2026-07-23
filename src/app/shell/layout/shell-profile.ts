@@ -18,6 +18,7 @@ export function resolveShellProfile(
 ): ShellProfile | null {
   if (legacyUser) {
     const name =
+      legacyUser.userDisplayName ||
       legacyUser.name ||
       legacyUser.fullname ||
       legacyUser.username ||

@@ -1,0 +1,41 @@
+export const methodDefinitionsWorkspaceFa = {
+  badge: "زیرساخت · داده‌های پایه",
+  title: "تعریف روش‌ها",
+  description: "مشاهده و ایجاد روش‌های کنترل‌شده دریافت و پرداخت بر اساس نشست جاری خزانه‌داری.",
+  loaded: "بارگذاری‌شده",
+  createTitle: "ایجاد تعریف روش",
+  listTitle: "روش‌های پیکربندی‌شده",
+  createAction: "ایجاد روش",
+  loadMore: "بارگذاری بیشتر",
+  empty: "هنوز هیچ تعریف روشی پیکربندی نشده است.",
+  loadError: "تعریف روش‌ها یا ارزهای فعال بارگذاری نشد.",
+  saveError: "تعریف روش ایجاد نشد. پاسخ سرور و مقادیر فرم را بررسی کنید.",
+  readOnly: "نشست شما اجازه مشاهده دارد، اما مجوز master-data.manage را ندارد.",
+  crossFieldError: "مرجع منبع، شماره پیگیری، نگاشت‌های OTHER_CONTROLLED، ارز سقف مبلغ و تعداد ارقام اعشار ارز را بررسی کنید.",
+  mappingsTitle: "نگاشت‌های حسابداری و قالب",
+  fields: {
+    code: "کد",
+    name: "نام",
+    direction: "جهت",
+    behavior: "دسته رفتار",
+    references: "مراجع الزامی",
+    currencies: "ارزهای مجاز",
+    fundsInTransit: "ایجاد وجوه در راه",
+    requiresApproval: "نیازمند تأیید",
+    debitMappingRef: "نگاشت بدهکار",
+    creditMappingRef: "نگاشت بستانکار",
+    feeMappingRef: "نگاشت کارمزد",
+    discrepancyMappingRef: "نگاشت مغایرت",
+    templateMappingRef: "نگاشت قالب",
+    state: "وضعیت"
+  },
+  amountLimits: {
+    title: "سقف‌های مبلغ اختیاری",
+    help: "هر ارز فقط یک‌بار مجاز است و باید در ارزهای مجاز انتخاب شده باشد. نبود ردیف یعنی بدون سقف در سطح روش.",
+    add: "افزودن سقف",
+    currency: "ارز",
+    amount: "حداکثر مثبت",
+    invalid: "یک عدد اعشاری مثبت مطابق قالب مبلغ Canon وارد کنید.",
+    remove: "حذف سقف مبلغ"
+  }
+} as const;

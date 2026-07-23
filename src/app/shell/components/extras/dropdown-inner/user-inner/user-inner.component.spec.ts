@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { AUTH_SESSION } from '@core/auth';
 import { LANGUAGE_SERVICE, LanguageServicePort } from '@core/i18n';
-import { LOCATION } from '@core/tokens';
 import { UserInnerComponent } from './user-inner.component';
 
 const createUser = (name: string, year: string) => ({
@@ -23,8 +22,7 @@ const createUser = (name: string, year: string) => ({
 type TestUser = ReturnType<typeof createUser>;
 type TestAuthSession = {
   initializeAuth: () => Promise<undefined>;
-  getAuthToken: () => undefined;
-  refreshAccessToken: () => Observable<undefined>;
+  invalidateSession: () => void;
   logout: jasmine.Spy;
   getCurrentUserSnapshot: () => TestUser | undefined;
   getCurrentUserChanges: () => Observable<TestUser | undefined>;
@@ -33,7 +31,6 @@ type TestAuthSession = {
 describe('UserInnerComponent auth session boundary', () => {
   let authUser: BehaviorSubject<TestUser | undefined>;
   let authSession: TestAuthSession;
-  let location: { reload: jasmine.Spy };
   let languageService: LanguageServicePort;
 
   const createComponent = () =>
@@ -43,14 +40,10 @@ describe('UserInnerComponent auth session boundary', () => {
     authUser = new BehaviorSubject<TestUser | undefined>(undefined);
     authSession = {
       initializeAuth: () => Promise.resolve(undefined),
-      getAuthToken: () => undefined,
-      refreshAccessToken: () => of(undefined),
+      invalidateSession: () => undefined,
       logout: jasmine.createSpy('logout'),
       getCurrentUserSnapshot: () => authUser.value,
       getCurrentUserChanges: () => authUser.asObservable(),
-    };
-    location = {
-      reload: jasmine.createSpy('reload'),
     };
     languageService = {
       getSelectedLanguage: () => 'fa',
@@ -66,7 +59,6 @@ describe('UserInnerComponent auth session boundary', () => {
         provideZonelessChangeDetection(),
         { provide: AUTH_SESSION, useValue: authSession },
         { provide: LANGUAGE_SERVICE, useValue: languageService },
-        { provide: LOCATION, useValue: location },
       ],
     });
   });
@@ -87,13 +79,12 @@ describe('UserInnerComponent auth session boundary', () => {
     );
   });
 
-  it('logs out through the core auth session and reloads the browser context', () => {
+  it('logs out through the core auth session', () => {
     const component = createComponent();
 
     component.logout();
 
     expect(authSession.logout).toHaveBeenCalled();
-    expect(location.reload).toHaveBeenCalled();
   });
 
   it('keeps language selection behind the language port', () => {

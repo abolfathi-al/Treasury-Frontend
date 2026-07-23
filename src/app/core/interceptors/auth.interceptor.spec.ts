@@ -20,18 +20,17 @@ describe('authInterceptor', () => {
 
   const authSession: AuthSessionPort = {
     initializeAuth: () => Promise.resolve(undefined),
-    getAuthToken: () => ({
-      accessToken: 'access-token',
-      refreshToken: 'refresh-token',
-      expiresIn: new Date('2030-01-01T00:00:00.000Z'),
-    }),
-    refreshAccessToken: () => of(undefined),
+    invalidateSession: jasmine.createSpy('invalidateSession'),
     logout: () => undefined,
     getCurrentUserSnapshot: () => undefined,
     getCurrentUserChanges: () => of(undefined),
   };
 
   beforeEach(() => {
+    (
+      authSession.invalidateSession as jasmine.Spy
+    ).calls.reset();
+
     TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
@@ -49,15 +48,40 @@ describe('authInterceptor', () => {
     httpTesting.verify();
   });
 
-  it('adds the bearer token from the core auth session contract', async () => {
+  it('does not add a bearer token to opaque cookie session requests', async () => {
     const response = firstValueFrom(http.get<{ ok: boolean }>('/api/orders'));
 
     const request = httpTesting.expectOne('/api/orders');
-    expect(request.request.headers.get('Authorization')).toBe(
-      'Bearer access-token'
-    );
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     request.flush({ ok: true });
 
     await expectAsync(response).toBeResolvedTo({ ok: true });
   });
+
+  it('invalidates local session state after a protected business HTTP 401', async () => {
+    const response = firstValueFrom(http.get('/v1/method-definitions'));
+    const request = httpTesting.expectOne('/v1/method-definitions');
+    request.flush({}, { status: 401, statusText: 'Unauthorized' });
+
+    await expectAsync(response).toBeRejected();
+    expect(authSession.invalidateSession).toHaveBeenCalled();
+  });
+
+  for (const requestCase of [
+    { method: 'POST', url: '/v1/auth/sessions' },
+    { method: 'POST', url: '/v1/auth/totp-verifications' },
+    { method: 'POST', url: '/v1/auth/password-recoveries' },
+    { method: 'GET', url: '/v1/auth/sessions/current' },
+  ]) {
+    it(`does not invalidate for an anonymous ${requestCase.method} ${requestCase.url} 401`, async () => {
+      const response = firstValueFrom(
+        http.request(requestCase.method, requestCase.url),
+      );
+      const request = httpTesting.expectOne(requestCase.url);
+      request.flush({}, { status: 401, statusText: 'Unauthorized' });
+
+      await expectAsync(response).toBeRejected();
+      expect(authSession.invalidateSession).not.toHaveBeenCalled();
+    });
+  }
 });

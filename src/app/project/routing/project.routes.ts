@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { LayoutComponent } from '@shell/layout/layout.component';
+import { AuthGuard } from '@modules/auth/guards/auth.guard';
 
 export const PROJECT_ROUTES: Routes = [
   {
@@ -15,10 +16,7 @@ export const PROJECT_ROUTES: Routes = [
   },
   {
     path: '',
-    // TODO(context-demo): Keep this shell in demo mode until the Context/Auth
-    // Facade exists for SSO, organization context, active access context, and
-    // actor context. Do not wire this copied guard to legacy auth.
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: LayoutComponent,
     children: [
       {
@@ -30,6 +28,19 @@ export const PROJECT_ROUTES: Routes = [
         data: {
           titleKey: 'workspace.dashboard.title',
           descriptionKey: 'workspace.dashboard.description',
+        },
+      },
+      {
+        path: 'foundation/method-definitions',
+        canActivate: [AuthGuard],
+        loadComponent: () =>
+          import(
+            '../../modules/master-data/method-definitions/method-definitions.component'
+          ).then((m) => m.MethodDefinitionsComponent),
+        data: {
+          titleKey: 'workspace.methodDefinitions.title',
+          descriptionKey: 'workspace.methodDefinitions.description',
+          permissions: ['master-data.view'],
         },
       },
       {

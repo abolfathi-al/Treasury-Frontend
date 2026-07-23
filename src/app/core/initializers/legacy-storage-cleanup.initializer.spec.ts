@@ -11,6 +11,7 @@ import {
   LOCAL_STORAGE,
   SESSION_STORAGE,
 } from '@core/tokens';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 import {
   legacyStorageCleanupSetup,
   shouldRemoveLegacyStorageKey,
@@ -55,6 +56,12 @@ class MemoryStorage implements Storage {
 describe('legacyStorageCleanupSetup', () => {
   let localStorageRef: MemoryStorage;
   let sessionStorageRef: MemoryStorage;
+  const retiredAuthStorageKey = 'velora-enterprise-0.1.2-velora_auth';
+  const runtimeConfig = {
+    appVersion: 'velora-enterprise-0.1.2',
+    authStorageKey: 'velora_auth',
+    apiUrl: '',
+  };
 
   beforeEach(() => {
     localStorageRef = new MemoryStorage();
@@ -68,22 +75,38 @@ describe('legacyStorageCleanupSetup', () => {
     expect(shouldRemoveLegacyStorageKey(legacyKey('language'))).toBeTrue();
     expect(shouldRemoveLegacyStorageKey(legacyDashKey('scroll-position'))).toBeTrue();
     expect(shouldRemoveLegacyStorageKey(legacyDataKey('panel'))).toBeTrue();
+    expect(
+      shouldRemoveLegacyStorageKey(
+        retiredAuthStorageKey,
+        retiredAuthStorageKey,
+      ),
+    ).toBeTrue();
     expect(shouldRemoveLegacyStorageKey('velora_language')).toBeFalse();
     expect(shouldRemoveLegacyStorageKey('velora_theme_mode_value')).toBeFalse();
+    expect(
+      shouldRemoveLegacyStorageKey(
+        'velora-enterprise-0.1.2-layout',
+        retiredAuthStorageKey,
+      ),
+    ).toBeFalse();
   });
 
   it('removes legacy-prefixed keys from local and session storage', async () => {
     localStorageRef.setItem(legacyKey('language'), 'fa');
     localStorageRef.setItem(legacyKey('theme_mode_value'), 'dark');
     localStorageRef.setItem('velora_language', 'en');
+    localStorageRef.setItem(retiredAuthStorageKey, 'retired-local-session');
+    localStorageRef.setItem('velora-enterprise-0.1.2-layout', 'sidebar');
     sessionStorageRef.setItem(legacyDashKey('login-token'), 'legacy');
-    sessionStorageRef.setItem('velora-enterprise-0.1.2-velora_auth', 'current');
+    sessionStorageRef.setItem(retiredAuthStorageKey, 'retired-session');
+    sessionStorageRef.setItem('velora_theme_mode_value', 'dark');
 
     const childInjector = createEnvironmentInjector(
       [
         { provide: IS_BROWSER_PLATFORM, useValue: true },
         { provide: LOCAL_STORAGE, useValue: localStorageRef },
         { provide: SESSION_STORAGE, useValue: sessionStorageRef },
+        { provide: APP_RUNTIME_CONFIG, useValue: runtimeConfig },
       ],
       TestBed.inject(EnvironmentInjector)
     );
@@ -95,10 +118,13 @@ describe('legacyStorageCleanupSetup', () => {
     expect(localStorageRef.getItem(legacyKey('language'))).toBeNull();
     expect(localStorageRef.getItem(legacyKey('theme_mode_value'))).toBeNull();
     expect(localStorageRef.getItem('velora_language')).toBe('en');
-    expect(sessionStorageRef.getItem(legacyDashKey('login-token'))).toBeNull();
-    expect(sessionStorageRef.getItem('velora-enterprise-0.1.2-velora_auth')).toBe(
-      'current'
+    expect(localStorageRef.getItem(retiredAuthStorageKey)).toBeNull();
+    expect(localStorageRef.getItem('velora-enterprise-0.1.2-layout')).toBe(
+      'sidebar',
     );
+    expect(sessionStorageRef.getItem(legacyDashKey('login-token'))).toBeNull();
+    expect(sessionStorageRef.getItem(retiredAuthStorageKey)).toBeNull();
+    expect(sessionStorageRef.getItem('velora_theme_mode_value')).toBe('dark');
   });
 
   it('does not access storage outside the browser runtime', async () => {
@@ -109,6 +135,7 @@ describe('legacyStorageCleanupSetup', () => {
         { provide: IS_BROWSER_PLATFORM, useValue: false },
         { provide: LOCAL_STORAGE, useValue: localStorageRef },
         { provide: SESSION_STORAGE, useValue: sessionStorageRef },
+        { provide: APP_RUNTIME_CONFIG, useValue: runtimeConfig },
       ],
       TestBed.inject(EnvironmentInjector)
     );

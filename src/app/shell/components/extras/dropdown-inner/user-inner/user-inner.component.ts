@@ -14,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AUTH_SESSION } from '@core/auth';
 import { LANGUAGE_SERVICE } from '@core/i18n';
 import { AuthFacade } from '@core/state/context';
-import { LOCATION } from '@core/tokens';
 import { MenuDirective } from '@shared/directives/menu.directive';
 import { resolveShellProfile } from '@shell/layout/shell-profile';
 
@@ -57,7 +56,6 @@ const USER_INNER_CONSTANTS = {
   },
 })
 export class UserInnerComponent implements OnInit {
-  private readonly location = inject<Location>(LOCATION);
   private readonly auth = inject(AUTH_SESSION);
   private readonly contextAuth = inject(AuthFacade, { optional: true });
   private readonly languageService = inject(LANGUAGE_SERVICE);
@@ -79,7 +77,6 @@ export class UserInnerComponent implements OnInit {
 
   logout(): void {
     this.auth.logout();
-    this.location.reload();
   }
 
   selectLanguage(lang: string): void {

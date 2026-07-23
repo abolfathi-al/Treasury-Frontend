@@ -1,87 +1,227 @@
-import { Injectable, inject, signal, computed, DestroyRef } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, BehaviorSubject, of, throwError, map, catchError, switchMap, finalize, tap, first, shareReplay, lastValueFrom } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import md5 from 'md5';
+import { Router } from '@angular/router';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  finalize,
+  first,
+  firstValueFrom,
+  of,
+  shareReplay,
+  tap,
+  throwError,
+} from 'rxjs';
 
 import { AuthSessionPort } from '@core/auth';
 import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
-import { SESSION_STORAGE } from '@core/tokens';
 import { LoggerService } from '@core/services/logger.service';
-import { AuthModel, UserModel } from '@models/auth';
-import { PermissionService } from './permission.service';
 import { NotificationService } from '@core/services/notification.service';
-import { runSafely } from '@shared/directives/shared/directive-helpers';
+import { PermissionService } from './permission.service';
+import {
+  LoginRequest,
+  LoginResponse,
+  PasswordRecoveryCompleted,
+  PasswordRecoveryRequest,
+  SessionEstablished,
+  SessionView,
+  TotpProof,
+  TotpResponse,
+  TreasuryProblem,
+} from './auth-contracts';
 
-export type UserType = UserModel | undefined;
-export type AuthState = 'idle' | 'loading' | 'authenticated' | 'unauthenticated' | 'error';
+export type UserType = SessionView | undefined;
+export type AuthState =
+  | 'idle'
+  | 'loading'
+  | 'authenticated'
+  | 'unauthenticated'
+  | 'error';
+
+const CREDENTIALS = { withCredentials: true } as const;
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements AuthSessionPort {
-  // Injected dependencies
   private readonly runtimeConfig = inject(APP_RUNTIME_CONFIG);
-  private readonly sessionStorage = inject<Storage>(SESSION_STORAGE, { optional: true });
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly permissionService = inject(PermissionService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly notificationService = inject(NotificationService);
   private readonly logger = inject(LoggerService);
-  // Private fields
-  private readonly authApiUrl = `${this.runtimeConfig.apiUrl}/api/auth`;
-  private readonly authLocalSessionToken = `${this.runtimeConfig.appVersion}-${this.runtimeConfig.authStorageKey}`;
+  private readonly apiUrl = this.runtimeConfig.apiUrl;
 
-  // Signals for reactive state management
   private readonly _currentUser = signal<UserType>(undefined);
-  private readonly _isLoading = signal<boolean>(false);
+  private readonly _isLoading = signal(false);
   private readonly _authState = signal<AuthState>('idle');
 
-  // Computed values
   readonly currentUser = computed(() => this._currentUser());
   readonly isLoading = computed(() => this._isLoading());
   readonly authState = computed(() => this._authState());
-  readonly isAuthenticated = computed(() => this._authState() === 'authenticated');
-  
-  // Permission-related computed values (delegated to PermissionService)
+  readonly isAuthenticated = computed(
+    () => this._authState() === 'authenticated',
+  );
   readonly permissions = computed(() => this.permissionService.permissions());
-  readonly hasPermissions = computed(() => this.permissionService.hasPermissions());
+  readonly hasPermissions = computed(() =>
+    this.permissionService.hasPermissions(),
+  );
 
-  // Observable streams for backward compatibility
-  readonly currentUser$: Observable<UserType>;
-  readonly isLoading$: Observable<boolean>;
-  readonly authState$: Observable<AuthState>;
-
-  // Behavior subjects for observables
   readonly currentUserSubject = new BehaviorSubject<UserType>(undefined);
-  private readonly isLoadingSubject = new BehaviorSubject<boolean>(false);
+  private readonly isLoadingSubject = new BehaviorSubject(false);
   private readonly authStateSubject = new BehaviorSubject<AuthState>('idle');
 
-  constructor() {
-    // Initialize observables
-    this.currentUser$ = this.currentUserSubject.asObservable().pipe(shareReplay(1));
-    this.isLoading$ = this.isLoadingSubject.asObservable().pipe(shareReplay(1));
-    this.authState$ = this.authStateSubject.asObservable().pipe(shareReplay(1));
-  }
+  readonly currentUser$ = this.currentUserSubject
+    .asObservable()
+    .pipe(shareReplay(1));
+  readonly isLoading$ = this.isLoadingSubject
+    .asObservable()
+    .pipe(shareReplay(1));
+  readonly authState$ = this.authStateSubject
+    .asObservable()
+    .pipe(shareReplay(1));
 
-  // Getters for backward compatibility
   get currentUserValue(): UserType {
     return this._currentUser();
   }
 
-  set currentUserValue(user: UserType) {
-    this._currentUser.set(user);
-    this.currentUserSubject.next(user);
+  initializeAuth(): Promise<UserType> {
+    return firstValueFrom(
+      this.getCurrentSession().pipe(
+        catchError(() => {
+          this.setUnauthenticated();
+          return of(undefined);
+        }),
+      ),
+    );
   }
 
-  get getAuthTokenFromSessionStorage(): AuthModel | undefined {
-    return this.getAuthFromSessionStorage();
+  login(request: LoginRequest): Observable<LoginResponse> {
+    this.setLoading();
+
+    return this.http
+      .post<LoginResponse>(`${this.apiUrl}/v1/auth/sessions`, request, {
+        ...CREDENTIALS,
+        headers: this.requestHeaders(),
+      })
+      .pipe(
+        tap((response) => {
+          if (response.outcome === 'SESSION_ESTABLISHED') {
+            this.acceptSession(response);
+          } else {
+            this._authState.set('unauthenticated');
+            this.authStateSubject.next('unauthenticated');
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this._authState.set('error');
+          this.authStateSubject.next('error');
+          return throwError(() => error);
+        }),
+        finalize(() => this.finishLoading()),
+      );
   }
 
-  getAuthToken(): AuthModel | undefined {
-    return this.getAuthFromSessionStorage();
+  verifyTotp(proof: TotpProof): Observable<TotpResponse> {
+    this.setLoading();
+
+    return this.http
+      .post<TotpResponse>(
+        `${this.apiUrl}/v1/auth/totp-verifications`,
+        proof,
+        {
+          ...CREDENTIALS,
+          headers: this.requestHeaders(),
+        },
+      )
+      .pipe(
+        tap((response) => {
+          if (response.outcome === 'SESSION_ESTABLISHED') {
+            this.acceptSession(response);
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this._authState.set('error');
+          this.authStateSubject.next('error');
+          return throwError(() => error);
+        }),
+        finalize(() => this.finishLoading()),
+      );
+  }
+
+  getCurrentSession(): Observable<UserType> {
+    this.setLoading();
+
+    return this.http
+      .get<SessionView>(`${this.apiUrl}/v1/auth/sessions/current`, CREDENTIALS)
+      .pipe(
+        tap((session) => this.acceptSessionView(session)),
+        catchError((error: HttpErrorResponse) => {
+          this.setUnauthenticated();
+          return throwError(() => error);
+        }),
+        finalize(() => this.finishLoading()),
+      );
+  }
+
+  recoverPassword(
+    request: PasswordRecoveryRequest,
+  ): Observable<PasswordRecoveryCompleted> {
+    this.setLoading(false);
+
+    return this.http
+      .post<PasswordRecoveryCompleted>(
+        `${this.apiUrl}/v1/auth/password-recoveries`,
+        request,
+        {
+          ...CREDENTIALS,
+          headers: this.requestHeaders(),
+        },
+      )
+      .pipe(finalize(() => this.finishLoading()));
+  }
+
+  logout(): void {
+    const sessionId = this._currentUser()?.sessionId;
+    if (!sessionId) {
+      this.invalidateSession();
+      return;
+    }
+
+    this.setLoading(false);
+    this.http
+      .delete<void>(
+        `${this.apiUrl}/v1/auth/sessions/${encodeURIComponent(sessionId)}`,
+        {
+          ...CREDENTIALS,
+          headers: this.requestHeaders(),
+        },
+      )
+      .pipe(
+        first(),
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => this.invalidateSession()),
+        catchError((error: HttpErrorResponse) => {
+          this.logger.error('Logout API error', 'AuthService', { error });
+          if (error.status === 401) {
+            this.invalidateSession();
+            return of(undefined);
+          }
+
+          this.notifyError(error, 'logout');
+          return of(undefined);
+        }),
+        finalize(() => this.finishLoading()),
+      )
+      .subscribe();
+  }
+
+  invalidateSession(): void {
+    this.setUnauthenticated();
+    void this.router.navigate(['/auth/login']);
   }
 
   getCurrentUserSnapshot(): UserType {
@@ -92,19 +232,6 @@ export class AuthService implements AuthSessionPort {
     return this.currentUser$;
   }
 
-  // Public method for APP_INITIALIZER to use
-  initializeAuth(): Promise<UserType> {
-    const auth = this.getAuthFromSessionStorage();
-    if (!auth || !auth.accessToken) {
-      this._authState.set('unauthenticated');
-      return Promise.resolve(undefined);
-    }
-    
-    this._authState.set('authenticated');
-    return lastValueFrom(this.getUserByToken());
-  }
-
-  // Permission management methods (delegated to PermissionService)
   hasPermission(permission: string): boolean {
     return this.permissionService.hasPermission(permission);
   }
@@ -117,222 +244,80 @@ export class AuthService implements AuthSessionPort {
     return this.permissionService.hasAllPermissions(permissions);
   }
 
-  private updatePermissions(permissions: string[]): void {
-    this.permissionService.loadPermissions(permissions);
-  }
-
-  login(companyCode: string, twoCharsFiscalYear: string, username?: string, password?: string): Observable<UserType> {
-    const request = {
-      ...(username ? { username } : {}),
-      ...(password ? { mD5Password: md5(password) } : {}),
-      companyCode,
-      twoCharsFiscalYear,
-    };
-
-    this._isLoading.set(true);
-    this._authState.set('loading');
-    this.isLoadingSubject.next(true);
-
-    return this.http.post<AuthModel>(`${this.authApiUrl}/getToken`, request).pipe(
-      map((data) => {
-        this.setAuthFromSessionStorage(data);
-        return data;
-      }),
-      switchMap(() => this.getUserByToken()),
-      tap((user) => {
-        if (user) {
-          this._authState.set('authenticated');
-          this._currentUser.set(user);
-          this.currentUserSubject.next(user);
-        }
-      }),
-      catchError((err) => {
-        this.logger.error('Login error', 'AuthService', { error: err });
-        this._authState.set('error');
-        return this.handleError('login', undefined)(err);
-      }),
-      finalize(() => {
-        this._isLoading.set(false);
-        this.isLoadingSubject.next(false);
-      })
-    );
-  }
-
-  logout(): void {
-    const auth = this.getAuthFromSessionStorage();
-
-    // Clear all state
-    this._currentUser.set(undefined);
-    this._authState.set('unauthenticated');
-    this._isLoading.set(false);
-
-    // Update observables
-    this.currentUserSubject.next(undefined);
-    this.authStateSubject.next('unauthenticated');
-
-    // Clear storage and permissions
-    this.sessionStorage?.removeItem(this.authLocalSessionToken);
-    
-    this.permissionService.clearAll();
-
-    // Navigate to login
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
-    });
-
-    // Call logout API if refresh token exists
-    if (auth?.refreshToken) {
-      this.http.post<void>(`${this.authApiUrl}/logout`, {
-        refreshToken: auth.refreshToken
-      }).pipe(
-        first(),
-        takeUntilDestroyed(this.destroyRef),
-        catchError((err) => {
-          this.logger.error('Logout API error', 'AuthService', { error: err });
-          return of(undefined);
-        })
-      ).subscribe();
-    }
-  }
-
-  getUserByToken(): Observable<UserType> {
-    const auth = this.getAuthFromSessionStorage();
-    if (!auth || !auth.accessToken) {
-      this._authState.set('unauthenticated');
-      return of(undefined);
-    }
-
-    this._isLoading.set(true);
-    this.isLoadingSubject.next(true);
-
-    return this.http.get<UserModel>(`${this.authApiUrl}/me`).pipe(
-      map((user: UserType) => {
-        if (user) {
-          // Update permissions
-          this.updatePermissions(user.accessList || []);
-          
-          // Update user state
-          this._currentUser.set(user);
-          this._authState.set('authenticated');
-          this.currentUserSubject.next(user);
-          this.authStateSubject.next('authenticated');
-        } else {
-          this.logout();
-        }
-        return user;
-      }),
-      catchError((err) => {
-        this.logger.error('Get user by token error', 'AuthService', { error: err });
-        this._authState.set('error');
-        this.logout();
-        return of(undefined);
-      }),
-      finalize(() => {
-        this._isLoading.set(false);
-        this.isLoadingSubject.next(false);
-      })
-    );
-  }
-
-  // Registration
-  registration(user: UserModel): Observable<UserModel> {
-    this._isLoading.set(true);
-    this.isLoadingSubject.next(true);
-
-    return this.http.post<UserModel>(this.authApiUrl, user).pipe(
-      tap((registeredUser) => {
-        this.logger.info('User registered successfully', 'AuthService', { user: registeredUser });
-      }),
-      catchError((err) => {
-        this.logger.error('Registration error', 'AuthService', { error: err });
-        return this.handleError('registration', user)(err);
-      }),
-      finalize(() => {
-        this._isLoading.set(false);
-        this.isLoadingSubject.next(false);
-      })
-    );
-  }
-
-  // Forgot password
-  forgotPassword(email: string): Observable<boolean> {
-    this._isLoading.set(true);
-    this.isLoadingSubject.next(true);
-
-    return this.http.post<boolean>(`${this.authApiUrl}/forgot-password`, { email }).pipe(
-      tap((success) => {
-        if (success) {
-          this.logger.info('Password reset email sent successfully', 'AuthService');
-        }
-      }),
-      catchError((err) => {
-        this.logger.error('Forgot password error', 'AuthService', { error: err });
-        return this.handleError('forgot password', false)(err);
-      }),
-      finalize(() => {
-        this._isLoading.set(false);
-        this.isLoadingSubject.next(false);
-      })
-    );
-  }
-
-  // Refresh access token
-  refreshAccessToken(): Observable<AuthModel | undefined> {
-    const auth = this.getAuthFromSessionStorage();
-    if (!auth || !auth.refreshToken) {
-      return of(undefined);
-    }
-
-    return this.http.post<AuthModel>(`${this.authApiUrl}/refresh`, {
-      refreshToken: auth.refreshToken
-    }).pipe(
-      map((data) => {
-        this.setAuthFromSessionStorage(data);
-        return data;
-      }),
-      catchError((err) => {
-        this.logger.error('Token refresh error', 'AuthService', { error: err });
-        this.logout();
-        return of(undefined);
-      })
-    );
-  }
-  // Private methods
-  private setAuthFromSessionStorage(auth: AuthModel) {
-    runSafely(() => {
-      if (!this.sessionStorage) return;
-      this.sessionStorage.setItem(this.authLocalSessionToken, JSON.stringify(auth));
-    }, (error) => this.logger.error('Failed to set auth from session storage', 'AuthService', { error }));
-  }
-
-  private getAuthFromSessionStorage(): AuthModel | undefined {
-    return runSafely(() => {
-      if (!this.sessionStorage) return undefined;
-      const lsValue = this.sessionStorage.getItem(this.authLocalSessionToken);
-      if (!lsValue) return undefined;
-      return JSON.parse(lsValue);
-    }, (error) => this.logger.error('Failed to get auth from session storage', 'AuthService', { error }));
-  }
-
-  // Error handling
   handleError<T>(operation = 'operation', result?: T) {
-    return ({ error: { errors, title } = {} }: HttpErrorResponse): Observable<T> => {
-      this.notificationService.toast({
-        ...(Array.isArray(errors) ? {
-          title: undefined,
-          html: errors.map(({ errorMessage }: { errorMessage: string }) => errorMessage).join('<br/>'),
-        } : {
-          text: `${title || errors} - ${operation}`,
-        }),
-        icon: 'error',
-      });
+    return (error: HttpErrorResponse): Observable<T> => {
+      this.notifyError(error, operation);
 
-      if (result) {
+      if (result !== undefined) {
         return of(result);
       }
 
-      return throwError(() => new Error(errors));
+      return throwError(() => error);
     };
   }
 
+  private requestHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'X-Request-Id': globalThis.crypto.randomUUID(),
+    });
+  }
+
+  private acceptSession(response: SessionEstablished): void {
+    this.acceptSessionView(response.session);
+  }
+
+  private acceptSessionView(session: SessionView): void {
+    this._currentUser.set(session);
+    this.currentUserSubject.next(session);
+    this.permissionService.loadPermissions([...session.effectivePermissions]);
+    this._authState.set('authenticated');
+    this.authStateSubject.next('authenticated');
+  }
+
+  private setUnauthenticated(): void {
+    this._currentUser.set(undefined);
+    this.currentUserSubject.next(undefined);
+    this.permissionService.clearAll();
+    this._authState.set('unauthenticated');
+    this.authStateSubject.next('unauthenticated');
+  }
+
+  private setLoading(updateAuthState = true): void {
+    this._isLoading.set(true);
+    this.isLoadingSubject.next(true);
+    if (updateAuthState) {
+      this._authState.set('loading');
+      this.authStateSubject.next('loading');
+    }
+  }
+
+  private finishLoading(): void {
+    this._isLoading.set(false);
+    this.isLoadingSubject.next(false);
+  }
+
+  private notifyError(error: HttpErrorResponse, operation: string): void {
+    const problem = this.readProblem(error);
+    const fieldDetails = problem?.fieldErrors
+      ?.map((fieldError) => fieldError.message)
+      .join('\n');
+
+    void this.notificationService.toast({
+      title: problem?.title,
+      text:
+        fieldDetails ||
+        problem?.detail ||
+        problem?.title ||
+        `${error.statusText || 'Request failed'} - ${operation}`,
+      icon: 'error',
+    });
+  }
+
+  private readProblem(error: HttpErrorResponse): TreasuryProblem | undefined {
+    const value: unknown = error.error;
+    if (!value || typeof value !== 'object' || !('code' in value)) {
+      return undefined;
+    }
+    return value as TreasuryProblem;
+  }
 }

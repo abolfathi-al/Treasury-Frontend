@@ -1,0 +1,41 @@
+export const methodDefinitionsWorkspaceEn = {
+  badge: "Foundation · Master Data",
+  title: "Method Definitions",
+  description: "List and create the controlled receipt and payment methods authorized by the current Treasury session.",
+  loaded: "loaded",
+  createTitle: "Create Method Definition",
+  listTitle: "Configured methods",
+  createAction: "Create method",
+  loadMore: "Load more",
+  empty: "No Method Definitions are configured yet.",
+  loadError: "Method Definitions or active currencies could not be loaded.",
+  saveError: "The Method Definition was not created. Review the server response and form values.",
+  readOnly: "Your session can view Method Definitions but does not include master-data.manage.",
+  crossFieldError: "Check the behavior anchor, tracking reference, OTHER_CONTROLLED mappings, amount-limit currencies, and currency decimal scale.",
+  mappingsTitle: "Accounting and template mappings",
+  fields: {
+    code: "Code",
+    name: "Name",
+    direction: "Direction",
+    behavior: "Behavior category",
+    references: "Required references",
+    currencies: "Allowed currencies",
+    fundsInTransit: "Creates funds in transit",
+    requiresApproval: "Requires approval",
+    debitMappingRef: "Debit mapping",
+    creditMappingRef: "Credit mapping",
+    feeMappingRef: "Fee mapping",
+    discrepancyMappingRef: "Discrepancy mapping",
+    templateMappingRef: "Template mapping",
+    state: "State"
+  },
+  amountLimits: {
+    title: "Optional amount limits",
+    help: "Each currency can appear once and must be selected in Allowed currencies. No row means unlimited at Method level.",
+    add: "Add limit",
+    currency: "Currency",
+    amount: "Positive maximum",
+    invalid: "Enter a positive decimal using the Canon amount syntax.",
+    remove: "Remove amount limit"
+  }
+} as const;

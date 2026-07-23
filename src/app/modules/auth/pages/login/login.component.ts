@@ -1,16 +1,30 @@
-import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable, catchError, finalize, first, tap } from 'rxjs';
+import { catchError, finalize, first, tap } from 'rxjs';
 
-import { StepperDirective } from '@shared/directives/stepper.directive';
-import { VeloraIconComponent } from '@shared/icons/velora-icon/velora-icon.component';
 import { InvalidFeedbackComponent } from '@shared/forms/invalid-feedback/invalid-feedback.component';
-import { environment } from '@environments/environment';
+import { VeloraIconComponent } from '@shared/icons/velora-icon/velora-icon.component';
+import { LoginChallenge } from '../../data-access/auth-contracts';
 import { AuthService } from '../../data-access/auth.service';
+import { passwordCodePointLengthValidator } from '../../data-access/auth.validators';
+
+type LoginStep = 'credentials' | 'totp';
 
 @Component({
   selector: 'vl-login',
@@ -19,37 +33,28 @@ import { AuthService } from '../../data-access/auth.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    AsyncPipe,
     ReactiveFormsModule,
+    RouterLink,
     TranslateModule,
-    StepperDirective,
     VeloraIconComponent,
     InvalidFeedbackComponent,
-  ]
+  ],
 })
 export class LoginComponent implements OnInit {
-  // Signals for reactive state management
-  private readonly _hasError = signal<boolean>(false);
-  private readonly _isSubmitting = signal<boolean>(false);
+  private readonly _hasError = signal(false);
+  private readonly _isSubmitting = signal(false);
+  private readonly _step = signal<LoginStep>('credentials');
+  private readonly _challenge = signal<LoginChallenge | null>(null);
 
-  // Computed values
   readonly hasError = computed(() => this._hasError());
   readonly isSubmitting = computed(() => this._isSubmitting());
-  readonly isProd = computed(() => environment.production);
+  readonly step = computed(() => this._step());
+  readonly challenge = computed(() => this._challenge());
 
-  // Form and navigation
-  form: FormGroup;
-  returnUrl: string;
-  isLoading$: Observable<boolean>;
+  credentialsForm: FormGroup;
+  totpForm: FormGroup;
+  returnUrl = '/dashboard';
 
-  // Default auth values for development
-  private readonly defaultAuth = {
-    username: this.isProd() ? null : 'admin',
-    password: this.isProd() ? null : '123456',
-  };
-
-  // Injected dependencies
-  private readonly document = inject(DOCUMENT);
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
@@ -57,71 +62,108 @@ export class LoginComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
-    this.isLoading$ = this.authService.isLoading$;
-
-    // Redirect to home if already logged in
     if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
+      void this.router.navigate(['/dashboard']);
     }
   }
 
   ngOnInit(): void {
-    this.initForm();
-    // Get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-
-  initForm(): void {
-    this.form = this.formBuilder.group({
-      username: [
-        this.defaultAuth.username,
-        Validators.compose([
+    this.credentialsForm = this.formBuilder.group({
+      login: [
+        '',
+        [
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(320),
-        ]),
+          Validators.minLength(1),
+          Validators.maxLength(254),
+        ],
       ],
       password: [
-        this.defaultAuth.password,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ]),
+        '',
+        [Validators.required, passwordCodePointLengthValidator],
       ],
     });
+    this.totpForm = this.formBuilder.group({
+      code: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{6}$/)],
+      ],
+    });
+
+    const requestedUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    if (requestedUrl?.startsWith('/') && !requestedUrl.startsWith('//')) {
+      this.returnUrl = requestedUrl;
+    }
   }
 
-  handleNextStep({ instance }: StepperDirective): void {
-    // Handle next step logic if needed
-  }
-
-  handlePrevStep({ instance }: StepperDirective): void {
-    instance.goPrev();
-  }
-
-  handleSubmit(): void {
+  submitCredentials(): void {
     this._hasError.set(false);
+    if (this.credentialsForm.invalid) {
+      this.credentialsForm.markAllAsTouched();
+      return;
+    }
 
-    if (this.form.valid) {
-      this._isSubmitting.set(true);
-      const { username, password } = this.form.value || {};
-
-      this.authService.login('', '', username, password).pipe(
+    this._isSubmitting.set(true);
+    const { login, password } = this.credentialsForm.getRawValue();
+    this.authService
+      .login({ login, password })
+      .pipe(
         first(),
         takeUntilDestroyed(this.destroyRef),
-        tap(() => this.router.navigate([this.returnUrl])),
+        tap((response) => {
+          if (response.outcome === 'TOTP_REQUIRED') {
+            this._challenge.set(response);
+            this._step.set('totp');
+            this.credentialsForm.disable({ emitEvent: false });
+            return;
+          }
+          void this.router.navigateByUrl(this.returnUrl);
+        }),
         catchError((error) => {
           this._hasError.set(true);
-          return this.authService.handleError('login', [])(error);
+          return this.authService.handleError('login', null)(error);
         }),
-        finalize(() => this._isSubmitting.set(false))
-      ).subscribe();
-    } else {
-      // Mark all form controls as touched to show validation errors
-      Object.keys(this.form.controls).forEach(controlName =>
-        this.form.controls[controlName].markAsTouched()
-      );
+        finalize(() => this._isSubmitting.set(false)),
+      )
+      .subscribe();
+  }
+
+  submitTotp(): void {
+    this._hasError.set(false);
+    const challenge = this._challenge();
+    if (!challenge || this.totpForm.invalid) {
+      this.totpForm.markAllAsTouched();
+      return;
     }
+
+    this._isSubmitting.set(true);
+    this.authService
+      .verifyTotp({
+        challengeId: challenge.challengeId,
+        code: this.totpForm.getRawValue().code,
+      })
+      .pipe(
+        first(),
+        takeUntilDestroyed(this.destroyRef),
+        tap((response) => {
+          if (response.outcome !== 'SESSION_ESTABLISHED') {
+            throw new Error('A login TOTP challenge did not establish a session.');
+          }
+          void this.router.navigateByUrl(this.returnUrl);
+        }),
+        catchError((error) => {
+          this._hasError.set(true);
+          return this.authService.handleError('verify TOTP', null)(error);
+        }),
+        finalize(() => this._isSubmitting.set(false)),
+      )
+      .subscribe();
+  }
+
+  restart(): void {
+    this._challenge.set(null);
+    this._step.set('credentials');
+    this._hasError.set(false);
+    this.credentialsForm.enable({ emitEvent: false });
+    this.totpForm.reset();
   }
 }

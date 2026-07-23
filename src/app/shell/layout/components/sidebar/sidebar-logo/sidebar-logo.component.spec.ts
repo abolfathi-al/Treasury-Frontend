@@ -30,8 +30,7 @@ describe('SidebarLogoComponent auth session boundary', () => {
           provide: AUTH_SESSION,
           useValue: {
             initializeAuth: () => Promise.resolve(undefined),
-            getAuthToken: () => undefined,
-            refreshAccessToken: () => of(undefined),
+            invalidateSession: () => undefined,
             logout: () => undefined,
             getCurrentUserSnapshot: () => authUser.value,
             getCurrentUserChanges: () => authUser.asObservable(),

@@ -30,6 +30,7 @@ import { supplierManagementWorkspaceFa } from '../workspace/supplier-management/
 import { supplierVisibilityWorkspaceFa } from '../workspace/supplier-visibility/fa';
 import { workspaceDashboardWorkspaceFa } from '../workspace/workspace-dashboard/fa';
 import { workspaceSwitcherWorkspaceFa } from '../workspace/workspace-switcher/fa';
+import { methodDefinitionsWorkspaceFa } from '../workspace/method-definitions/fa';
 
 export const veloraShellFaLocale = {
   lang: 'fa',
@@ -72,6 +73,7 @@ export const veloraShellFaLocale = {
       supplierVisibility: supplierVisibilityWorkspaceFa,
       workspaceDashboard: workspaceDashboardWorkspaceFa,
       workspaceSwitcher: workspaceSwitcherWorkspaceFa,
+      methodDefinitions: methodDefinitionsWorkspaceFa,
     },
   },
 } as const;

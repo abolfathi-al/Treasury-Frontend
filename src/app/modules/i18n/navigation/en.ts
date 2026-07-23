@@ -2,6 +2,7 @@ export const navigationEn = {
   menu: {
     main: "Main Menu",
     dashboard: "Dashboard",
+    methodDefinitions: "Method Definitions",
     foundation: "Foundation",
     auth: "Auth",
     errors: "Errors",

@@ -193,10 +193,7 @@ function buildInitializers(
   initializers.push(provideAppInitializer(themeModeSetup));
 
   initializers.push(
-    provideAppInitializer(() => {
-      getUserByToken();
-      return Promise.resolve();
-    })
+    provideAppInitializer(() => getUserByToken())
   );
 
   if (includeServiceWorker) {

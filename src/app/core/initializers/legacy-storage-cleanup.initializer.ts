@@ -4,6 +4,7 @@ import {
   LOCAL_STORAGE,
   SESSION_STORAGE,
 } from '@core/tokens';
+import { APP_RUNTIME_CONFIG } from '@core/config/runtime.config';
 
 const LEGACY_NAMESPACE_CHAR_CODES = [100, 115] as const;
 const LEGACY_STORAGE_KEY_SUFFIXES = [
@@ -30,14 +31,28 @@ export const legacyStorageCleanupSetup = () => {
     return Promise.resolve(SKIPPED_MESSAGE);
   }
 
-  cleanupLegacyStorage(inject(LOCAL_STORAGE, { optional: true }));
-  cleanupLegacyStorage(inject(SESSION_STORAGE, { optional: true }));
+  const runtimeConfig = inject(APP_RUNTIME_CONFIG);
+  const retiredAuthStorageKey =
+    `${runtimeConfig.appVersion}-${runtimeConfig.authStorageKey}`;
+
+  cleanupLegacyStorage(
+    inject(LOCAL_STORAGE, { optional: true }),
+    retiredAuthStorageKey,
+  );
+  cleanupLegacyStorage(
+    inject(SESSION_STORAGE, { optional: true }),
+    retiredAuthStorageKey,
+  );
 
   return Promise.resolve(COMPLETED_MESSAGE);
 };
 
-export function shouldRemoveLegacyStorageKey(key: string): boolean {
+export function shouldRemoveLegacyStorageKey(
+  key: string,
+  retiredAuthStorageKey?: string,
+): boolean {
   return (
+    key === retiredAuthStorageKey ||
     legacyStorageKeys().includes(key) ||
     legacyStorageKeyPrefixes().some(prefix => key.startsWith(prefix))
   );
@@ -63,7 +78,10 @@ function legacyStorageKeys(): string[] {
   return LEGACY_STORAGE_KEY_SUFFIXES.map(suffix => `${namespace}_${suffix}`);
 }
 
-function cleanupLegacyStorage(storage: Storage | null): void {
+function cleanupLegacyStorage(
+  storage: Storage | null,
+  retiredAuthStorageKey: string,
+): void {
   if (!storage) {
     return;
   }
@@ -74,7 +92,7 @@ function cleanupLegacyStorage(storage: Storage | null): void {
     ).filter((key): key is string => Boolean(key));
 
     for (const key of keys) {
-      if (shouldRemoveLegacyStorageKey(key)) {
+      if (shouldRemoveLegacyStorageKey(key, retiredAuthStorageKey)) {
         storage.removeItem(key);
       }
     }

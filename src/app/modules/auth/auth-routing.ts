@@ -3,7 +3,6 @@ import { AuthComponent } from './pages/auth-shell/auth.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
 
 export const AuthRouting: Routes = [
   {
@@ -22,14 +21,6 @@ export const AuthRouting: Routes = [
           returnUrl: typeof window !== 'undefined' ? window.location.pathname : '/',
           titleKey: 'workspace.auth.login.title',
           descriptionKey: 'workspace.auth.login.desc',
-        },
-      },
-      {
-        path: 'registration',
-        component: RegistrationComponent,
-        data: {
-          titleKey: 'workspace.auth.register.title',
-          descriptionKey: 'workspace.auth.register.desc',
         },
       },
       {

@@ -1,190 +1,161 @@
-<!-- begin::Stepper -->
-<div
-  class="stepper stepper-links d-flex flex-column"
-  id="velora_login_stepper"
-  #stepperLogin="vlVeloraStepper"
-  data-velora-stepper="true"
-  (veloraStepperNext)="handleNextStep(stepperLogin)"
-  (veloraStepperPrevious)="handlePrevStep(stepperLogin)">
-
-  <!--begin::Nav-->
-  <div class="stepper-nav" hidden>
-    <!--begin::Step 1-->
-    <div class="stepper-item current" data-velora-stepper-element="nav"></div>
-    <!--end::Step 1-->
-
-    <!--begin::Step 2-->
-    <div class="stepper-item" data-velora-stepper-element="nav"></div>
-    <!--end::Step 2-->
+<div class="d-flex flex-column gap-6 w-100">
+  <div>
+    <span class="badge badge-light-primary fw-semibold mb-4">
+      {{ 'workspace.auth.login.secureSession' | translate }}
+    </span>
+    <h1
+      class="text-dark fw-bolder mb-3"
+      translate="workspace.auth.login.title">
+    </h1>
+    <p
+      class="text-gray-600 mb-0"
+      translate="workspace.auth.login.desc">
+    </p>
   </div>
-  <!--end::Nav-->
 
-  <!--begin::Form-->
-  <form
-    class="form w-100"
-    [formGroup]="form"
-    novalidate="novalidate">
+  @if (hasError()) {
+    <div class="alert alert-danger mb-0" role="alert">
+      <div
+        class="alert-text fw-semibold"
+        translate="workspace.auth.login.error">
+      </div>
+    </div>
+  }
 
-    <!--begin::Step 1-->
-    <div class="current" data-velora-stepper-element="content">
-      <!--begin::Content-->
-      <div class="d-flex flex-column gap-6 w-100">
-        <!--begin::Heading-->
-        <h1
-          class="text-dark fw-bolder mb-10"
-          translate="workspace.auth.login.title">
-        </h1>
-        <!--end::Heading-->
-
-        <!-- begin::Alert error-->
-        @if (hasError()) {
-          <div class="alert alert-danger">
-            <div
-              class="alert-text font-weight-bold"
-              translate="validation.loginDetailsAreIncorrect">
-            </div>
-          </div>
-        }
-        <!-- end::Alert error-->
-
-        <!--begin::Form group-->
+  @if (step() === 'credentials') {
+    <form
+      class="form w-100"
+      [formGroup]="credentialsForm"
+      (ngSubmit)="submitCredentials()"
+      novalidate>
+      <div class="d-flex flex-column gap-6">
         <div class="form-group">
           <label
-            class="form-label"
-            for="username"
-            translate="workspace.auth.input.username">
+            class="form-label required"
+            for="login"
+            translate="workspace.auth.input.login">
           </label>
-
           <input
             class="form-control bg-transparent"
-            id="username"
-            autocomplete="off"
-            formControlName="username"/>
-
-          <!--begin::Input feedback-->
+            id="login"
+            formControlName="login"
+            autocomplete="username"
+            [placeholder]="'workspace.auth.input.login' | translate"/>
           <vl-invalid-feedback
-            control="username"
-            name="workspace.auth.input.username">
+            control="login"
+            name="workspace.auth.input.login">
           </vl-invalid-feedback>
-          <!--end::Input feedback-->
         </div>
-        <!--end::Form group-->
 
-        <!--begin::Form group-->
         <div class="form-group">
           <label
-            class="form-label"
+            class="form-label required"
             for="password"
             translate="workspace.auth.input.password">
           </label>
-
           <input
             class="form-control bg-transparent"
             id="password"
             type="password"
-            autocomplete="off"
-            focusTargetId="stepper_action_next"
-            formControlName="password"/>
-
-          <!--begin::Input feedback-->
+            formControlName="password"
+            autocomplete="current-password"
+            [placeholder]="'workspace.auth.input.password' | translate"/>
           <vl-invalid-feedback
             control="password"
             name="workspace.auth.input.password">
           </vl-invalid-feedback>
-          <!--end::Input feedback-->
-        </div>
-        <!--end::Form group-->
-      </div>
-      <!--end::Content-->
-    </div>
-    <!--end::Step 1-->
-
-    <!--begin::Step 2-->
-    <div data-velora-stepper-element="content">
-      <!--begin::Content-->
-      <div class="d-flex flex-column gap-6 w-100">
-        <!--begin::Heading-->
-        <h1
-          class="text-dark fw-bolder mb-10"
-          translate="workspace.auth.login.fiscalYearTitle">
-        </h1>
-        <!--end::Heading-->
-
-        <!-- begin::Alert error-->
-        @if (hasError()) {
-          <div class="alert alert-danger">
-            <div
-              class="alert-text font-weight-bold"
-              translate="validation.loginDetailsAreIncorrect">
-            </div>
+          <div
+            class="form-text"
+            translate="workspace.auth.login.passwordHint">
           </div>
-        }
-        <!-- end::Alert error-->
-      </div>
-      <!--end::Content-->
-    </div>
-    <!--end::Step 2-->
+        </div>
 
-    <!--begin::Actions-->
-    <div class="d-flex flex-stack pt-15">
-      <!--begin::Wrapper-->
-      <div>
-        <button
-          type="button"
-          class="btn btn-flex btn-light-primary"
-          data-velora-stepper-action="previous">
-          <vl-velora-icon name="arrow-right" class="fs-4 me-2"></vl-velora-icon>
-          {{'common.actions.back' | translate}}
-        </button>
-      </div>
-      <!--end::Wrapper-->
-
-      <!--begin::Wrapper-->
-      <div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="stepper_action_submit"
-          [disabled]="isLoading$ | async"
-          data-velora-stepper-action="submit"
-          [attr.data-velora-indicator]="(isLoading$ | async) ? 'on' : 'off'"
-          (click)="handleSubmit()">
-
-          <span class="indicator-label">
-            <span class="d-flex align-items-center">
-              {{'workspace.auth.login.button' | translate}}
-              <vl-velora-icon name="arrow-left" class="fs-4 fs-4 ms-2 me-0"></vl-velora-icon>
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
+          <a
+            routerLink="/auth/forgot-password"
+            class="link-primary fw-semibold"
+            translate="workspace.auth.login.recover">
+          </a>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="isSubmitting()"
+            [attr.data-velora-indicator]="isSubmitting() ? 'on' : 'off'">
+            <span
+              class="indicator-label"
+              translate="workspace.auth.login.button">
             </span>
-          </span>
-          <span class="indicator-progress">
-            {{'common.states.wait' | translate}}
-            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-          </span>
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="stepper_action_next"
-          [disabled]="isLoading$ | async"
-          data-velora-stepper-action="next"
-          [attr.data-velora-indicator]="(isLoading$ | async) ? 'on' : 'off'">
-
-          <span class="indicator-label">
-            <span class="d-flex align-items-center">
-              {{'common.actions.continue' | translate}}
-              <vl-velora-icon name="arrow-left" class="fs-4 fs-4 ms-2 me-0"></vl-velora-icon>
+            <span class="indicator-progress">
+              {{ 'common.states.wait' | translate }}
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
             </span>
-          </span>
-          <span class="indicator-progress">
-            {{'common.states.wait' | translate}}
-            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
-      <!--end::Wrapper-->
-    </div>
-    <!--end::Actions-->
-  </form>
-  <!--end::Form-->
+    </form>
+  } @else {
+    <form
+      class="form w-100"
+      [formGroup]="totpForm"
+      (ngSubmit)="submitTotp()"
+      novalidate>
+      <div class="d-flex flex-column gap-6">
+        <div class="rounded bg-light-primary p-5">
+          <div
+            class="fw-bold text-primary mb-1"
+            translate="workspace.auth.login.totpTitle">
+          </div>
+          <div class="text-gray-700">
+            {{ 'workspace.auth.login.totpExpires' | translate: { value: challenge()?.expiresAt } }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-label required"
+            for="totp-code"
+            translate="workspace.auth.input.totpCode">
+          </label>
+          <input
+            class="form-control bg-transparent text-center fs-2 ls-3"
+            id="totp-code"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            formControlName="code"
+            autocomplete="one-time-code"
+            [placeholder]="'workspace.auth.input.totpCode' | translate"/>
+          <vl-invalid-feedback
+            control="code"
+            name="workspace.auth.input.totpCode">
+          </vl-invalid-feedback>
+        </div>
+
+        <div class="d-flex justify-content-between gap-4">
+          <button
+            type="button"
+            class="btn btn-light"
+            [disabled]="isSubmitting()"
+            (click)="restart()">
+            <vl-velora-icon name="arrow-right" class="fs-4 me-2"></vl-velora-icon>
+            {{ 'common.actions.back' | translate }}
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="isSubmitting()"
+            [attr.data-velora-indicator]="isSubmitting() ? 'on' : 'off'">
+            <span
+              class="indicator-label"
+              translate="workspace.auth.login.verifyTotp">
+            </span>
+            <span class="indicator-progress">
+              {{ 'common.states.wait' | translate }}
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+  }
 </div>

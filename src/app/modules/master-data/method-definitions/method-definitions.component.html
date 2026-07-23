@@ -1,0 +1,331 @@
+<section>
+  <div class="card border-0 shadow-sm mb-6">
+    <div class="card-body p-8">
+      <div class="d-flex flex-column flex-lg-row justify-content-between gap-6">
+        <div>
+          <span class="badge badge-light-primary fw-semibold mb-3">
+            {{ 'workspace.methodDefinitions.badge' | translate }}
+          </span>
+          <h1
+            class="fs-2 fw-bold text-gray-900 mb-2"
+            translate="workspace.methodDefinitions.title">
+          </h1>
+          <p
+            class="text-gray-700 mb-0"
+            translate="workspace.methodDefinitions.description">
+          </p>
+        </div>
+        <div class="d-flex align-items-start">
+          <span class="badge badge-light-info fs-7">
+            {{ methods().length }}
+            {{ 'workspace.methodDefinitions.loaded' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (loadFailed()) {
+    <div
+      class="alert alert-danger"
+      role="alert"
+      translate="workspace.methodDefinitions.loadError">
+    </div>
+  }
+
+  <div class="row g-6">
+    <div class="col-12 col-xxl-5">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header border-0 pt-6">
+          <div class="card-title">
+            <h2
+              class="fs-3 fw-bold text-gray-900 mb-0"
+              translate="workspace.methodDefinitions.createTitle">
+            </h2>
+          </div>
+        </div>
+        <div class="card-body pt-4">
+          @if (!canCreate()) {
+            <div
+              class="alert alert-info"
+              translate="workspace.methodDefinitions.readOnly">
+            </div>
+          }
+          @if (saveFailed()) {
+            <div
+              class="alert alert-danger"
+              role="alert"
+              translate="workspace.methodDefinitions.saveError">
+            </div>
+          }
+          @if (form.errors && form.touched) {
+            <div
+              class="alert alert-warning"
+              role="alert"
+              translate="workspace.methodDefinitions.crossFieldError">
+            </div>
+          }
+
+          <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+            <div class="row g-5">
+              <div class="col-12 col-md-6">
+                <vl-text-control
+                  controlName="code"
+                  label="workspace.methodDefinitions.fields.code"
+                  [maxLength]="64">
+                </vl-text-control>
+              </div>
+              <div class="col-12 col-md-6">
+                <vl-text-control
+                  controlName="name"
+                  label="workspace.methodDefinitions.fields.name"
+                  [maxLength]="160">
+                </vl-text-control>
+              </div>
+              <div class="col-12 col-md-6">
+                <vl-single-select-control
+                  controlName="direction"
+                  label="workspace.methodDefinitions.fields.direction"
+                  [options]="directionOptions"
+                  [clearable]="false">
+                </vl-single-select-control>
+              </div>
+              <div class="col-12 col-md-6">
+                <vl-single-select-control
+                  controlName="behaviorCategory"
+                  label="workspace.methodDefinitions.fields.behavior"
+                  [options]="behaviorOptions"
+                  [clearable]="false">
+                </vl-single-select-control>
+              </div>
+              <div class="col-12">
+                <vl-multi-select-control
+                  controlName="requiredReferences"
+                  label="workspace.methodDefinitions.fields.references"
+                  [required]="false"
+                  [options]="referenceOptions">
+                </vl-multi-select-control>
+              </div>
+              <div class="col-12">
+                <vl-multi-select-control
+                  controlName="allowedCurrencies"
+                  label="workspace.methodDefinitions.fields.currencies"
+                  [options]="currencyOptions()">
+                </vl-multi-select-control>
+              </div>
+              <div class="col-12 col-md-6">
+                <vl-boolean-control
+                  controlName="createsFundsInTransit"
+                  label="workspace.methodDefinitions.fields.fundsInTransit"
+                  [required]="false">
+                </vl-boolean-control>
+              </div>
+              <div class="col-12 col-md-6">
+                <vl-boolean-control
+                  controlName="requiresApproval"
+                  label="workspace.methodDefinitions.fields.requiresApproval"
+                  [required]="false">
+                </vl-boolean-control>
+              </div>
+            </div>
+
+            <div class="separator my-7"></div>
+
+            <div class="d-flex align-items-center justify-content-between gap-4 mb-4">
+              <div>
+                <h3
+                  class="fs-5 fw-bold mb-1"
+                  translate="workspace.methodDefinitions.amountLimits.title">
+                </h3>
+                <p
+                  class="text-gray-600 mb-0"
+                  translate="workspace.methodDefinitions.amountLimits.help">
+                </p>
+              </div>
+              <button
+                type="button"
+                class="btn btn-sm btn-light-primary"
+                [disabled]="!canCreate()"
+                (click)="addAmountLimit()">
+                <vl-velora-icon name="plus" class="fs-5 me-1"></vl-velora-icon>
+                {{ 'workspace.methodDefinitions.amountLimits.add' | translate }}
+              </button>
+            </div>
+
+            <div formArrayName="amountLimits" class="d-flex flex-column gap-3">
+              @for (limit of amountLimits.controls; track limit; let index = $index) {
+                <div [formGroupName]="index" class="row g-3 align-items-start">
+                  <div class="col-12 col-md-5">
+                    <label
+                      class="form-label required"
+                      [for]="'limit-currency-' + index"
+                      translate="workspace.methodDefinitions.amountLimits.currency">
+                    </label>
+                    <select
+                      class="form-select"
+                      [id]="'limit-currency-' + index"
+                      formControlName="currency">
+                      <option [ngValue]="null"></option>
+                      @for (currency of currencyOptions(); track currency.value) {
+                        <option
+                          [value]="currency.value"
+                          [disabled]="isLimitCurrencyUnavailable(currency.value, index)">
+                          {{ currency.label }}
+                        </option>
+                      }
+                    </select>
+                  </div>
+                  <div class="col-10 col-md-5">
+                    <label
+                      class="form-label required"
+                      [for]="'limit-amount-' + index"
+                      translate="workspace.methodDefinitions.amountLimits.amount">
+                    </label>
+                    <input
+                      class="form-control"
+                      [id]="'limit-amount-' + index"
+                      inputmode="decimal"
+                      formControlName="amount"/>
+                    @if (
+                      limit.get('amount')?.touched &&
+                      limit.get('amount')?.hasError('positiveDecimal')
+                    ) {
+                      <div
+                        class="text-danger fs-7 mt-2"
+                        translate="workspace.methodDefinitions.amountLimits.invalid">
+                      </div>
+                    }
+                  </div>
+                  <div class="col-2 d-flex align-items-end">
+                    <button
+                      type="button"
+                      class="btn btn-icon btn-light-danger mt-8"
+                      [attr.aria-label]="'workspace.methodDefinitions.amountLimits.remove' | translate"
+                      (click)="removeAmountLimit(index)">
+                      <vl-velora-icon name="trash" class="fs-4"></vl-velora-icon>
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div class="separator my-7"></div>
+            <h3
+              class="fs-5 fw-bold mb-4"
+              translate="workspace.methodDefinitions.mappingsTitle">
+            </h3>
+            <div class="row g-5">
+              @for (mapping of [
+                'debitMappingRef',
+                'creditMappingRef',
+                'feeMappingRef',
+                'discrepancyMappingRef',
+                'templateMappingRef'
+              ]; track mapping) {
+                <div class="col-12 col-md-6">
+                  <vl-text-control
+                    [controlName]="mapping"
+                    [label]="'workspace.methodDefinitions.fields.' + mapping"
+                    [required]="false"
+                    [maxLength]="128">
+                  </vl-text-control>
+                </div>
+              }
+            </div>
+
+            <div class="d-flex justify-content-end mt-8">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!canCreate() || isSaving()"
+                [attr.data-velora-indicator]="isSaving() ? 'on' : 'off'">
+                <span
+                  class="indicator-label"
+                  translate="workspace.methodDefinitions.createAction">
+                </span>
+                <span class="indicator-progress">
+                  {{ 'common.states.wait' | translate }}
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-xxl-7">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header border-0 pt-6">
+          <div class="card-title">
+            <h2
+              class="fs-3 fw-bold text-gray-900 mb-0"
+              translate="workspace.methodDefinitions.listTitle">
+            </h2>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          @if (isLoading()) {
+            <div class="d-flex justify-content-center py-12">
+              <span class="spinner-border text-primary" role="status"></span>
+            </div>
+          } @else if (methods().length === 0) {
+            <div class="text-center text-gray-600 py-12">
+              <vl-velora-icon name="information-5" class="fs-2x mb-3"></vl-velora-icon>
+              <p
+                class="mb-0"
+                translate="workspace.methodDefinitions.empty">
+              </p>
+            </div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table align-middle table-row-dashed gy-5">
+                <thead>
+                  <tr class="text-gray-600 fw-bold fs-7 text-uppercase">
+                    <th translate="workspace.methodDefinitions.fields.code"></th>
+                    <th translate="workspace.methodDefinitions.fields.name"></th>
+                    <th translate="workspace.methodDefinitions.fields.direction"></th>
+                    <th translate="workspace.methodDefinitions.fields.behavior"></th>
+                    <th translate="workspace.methodDefinitions.fields.currencies"></th>
+                    <th translate="workspace.methodDefinitions.fields.state"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (method of methods(); track method.id) {
+                    <tr>
+                      <td class="fw-bold text-gray-900">{{ method.code }}</td>
+                      <td>{{ method.name }}</td>
+                      <td><span class="badge badge-light">{{ method.direction }}</span></td>
+                      <td>{{ method.behaviorCategory }}</td>
+                      <td>{{ method.allowedCurrencies.join(', ') }}</td>
+                      <td>
+                        <span
+                          class="badge"
+                          [class.badge-light-success]="method.state === 'ACTIVE'"
+                          [class.badge-light-secondary]="method.state === 'INACTIVE'">
+                          {{ method.state }}
+                        </span>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+
+          @if (page()?.hasMore) {
+            <div class="d-flex justify-content-center pt-5">
+              <button
+                type="button"
+                class="btn btn-light-primary"
+                [disabled]="isLoadingMore()"
+                (click)="loadMore()"
+                translate="workspace.methodDefinitions.loadMore">
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

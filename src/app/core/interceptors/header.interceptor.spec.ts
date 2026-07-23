@@ -29,8 +29,7 @@ describe('headerInterceptor', () => {
 
   const authSession: AuthSessionPort = {
     initializeAuth: () => Promise.resolve(undefined),
-    getAuthToken: () => undefined,
-    refreshAccessToken: () => of(undefined),
+    invalidateSession: () => undefined,
     logout: () => undefined,
     getCurrentUserSnapshot: () => ({
       companyCode: 'VL',

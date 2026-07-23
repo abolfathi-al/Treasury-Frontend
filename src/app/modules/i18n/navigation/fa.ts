@@ -2,6 +2,7 @@ export const navigationFa = {
   menu: {
     main: "منوی اصلی",
     dashboard: "داشبورد",
+    methodDefinitions: "تعریف روش‌ها",
     foundation: "زیرساخت",
     auth: "احراز هویت",
     errors: "خطاها",
