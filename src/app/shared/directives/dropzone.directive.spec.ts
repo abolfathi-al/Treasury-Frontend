@@ -1,6 +1,7 @@
 import {
   Component,
   provideZonelessChangeDetection,
+  signal,
   viewChild,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -22,6 +23,7 @@ type FakeDropzoneHandler = (...args: unknown[]) => unknown;
 class FakeDropzone {
   static lastInstance: FakeDropzone | null = null;
   static lastOptions: DropzoneOptions | null = null;
+  static creationCount = 0;
 
   readonly files: Dropzone.DropzoneFile[] = [];
   readonly handlers = new Map<string, FakeDropzoneHandler[]>();
@@ -32,6 +34,7 @@ class FakeDropzone {
     readonly element: HTMLElement,
     options: DropzoneOptions
   ) {
+    FakeDropzone.creationCount++;
     FakeDropzone.lastInstance = this;
     FakeDropzone.lastOptions = options;
     const init = options.init as ((this: FakeDropzone) => void) | undefined;
@@ -64,6 +67,8 @@ class FakeDropzone {
   template: `
     <div
       vlVeloraDropzone
+      [dropzoneMaxFiles]="maxFiles()"
+      [dropzoneMaxFilesize]="maxFilesize()"
       [dropzoneHiddenInputContainer]="hiddenInputContainer"
       [dropzoneRenameFile]="renameFile"
       [dropzoneTransformFile]="transformFile"
@@ -73,6 +78,8 @@ class FakeDropzone {
 })
 class HostComponent {
   readonly directive = viewChild.required(DropzoneDirective);
+  readonly maxFiles = signal(1);
+  readonly maxFilesize = signal(2);
   readonly hiddenInputContainer = document.createElement('div');
   readonly renameFile = (name: string): string => `renamed-${name}`;
   readonly transformFile = (
@@ -127,6 +134,7 @@ describe('Dropzone directive adapter helpers', () => {
   beforeEach(() => {
     FakeDropzone.lastInstance = null;
     FakeDropzone.lastOptions = null;
+    FakeDropzone.creationCount = 0;
     TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
@@ -380,6 +388,27 @@ describe('Dropzone directive adapter helpers', () => {
     } finally {
       jasmine.clock().uninstall();
     }
+  });
+
+  it('reinitializes once when multiple bound options change together', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const component = fixture.componentInstance;
+    const directive = component.directive();
+    const internals = directive as unknown as DropzoneDirectiveInternals;
+    internals.DropzoneClass = FakeDropzone as unknown as typeof Dropzone;
+    internals.createInstance();
+    const firstInstance = FakeDropzone.lastInstance!;
+
+    component.maxFiles.set(4);
+    component.maxFilesize.set(8);
+    fixture.detectChanges();
+
+    expect(FakeDropzone.creationCount).toBe(2);
+    expect(firstInstance.destroyed).toBeTrue();
+    expect(FakeDropzone.lastOptions?.maxFiles).toBe(4);
+    expect(FakeDropzone.lastOptions?.maxFilesize).toBe(8);
+    fixture.destroy();
   });
 
   it('ends loading when initialization fails', () => {

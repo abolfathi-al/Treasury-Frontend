@@ -23,7 +23,11 @@ import { LoggerService } from '@core/services/logger.service';
 
 import { BaseDirective } from './shared/base-directive';
 import { useDirectiveHost } from './shared/directive-host';
-import { runSafely, setOptionIfChanged } from './shared/directive-helpers';
+import {
+  type InputEffectBinding,
+  runSafely,
+  setOptionIfChanged,
+} from './shared/directive-helpers';
 
 export interface TinySliderOptions {
   container?: HTMLElement | string;
@@ -237,7 +241,7 @@ export class TinySliderDirective
       this.markBaseDestroyed();
       this.destroyTinySlider();
     });
-    this.setupInputBindings();
+    this.bindInputs(this.inputBindings);
   }
 
   ngOnInit(): void {
@@ -258,6 +262,8 @@ export class TinySliderDirective
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.host.isBrowser || !this.isBaseInitialized()) return;
 
+    this.syncInputs(this.inputBindings);
+
     const requiresReinit =
       changes['tinySliderMode'] ||
       changes['tinySliderAxis'] ||
@@ -268,6 +274,7 @@ export class TinySliderDirective
       this.reinitialize();
     } else {
       this.updateInstance();
+      this.updateValidation();
     }
   }
 
@@ -345,8 +352,7 @@ export class TinySliderDirective
     );
   }
 
-  private setupInputBindings(): void {
-    this.bindInputs([
+  private readonly inputBindings: InputEffectBinding<TinySliderOptions>[] = [
       { input: this.tinySliderMode, key: 'mode' },
       { input: this.tinySliderAxis, key: 'axis' },
       { input: this.tinySliderItems, key: 'items' },
@@ -396,8 +402,7 @@ export class TinySliderDirective
       { input: this.tinySliderNonce, key: 'nonce' },
       { input: this.tinySliderTextDirection, key: 'textDirection' },
       { input: this.tinySliderResponsive, key: 'responsive' },
-    ]);
-  }
+    ];
 
   private scheduleBootstrap(): void {
     this.clearBootstrapSchedule();
@@ -730,12 +735,7 @@ export class TinySliderDirective
     value: TinySliderOptions[K]
   ): boolean {
     if (value === undefined) return false;
-    return setOptionIfChanged(this.optionsManager, key, value, () => {
-      if (this.isBaseInitialized()) {
-        this.updateInstance();
-        this.updateValidation();
-      }
-    });
+    return setOptionIfChanged(this.optionsManager, key, value);
   }
 
   private updateState(): void {

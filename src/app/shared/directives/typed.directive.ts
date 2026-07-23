@@ -219,17 +219,17 @@ export class TypedDirective
 
   updateStrings(strings: string[]): void {
     if (!this.instance || !strings || strings.length === 0) return;
-    this.updateOption('strings', strings);
+    if (this.updateOption('strings', strings)) this.recreateTyped();
   }
 
   updateTypeSpeed(speed: number): void {
     if (!this.instance || speed < 0) return;
-    this.updateOption('typeSpeed', speed);
+    if (this.updateOption('typeSpeed', speed)) this.recreateTyped();
   }
 
   updateBackSpeed(speed: number): void {
     if (!this.instance || speed < 0) return;
-    this.updateOption('backSpeed', speed);
+    if (this.updateOption('backSpeed', speed)) this.recreateTyped();
   }
 
   isValidTyped(): boolean {
@@ -251,11 +251,7 @@ export class TypedDirective
     key: K,
     value: TypedOptions[K] | undefined
   ): boolean {
-    const changed = setOptionIfChanged(this.optionsManager, key, value);
-    if (changed && this.isBaseInitialized() && !this.isBaseDestroyed()) {
-      this.recreateTyped();
-    }
-    return changed;
+    return setOptionIfChanged(this.optionsManager, key, value);
   }
 
   private setupBindings(): void {
@@ -280,7 +276,11 @@ export class TypedDirective
       { input: this.typedBindInputFocusEvents, key: 'bindInputFocusEvents' as const },
       { input: this.typedContentType, key: 'contentType' as const },
     ];
-    this.bindInputs(bindings);
+    this.bindInputs(bindings, () => {
+      if (this.isBaseInitialized() && !this.isBaseDestroyed()) {
+        this.recreateTyped();
+      }
+    });
   }
 
   private initTyped(): void {

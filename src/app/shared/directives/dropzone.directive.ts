@@ -365,7 +365,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
       this.markBaseDestroyed();
       this.cleanup();
     });
-    this.bindInputs(this.inputBindings);
+    this.bindInputs(this.inputBindings, () => this.onOptionsUpdated());
   }
 
   ngOnInit(): void {
@@ -401,7 +401,7 @@ export class DropzoneDirective extends BaseDirective<DropzoneOptions, DropzoneEr
 
   protected override updateOption<K extends keyof DropzoneOptions>(key: K, value: DropzoneOptions[K]): boolean {
     if (value === undefined) return false;
-    return setOptionIfChanged(this.optionsManager, key, value, () => this.onOptionsUpdated());
+    return setOptionIfChanged(this.optionsManager, key, value);
   }
 
   private loadLibrary(): Promise<void> {
