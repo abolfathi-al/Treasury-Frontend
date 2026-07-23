@@ -1,13 +1,17 @@
 # Enterprise Treasury Frontend agent contract
 
-This repository contains the Enterprise Treasury Angular frontend. Keep changes
-inside the frontend unless the user explicitly expands the scope.
+This Git repository contains the Enterprise Treasury Angular frontend. Keep
+implementation changes inside this repository. Backend work belongs to the
+sibling `../Treasury-Backend/` repository and must use its own branch, commits,
+push, tests, review, and PR. Never mix frontend and backend changes in one
+commit or PR.
 
 ## Semantic authority
 
 - Treasury domain meaning comes from the sibling repository
-  `../Enterprise-Treasury-Canon/canon-v3/`. Start with `canon.yaml` and
+  `../Treasury-Canon/canon-v4/`. Start with `canon.yaml` and
   `00-governance/authority.yaml`, then follow their active references.
+- The task's immutable Canon commit is pinned in `canon-revision.json`.
 - The frontend presents and orchestrates user interactions. It MUST NOT invent,
   override, or silently reinterpret Canon-owned truth, lifecycle, authorization,
   integration, or runtime claims.
@@ -56,7 +60,8 @@ inside the frontend unless the user explicitly expands the scope.
 
 Run the smallest relevant check for a local edit. For non-trivial or cross-cutting
 changes, run type checking, lint, CI tests, and a build. A lockfile is currently
-absent; do not silently generate one or switch package managers.
+tracked as `pnpm-lock.yaml`; do not switch package managers or regenerate it
+unless an authorized dependency change requires it.
 
 After code changes, run `graphify update .`. Documentation changes require a full
 semantic Graphify refresh rather than the AST-only update.
