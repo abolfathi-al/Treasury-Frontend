@@ -402,6 +402,7 @@ export class NoUiSliderDirective
     }
 
     this.instance = inst;
+    this.attachCallbacks(inst, this.optionsManager.snapshot());
     this.markBaseInitialized();
     this.status.setActive(true);
     this.status.setLoading(false);
@@ -428,12 +429,10 @@ export class NoUiSliderDirective
 
   private buildOptions(): Options {
     const opts = this.optionsManager.snapshot();
-    const config: Options = { ...(opts as Options) };
-    this.attachCallbacks(config, opts);
-    return config;
+    return { ...(opts as Options) };
   }
 
-  private attachCallbacks(config: Options, opts: NoUiSliderOptions): void {
+  private attachCallbacks(instance: API, opts: NoUiSliderOptions): void {
     const wrap =
       (message: string, emitter: OutputEmitterRef<unknown> | undefined, callback?: (...args: unknown[]) => void) =>
       (
@@ -457,19 +456,24 @@ export class NoUiSliderDirective
         );
       };
 
-    const extConfig = config as {
-      onStart?: ReturnType<typeof wrap>;
-      onChange?: ReturnType<typeof wrap>;
-      onUpdate?: ReturnType<typeof wrap>;
-      onEnd?: ReturnType<typeof wrap>;
-      onSet?: ReturnType<typeof wrap>;
+    const on = (event: string, callback: ReturnType<typeof wrap>) => {
+      instance.on(event, callback as Parameters<API['on']>[1]);
     };
 
-    extConfig.onStart = wrap('onStart failed', this.sliderStart, opts.onStart as (...args: unknown[]) => void);
-    extConfig.onChange = wrap('onChange failed', this.sliderChange, opts.onChange as (...args: unknown[]) => void);
-    extConfig.onUpdate = wrap('onUpdate failed', this.sliderUpdate, opts.onUpdate as (...args: unknown[]) => void);
-    extConfig.onEnd = wrap('onEnd failed', this.sliderEnd, opts.onEnd as (...args: unknown[]) => void);
-    extConfig.onSet = wrap('onSet failed', this.setEvent, opts.onSet as (...args: unknown[]) => void);
+    on(
+      'start',
+      wrap('onStart failed', this.sliderStart, opts.onStart as (...args: unknown[]) => void)
+    );
+    on(
+      'change',
+      wrap('onChange failed', this.sliderChange, opts.onChange as (...args: unknown[]) => void)
+    );
+    on(
+      'update',
+      wrap('onUpdate failed', this.sliderUpdate, opts.onUpdate as (...args: unknown[]) => void)
+    );
+    on('end', wrap('onEnd failed', this.sliderEnd, opts.onEnd as (...args: unknown[]) => void));
+    on('set', wrap('onSet failed', this.setEvent, opts.onSet as (...args: unknown[]) => void));
   }
 
   private updateInstance(): void {

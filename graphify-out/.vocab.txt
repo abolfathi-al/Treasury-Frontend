@@ -1051,6 +1051,7 @@ queued
 quick
 random
 randomization
+range
 rate
 rationale
 raw

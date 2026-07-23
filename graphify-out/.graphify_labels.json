@@ -391,9 +391,15 @@
   "389": "@angular/animations",
   "390": "@angular-eslint/eslint-plugin",
   "391": "autosize.directive.ts",
+  "392": "Q: ok",
+  "393": "directive-catalog.spec.ts",
   "394": "theme-mode-switcher.component.spec.ts",
   "395": "Q: How should DropzoneDirective represent upload errors that have no XMLHttpRequest?",
+  "396": "HostComponent",
   "397": "animate.css",
   "398": "mockApiInterceptor",
-  "401": "Q: ok"
+  "399": "paragraph-skeleton.component.ts",
+  "400": "@angular/compiler",
+  "401": "Q: ok",
+  "402": "@angular/compiler-cli"
 }

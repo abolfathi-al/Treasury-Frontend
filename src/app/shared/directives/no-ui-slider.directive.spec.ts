@@ -9,7 +9,10 @@ import type { API, Options } from 'nouislider';
 
 import { CssLoaderService } from '@core/services/css-loader.service';
 
-import { NoUiSliderDirective } from './no-ui-slider.directive';
+import {
+  NoUiSliderDirective,
+  type NoUiSliderOptions,
+} from './no-ui-slider.directive';
 
 @Component({
   imports: [NoUiSliderDirective],
@@ -70,6 +73,52 @@ describe('NoUiSliderDirective input updates', () => {
       jasmine.objectContaining<Options>({ start: 35, step: 5 }),
       false
     );
+    fixture.destroy();
+  });
+
+  it('registers public callbacks through the native event API', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const directive = fixture.componentInstance.directive();
+    const handlers = new Map<string, Parameters<API['on']>[1]>();
+    const fakeInstance = {
+      destroy: jasmine.createSpy('destroy'),
+      get: () => '20',
+      on: jasmine
+        .createSpy('on')
+        .and.callFake((event: string, callback: Parameters<API['on']>[1]) => {
+          handlers.set(event, callback);
+        }),
+    } as unknown as API;
+    const internals = directive as unknown as {
+      instance: API | null;
+      attachCallbacks(instance: API, options: NoUiSliderOptions): void;
+    };
+    const onChange = jasmine.createSpy('onChange');
+    const sliderChange = spyOn(directive.sliderChange, 'emit');
+    internals.instance = fakeInstance;
+
+    internals.attachCallbacks(fakeInstance, { onChange });
+    handlers
+      .get('change')
+      ?.call(fakeInstance, ['30'], 0, [30], false, [30], fakeInstance);
+
+    expect(fakeInstance.on).toHaveBeenCalledTimes(5);
+    expect([...handlers.keys()]).toEqual([
+      'start',
+      'change',
+      'update',
+      'end',
+      'set',
+    ]);
+    expect(sliderChange).toHaveBeenCalledOnceWith({
+      values: ['30'],
+      handle: 0,
+      unencoded: [30],
+      tap: false,
+      positions: [30],
+    });
+    expect(onChange).toHaveBeenCalledOnceWith(['30'], 0, [30], false, [30]);
     fixture.destroy();
   });
 });
