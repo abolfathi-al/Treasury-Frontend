@@ -1,6 +1,7 @@
 import {
   Component,
   provideZonelessChangeDetection,
+  signal,
   viewChild,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -15,10 +16,19 @@ import {
 @Component({
   imports: [TreeDirective],
   standalone: true,
-  template: '<div vlVeloraTree [treeData]="nodes"></div>',
+  template: `
+    <div
+      vlVeloraTree
+      [treeData]="nodes()"
+      [treeAnimation]="animation()"
+      [treeStriped]="striped()"
+    ></div>
+  `,
 })
 class TreeDirectiveHostComponent {
-  readonly nodes: TreeNode[] = [{ id: 'root', text: 'Root' }];
+  readonly nodes = signal<TreeNode[]>([{ id: 'root', text: 'Root' }]);
+  readonly animation = signal<boolean | number>(100);
+  readonly striped = signal(true);
   readonly directive = viewChild.required(TreeDirective);
 }
 
@@ -60,6 +70,28 @@ describe('TreeDirective lifecycle', () => {
     fixture.destroy();
     document.dispatchEvent(new MouseEvent('mousemove'));
     expect(dragMoveSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('applies initial options and refreshes batched input changes once', () => {
+    const fixture = TestBed.createComponent(TreeDirectiveHostComponent);
+    fixture.detectChanges();
+    const component = fixture.componentInstance;
+    const directive = component.directive();
+    const internals = directive as unknown as { loadTreeData(): void };
+
+    expect(directive.getOptions().core?.animation).toBe(100);
+    expect(directive.getOptions().core?.themes?.striped).toBeTrue();
+    const loadTreeData = spyOn(internals, 'loadTreeData').and.callThrough();
+
+    component.nodes.set([{ id: 'next', text: 'Next' }]);
+    component.animation.set(200);
+    component.striped.set(false);
+    fixture.detectChanges();
+
+    expect(loadTreeData).toHaveBeenCalledTimes(1);
+    expect(directive.getOptions().core?.animation).toBe(200);
+    expect(directive.getOptions().core?.themes?.striped).toBeFalse();
+    fixture.destroy();
   });
 
   it('cancels delayed context-menu listeners when destroyed', async () => {

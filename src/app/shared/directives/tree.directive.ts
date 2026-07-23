@@ -4,12 +4,10 @@ import {
   effect,
   inject,
   input,
-  OnChanges,
   OnDestroy,
   OnInit,
   output,
   signal,
-  SimpleChanges,
   untracked,
 } from '@angular/core';
 import { LoggerService } from '@core/services/logger.service';
@@ -191,7 +189,7 @@ interface DropLocation {
 })
 export class TreeDirective
   extends BaseDirective<TreeOptions, TreeError>
-  implements OnInit, OnChanges, OnDestroy
+  implements OnInit, OnDestroy
 {
   private readonly host = useDirectiveHost();
 
@@ -205,85 +203,75 @@ export class TreeDirective
   private initInputEffects(): void {
     effect(() => {
       const data = this.treeData();
+      const bindings: Array<readonly [unknown, string]> = [
+        [this.treeAnimation(), 'core.animation'],
+        [this.treeMultiple(), 'core.multiple'],
+        [this.treeTheme(), 'core.themes.name'],
+        [this.treeDots(), 'core.themes.dots'],
+        [this.treeIcons(), 'core.themes.icons'],
+        [this.treeStriped(), 'core.themes.striped'],
+        [this.treeForceText(), 'core.force_text'],
+        [this.treeExpandSelectedOnload(), 'core.expand_selected_onload'],
+        [this.treeWorker(), 'core.worker'],
+        [this.treeCheckboxThreeState(), 'checkbox.three_state'],
+        [this.treeCheckboxCascade(), 'checkbox.cascade'],
+        [this.treeCheckboxTieSelection(), 'checkbox.tie_selection'],
+        [this.treeCheckboxWholeNode(), 'checkbox.whole_node'],
+        [this.treeSearchCaseInsensitive(), 'search.case_insensitive'],
+        [this.treeSearchShowOnlyMatches(), 'search.show_only_matches'],
+        [this.treeSearchFuzzy(), 'search.fuzzy'],
+        [this.treeDndCopy(), 'dnd.copy'],
+        [this.treeDndInsidePos(), 'dnd.inside_pos'],
+        [this.treeDndCheckWhileDragging(), 'dnd.check_while_dragging'],
+        [this.treeDndUseHtml5(), 'dnd.use_html5'],
+        [this.treeDndTouch(), 'dnd.touch'],
+        [this.treeMassloadUrl(), 'massload.url'],
+        [this.treeStateKey(), 'state.key'],
+        [this.treeStateEvents(), 'state.events'],
+        [this.treeStateTtl(), 'state.ttl'],
+        [this.treeSort(), 'sort'],
+        [this.treeUniqueCaseSensitive(), 'unique.case_sensitive'],
+        [this.treeTypes(), 'types'],
+      ];
+      const plugins = this.treePlugins();
+      const wholerow = this.treeWholerow();
+      const unique = this.treeUnique();
+
       untracked(() => {
+        const dataChanged = this.currentTreeData !== data;
         this.currentTreeData = data || [];
-        if (this.isBaseInitialized()) this.loadTreeData();
-      });
-    });
+        let optionsChanged = false;
 
-    const createNestedEffect = <T>(
-      inputFn: () => T | undefined,
-      path: string
-    ) => {
-      effect(() => {
-        const v = inputFn();
-        untracked(() => {
-          if (v !== undefined) this.setNestedOption(path, v);
+        bindings.forEach(([value, path]) => {
+          if (value !== undefined && this.setNestedOption(path, value)) {
+            optionsChanged = true;
+          }
         });
-      });
-    };
 
-    createNestedEffect(this.treeAnimation, 'core.animation');
-    createNestedEffect(this.treeMultiple, 'core.multiple');
-    createNestedEffect(this.treeTheme, 'core.themes.name');
-    createNestedEffect(this.treeDots, 'core.themes.dots');
-    createNestedEffect(this.treeIcons, 'core.themes.icons');
-    createNestedEffect(this.treeStriped, 'core.themes.striped');
-    createNestedEffect(this.treeForceText, 'core.force_text');
-    createNestedEffect(
-      this.treeExpandSelectedOnload,
-      'core.expand_selected_onload'
-    );
-    createNestedEffect(this.treeWorker, 'core.worker');
-    createNestedEffect(this.treeCheckboxThreeState, 'checkbox.three_state');
-    createNestedEffect(this.treeCheckboxCascade, 'checkbox.cascade');
-    createNestedEffect(this.treeCheckboxTieSelection, 'checkbox.tie_selection');
-    createNestedEffect(this.treeCheckboxWholeNode, 'checkbox.whole_node');
-    createNestedEffect(
-      this.treeSearchCaseInsensitive,
-      'search.case_insensitive'
-    );
-    createNestedEffect(
-      this.treeSearchShowOnlyMatches,
-      'search.show_only_matches'
-    );
-    createNestedEffect(this.treeSearchFuzzy, 'search.fuzzy');
-    createNestedEffect(this.treeDndCopy, 'dnd.copy');
-    createNestedEffect(this.treeDndInsidePos, 'dnd.inside_pos');
-    createNestedEffect(
-      this.treeDndCheckWhileDragging,
-      'dnd.check_while_dragging'
-    );
-    createNestedEffect(this.treeDndUseHtml5, 'dnd.use_html5');
-    createNestedEffect(this.treeDndTouch, 'dnd.touch');
-    createNestedEffect(this.treeMassloadUrl, 'massload.url');
-    createNestedEffect(this.treeStateKey, 'state.key');
-    createNestedEffect(this.treeStateEvents, 'state.events');
-    createNestedEffect(this.treeStateTtl, 'state.ttl');
-    createNestedEffect(this.treeSort, 'sort');
-    createNestedEffect(this.treeUniqueCaseSensitive, 'unique.case_sensitive');
-    createNestedEffect(this.treeTypes, 'types');
+        if (
+          plugins !== undefined &&
+          this.setNestedOption('plugins', plugins || [])
+        ) {
+          optionsChanged = true;
+        }
+        if (wholerow !== undefined) {
+          optionsChanged =
+            this.setNestedOption('wholerow.hover', wholerow) || optionsChanged;
+          optionsChanged =
+            this.setNestedOption('wholerow.selected', wholerow) ||
+            optionsChanged;
+        }
+        if (unique !== undefined) {
+          optionsChanged =
+            this.setNestedOption('unique.case_sensitive', !unique) ||
+            optionsChanged;
+        }
 
-    effect(() => {
-      const v = this.treePlugins();
-      untracked(() => {
-        if (v !== undefined) this.setNestedOption('plugins', v || []);
-      });
-    });
-
-    effect(() => {
-      const v = this.treeWholerow();
-      untracked(() => {
-        if (v !== undefined)
-          this.setNestedOption('wholerow', { hover: v, selected: v });
-      });
-    });
-
-    effect(() => {
-      const v = this.treeUnique();
-      untracked(() => {
-        if (v !== undefined)
-          this.setNestedOption('unique', { case_sensitive: !v });
+        if (!this.isBaseInitialized() || (!dataChanged && !optionsChanged)) {
+          return;
+        }
+        if (optionsChanged) this.syncContainerClasses();
+        this.loadTreeData();
       });
     });
   }
@@ -547,12 +535,6 @@ export class TreeDirective
     }
 
     this.initializeTree();
-  }
-
-  ngOnChanges(_changes: SimpleChanges): void {
-    if (this.isBaseInitialized()) {
-      this.loadTreeData();
-    }
   }
 
   ngOnDestroy(): void {
@@ -2396,10 +2378,8 @@ export class TreeDirective
   }
 
   private setNestedOption(key: string, value: any): boolean {
-    if (!this.treeInstance) return false;
-
     const keys = key.split('.');
-    let current: any = this.treeInstance.options;
+    let current: any = this.treeInstance?.options ?? this.DEFAULT_OPTIONS;
 
     for (let i = 0; i < keys.length - 1; i++) {
       if (!current[keys[i]]) {
@@ -2414,8 +2394,6 @@ export class TreeDirective
       return false;
     }
     current[leafKey] = value;
-    this.syncContainerClasses();
-    this.updateTabIndices();
     return true;
   }
 

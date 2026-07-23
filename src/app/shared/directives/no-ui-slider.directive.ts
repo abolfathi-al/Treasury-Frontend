@@ -19,6 +19,7 @@ import { LoggerService } from '@core/services/logger.service';
 import { BaseDirective } from './shared/base-directive';
 import { useDirectiveHost } from './shared/directive-host';
 import {
+  type InputEffectBinding,
   mergeOptionsIfChanged,
   runSafely,
   setOptionIfChanged,
@@ -200,6 +201,21 @@ export class NoUiSliderDirective
   readonly noUiSliderTooltips = input<boolean | boolean[]>();
   readonly noUiSliderKeyboardSupport = input<boolean>();
 
+  private readonly inputBindings: InputEffectBinding<NoUiSliderOptions>[] = [
+    { input: this.noUiSliderStart, key: 'start' },
+    { input: this.noUiSliderConnect, key: 'connect' },
+    { input: this.noUiSliderDirection, key: 'direction' },
+    { input: this.noUiSliderOrientation, key: 'orientation' },
+    { input: this.noUiSliderMargin, key: 'margin' },
+    { input: this.noUiSliderLimit, key: 'limit' },
+    { input: this.noUiSliderPadding, key: 'padding' },
+    { input: this.noUiSliderStep, key: 'step' },
+    { input: this.noUiSliderAnimate, key: 'animate' },
+    { input: this.noUiSliderAnimationDuration, key: 'animationDuration' },
+    { input: this.noUiSliderTooltips, key: 'tooltips' },
+    { input: this.noUiSliderKeyboardSupport, key: 'keyboardSupport' },
+  ];
+
   /* eslint-disable @angular-eslint/no-output-rename -- Public event aliases are used by modules/** dashboard showcase templates. */
   readonly sliderStart = output<{
     values: string[];
@@ -242,7 +258,8 @@ export class NoUiSliderDirective
   constructor() {
     super(inject(LoggerService), 'NoUiSliderDirective', { ...DEFAULT_OPTIONS });
     this.host.destroyRef.onDestroy(() => this.cleanup());
-    this.initInputEffects();
+    this.bindInputs(this.inputBindings);
+    this.initRangeEffect();
   }
 
   ngOnInit(): void {
@@ -266,11 +283,20 @@ export class NoUiSliderDirective
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isBaseInitialized()) return;
 
+    this.syncInputs(this.inputBindings);
+    this.syncRangeInputs();
+
+    const startChange = changes['noUiSliderStart'];
+    const handleCount = (value: unknown) =>
+      Array.isArray(value) ? value.length : 1;
     const requiresReinit = !!(
-      changes['noUiSliderStart'] ||
-      changes['noUiSliderRangeMin'] ||
-      changes['noUiSliderRangeMax'] ||
-      changes['noUiSliderStep']
+      changes['noUiSliderDirection'] ||
+      changes['noUiSliderOrientation'] ||
+      changes['noUiSliderAnimationDuration'] ||
+      changes['noUiSliderKeyboardSupport'] ||
+      (startChange &&
+        handleCount(startChange.previousValue) !==
+          handleCount(startChange.currentValue))
     );
 
     if (requiresReinit) {
@@ -322,44 +348,26 @@ export class NoUiSliderDirective
     }, 'Destroy failed');
   }
 
-  private initInputEffects(): void {
-    const bind = <T>(inputFn: () => T | undefined, key: keyof NoUiSliderOptions) => {
-      effect(() => {
-        const v = inputFn();
-        untracked(() => {
-          if (v !== undefined) this.updateOption(key, v as NoUiSliderOptions[typeof key]);
-        });
-      });
-    };
-
-    bind(() => this.noUiSliderStart(), 'start');
-    bind(() => this.noUiSliderConnect(), 'connect');
-    bind(() => this.noUiSliderDirection(), 'direction');
-    bind(() => this.noUiSliderOrientation(), 'orientation');
-    bind(() => this.noUiSliderMargin(), 'margin');
-    bind(() => this.noUiSliderLimit(), 'limit');
-    bind(() => this.noUiSliderPadding(), 'padding');
-    bind(() => this.noUiSliderStep(), 'step');
-    bind(() => this.noUiSliderAnimate(), 'animate');
-    bind(() => this.noUiSliderAnimationDuration(), 'animationDuration');
-    bind(() => this.noUiSliderTooltips(), 'tooltips');
-    bind(() => this.noUiSliderKeyboardSupport(), 'keyboardSupport');
-
+  private initRangeEffect(): void {
     effect(() => {
-      const v = this.noUiSliderRangeMin();
-      untracked(() => {
-        if (v !== undefined)
-          this.updateOption('range', { ...this.optionsManager.snapshot().range, min: v });
-      });
+      const min = this.noUiSliderRangeMin();
+      const max = this.noUiSliderRangeMax();
+      untracked(() => this.syncRangeInputs(min, max));
     });
+  }
 
-    effect(() => {
-      const v = this.noUiSliderRangeMax();
-      untracked(() => {
-        if (v !== undefined)
-          this.updateOption('range', { ...this.optionsManager.snapshot().range, max: v });
-      });
-    });
+  private syncRangeInputs(
+    min = this.noUiSliderRangeMin(),
+    max = this.noUiSliderRangeMax()
+  ): void {
+    if (min === undefined && max === undefined) return;
+
+    const range = this.optionsManager.snapshot().range ?? {};
+    const nextMin = min ?? range.min;
+    const nextMax = max ?? range.max;
+    if (Object.is(range.min, nextMin) && Object.is(range.max, nextMax)) return;
+
+    this.updateOption('range', { ...range, min: nextMin, max: nextMax });
   }
 
   protected override updateOption<K extends keyof NoUiSliderOptions>(
@@ -471,14 +479,12 @@ export class NoUiSliderDirective
         return;
       }
 
-      const opts = this.optionsManager.snapshot();
-      Object.keys(opts).forEach((key) => {
-        const k = key as keyof NoUiSliderOptions;
-        const v = opts[k];
-        if (v !== undefined) {
-          (this.instance as unknown as Record<string, unknown>)[k] = v;
-        }
-      });
+      this.instance.updateOptions(
+        this.optionsManager.snapshot() as Options,
+        false
+      );
+      this.updateValuesState();
+      this.addAriaAttributes();
     }, 'Update instance failed');
   }
 
