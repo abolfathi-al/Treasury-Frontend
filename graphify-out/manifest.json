@@ -240,9 +240,9 @@
     "semantic_hash": "0a063f149307a3d1acc2823e059bd951"
   },
   "src/app/core/interceptors/timeout.interceptor.ts": {
-    "mtime": 1784810814.2975132,
-    "ast_hash": "1a980ec320a756f1eee5c37498dc219d",
-    "semantic_hash": "1a980ec320a756f1eee5c37498dc219d"
+    "mtime": 1784847405.2527688,
+    "ast_hash": "30ee50f386d889e32e36be5c06f99cd2",
+    "semantic_hash": ""
   },
   "src/app/core/navigation/index.ts": {
     "mtime": 1784810814.2976377,
@@ -635,8 +635,8 @@
     "semantic_hash": "fa1aee9366100ccaa6e0c7b70eb756f9"
   },
   "src/app/modules/auth/guards/auth.guard.ts": {
-    "mtime": 1784836385.4780068,
-    "ast_hash": "c06da9fd2f93068beb703afeab4f55f1",
+    "mtime": 1784848355.0847027,
+    "ast_hash": "913775f3282038f22ed8fef572790992",
     "semantic_hash": ""
   },
   "src/app/modules/auth/guards/index.ts": {
@@ -1340,9 +1340,9 @@
     "semantic_hash": "ec100f9c917f314ad7b69dedb8735a54"
   },
   "src/app/shared/directives/inputmask.directive.ts": {
-    "mtime": 1784810814.3514464,
-    "ast_hash": "ce438d0e87103d2f2402e809973fc6c1",
-    "semantic_hash": "ce438d0e87103d2f2402e809973fc6c1"
+    "mtime": 1784847846.8428802,
+    "ast_hash": "0b647b66f02fc283e2662b7c9601592e",
+    "semantic_hash": ""
   },
   "src/app/shared/directives/maxlength.directive.ts": {
     "mtime": 1784810814.3516603,
@@ -1350,8 +1350,8 @@
     "semantic_hash": "846bf4fa816adbce9d4454759a7f36fa"
   },
   "src/app/shared/directives/menu.directive.ts": {
-    "mtime": 1784810814.3523052,
-    "ast_hash": "da87692f43446b4c55d0558d0592abc2",
+    "mtime": 1784848224.6052873,
+    "ast_hash": "d7f99f1247b3e529d5f0a7094a497aab",
     "semantic_hash": ""
   },
   "src/app/shared/directives/no-ui-slider.directive.ts": {
@@ -1560,9 +1560,9 @@
     "semantic_hash": "5d5204e422d0460a9a50aa80b5cc89a7"
   },
   "src/app/shared/forms/form-controls/shared-form-controls.spec.ts": {
-    "mtime": 1784810814.3623059,
-    "ast_hash": "ffeef808225a320f6bd6636f5d8707fa",
-    "semantic_hash": "ffeef808225a320f6bd6636f5d8707fa"
+    "mtime": 1784847846.976794,
+    "ast_hash": "f0b57bba402ef5c81a3e5879e9218482",
+    "semantic_hash": ""
   },
   "src/app/shared/forms/form-controls/single-select-control/single-select-control.component.ts": {
     "mtime": 1784810814.363999,
@@ -2500,8 +2500,8 @@
     "semantic_hash": ""
   },
   "angular.json": {
-    "mtime": 1784810814.1452744,
-    "ast_hash": "a4b180383a11bb616a1cd9a3d22030cc",
+    "mtime": 1784843641.743374,
+    "ast_hash": "fe980b9f9da0dd8e7c12fc4ad9121f1f",
     "semantic_hash": ""
   },
   "figma-config.js": {
@@ -2525,8 +2525,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1784810814.2705324,
-    "ast_hash": "3c7136c8fd478394c19976518b0ead61",
+    "mtime": 1784843641.9203289,
+    "ast_hash": "71bccdb9ab321b9c3800c68c26e79d20",
     "semantic_hash": ""
   },
   "scripts/compress.js": {
@@ -2695,8 +2695,8 @@
     "semantic_hash": ""
   },
   "src/app/shared/directives/menu.directive.spec.ts": {
-    "mtime": 1784810814.3520627,
-    "ast_hash": "6ddc2891a8b0e884b03a4f2db3e4a335",
+    "mtime": 1784848224.7950134,
+    "ast_hash": "c05d608b572c4f445c479504408a8dd0",
     "semantic_hash": ""
   },
   "src/app/shared/directives/stepper.directive.spec.ts": {
@@ -10410,8 +10410,8 @@
     "semantic_hash": ""
   },
   "src/app/modules/auth/guards/auth.guard.spec.ts": {
-    "mtime": 1784839952.7110038,
-    "ast_hash": "545ced981eb6c67e86a3c5f5e3b5cbd5",
+    "mtime": 1784848355.218789,
+    "ast_hash": "b8448d0ba08314a7f275c621169ef1b7",
     "semantic_hash": ""
   },
   "src/app/modules/auth/pages/forgot-password/forgot-password.component.spec.ts": {
@@ -10427,6 +10427,21 @@
   "src/app/modules/master-data/method-definitions/method-definitions.component.spec.ts": {
     "mtime": 1784839952.6291707,
     "ast_hash": "5fb8ca4c33133d32e24f0f15aebb34db",
+    "semantic_hash": ""
+  },
+  "scripts/validate-dev-proxy.mjs": {
+    "mtime": 1784843694.4801102,
+    "ast_hash": "697c093615b45bf15503b2116553da24",
+    "semantic_hash": ""
+  },
+  "src/proxy.conf.json": {
+    "mtime": 1784843641.6560595,
+    "ast_hash": "469a2370200b2d4616d4304a8967e9d7",
+    "semantic_hash": ""
+  },
+  "src/app/core/interceptors/timeout.interceptor.spec.ts": {
+    "mtime": 1784847463.4146395,
+    "ast_hash": "776479819edbccd6a22ffe0d2c579340",
     "semantic_hash": ""
   }
 }

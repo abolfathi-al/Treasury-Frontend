@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -32,7 +33,9 @@ export class AuthGuard implements CanActivate {
         return this.permissionsAllow(route, state);
       }),
       catchError((error) => {
-        this.logger.error('Auth guard error', 'AuthGuard', { error });
+        if (!(error instanceof HttpErrorResponse && error.status === 401)) {
+          this.logger.error('Auth guard error', 'AuthGuard', { error });
+        }
         this.redirectToLogin(state.url);
         return of(false);
       })

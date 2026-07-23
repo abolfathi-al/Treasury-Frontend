@@ -10,12 +10,11 @@ const TIMEOUT_PATHS = environment.interceptorsPaths.get('timeout');
 const TIMEOUT_HEADER = 'timeout';
 
 export const timeoutInterceptor: HttpInterceptorFn = (req, next) => {
-  const defaultTimeout = inject(DEFAULT_TIMEOUT);
-
   if (!(TIMEOUT_PATHS && TIMEOUT_PATHS.test(req.url))) {
     return next(req);
   }
 
+  const defaultTimeout = inject(DEFAULT_TIMEOUT);
   const timeoutHeader = req.headers.get(TIMEOUT_HEADER);
   const timeoutDuration = timeoutHeader ? Number(timeoutHeader) : defaultTimeout;
 

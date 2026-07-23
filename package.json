@@ -8,6 +8,7 @@
     "start:ssr": "ng serve --port 4000 --configuration development",
     "build": "ng build",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit && tsc -p tsconfig.server.json --noEmit",
+    "dev-proxy:validate": "node scripts/validate-dev-proxy.mjs",
     "i18n:validate": "node scripts/validate-velora-shell-i18n.mjs",
     "i18n:inventory": "node scripts/validate-velora-shell-i18n.mjs --write-json",
     "build:prod": "ng build --base-href / --configuration production --stats-json",

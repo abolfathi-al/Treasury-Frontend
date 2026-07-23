@@ -683,7 +683,11 @@ export class MenuDirective
   }
 
   private isOpenInternal(): boolean {
-    if (!this.host.isBrowser || !this.subEl) return false;
+    if (!this.host.isBrowser) return false;
+    if (this.host.elementRef.nativeElement.classList.contains(CSS.SHOW)) {
+      return true;
+    }
+    if (!this.subEl) return false;
     if (this.subEl.classList.contains(CSS.SHOW)) return true;
     if (!this.host.window) return false;
 

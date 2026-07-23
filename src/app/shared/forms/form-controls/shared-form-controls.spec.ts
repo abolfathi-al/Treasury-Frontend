@@ -302,6 +302,24 @@ describe('shared form controls', () => {
     expect(controlComponent.value()).toBe('updated value');
   });
 
+  it('keeps plain text input synchronized with its reactive control after blur', () => {
+    const existingFixture = TestBed.createComponent(ExistingControlHostComponent);
+    existingFixture.detectChanges();
+    const input = existingFixture.nativeElement.querySelector(
+      '#text',
+    ) as HTMLInputElement;
+
+    input.value = 'user entered value';
+    input.dispatchEvent(new Event('input'));
+    input.dispatchEvent(new Event('blur'));
+    existingFixture.detectChanges();
+
+    expect(existingFixture.componentInstance.form.get('text')?.value).toBe(
+      'user entered value',
+    );
+    expect(input.value).toBe('user entered value');
+  });
+
   it('rebuilds validators when shared control policy inputs change', () => {
     const dynamicFixture = TestBed.createComponent(DynamicControlHostComponent);
     dynamicFixture.detectChanges();

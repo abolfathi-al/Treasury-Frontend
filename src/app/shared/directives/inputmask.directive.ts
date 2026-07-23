@@ -231,6 +231,7 @@ export class InputmaskDirective extends BaseDirective<InputmaskOptions, Inputmas
 
   ngOnInit(): void {
     if (!this.host.isBrowser) return;
+    if (!this.inputmaskOptions() && this.inputmaskMask() === undefined) return;
     this.syncMaskInputs();
     this.initInputmask();
   }

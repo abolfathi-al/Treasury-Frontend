@@ -88,13 +88,16 @@ describe('MenuDirective', () => {
 
     expect(menu.classList.contains('show')).toBeTrue();
     expect(shown).toHaveBeenCalledTimes(1);
+    jasmine.clock().tick(50);
+    expect(menu.style.opacity).toBe('1');
+    expect(menu.style.visibility).toBe('visible');
+    expect(directive.isOpen).toBeTrue();
 
     document.body.click();
 
     expect(menu.classList.contains('show')).toBeFalse();
     expect(hidden).toHaveBeenCalledTimes(1);
 
-    jasmine.clock().tick(50);
     expect(menu.style.opacity).toBe('0');
     expect(menu.style.visibility).toBe('hidden');
 
